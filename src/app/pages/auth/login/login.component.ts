@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {BackendService} from "../../../service/backend.service";
-import {AuthService} from "../../../service/auth.service";
+import {BackendService} from "../../../shared/service/backend.service";
+import {AuthService} from "../../../shared/service/auth.service";
 import {NgForm} from "@angular/forms";
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 	loggedIn: boolean | undefined;
@@ -17,19 +16,18 @@ export class LoginComponent implements OnInit {
 		password: null
 	}
 
-	// constructor(private backend:BackendService, private token:TokenService, private router:Router,private Auth:AuthService) {
 	constructor(private backend: BackendService, private router: Router, private Auth: AuthService) {
 		console.log("==" + this.loggedIn);
 	}
 
 	public error: any = [];
-	public message: null|string = null;
+	public message: null | string = null;
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+	}
 
 	Login() {
 		return this.backend.login(this.form).subscribe({
-				// data=>console.log(data),
 				next: (data) => this.handleResponse(data),
 				error: (error) => this.handleError(error),
 			}
@@ -38,7 +36,6 @@ export class LoginComponent implements OnInit {
 
 	handleResponse(data: any) {
 		console.log(data);
-		// this.token.handle(data.access_token);
 		this.Auth.changeAuthStatus(true);
 		this.router.navigateByUrl("/profile");
 	}

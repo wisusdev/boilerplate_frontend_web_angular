@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
-import {LoginComponent} from "./components/auth/login/login.component";
-import {RegisterComponent} from "./components/auth/register/register.component";
-import {ProfileComponent} from "./components/profile/profile.component";
+import {LoginComponent} from "./pages/auth/login/login.component";
+import {RegisterComponent} from "./pages/auth/register/register.component";
+import {ProfileComponent} from "./pages/profile/profile.component";
 import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
