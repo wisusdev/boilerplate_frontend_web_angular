@@ -1,55 +1,67 @@
-import {APP_INITIALIZER, Injector, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
-import {AppComponent} from './app.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
-import {NavbarComponent} from './shared/components/navbar/navbar.component';
-import {LoginComponent} from './pages/auth/login/login.component';
-import {RegisterComponent} from './pages/auth/register/register.component';
-import {ProfileComponent} from './pages/profile/profile.component';
-import {AppRoutingModule} from "./app-routing.module";
-import {NgbCollapse} from "@ng-bootstrap/ng-bootstrap";
-import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {appInitFactory} from "./shared/factories/app-init.factory";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NavbarComponent } from "./resources/views/shared/navbar/navbar.component";
+import { ToastComponent } from "./resources/components/toast/toast.component";
+import { ThemeComponent } from "./resources/components/theme/theme.component";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { ResetPasswordComponent } from './resources/views/auth/reset-password/reset-password.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LoginComponent } from "./resources/views/auth/login/login.component";
+import { RegisterComponent } from "./resources/views/auth/register/register.component";
+import { ForgotPasswordComponent } from "./resources/views/auth/forgot-password/forgot-password.component";
+import { ProfileComponent } from "./resources/views/profile/profile.component";
+import {
+	NgbCollapse,
+	NgbDropdown,
+	NgbDropdownItem,
+	NgbDropdownMenu,
+	NgbDropdownToggle
+} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		NavbarComponent,
 		LoginComponent,
 		RegisterComponent,
+		ForgotPasswordComponent,
+		ResetPasswordComponent,
+		NavbarComponent,
 		ProfileComponent
 	],
 	imports: [
 		BrowserModule,
-		AppRoutingModule,
-		FormsModule,
 		HttpClientModule,
-		NgbCollapse,
 		TranslateModule.forRoot({
-			loader:
-				{
-					provide: TranslateLoader,
-					useFactory: (createTranslateLoader),
-					deps: [HttpClient]
-				}
-		})
+			loader: {
+				provide: TranslateLoader,
+				useFactory: httpTranslateLoader,
+				deps: [HttpClient]
+			}
+		}),
+		AppRoutingModule,
+		ToastComponent,
+		ThemeComponent,
+		ReactiveFormsModule,
+		FormsModule,
+		NgbDropdown,
+		NgbDropdownToggle,
+		NgbDropdownItem,
+		NgbDropdownMenu,
+		NgbCollapse
 	],
 	providers: [
-		{
-			provide: APP_INITIALIZER,
-			useFactory: appInitFactory,
-			deps: [TranslateService, Injector],
-			multi: true
-		},
+		provideClientHydration()
 	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
 }
 
-export function createTranslateLoader(http: HttpClient) {
-	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+export function httpTranslateLoader(http: HttpClient) {
+	return new TranslateHttpLoader(http);
 }
