@@ -1,18 +1,8 @@
-import {EnvName} from "../app/shared/enums/environment.enum";
-import packageInfo from '../../package.json';
-
-const scheme = 'http://';
-const host   = 'localhost';
-const port   = ':5000';
-const path   = '/api/';
-
-const baseUrl = scheme + host + port + path;
-
 export const environment = {
-	production      : false,
-	version         : packageInfo.version,
-	appName         : 'EasyAngular',
-	envName         : EnvName.LOCAL,
-	defaultLanguage : 'es',
-	apiBaseUrl      : baseUrl,
+    production: false,
+    APP_NAME: 'wpos',
+    API_URL: 'http://localhost:8000/api',
+    API_VERSION: '/v1',
+    APP_VERSION: '1.0.0',
+    APP_YEAR: '2021'
 };
