@@ -1,0 +1,41 @@
+<div class="auth-body">
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-md-4">
+            <div class="card border shadow">
+                <div class="card-header border-0">
+                    <h3>{{'welcomeback' | translate}}</h3>
+                    <p class="mb-0">{{'pleaselogin' | translate}}</p>
+                </div>
+                <div class="card-body">
+                    <form class="mb-4" [formGroup]="formUser" (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" class="form-control" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" class="form-control" id="password" formControlName="password" name="password" autocomplete="off" placeholder="{{'password' | translate}}">
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between my-4">
+                            <div class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">{{'rememberme' | translate}}</label>
+                            </div>
+                            <a routerLink="/auth/forgot-password" class="text-decoration-none">{{'forgotpassword' | translate}}</a>
+                        </div>
+
+
+                        <button class="btn btn-border btn-primary w-50 py-2" type="submit">{{'login' | translate}}</button>
+                    </form>
+                    <p><span class="fw-light me-2">{{'donthaveaccount' | translate}}</span> <a class="fw-bolder text-decoration-none" routerLink="/auth/register">{{'registerHere' | translate}}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
