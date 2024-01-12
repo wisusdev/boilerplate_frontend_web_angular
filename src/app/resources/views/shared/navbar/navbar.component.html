@@ -1,0 +1,44 @@
+<nav class="main-header navbar navbar-expand-lg bg-primary-subtle">
+	<div class="container-fluid">
+		<a class="navbar-brand" data-widget="pushmenu" href="#" role="button">{{ appName }}</a>
+		<button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"
+			data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed" id="collapsibleNavbar">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                @if (loggedIn){
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" routerLink="auth/login">{{'home' | translate}}</a>
+                    </li>
+                }
+			</ul>
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownLang" role="button"> <i class="bi bi-translate"></i></a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdownLang" class="dropdown-menu">
+						<a *ngFor="let language of translate.getLangs()" ngbDropdownItem href="#" (click)="switchLanguage(language, $event)">
+							{{ language }}
+						</a>
+					</div>
+				</li>
+
+				@if(!loggedIn){
+					<li class="nav-item">
+						<a class="nav-link" routerLink="auth/login">{{'login' | translate}}</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="auth/register">{{'register' | translate}}</a>
+					</li>
+				}
+
+				@if(loggedIn){
+					<li class="nav-item">
+						<a class="nav-link" href="#" (click)="logout($event)">{{'logout' | translate}}</a>
+					</li>
+				}
+			</ul>
+		</div>
+	</div>
+</nav>
