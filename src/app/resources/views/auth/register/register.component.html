@@ -1,0 +1,80 @@
+<div class="py-4 auth-body">
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-md-4">
+            <div class="card border shadow">
+                <div class="card-header border-0">
+                    <p class="mb-0">{{"registerHere" | translate}}</p>
+                </div>
+                <div class="card-body">
+                    <form class="mb-4" [formGroup]="formUser" (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" class="form-control" id="username" formControlName="username" name="username" autocomplete="username" placeholder="{{'username' | translate}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control" id="first_name" formControlName="first_name" name="first_name" placeholder="{{'firstname' | translate}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control" id="last_name" formControlName="last_name" name="last_name" placeholder="{{'lastname' | translate}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" class="form-control" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" formControlName="password" name="password" autocomplete="new-password" placeholder="{{'password' | translate}}">
+                                </div>
+                            </div>
+    
+                            <div class="col-md-6 mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="password_confirmation" formControlName="password_confirmation" name="password_confirmation" autocomplete="new-password" placeholder="{{'confirmPassword' | translate}}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button [disabled]="!formUser.valid" class="btn btn-border btn-primary w-100 py-2" type="submit">{{'register' | translate}}</button>
+                    </form>
+
+                    <div class="mb-3">
+                        <p class="text-center">- {{'orSinInWith' | translate}} -</p>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-border btn-outline-primary w-100 py-2 me-2" type="button">
+                                <i class="bi bi-facebook"></i>
+                            </button>
+                            <button class="btn btn-border btn-outline-danger w-100 py-2 me-2" type="button">
+                                <i class="bi bi-google"></i>
+                            </button>
+                            <button class="btn btn-border btn-outline-info w-100 py-2" type="button">
+                                <i class="bi bi-twitter-x"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="mb-0">{{'ByRegistering' | translate}} <a href="#">{{'termsOfService' | translate}}</a> {{'and' | translate}} <a href="#">{{'privacyPolicy' | translate}}</a>.</p>
+                    </div>
+
+                    <p><span class="fw-light me-2">{{'alreadyaccount' | translate}}</span> <a class="fw-bolder text-decoration-none" routerLink="/auth/login">{{'loginHere' | translate}}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
