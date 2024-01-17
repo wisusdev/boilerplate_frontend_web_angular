@@ -42,7 +42,14 @@ export class LoginComponent implements OnInit {
 				this.toast.show({ message: response['message'], classname: 'bg-success text-light', delay: 5000 });
 			},
 			(error) => {
-				this.toast.show({ message: 'Error logging in user', classname: 'bg-danger text-light', delay: 5000 });
+				if(typeof error === 'object'){
+					for(let key in error){
+						this.toast.show({ message: error[key], classname: 'bg-danger text-light', delay: 5000 });
+					}
+				} else {
+					this.toast.show({ message: error, classname: 'bg-danger text-light', delay: 5000 });
+				}
+
 			}
 		);
 	}
