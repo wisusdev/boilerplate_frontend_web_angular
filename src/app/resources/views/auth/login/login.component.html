@@ -31,7 +31,7 @@
                         </div>
 
 
-                        <button class="btn btn-border btn-primary w-50 py-2" type="submit">{{'login' | translate}}</button>
+                        <button [disabled]="!formUser.valid" class="btn btn-border btn-primary w-50 py-2" type="submit">{{'login' | translate}}</button>
                     </form>
                     <p><span class="fw-light me-2">{{'donthaveaccount' | translate}}</span> <a class="fw-bolder text-decoration-none" routerLink="/auth/register">{{'registerHere' | translate}}</a></p>
                 </div>
