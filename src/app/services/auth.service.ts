@@ -105,11 +105,13 @@ export class AuthService {
         if (error.error instanceof ErrorEvent) {
             errorMessage = error.error.message;
         } else {
-            errorMessage = `Error code: ${error.status}. Message: ${error.message}`;
+            if (error.status === 422) {
+                errorMessage = error.error;
+            } else {
+                errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            }
         }
 
-        return throwError(() => {
-            errorMessage;
-        })
+        return throwError(() => errorMessage);
     }
 }
