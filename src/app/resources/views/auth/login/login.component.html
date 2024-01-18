@@ -11,14 +11,20 @@
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+                                <input type="email" class="form-control" [ngClass]="{'is-invalid': errorMessages['email']}" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+								<div class="invalid-feedback">
+									{{ errorMessages['email'] }}
+								</div>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                <input type="password" class="form-control" id="password" formControlName="password" name="password" autocomplete="off" placeholder="{{'password' | translate}}">
+                                <input type="password" class="form-control" [ngClass]="{'is-invalid': errorMessages['password']}" id="password" formControlName="password" name="password" autocomplete="off" placeholder="{{'password' | translate}}">
+								<div class="invalid-feedback">
+									{{ errorMessages['password'] }}
+								</div>
                             </div>
                         </div>
 
@@ -29,7 +35,6 @@
                             </div>
                             <a routerLink="/auth/forgot-password" class="text-decoration-none">{{'forgotpassword' | translate}}</a>
                         </div>
-
 
                         <button [disabled]="!formUser.valid" class="btn btn-border btn-primary w-50 py-2" type="submit">{{'login' | translate}}</button>
                     </form>

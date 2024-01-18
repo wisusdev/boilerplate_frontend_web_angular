@@ -1,22 +1,33 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { AuthService } from "../../../../services/auth.service";
-import { ToastService } from "../../../../services/toast.service";
-import { UserModel } from "../../../../models/user.model";
-import { authUserModel } from '../../../../models/token.model';
+import { UserInterface } from "../../../../interfaces/user.interface";
+import {ErrorMessages} from "../../../../interfaces/errors.interface";
+import {HandleMessage} from "../../../../core/HandleMessage";
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-	constructor(private formBuilder: FormBuilder, private authService: AuthService, private toast: ToastService, private router: Router) { }
+	constructor(private formBuilder: FormBuilder, private authService: AuthService, private handleMessage: HandleMessage) { }
 
 	formUser!: FormGroup;
 
+	errorMessages: ErrorMessages = {
+		email: '',
+		password: ''
+	};
+
+	resetErrorMessages() {
+		this.errorMessages = {
+			email: '',
+			password: ''
+		};
+	}
+
 	@Input()
-	userModel!: UserModel;
+	userModel!: UserInterface;
 
 	ngOnInit() {
 		this.formUser = this.formBuilder.group({
@@ -30,27 +41,10 @@ export class LoginComponent implements OnInit {
 	}
 
 	onSubmit() {
+		this.resetErrorMessages();
 		this.authService.login(this.formUser.value).subscribe(
-			(response: authUserModel) => {
-				console.log(response);
-				if (response && response.token) {
-					localStorage.setItem('token', response.token);
-					localStorage.setItem('expires_at', response.expires_at);
-				}
-				this.formUser.reset();
-				this.router.navigate(['/profile']);
-				this.toast.show({ message: response['message'], classname: 'bg-success text-light', delay: 5000 });
-			},
-			(error) => {
-				if(typeof error === 'object'){
-					for(let key in error){
-						this.toast.show({ message: error[key], classname: 'bg-danger text-light', delay: 5000 });
-					}
-				} else {
-					this.toast.show({ message: error, classname: 'bg-danger text-light', delay: 5000 });
-				}
-
-			}
+			(response) => this.handleMessage.handleResponse(response, this.formUser, '/profile'),
+			(error) => this.handleMessage.handleError(error, this.errorMessages)
 		);
 	}
 }
