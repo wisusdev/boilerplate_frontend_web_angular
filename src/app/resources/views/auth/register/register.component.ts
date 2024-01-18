@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
-import { UserModel } from "../../../../models/user.model";
+import { UserInterface } from "../../../../interfaces/user.interface";
 import { AuthService } from "../../../../services/auth.service";
 import { ToastService } from "../../../../services/toast.service";
 
@@ -15,7 +15,7 @@ export class RegisterComponent {
 	formUser!: FormGroup;
 
 	@Input()
-	userModel!: UserModel;
+	userModel!: UserInterface;
 
 	ngOnInit() {
 		this.formUser = this.formBuilder.group({
