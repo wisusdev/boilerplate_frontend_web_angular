@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { UserModel } from "../models/user.model";
-import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { UserInterface } from "../interfaces/user.interface";
+import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { environment } from '../../environments/environment';
-import { authUserModel } from '../models/token.model';
+import { authUserModel } from '../interfaces/token.interface';
+import { environment } from "@env/environment";
+import { HandleMessage } from "../core/HandleMessage";
 
 @Injectable({
     providedIn: 'root'
@@ -18,52 +19,20 @@ export class AuthService {
     private _apiUriForgotPassword = this._apiUri + '/auth/forgot-password';
     private _apiUriResetPassword = this._apiUri + '/auth/reset-password';
 
-    private isLoggedIn = new BehaviorSubject<boolean>(false);
-
-    constructor(private httpClient: HttpClient) { }
-
-    // Toogle Loggedin
-    toggleLogin(state: boolean): void {
-        this.isLoggedIn.next(state);
-    }
-
-    status() {
-        if (typeof localStorage !== 'undefined') {
-            const token: string | null = localStorage.getItem('token');
-            const expiresAt: string | null = localStorage.getItem('expires_at');
-
-            if (!token || !expiresAt) {
-                this.isLoggedIn.next(false);
-                console.log('No token or expires_at found');
-            } else {
-                const expiresAtDate = new Date(expiresAt);
-                const currentDate = new Date();
-
-                if (currentDate > expiresAtDate) {
-                    this.isLoggedIn.next(false);
-                    console.log('Token expired');
-                } else {
-                    this.isLoggedIn.next(true);
-                    console.log('Token valid');
-                }
-            }
-        }
-
-        return this.isLoggedIn.asObservable();
-    }
+    constructor(private httpClient: HttpClient, private handleMessage: HandleMessage) {}
 
     httpHeaders: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-    register(data: UserModel): Observable<object> {
+    register(data: UserInterface): Observable<object> {
         return this.httpClient.post(`${this._apiUriRegister}`, data, {
             headers: this.httpHeaders,
-        }).pipe(catchError(this.errorHandle));
+        }).pipe(catchError(this.handleMessage.errorHandle));
     }
 
-    login(data: UserModel): Observable<authUserModel> {
+    login(data: UserInterface): Observable<authUserModel> {
         return this.httpClient.post<authUserModel>(`${this._apiUriLogin}`, data, {
             headers: this.httpHeaders,
-        }).pipe(catchError(this.errorHandle));
+        }).pipe(catchError(this.handleMessage.errorHandle));
     }
 
     logout(): Observable<object> {
@@ -72,19 +41,21 @@ export class AuthService {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         });
-        return this.httpClient.post(`${this._apiUriLogout}`, {},{headers: headers,}).pipe(catchError(this.errorHandle));
+        return this.httpClient.post(`${this._apiUriLogout}`, {}, { 
+            headers: headers, 
+        }).pipe(catchError(this.handleMessage.errorHandle));
     }
 
     refreshToken(): Observable<object> {
         return this.httpClient.post(`${this._apiUriRefresh}`, {
             headers: this.httpHeaders,
-        }).pipe(catchError(this.errorHandle));
+        }).pipe(catchError(this.handleMessage.errorHandle));
     }
 
-    forgotPassword(data: UserModel): Observable<object> {
+    forgotPassword(data: UserInterface): Observable<object> {
         return this.httpClient.post(`${this._apiUriForgotPassword}`, data, {
             headers: this.httpHeaders,
-        }).pipe(catchError(this.errorHandle));
+        }).pipe(catchError(this.handleMessage.errorHandle));
     }
 
     resetPassword(token: string, password: string, password_confirmation: string): Observable<object> {
@@ -96,22 +67,6 @@ export class AuthService {
 
         return this.httpClient.post(`${this._apiUriResetPassword}`, data, {
             headers: this.httpHeaders,
-        }).pipe(catchError(this.errorHandle));
-    }
-
-    errorHandle(error: HttpErrorResponse): Observable<never> {
-        let errorMessage: string = '';
-
-        if (error.error instanceof ErrorEvent) {
-            errorMessage = error.error.message;
-        } else {
-            if (error.status === 422) {
-                errorMessage = error.error;
-            } else {
-                errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-            }
-        }
-
-        return throwError(() => errorMessage);
+        }).pipe(catchError(this.handleMessage.errorHandle));
     }
 }
