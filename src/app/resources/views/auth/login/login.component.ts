@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../../../core/Services/Auth.service";
-import { UserInterface } from "../../../../core/Interfaces/User.interface";
-import { ErrorMessages } from "../../../../core/Interfaces/Errors.interface";
-import { Handle } from "../../../../core/Exceptions/Handle";
+import { AuthService } from "../../../../data/Services/Auth.service";
+import { UserInterface } from "../../../../data/Interfaces/User.interface";
+import { ErrorMessages } from "../../../../data/Interfaces/Errors.interface";
+import { Handle } from "../../../../data/Exceptions/Handle";
 import { of, tap } from "rxjs";
 import { catchError } from "rxjs/operators";
 
