@@ -7,5 +7,5 @@ import {app} from "./config/App";
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	title = app.NAME;
+	title = app.name;
 }
