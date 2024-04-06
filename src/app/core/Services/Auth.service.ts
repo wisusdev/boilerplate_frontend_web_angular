@@ -5,13 +5,13 @@ import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { authUserModel } from '../Interfaces/Token.interface';
 import { Handle } from "../Exceptions/Handle";
-import {app} from "../../config/App";
+import {Api} from "../../config/Api";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private _apiUri = app.API_URL + app.API_VERSION;
+    private _apiUri = Api.API_URL + Api.API_VERSION;
     private _apiUriLogin = this._apiUri + '/auth/login';
     private _apiUriLogout = this._apiUri + '/auth/logout';
     private _apiUriRefresh = this._apiUri + '/auth/refresh';
@@ -21,7 +21,7 @@ export class AuthService {
 
     constructor(private httpClient: HttpClient, private handleMessage: Handle) {}
 
-    httpHeaders: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    httpHeaders: HttpHeaders = new HttpHeaders(Api.HEADERS);
 
     register(data: UserInterface): Observable<object> {
         return this.httpClient.post(`${this._apiUriRegister}`, data, {
@@ -37,12 +37,9 @@ export class AuthService {
 
     logout(): Observable<object> {
         const token: string | null = localStorage.getItem('token');
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-        });
+		this.httpHeaders = new HttpHeaders({...Api.HEADERS, 'Authorization': `Bearer ${token}`});
         return this.httpClient.post(`${this._apiUriLogout}`, {}, {
-            headers: headers,
+            headers: this.httpHeaders,
         }).pipe(catchError(this.handleMessage.errorHandle));
     }
 
