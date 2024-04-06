@@ -2,11 +2,8 @@ export const app = {
 	/* Application Name */
 	NAME: 'Angular App',
 
-	/* Backend API URL */
-	API_URL: 'http://localhost:8000/api',
-
-	/* Backend API Version */
-	API_VERSION: '/v1',
+	/* Application URl */
+	URL: 'http://localhost:4200',
 
 	/* Application locale */
 	LOCALE: 'en',
