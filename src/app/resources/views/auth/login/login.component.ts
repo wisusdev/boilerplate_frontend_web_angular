@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../../../services/auth.service";
-import { UserInterface } from "../../../../interfaces/user.interface";
-import {ErrorMessages} from "../../../../interfaces/errors.interface";
-import {HandleMessage} from "../../../../core/HandleMessage";
+import { AuthService } from "../../../../core/Services/Auth.service";
+import { UserInterface } from "../../../../core/Interfaces/User.interface";
+import {ErrorMessages} from "../../../../core/Interfaces/Errors.interface";
+import {Handle} from "../../../../core/Exceptions/Handle";
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-	constructor(private formBuilder: FormBuilder, private authService: AuthService, private handleMessage: HandleMessage) { }
+	constructor(private formBuilder: FormBuilder, private authService: AuthService, private handleMessage: Handle) { }
 
 	formUser!: FormGroup;
 
