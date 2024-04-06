@@ -9,24 +9,24 @@
 	"oldPassword": "Old Password",
 	"charactersRequired": "At least 8 characters",
 
-	"welcomeback": "Welcome back!",
-	"pleaselogin": "Please log in",
-	"rememberme": "Remember me",
-	"forgotpassword": "Forgot your password?",
+	"welcomeBack": "Welcome back!",
+	"pleaseLogin": "Please log in",
+	"rememberMe": "Remember me",
+	"forgotPassword": "Forgot your password?",
 	"login": "Log in",
-	"donthaveaccount": "Don't have an account?",
+	"dontHaveAccount": "Don't have an account?",
 	"registerHere": "Register here",
-	
+
 	"register": "Register",
 	"orSinInWith": "Or sign in with",
-	"alreadyaccount": "Already have an account?",
+	"alreadyAccount": "Already have an account?",
 	"loginHere": "Log in here",
 	"ByRegistering": "By registering, you agree to our",
 	"termsOfService": "Terms of Service",
 	"and": "and",
 	"privacyPolicy": "Privacy Policy",
 
-	"resetpassword": "Reset Your Password",
+	"resetPassword": "Reset Your Password",
 	"sendPasswordResetLink": "Send Password Reset Link",
 	"changePassword": "Change Password",
 	"changePasswordHeading": "You are only one step a way from your new password, recover your password now.",
@@ -34,12 +34,9 @@
 	"home": "Home",
 	"logout": "Log out",
 
-	
 	"nameError": "I'm sure you must have a name!",
 	"phoneNo": "Phone Number",
 	"bio": "Enter Biography",
 	"termsConditions": "I accept the terms and conditions.",
-	"submit": "Submit",
-	"changepassword": "Change Password",
-	"logout": "Log out"
+	"submit": "Submit"
 }
