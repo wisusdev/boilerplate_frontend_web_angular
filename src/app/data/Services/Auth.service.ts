@@ -11,7 +11,7 @@ import { Api } from "../../config/Api";
 	providedIn: 'root'
 })
 export class AuthService {
-	private _apiUri = Api.API_URL + Api.API_VERSION;
+	private _apiUri = Api.api_url + Api.api_version;
 	private _apiUriLogin = this._apiUri + '/auth/login';
 	private _apiUriLogout = this._apiUri + '/auth/logout';
 	private _apiUriRefresh = this._apiUri + '/auth/refresh';
@@ -22,7 +22,7 @@ export class AuthService {
 	constructor(private httpClient: HttpClient, private handleMessage: Handle) {
 	}
 
-	httpHeaders: HttpHeaders = new HttpHeaders(Api.HEADERS);
+	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
 	register(data: UserInterface): Observable<object> {
 		return this.httpClient.post(`${this._apiUriRegister}`, data, {
@@ -38,7 +38,7 @@ export class AuthService {
 
 	logout(): Observable<object> {
 		const token: string | null = localStorage.getItem('token');
-		this.httpHeaders = new HttpHeaders({ ...Api.HEADERS, 'Authorization': `Bearer ${token}` });
+		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${token}` });
 		return this.httpClient.post(`${this._apiUriLogout}`, {}, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
