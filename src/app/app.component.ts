@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
-import { environment } from '../environments/environment';
+import {app} from "./config/App";
 
 @Component({
 	selector: 'app-root',
@@ -8,5 +7,5 @@ import { environment } from '../environments/environment';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	title = environment.APP_NAME;
+	title = app.NAME;
 }
