@@ -37,7 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
 	onSubmit() {
 		this.authService.forgotPassword(this.formForgotPassword.value).subscribe(
 			(response) => this.handleMessage.handleResponse(response, this.formForgotPassword, '/auth/login'),
-			(error) => this.handleMessage.handleError(error, this.errorMessages)
+			(error) => this.handleMessage.handleError(error)
 		);
 	}
 }
