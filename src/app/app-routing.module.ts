@@ -4,7 +4,7 @@ import {LoginComponent} from "./resources/views/auth/login/login.component";
 import {RegisterComponent} from "./resources/views/auth/register/register.component";
 import {ForgotPasswordComponent} from "./resources/views/auth/forgot-password/forgot-password.component";
 import {ProfileComponent} from "./resources/views/profile/profile.component";
-import {authGuard} from "./guards/auth.guard";
+import {authGuard} from "./core/Guards/Auth.guard";
 import {ResetPasswordComponent} from "./resources/views/auth/reset-password/reset-password.component";
 
 const routes: Routes = [
