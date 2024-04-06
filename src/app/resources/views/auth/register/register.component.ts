@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
-import { UserInterface } from "../../../../core/Interfaces/User.interface";
-import { AuthService } from "../../../../core/Services/Auth.service";
-import { ToastService } from "../../../../core/Services/Toast.service";
+import { UserInterface } from "../../../../data/Interfaces/User.interface";
+import { AuthService } from "../../../../data/Services/Auth.service";
+import { ToastService } from "../../../../data/Services/Toast.service";
 
 @Component({
 	selector: 'app-register',
