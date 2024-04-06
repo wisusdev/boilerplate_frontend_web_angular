@@ -18,13 +18,7 @@ export abstract class Handle {
 		if (error.error instanceof ErrorEvent) {
 			errorMessage = error.error.message;
 		} else {
-			if (error.status === 422) {
-				errorMessage = error.error.errors.detail;
-			} else if (error.status === 400 || error.status === 422) {
-				errorMessage = error.error.errors.detail;
-			} else {
-				errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-			}
+			errorMessage = error.error.errors;
 		}
 
 		return throwError(() => errorMessage);
@@ -40,11 +34,10 @@ export abstract class Handle {
 		this.toast.show({ message: response['message'], classname: 'bg-success text-light', delay: 5000 });
 	}
 
-	handleError(error: any, errorMessages: any) {
+	handleError(error: any) {
 		if (typeof error === 'object') {
 			for (let key in error) {
-				errorMessages[key] = error[key];
-				this.toast.show({ message: error[key], classname: 'bg-danger text-light', delay: 5000 });
+				this.toast.show({ message: error[key]['detail'], classname: 'bg-danger text-light', delay: 5000 });
 			}
 		} else {
 			this.toast.show({ message: error, classname: 'bg-danger text-light', delay: 5000 });
