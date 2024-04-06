@@ -1,9 +1,9 @@
 export const Api = {
-	API_URL: 'http://localhost:8000/api',
+	api_url: 'http://localhost:8000/api',
 
-	API_VERSION: '/v1',
+	api_version: '/v1',
 
-	HEADERS: {
+	headers: {
 		'Content-Type': 'application/vnd.api+json',
 		'Accept': 'application/vnd.api+json',
 	},
