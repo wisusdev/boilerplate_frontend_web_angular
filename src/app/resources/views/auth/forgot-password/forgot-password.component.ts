@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../../services/auth.service';
-import { HandleMessage } from 'src/app/core/HandleMessage';
-import { ErrorMessages } from 'src/app/interfaces/errors.interface';
+import { AuthService } from '../../../../core/Services/auth.service';
+import { Handle } from '../../../../core/Exceptions/Handle';
+import { ErrorMessages } from '../../../../core/Interfaces/errors.interface';
 
 @Component({
 	selector: 'app-forgot-password',
@@ -10,7 +10,7 @@ import { ErrorMessages } from 'src/app/interfaces/errors.interface';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-	constructor(private formBuilder: FormBuilder, private authService: AuthService, private handleMessage: HandleMessage) { }
+	constructor(private formBuilder: FormBuilder, private authService: AuthService, private handleMessage: Handle) { }
 
 	formForgotPassword!: FormGroup;
 
