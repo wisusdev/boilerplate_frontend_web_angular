@@ -4,6 +4,8 @@ import { AuthService } from "../../../../core/Services/Auth.service";
 import { UserInterface } from "../../../../core/Interfaces/User.interface";
 import { ErrorMessages } from "../../../../core/Interfaces/Errors.interface";
 import { Handle } from "../../../../core/Exceptions/Handle";
+import { of, tap } from "rxjs";
+import { catchError } from "rxjs/operators";
 
 @Component({
 	selector: 'app-login',
@@ -42,9 +44,12 @@ export class LoginComponent implements OnInit {
 
 	onSubmit() {
 		this.resetErrorMessages();
-		this.authService.login(this.formUser.value).subscribe(
-			(response) => this.handleMessage.handleResponse(response, this.formUser, '/profile'),
-			(error) => this.handleMessage.handleError(error)
-		);
+		this.authService.login(this.formUser.value).pipe(
+			tap(response => this.handleMessage.handleResponse(response, this.formUser, '/profile')),
+			catchError(error => {
+				this.handleMessage.handleError(error);
+				return of(null);
+			})
+		).subscribe();
 	}
 }
