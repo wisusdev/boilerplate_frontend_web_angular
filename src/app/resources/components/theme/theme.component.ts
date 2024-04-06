@@ -1,14 +1,14 @@
 import {Component, Inject, Renderer2, RendererFactory2} from '@angular/core';
-import {ThemeService} from "../../../services/theme.service";
+import {ThemeService} from "../../../core/Services/Theme.service";
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
 	selector: 'app-theme',
 	standalone: true,
 	imports: [
-		NgbDropdown, 
-		NgbDropdownMenu, 
-		NgbDropdownItem, 
+		NgbDropdown,
+		NgbDropdownMenu,
+		NgbDropdownItem,
 		NgbDropdownToggle
 	],
 	templateUrl: './theme.component.html',
