@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { environment } from "../../../../../environments/environment";
-import { AuthService } from '../../../../services/auth.service';
-import { AuthUser } from 'src/app/core/AuthUser';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {AuthService} from '../../../../core/Services/Auth.service';
+import {Auth} from '../../../../config/Auth';
+import {app} from "../../../../config/App";
 
 @Component({
 	selector: 'app-navbar',
@@ -13,19 +13,19 @@ export class NavbarComponent implements OnInit {
 	collapsed: boolean = true;
 	public loggedIn: boolean = false;
 	public isMenuCollapsed: boolean = true;
-	public appName: string = environment.APP_NAME;
+	public appName: string = app.NAME;
 
-	constructor(private router: Router, public translate: TranslateService, private authService: AuthService, private authUser: AuthUser ) {
+	constructor(private router: Router, public translate: TranslateService, private authService: AuthService, private authUser: Auth) {
 		translate.addLangs(['en', 'es']);
 		translate.setDefaultLang('es');
 	}
 
 	ngOnInit() {
 		this.authUser.status().subscribe((response) => {
-			this.loggedIn = response;
-		}, (error) => {
-			console.log(error);
-		}
+				this.loggedIn = response;
+			}, (error) => {
+				console.log(error);
+			}
 		);
 	}
 
