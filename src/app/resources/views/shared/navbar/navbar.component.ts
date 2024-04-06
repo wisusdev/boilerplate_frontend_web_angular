@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {TranslateService} from "@ngx-translate/core";
-import {AuthService} from '../../../../core/Services/Auth.service';
-import {Auth} from '../../../../config/Auth';
-import {app} from "../../../../config/App";
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { AuthService } from '../../../../data/Services/Auth.service';
+import { Auth } from '../../../../config/Auth';
+import { app } from "../../../../config/App";
+import { Lang } from "../../../../config/Lang";
 
 @Component({
 	selector: 'app-navbar',
@@ -13,19 +14,25 @@ export class NavbarComponent implements OnInit {
 	collapsed: boolean = true;
 	public loggedIn: boolean = false;
 	public isMenuCollapsed: boolean = true;
-	public appName: string = app.NAME;
+	public appName: string = app.name;
+	public availableLangNavbarArray: any[] = [];
 
 	constructor(private router: Router, public translate: TranslateService, private authService: AuthService, private authUser: Auth) {
-		translate.addLangs(['en', 'es']);
-		translate.setDefaultLang('es');
+		this.availableLangNavbarArray = Object.entries(Lang.availableLang).map(([key, value]) => ({ key, ...value }));
+		translate.addLangs(Object.keys(Lang.availableLang));
+		for (let lang of this.availableLangNavbarArray) {
+			if (lang.default) {
+				translate.setDefaultLang(lang.key);
+			}
+		}
 	}
 
 	ngOnInit() {
 		this.authUser.status().subscribe((response) => {
-				this.loggedIn = response;
-			}, (error) => {
-				console.log(error);
-			}
+			this.loggedIn = response;
+		}, (error) => {
+			console.log(error);
+		}
 		);
 	}
 
