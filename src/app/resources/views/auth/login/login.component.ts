@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../../../core/Services/Auth.service";
 import { UserInterface } from "../../../../core/Interfaces/User.interface";
-import {ErrorMessages} from "../../../../core/Interfaces/Errors.interface";
-import {Handle} from "../../../../core/Exceptions/Handle";
+import { ErrorMessages } from "../../../../core/Interfaces/Errors.interface";
+import { Handle } from "../../../../core/Exceptions/Handle";
 
 @Component({
 	selector: 'app-login',
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 		this.resetErrorMessages();
 		this.authService.login(this.formUser.value).subscribe(
 			(response) => this.handleMessage.handleResponse(response, this.formUser, '/profile'),
-			(error) => this.handleMessage.handleError(error, this.errorMessages)
+			(error) => this.handleMessage.handleError(error)
 		);
 	}
 }
