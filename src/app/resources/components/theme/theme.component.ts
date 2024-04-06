@@ -1,5 +1,5 @@
 import {Component, Inject, Renderer2, RendererFactory2} from '@angular/core';
-import {ThemeService} from "../../../core/Services/Theme.service";
+import {ThemeService} from "../../../data/Services/Theme.service";
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
