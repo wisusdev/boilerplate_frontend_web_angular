@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../../../data/Services/Auth.service";
-import { UserInterface } from "../../../../data/Interfaces/User.interface";
 import { ErrorMessages } from "../../../../data/Interfaces/Errors.interface";
 import { Handle } from "../../../../data/Exceptions/Handle";
 import { of, tap } from "rxjs";
 import { catchError } from "rxjs/operators";
+import {LoginUserInterface} from "../../../../data/Interfaces/Auth/LoginUser.interface";
 
 @Component({
 	selector: 'app-login',
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	@Input()
-	userModel!: UserInterface;
+	userModel!: LoginUserInterface;
 
 	ngOnInit() {
 		this.formUser = this.formBuilder.group({
