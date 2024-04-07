@@ -29,10 +29,10 @@ export class NavbarComponent implements OnInit {
 
 	ngOnInit() {
 		this.authUser.status().subscribe((response) => {
-			this.loggedIn = response;
-		}, (error) => {
-			console.log(error);
-		}
+				this.loggedIn = response;
+			}, (error) => {
+				console.log(error);
+			}
 		);
 	}
 
@@ -42,8 +42,7 @@ export class NavbarComponent implements OnInit {
 			(response) => {
 				console.log(response);
 				this.loggedIn = false;
-				localStorage.removeItem('token');
-				localStorage.removeItem('expires_at');
+				localStorage.removeItem('access_token');
 				this.router.navigateByUrl('/auth/login');
 			},
 			(error) => {
