@@ -6,13 +6,14 @@ import {ForgotPasswordComponent} from "./resources/views/auth/forgot-password/fo
 import {ProfileComponent} from "./resources/views/profile/profile.component";
 import {authGuard} from "./data/Guards/Auth.guard";
 import {ResetPasswordComponent} from "./resources/views/auth/reset-password/reset-password.component";
+import { guestGuard } from './data/Guards/guest.guard';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'auth/login', pathMatch: 'full'},
-	{ path: 'auth/login', component: LoginComponent },
-	{ path: 'auth/register', component: RegisterComponent },
-	{ path: 'auth/forgot-password', component: ForgotPasswordComponent },
-	{ path: 'auth/reset-password', component: ResetPasswordComponent },
+	{ path: 'auth/login', component: LoginComponent, canActivate: [guestGuard]},
+	{ path: 'auth/register', component: RegisterComponent, canActivate: [guestGuard] },
+	{ path: 'auth/forgot-password', component: ForgotPasswordComponent, canActivate: [guestGuard]},
+	{ path: 'auth/reset-password', component: ResetPasswordComponent, canActivate: [guestGuard]},
 	{ path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
 ];
 
