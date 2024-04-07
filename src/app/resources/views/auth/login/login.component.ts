@@ -6,6 +6,7 @@ import { Handle } from "../../../../data/Exceptions/Handle";
 import { of, tap } from "rxjs";
 import { catchError } from "rxjs/operators";
 import {LoginUserInterface} from "../../../../data/Interfaces/Auth/LoginUser.interface";
+import {app} from "../../../../config/App";
 
 @Component({
 	selector: 'app-login',
@@ -46,8 +47,14 @@ export class LoginComponent implements OnInit {
 		let userLoginData = this.formatFormUser(this.formUser.value);
 		this.resetErrorMessages();
 		this.authService.login(userLoginData).pipe(
-			tap(response => this.handleMessage.handleResponse(response, this.formUser, '/profile')),
+			tap(response => this.handleMessage.handleResponse(response, this.formUser, app.redirectAuth)),
 			catchError(error => {
+				if(typeof error === 'object') {
+					for (let key in error) {
+						let keyName = error[key]['title'].split('.')[1];
+						this.errorMessages[keyName] = error[key]['detail'];
+					}
+				}
 				this.handleMessage.handleError(error);
 				return of(null);
 			})
