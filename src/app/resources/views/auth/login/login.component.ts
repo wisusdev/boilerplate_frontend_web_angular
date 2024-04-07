@@ -43,13 +43,23 @@ export class LoginComponent implements OnInit {
 	}
 
 	onSubmit() {
+		let userLoginData = this.formatFormUser(this.formUser.value);
 		this.resetErrorMessages();
-		this.authService.login(this.formUser.value).pipe(
+		this.authService.login(userLoginData).pipe(
 			tap(response => this.handleMessage.handleResponse(response, this.formUser, '/profile')),
 			catchError(error => {
 				this.handleMessage.handleError(error);
 				return of(null);
 			})
 		).subscribe();
+	}
+
+	formatFormUser(formUser: any) {
+		return {
+			"data": {
+				"email": formUser.email,
+				"password": formUser.password
+			}
+		}
 	}
 }
