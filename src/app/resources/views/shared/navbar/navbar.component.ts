@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { AuthService } from '../../../../data/Services/Auth.service';
-import { Auth } from '../../../../config/Auth';
+import { Auth } from '../../../../data/Providers/Auth';
 import { app } from "../../../../config/App";
 import { Lang } from "../../../../config/Lang";
 
@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
 				console.log(response);
 				this.loggedIn = false;
 				localStorage.removeItem('access_token');
-				this.router.navigateByUrl('/auth/login');
+				this.router.navigateByUrl(app.redirectLogout);
 			},
 			(error) => {
 				console.log(error);
