@@ -1,34 +1,24 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class Auth {
-    private isLoggedIn = new BehaviorSubject<boolean>(false);
+	private isLoggedIn = new BehaviorSubject<boolean>(false);
 
-    status() {
-        if (typeof localStorage !== 'undefined') {
-            const token: string | null = localStorage.getItem('token');
-            const expiresAt: string | null = localStorage.getItem('expires_at');
+	status() {
+		if (typeof localStorage !== 'undefined') {
+			const access_token: string | null = localStorage.getItem('access_token');
 
-            if (!token || !expiresAt) {
-                this.isLoggedIn.next(false);
-                console.log('No token or expires_at found');
-            } else {
-                const expiresAtDate = new Date(expiresAt);
-                const currentDate = new Date();
+			if (!access_token) {
+				this.isLoggedIn.next(false);
+				console.log('No token or expires_at found');
+			}
 
-                if (currentDate > expiresAtDate) {
-                    this.isLoggedIn.next(false);
-                    console.log('Token expired');
-                } else {
-                    this.isLoggedIn.next(true);
-                    console.log('Token valid');
-                }
-            }
-        }
+			this.isLoggedIn.next(true);
+		}
 
-        return this.isLoggedIn.asObservable();
-    }
+		return this.isLoggedIn.asObservable();
+	}
 }
