@@ -6,7 +6,7 @@ import {ForgotPasswordComponent} from "./resources/views/auth/forgot-password/fo
 import {ProfileComponent} from "./resources/views/profile/profile.component";
 import {authGuard} from "./data/Guards/Auth.guard";
 import {ResetPasswordComponent} from "./resources/views/auth/reset-password/reset-password.component";
-import { guestGuard } from './data/Guards/guest.guard';
+import {guestGuard} from './data/Guards/Guest.guard';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'auth/login', pathMatch: 'full'},
