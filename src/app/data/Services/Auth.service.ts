@@ -6,7 +6,7 @@ import { catchError } from "rxjs/operators";
 import { authUserModel } from '../Interfaces/Token.interface';
 import { Handle } from "../Exceptions/Handle";
 import { Api } from "../../config/Api";
-import {LoginUserInterface} from "../Interfaces/Auth/LoginUserInterface";
+import {LoginUserInterface} from "../Interfaces/Auth/LoginUser.interface";
 
 @Injectable({
 	providedIn: 'root'
