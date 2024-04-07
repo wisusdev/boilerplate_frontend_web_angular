@@ -24,14 +24,14 @@ export class AuthService {
 
 	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
-	register(data: UserInterface): Observable<object> {
-		return this.httpClient.post(`${this._apiUriRegister}`, data, {
+	login(data: any): Observable<authUserModel> {
+		return this.httpClient.post<authUserModel>(`${this._apiUriLogin}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	login(data: UserInterface): Observable<authUserModel> {
-		return this.httpClient.post<authUserModel>(`${this._apiUriLogin}`, data, {
+	register(data: UserInterface): Observable<object> {
+		return this.httpClient.post(`${this._apiUriRegister}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
