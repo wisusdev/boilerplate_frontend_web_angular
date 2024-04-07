@@ -38,7 +38,7 @@ export class AuthService {
 	}
 
 	logout(): Observable<object> {
-		const token: string | null = localStorage.getItem('token');
+		const token: string | null = localStorage.getItem('access_token');
 		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${token}` });
 		return this.httpClient.post(`${this._apiUriLogout}`, {}, {
 			headers: this.httpHeaders,
