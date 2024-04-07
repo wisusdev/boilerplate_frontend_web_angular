@@ -1,7 +1,8 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {Auth} from "../../config/Auth";
+import {Auth} from "../Providers/Auth";
 import {map, take} from "rxjs";
+import {app} from "../../config/App";
 
 export const guestGuard: CanActivateFn = () => {
 	const authUser = inject(Auth);
@@ -11,7 +12,7 @@ export const guestGuard: CanActivateFn = () => {
 		if(!isLoggedIn){
 			return true;
 		} else {
-			router.createUrlTree(['/profile']);
+			router.createUrlTree([app.redirectAuth]);
 			return false;
 		}
 	}));
