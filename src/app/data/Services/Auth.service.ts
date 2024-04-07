@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { UserInterface } from "../Interfaces/User.interface";
+import { RegisterUserInterface } from "../Interfaces/Auth/RegisterUser.interface";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { authUserModel } from '../Interfaces/Token.interface';
 import { Handle } from "../Exceptions/Handle";
 import { Api } from "../../config/Api";
+import {LoginUserInterface} from "../Interfaces/Auth/LoginUserInterface";
 
 @Injectable({
 	providedIn: 'root'
@@ -24,13 +25,13 @@ export class AuthService {
 
 	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
-	login(data: any): Observable<authUserModel> {
+	login(data: LoginUserInterface): Observable<authUserModel> {
 		return this.httpClient.post<authUserModel>(`${this._apiUriLogin}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	register(data: UserInterface): Observable<object> {
+	register(data: RegisterUserInterface): Observable<object> {
 		return this.httpClient.post(`${this._apiUriRegister}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
@@ -50,7 +51,7 @@ export class AuthService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	forgotPassword(data: UserInterface): Observable<object> {
+	forgotPassword(data: RegisterUserInterface): Observable<object> {
 		return this.httpClient.post(`${this._apiUriForgotPassword}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
