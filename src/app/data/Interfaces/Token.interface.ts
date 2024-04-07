@@ -1,8 +1,5 @@
 export interface authUserModel {
-    status: boolean;
-    code: number;
-    message: string;
-    type: string;
-    token: string;
+    access_token: string;
+    token_type: string;
     expires_at: string;
 }
