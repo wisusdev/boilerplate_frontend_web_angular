@@ -13,7 +13,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/todoist",
+						"outputPath": "dist/todolist",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": [
@@ -44,12 +44,6 @@
 									"maximumError": "4kb"
 								}
 							],
-							"fileReplacements": [
-								{
-									"replace": "src/environments/environment.ts",
-									"with": "src/environments/environment.prod.ts"
-								}
-							],
 							"outputHashing": "all"
 						},
 						"development": {
@@ -67,10 +61,10 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "todoist:build:production"
+							"buildTarget": "todolist:build:production"
 						},
 						"development": {
-							"buildTarget": "todoist:build:development"
+							"buildTarget": "todolist:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -78,7 +72,7 @@
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"buildTarget": "todoist:build"
+						"buildTarget": "todolist:build"
 					}
 				},
 				"test": {
