@@ -3,7 +3,7 @@ import {inject} from "@angular/core";
 import {Auth} from "../../config/Auth";
 import {map, take} from "rxjs";
 
-export const guestGuard: CanActivateFn = (route, state) => {
+export const guestGuard: CanActivateFn = () => {
 	const authUser = inject(Auth);
 	const router = inject(Router);
 
@@ -11,7 +11,7 @@ export const guestGuard: CanActivateFn = (route, state) => {
 		if(!isLoggedIn){
 			return true;
 		} else {
-			router.navigate(['/profile']);
+			router.createUrlTree(['/profile']);
 			return false;
 		}
 	}));
