@@ -3,5 +3,11 @@ export const app = {
 	name: 'Angular App',
 
 	/* Application URl */
-	url: 'http://localhost:4200',
+	app_url: 'http://localhost:4200',
+
+	/* Redirect after login */
+	redirectAuth: '/profile',
+
+	/* Redirect after logout */
+	redirectLogout: '/auth/login',
 }
