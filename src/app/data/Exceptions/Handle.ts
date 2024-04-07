@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import {Observable, pipe, throwError} from "rxjs";
 import { Router } from "@angular/router";
 import { ToastService } from "../Services/Toast.service";
 import { FormGroup } from "@angular/forms";
@@ -25,13 +25,12 @@ export abstract class Handle {
 	}
 
 	handleResponse(response: any, form: FormGroup, route: string = '/profile') {
-		if (response && response.token) {
-			localStorage.setItem('token', response.token);
-			localStorage.setItem('expires_at', response.expires_at);
+		if (response && response.access_token) {
+			localStorage.setItem('access_token', response.access_token);
 		}
 		form.reset();
 		this.router.navigate([route]);
-		this.toast.show({ message: response['message'], classname: 'bg-success text-light', delay: 5000 });
+		this.toast.show({ message: "Inicios de sesión exitoso", classname: 'bg-success text-light', delay: 5000 });
 	}
 
 	handleError(error: any) {
