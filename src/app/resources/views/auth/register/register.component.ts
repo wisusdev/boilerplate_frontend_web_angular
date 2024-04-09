@@ -4,15 +4,38 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angula
 import { RegisterUserInterface } from "../../../../data/Interfaces/Auth/RegisterUser.interface";
 import { AuthService } from "../../../../data/Services/Auth.service";
 import { ToastService } from "../../../../data/Services/Toast.service";
+import { Handle } from 'src/app/data/Exceptions/Handle';
+import { catchError, of, tap } from 'rxjs';
+import { ErrorMessages } from 'src/app/data/Interfaces/Errors.interface';
 
 @Component({
 	selector: 'app-register',
 	templateUrl: './register.component.html'
 })
 export class RegisterComponent {
-	constructor(private formBuilder: FormBuilder, private authUser: AuthService, private toast: ToastService, private router: Router) { }
+	constructor(private formBuilder: FormBuilder, private authUser: AuthService, private handleMessage: Handle) { }
 
 	formUser!: FormGroup;
+
+	errorMessages: ErrorMessages = {
+		username: '',
+		first_name: '',
+		last_name: '',
+		email: '',
+		password: '',
+		password_confirmation: ''
+	};
+
+	resetErrorMessages() {
+		this.errorMessages = {
+			username: '',
+			first_name: '',
+			last_name: '',
+			email: '',
+			password: '',
+			password_confirmation: ''
+		};
+	}
 
 	@Input()
 	userModel!: RegisterUserInterface;
@@ -31,16 +54,36 @@ export class RegisterComponent {
 			this.formUser.patchValue(this.formUser);
 		}
 	}
+
 	onSubmit() {
-		this.authUser.register(this.formUser.value).subscribe(
-			(response) => {
-				this.formUser.reset();
-				this.toast.show({ message: 'User registered successfully', classname: 'bg-success text-light', delay: 5000 });
-				this.router.navigate(['/auth/login']);
-			},
-			(error) => {
-				this.toast.show({ message: 'Error registering user', classname: 'bg-danger text-light', delay: 5000 });
-			}
-		);
+		let userRegisterData = this.formatFormUser(this.formUser.value);
+		this.resetErrorMessages();
+		this.authUser.register(userRegisterData).pipe(
+			tap(response => this.handleMessage.handleResponse(response, this.formUser, '/auth/login')),
+			catchError(error => {
+				if(typeof error === 'object') {
+					for (let key in error) {
+						let keyName = error[key]['title'].split('.')[1];
+						this.errorMessages[keyName] = error[key]['detail'];
+					}
+				}
+				this.handleMessage.handleError(error);
+				return of(null);
+			})
+		).subscribe();
 	}
+
+	formatFormUser(formUser: any) {
+		return {
+			"data": {
+				"username": formUser.username,
+				"first_name": formUser.first_name,
+				"last_name": formUser.last_name,
+				"email": formUser.email,
+				"password": formUser.password,
+				"password_confirmation": formUser.password_confirmation
+			}
+		}
+	}
+
 }
