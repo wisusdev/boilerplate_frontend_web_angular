@@ -7,6 +7,8 @@ import { authUserModel } from '../Interfaces/Token.interface';
 import { Handle } from "../Exceptions/Handle";
 import { Api } from "../../config/Api";
 import {LoginUserInterface} from "../Interfaces/Auth/LoginUser.interface";
+import {ForgotPassword} from "../Interfaces/Auth/ForgotPassword.interface";
+import { ResetPassword } from '../Interfaces/Auth/ResetPassword.interface';
 
 @Injectable({
 	providedIn: 'root'
@@ -51,19 +53,13 @@ export class AuthService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	forgotPassword(data: RegisterUserInterface): Observable<object> {
+	forgotPassword(data: ForgotPassword): Observable<object> {
 		return this.httpClient.post(`${this._apiUriForgotPassword}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	resetPassword(token: string, password: string, password_confirmation: string): Observable<object> {
-		const data = {
-			token: token,
-			password: password,
-			password_confirmation: password_confirmation,
-		};
-
+	resetPassword(data: ResetPassword): Observable<object> {
 		return this.httpClient.post(`${this._apiUriResetPassword}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
