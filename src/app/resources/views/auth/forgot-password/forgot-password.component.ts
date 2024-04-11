@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../../data/Services/Auth.service';
-import { Handle } from '../../../../data/Exceptions/Handle';
-import { ErrorMessages } from '../../../../data/Interfaces/Errors.interface';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../../../data/Services/Auth.service';
+import {Handle} from '../../../../data/Exceptions/Handle';
+import {ErrorMessages} from '../../../../data/Interfaces/Errors.interface';
+import {catchError, of, tap} from "rxjs";
 
 @Component({
 	selector: 'app-forgot-password',
@@ -10,7 +11,8 @@ import { ErrorMessages } from '../../../../data/Interfaces/Errors.interface';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-	constructor(private formBuilder: FormBuilder, private authService: AuthService, private handleMessage: Handle) { }
+	constructor(private formBuilder: FormBuilder, private authService: AuthService, private handleMessage: Handle) {
+	}
 
 	formForgotPassword!: FormGroup;
 
@@ -35,9 +37,29 @@ export class ForgotPasswordComponent implements OnInit {
 	}
 
 	onSubmit() {
-		this.authService.forgotPassword(this.formForgotPassword.value).subscribe(
-			(response) => this.handleMessage.handleResponse(response, this.formForgotPassword, '/auth/login'),
-			(error) => this.handleMessage.handleError(error)
-		);
+		let userForgotPasswordData = this.formatFormUser(this.formForgotPassword.value);
+		this.resetErrorMessages();
+		this.authService.forgotPassword(userForgotPasswordData).pipe(
+			tap(response => {
+				this.handleMessage.handleResponse('Successfully sent reset password email', this.formForgotPassword, '/auth/login');
+			}),
+			catchError(error => {
+				if (typeof error === 'object') {
+					for (let key in error) {
+						let keyName = error[key]['title'].split('.')[1];
+						this.errorMessages[keyName] = error[key]['detail'];
+					}
+				}
+				return of(null);
+			})
+		).subscribe();
+	}
+
+	formatFormUser(formUser: any) {
+		return {
+			"data": {
+				"email": formUser.email,
+			}
+		};
 	}
 }
