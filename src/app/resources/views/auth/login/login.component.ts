@@ -47,7 +47,12 @@ export class LoginComponent implements OnInit {
 		let userLoginData = this.formatFormUser(this.formUser.value);
 		this.resetErrorMessages();
 		this.authService.login(userLoginData).pipe(
-			tap(response => this.handleMessage.handleResponse(response, this.formUser, app.redirectAuth)),
+			tap(response => {
+				if (response && response.access_token) {
+					localStorage.setItem('access_token', response.access_token);
+				}
+				this.handleMessage.handleResponse('Successfully login', this.formUser, app.redirectAuth)
+			}),
 			catchError(error => {
 				if(typeof error === 'object') {
 					for (let key in error) {
