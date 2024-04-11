@@ -1,18 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "../../../../data/Services/Auth.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ToastService } from "../../../../data/Services/Toast.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../../../../data/Services/Auth.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ToastService} from "../../../../data/Services/Toast.service";
+import {ErrorMessages} from "../../../../data/Interfaces/Errors.interface";
+import {catchError, of, tap} from "rxjs";
+import {Handle} from "../../../../data/Exceptions/Handle";
 
 @Component({
 	selector: 'app-reset-password',
 	templateUrl: './reset-password.component.html'
 })
 export class ResetPasswordComponent implements OnInit {
-	token: any;
+	constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private authService: AuthService, private handleMessage: Handle) {
+	}
+
+	token: string = '';
 	formUser!: FormGroup;
 
-	constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authService: AuthService, private toast: ToastService) {
+	errorMessages: ErrorMessages = {
+		password: '',
+		password_confirmation: ''
+	};
+
+	resetErrorMessages() {
+		this.errorMessages = {
+			password: '',
+			password_confirmation: ''
+		};
 	}
 
 	ngOnInit(): void {
@@ -27,20 +42,31 @@ export class ResetPasswordComponent implements OnInit {
 	}
 
 	onSubmit() {
-		const password = this.formUser.value.password;
-		const password_confirmation = this.formUser.value.password_confirmation;
+		let userResetPasswordData = this.formatFormUser(this.formUser.value);
+		this.resetErrorMessages();
+		this.authService.resetPassword(userResetPasswordData).pipe(
+			tap(response => {
+				this.handleMessage.handleResponse('Successfully reset password', this.formUser, '/auth/login');
+			}),
+			catchError(error => {
+				if (typeof error === 'object') {
+					for (let key in error) {
+						let keyName = error[key]['title'].split('.')[1];
+						this.errorMessages[keyName] = error[key]['detail'];
+					}
+				}
+				return of(null);
+			})
+		).subscribe();
+	}
 
-		this.authService.resetPassword(this.token, password, password_confirmation).subscribe(
-			(response) => {
-				console.log(response);
-				this.formUser.reset();
-				this.toast.show({ message: 'Your password has been reset!', classname: 'bg-success text-light', delay: 5000 });
-				this.router.navigate(['auth/login']);
-			},
-			(error) => {
-				console.log(error);
-				this.toast.show({ message: 'Something went wrong!', classname: 'bg-danger text-light', delay: 5000 });
+	formatFormUser(formUser: any) {
+		return {
+			"data": {
+				"token": this.token,
+				"password": formUser.password,
+				"password_confirmation": formUser.password_confirmation
 			}
-		);
+		}
 	}
 }
