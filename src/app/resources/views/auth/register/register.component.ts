@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RegisterUserInterface } from "../../../../data/Interfaces/Auth/RegisterUser.interface";
 import { AuthService } from "../../../../data/Services/Auth.service";
-import { ToastService } from "../../../../data/Services/Toast.service";
 import { Handle } from 'src/app/data/Exceptions/Handle';
 import { catchError, of, tap } from 'rxjs';
 import { ErrorMessages } from 'src/app/data/Interfaces/Errors.interface';
@@ -59,7 +57,7 @@ export class RegisterComponent {
 		let userRegisterData = this.formatFormUser(this.formUser.value);
 		this.resetErrorMessages();
 		this.authUser.register(userRegisterData).pipe(
-			tap(response => this.handleMessage.handleResponse(response, this.formUser, '/auth/login')),
+			tap(response => this.handleMessage.handleResponse('User created successfully', this.formUser, '/auth/login')),
 			catchError(error => {
 				if(typeof error === 'object') {
 					for (let key in error) {
