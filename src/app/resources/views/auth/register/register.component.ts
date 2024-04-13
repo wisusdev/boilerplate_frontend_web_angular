@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RegisterUserInterface } from "../../../../data/Interfaces/Auth/RegisterUser.interface";
-import { AuthService } from "../../../../data/Services/Auth.service";
+import { AuthService } from "../Auth.service";
 import { Handle } from 'src/app/data/Exceptions/Handle';
 import { catchError, of, tap } from 'rxjs';
 import { ErrorMessages } from 'src/app/data/Interfaces/Errors.interface';
