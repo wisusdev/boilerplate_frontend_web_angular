@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../../../data/Services/Auth.service";
+import { AuthService } from "../Auth.service";
 import { ErrorMessages } from "../../../../data/Interfaces/Errors.interface";
 import { Handle } from "../../../../data/Exceptions/Handle";
 import { of, tap } from "rxjs";
