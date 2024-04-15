@@ -61,7 +61,7 @@ import {
 		NgbDropdownItem,
 		NgbDropdownMenu,
 		NgbCollapse,
-		NgOptimizedImage,
+		NgOptimizedImage
 	],
 	providers: [
 		provideClientHydration()
