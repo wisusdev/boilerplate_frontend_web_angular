@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ErrorMessages} from "../../../../data/Interfaces/Errors.interface";
 import {AccountService} from "../account.service";
@@ -6,7 +6,6 @@ import {Lang} from "../../../../config/Lang";
 import {of, tap} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {Handle} from "../../../../data/Exceptions/Handle";
-import {app} from "../../../../config/App";
 import {ToastService} from "../../../../data/Services/Toast.service";
 
 @Component({
@@ -22,6 +21,8 @@ export class ProfileComponent implements OnInit {
 	constructor(private formBuilder: FormBuilder, private accountService: AccountService, private handleMessage: Handle, private toast: ToastService) {
 		this.availableLang = Object.entries(Lang.availableLang).map(([key, value]) => ({ key, ...value }));
 	}
+
+	@ViewChild('avatarFile') avatarFile: any;
 
 	formProfile!: FormGroup;
 
@@ -47,6 +48,10 @@ export class ProfileComponent implements OnInit {
 	profileModel!: any;
 
 	ngOnInit() {
+		this.initFormProfile();
+	}
+
+	initFormProfile() {
 		let userData = localStorage.getItem('user');
 		if (userData) {
 			let dataProfile = JSON.parse(userData);
@@ -63,6 +68,10 @@ export class ProfileComponent implements OnInit {
 	}
 
 	onFileSelected(event: any) {
+		this.handleFileSelection(event);
+	}
+
+	handleFileSelection(event: any) {
 		let selectAvatar = <File>event.target.files[0];
 
 		if (!this.allowedTypes.includes(selectAvatar.type)) {
@@ -81,12 +90,17 @@ export class ProfileComponent implements OnInit {
 	}
 
 	onSubmit() {
+		this.updateUserProfile();
+	}
+
+	updateUserProfile() {
 		let formProfile = this.formatFormProfile(this.formProfile.value);
 		this.resetErrorMessages();
 		this.accountService.updateProfile(formProfile).pipe(
 			tap(response => {
 				if (response.data) {
 					localStorage.setItem('user', JSON.stringify(response.data.attributes));
+					this.avatarFile.nativeElement.value = '';
 					let uniqueString = new Date().getTime();
 					this.avatarUrl = (response.data.attributes.avatar || "/assets/images/profile.png") + "?v=" + uniqueString;
 					this.toast.show({ message: 'Successfully update profile'});
@@ -95,7 +109,7 @@ export class ProfileComponent implements OnInit {
 			catchError(error => {
 				if(typeof error === 'object') {
 					for (let key in error) {
-						let keyName = error[key]['title'].split('.')[1];
+						let keyName = error[key]['title'].split('.')[2];
 						this.errorMessages[keyName] = error[key]['detail'];
 					}
 				}
