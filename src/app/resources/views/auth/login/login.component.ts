@@ -48,8 +48,10 @@ export class LoginComponent implements OnInit {
 		this.resetErrorMessages();
 		this.authService.login(userLoginData).pipe(
 			tap(response => {
-				if (response && response.access_token) {
-					localStorage.setItem('access_token', response.access_token);
+				if (response && response.data.attributes.token) {
+					localStorage.setItem('user', JSON.stringify(response.data.attributes.user));
+					localStorage.setItem('user_key', response.data.id);
+					localStorage.setItem('access_token', response.data.attributes.token);
 				}
 				this.handleMessage.handleResponse('Successfully login', this.formUser, app.redirectAuth)
 			}),
