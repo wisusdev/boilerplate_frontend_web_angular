@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 export interface Toast {
 	message: string;
-	classname?: string;
+	className?: string;
 	delay?: number;
 }
 
@@ -13,7 +13,7 @@ export class ToastService {
 	toasts: Toast[] = [];
 
 	show(toast: Toast) {
-		toast.classname = toast.classname || 'bg-success text-light';
+		toast.className = toast.className || 'bg-success text-light';
 		toast.delay = toast.delay || 5000;
 		this.toasts.push(toast);
 	}
