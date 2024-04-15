@@ -9,37 +9,48 @@
 					<h5 class="card-title">Account</h5>
 				</div>
 				<div class="card-body">
-					<p class="text-center">
-						<img ngSrc="/assets/images/profile.png" class="img-thumbnail rounded img-profile" id="avatar" alt="profile-picture" width="512" height="512">
+					<p class="text-center mb-4">
+						<img [src]="avatarUrl" class="rounded img-profile" id="avatarProfile" alt="profile-picture">
 					</p>
-					<form>
+					<form [formGroup]="formProfile" (ngSubmit)="onSubmit()">
 						<div class="row">
 							<div class="col-md-6 mb-3">
 								<div class="input-group">
 									<span class="input-group-text"><i class="bi bi-person"></i></span>
-									<input type="text" class="form-control" id="first_name" formControlName="first_name" name="first_name" placeholder="{{'firstname' | translate}}">
+									<input type="text" class="form-control" id="first_name" formControlName="first_name" name="first_name" placeholder="{{'firstName' | translate}}">
 								</div>
 							</div>
 							<div class="col-md-6 mb-3">
 								<div class="input-group">
 									<span class="input-group-text"><i class="bi bi-person"></i></span>
-									<input type="text" class="form-control" id="last_name" formControlName="last_name" name="last_name" placeholder="{{'lastname' | translate}}">
+									<input type="text" class="form-control" id="last_name" formControlName="last_name" name="last_name" placeholder="{{'lastName' | translate}}">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<div class="input-group">
+									<span class="input-group-text"><i class="bi bi-envelope"></i></span>
+									<input type="email" class="form-control" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+								</div>
+							</div>
+							<div class="col-md-6 mb-3">
+								<div class="input-group">
+									<span class="input-group-text"><i class="bi bi-translate"></i></span>
+									<select class="form-select" formControlName="language">
+										<option *ngFor="let language of availableLang" [value]="language.key">{{language.name}}</option>
+									</select>
 								</div>
 							</div>
 						</div>
 
 						<div class="mb-3">
-							<div class="input-group">
-								<span class="input-group-text"><i class="bi bi-envelope"></i></span>
-								<input type="email" class="form-control" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+							<div class="input-group mb-3">
+								<label for="avatarFile" class="input-group-text"><i class="bi bi-cloud-upload-fill"></i></label>
+								<input type="file" class="form-control" id="avatarFile" (change)="onFileSelected($event)" [accept]="allowedTypes">
 							</div>
 						</div>
-
-						<div class="mb-3">
-							<label for="exampleInputFile" class="form-label">Profile picture </label>
-							<input type="file" class="form-control" id="exampleInputFile">
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary">{{'update' | translate}}</button>
 					</form>
 				</div>
 			</div>
