@@ -40,13 +40,19 @@ export class NavbarComponent implements OnInit {
 		$event.preventDefault();
 		this.authService.logout().subscribe(
 			(response) => {
-				console.log(response);
 				this.loggedIn = false;
 				localStorage.removeItem('access_token');
+				localStorage.removeItem('user');
+				localStorage.removeItem('user_key');
 				this.router.navigateByUrl(app.redirectLogout);
 			},
 			(error) => {
-				console.log(error);
+				if (error[0].status == 401) {
+					localStorage.removeItem('access_token');
+					localStorage.removeItem('user');
+					localStorage.removeItem('user_key');
+					this.router.navigateByUrl(app.redirectLogout);
+				}
 			}
 		);
 	}
