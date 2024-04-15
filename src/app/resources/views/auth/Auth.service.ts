@@ -14,7 +14,7 @@ import { ResetPassword } from '../../../data/Interfaces/Auth/ResetPassword.inter
 	providedIn: 'root'
 })
 export class AuthService {
-	private _apiUri = Api.api_url + Api.api_version;
+	private _apiUri = Api.api_url_v1;
 	private _apiUriLogin = this._apiUri + '/auth/login';
 	private _apiUriLogout = this._apiUri + '/auth/logout';
 	private _apiUriRefresh = this._apiUri + '/auth/refresh';
