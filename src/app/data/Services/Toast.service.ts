@@ -13,6 +13,8 @@ export class ToastService {
 	toasts: Toast[] = [];
 
 	show(toast: Toast) {
+		toast.classname = toast.classname || 'bg-success text-light';
+		toast.delay = toast.delay || 5000;
 		this.toasts.push(toast);
 	}
 
