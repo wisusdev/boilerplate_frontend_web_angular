@@ -27,16 +27,16 @@ export abstract class Handle {
 	handleResponse(response: any, form: FormGroup, route: string = '/profile') {
 		form.reset();
 		this.router.navigate([route]);
-		this.toast.show({ message: response, classname: 'bg-success text-light', delay: 5000 });
+		this.toast.show({ message: response, className: 'bg-success text-light', delay: 5000 });
 	}
 
 	handleError(error: any) {
 		if (typeof error === 'object') {
 			for (let key in error) {
-				this.toast.show({ message: error[key]['detail'], classname: 'bg-danger text-light', delay: 5000 });
+				this.toast.show({ message: error[key]['detail'], className: 'bg-danger text-light', delay: 5000 });
 			}
 		} else {
-			this.toast.show({ message: error, classname: 'bg-danger text-light', delay: 5000 });
+			this.toast.show({ message: error, className: 'bg-danger text-light', delay: 5000 });
 		}
 	}
 }
