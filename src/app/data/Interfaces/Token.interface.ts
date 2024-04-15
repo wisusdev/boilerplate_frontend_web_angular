@@ -1,4 +1,17 @@
 export interface authUserModel {
-    access_token: string;
-    token_type: string;
+	data: {
+		type: string;
+		id: string;
+		attributes: {
+			user: {
+				first_name: string;
+				last_name: string;
+				username: string;
+				email: string;
+				avatar: string;
+				language: string;
+			};
+			token: string;
+		};
+	}
 }
