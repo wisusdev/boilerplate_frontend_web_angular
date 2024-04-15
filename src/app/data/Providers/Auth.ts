@@ -13,10 +13,8 @@ export class Auth {
 
 			if (!access_token || access_token === 'undefined') {
 				this.isLoggedIn.next(false);
-				console.log('No token or expires_at found');
 			} else {
 				this.isLoggedIn.next(true);
-				console.log('Token found');
 			}
 		}
 
