@@ -1,7 +1,7 @@
 {
 	"username": "Nombre de usuario",
-	"firstname": "Nombre",
-	"lastname": "Apellido",
+	"firstName": "Nombre",
+	"lastName": "Apellido",
 	"name": "Nombre",
 	"email": "Dirección de correo electrónico",
 	"password": "Contraseña",
@@ -38,5 +38,11 @@
 	"phoneNo": "Número de teléfono",
 	"bio": "Introduce la biografía",
 	"termsConditions": "Acepto los términos y condiciones.",
-	"submit": "Enviar"
+	"submit": "Enviar",
+	"cancel": "Cancelar",
+	"edit": "Editar",
+	"delete": "Eliminar",
+	"save": "Guardar",
+	"update": "Actualizar",
+	"change": "Cambiar"
 }

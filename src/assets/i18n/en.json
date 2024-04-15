@@ -1,7 +1,7 @@
 {
 	"username": "Username",
-	"firstname": "First Name",
-	"lastname": "Last Name",
+	"firstName": "First Name",
+	"lastName": "Last Name",
 	"name": "Name",
 	"email": "Email Address",
 	"password": "Password",
@@ -38,5 +38,11 @@
 	"phoneNo": "Phone Number",
 	"bio": "Enter Biography",
 	"termsConditions": "I accept the terms and conditions.",
-	"submit": "Submit"
+	"submit": "Submit",
+	"cancel": "Cancel",
+	"edit": "Edit",
+	"delete": "Delete",
+	"save": "Save",
+	"update": "Update",
+	"change": "Change"
 }
