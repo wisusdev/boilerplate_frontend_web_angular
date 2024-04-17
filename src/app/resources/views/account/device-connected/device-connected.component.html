@@ -4,19 +4,23 @@
 			<app-account-menu-list></app-account-menu-list>
 		</div>
 		<div class="col-md-8">
-			<div class="card mb-4" *ngFor="let device of devices?.data">
-				<div class="card-header d-flex justify-content-between">
-					<p class="mb-0">{{'deviceConnectedIn' | translate}} {{ device.country }}</p>
-					<p class="mb-0">
-						<button class="btn btn-sm btn-danger" value="{{device.id}}">Cerrar sesión</button>
-					</p>
-				</div>
-				<div class="card-body" >
-					<p class="mb-0">Fecha: <span class="fw-bold">{{device.login_at}}</span></p>
-					<p class="mb-0">Ubicación: <span class="fw-bold">{{ device.country }}</span></p>
-					<p class="mb-0">Dispositivo: <span class="fw-bold">{{ device.os }}</span></p>
-					<p class="mb-0">Navegador: <span class="fw-bold">{{ device.browser }}</span></p>
-					<p class="mb-0">IP: <span class="fw-bold">{{ device.ip }}</span></p>
+			<div class="row">
+				<div class="col-md-6" *ngFor="let device of devices?.data">
+					<div class="card mb-4">
+						<div class="card-header d-flex justify-content-between">
+							<p class="mb-0">{{'deviceConnectedIn' | translate}} {{ device.country }}</p>
+							<p class="mb-0">
+								<button class="btn btn-sm btn-danger" value="{{device.id}}" (click)="logoutDevice(device.id)">Cerrar sesión</button>
+							</p>
+						</div>
+						<div class="card-body" >
+							<p class="mb-0">Fecha: <span class="fw-bold">{{device.login_at}}</span></p>
+							<p class="mb-0">Ubicación: <span class="fw-bold">{{ device.country }}</span></p>
+							<p class="mb-0">Dispositivo: <span class="fw-bold">{{ device.os }}</span></p>
+							<p class="mb-0">Navegador: <span class="fw-bold">{{ device.browser }}</span></p>
+							<p class="mb-0">IP: <span class="fw-bold">{{ device.ip }}</span></p>
+						</div>
+					</div>
 				</div>
 			</div>
 			@if (devices?.last_page > 1) {
