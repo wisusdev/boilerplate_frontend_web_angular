@@ -25,7 +25,8 @@ import {
 	NgbDropdown,
 	NgbDropdownItem,
 	NgbDropdownMenu,
-	NgbDropdownToggle
+	NgbDropdownToggle, 
+	NgbPaginationModule
 } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
@@ -61,7 +62,8 @@ import {
 		NgbDropdownItem,
 		NgbDropdownMenu,
 		NgbCollapse,
-		NgOptimizedImage
+		NgOptimizedImage,
+		NgbPaginationModule
 	],
 	providers: [
 		provideClientHydration()
