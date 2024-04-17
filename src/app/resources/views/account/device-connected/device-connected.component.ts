@@ -9,7 +9,8 @@ import {catchError, tap} from "rxjs";
 	templateUrl: './device-connected.component.html',
 })
 export class DeviceConnectedComponent implements OnInit {
-	constructor(private accountService: AccountService, private toast: ToastService, private handleMessage: Handle) {}
+	constructor(private accountService: AccountService, private toast: ToastService, private handleMessage: Handle) {
+	}
 
 	devices: any = [];
 	totalPages: number = 0;
@@ -36,8 +37,29 @@ export class DeviceConnectedComponent implements OnInit {
 		).subscribe();
 	}
 
+	logoutDevice(deviceId: number) {
+		let logoutDeviceData = this.formatLogoutDevice(deviceId.toString());
+		this.accountService.logoutDeviceAuth(logoutDeviceData).pipe(
+			tap(() => {
+				this.getDevices();
+			}),
+			catchError(this.handleMessage.errorHandle)
+		).subscribe();
+
+	}
+
 	setPage(pageNumber: number): void {
 		this.pageNumber = pageNumber;
 		this.getDevices();
+	}
+
+	formatLogoutDevice(deviceId: string) {
+		return {
+			"data": {
+				"attributes": {
+					"device_id": deviceId
+				}
+			}
+		}
 	}
 }
