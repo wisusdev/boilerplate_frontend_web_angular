@@ -4,21 +4,27 @@
 			<app-account-menu-list></app-account-menu-list>
 		</div>
 		<div class="col-md-8">
-			<div class="card">
+			<div class="card mb-4" *ngFor="let device of devices?.data">
 				<div class="card-header d-flex justify-content-between">
-					<p class="mb-0">{{'devicesConnected' | translate}}</p>
+					<p class="mb-0">{{'deviceConnectedIn' | translate}} {{ device.country }}</p>
 					<p class="mb-0">
-						<button class="btn btn-sm btn-danger">Cerrar sesión</button>
+						<button class="btn btn-sm btn-danger" value="{{device.id}}">Cerrar sesión</button>
 					</p>
 				</div>
-				<div class="card-body">
-					<p class="mb-0">Fecha: <span class="fw-bold">2021-09-15 12:00:00</span></p>
-					<p class="mb-0">Ubicación: <span class="fw-bold">San Salvador, El Salvador</span></p>
-					<p class="mb-0">Dispositivo: <span class="fw-bold">Windows 10</span></p>
-					<p class="mb-0">Navegador: <span class="fw-bold">Google Chrome</span></p>
-					<p class="mb-0">IP: <span class="fw-bold">192.168.1.0</span></p>
+				<div class="card-body" >
+					<p class="mb-0">Fecha: <span class="fw-bold">{{device.login_at}}</span></p>
+					<p class="mb-0">Ubicación: <span class="fw-bold">{{ device.country }}</span></p>
+					<p class="mb-0">Dispositivo: <span class="fw-bold">{{ device.os }}</span></p>
+					<p class="mb-0">Navegador: <span class="fw-bold">{{ device.browser }}</span></p>
+					<p class="mb-0">IP: <span class="fw-bold">{{ device.ip }}</span></p>
 				</div>
 			</div>
-
+			@if (devices?.last_page > 1) {
+				<ngb-pagination [collectionSize]="totalPages * 10" [(page)]="pageNumber" [maxSize]="5" (pageChange)="setPage($event)">
+					<ng-template ngbPaginationPrevious>Prev</ng-template>
+					<ng-template ngbPaginationNext>Next</ng-template>
+				</ngb-pagination>
+			}
 		</div>
 	</div>
+</div>
