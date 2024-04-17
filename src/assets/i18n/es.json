@@ -36,6 +36,7 @@
 	"home": "Inicio",
 	"profile": "Perfil",
 	"devicesConnected": "Dispositivos conectados",
+	"deviceConnectedIn": "Dispositivo conectado en",
 	"logout": "Cerrar sesión",
 
 	"nameError": "¡Estoy seguro de que debes tener un nombre!",

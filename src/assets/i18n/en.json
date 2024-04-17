@@ -36,6 +36,7 @@
 	"home": "Home",
 	"profile": "Profile",
 	"devicesConnected": "Devices Connected",
+	"deviceConnectedIn": "Device connected in",
 	"logout": "Log out",
 
 	"nameError": "I'm sure you must have a name!",
