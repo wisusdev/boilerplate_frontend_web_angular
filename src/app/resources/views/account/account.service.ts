@@ -14,11 +14,11 @@ export class AccountService {
 	private _apiUri: string = Api.api_url_v1;
 	private _apiUriAccount: string = this._apiUri + '/account/profile';
 	private _apiUriChangePassword: string = this._apiUri + '/account/change-password';
+	private _apiUriDeviceAuth: string = this._apiUri + '/account/devices-auth-list?fields[device_infos]=id,login_at,browser,os,ip,country';
 
 	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
-	constructor(private httpClient: HttpClient, private handleMessage: Handle) {
-	}
+	constructor(private httpClient: HttpClient, private handleMessage: Handle) {}
 
 	getInfoProfile(): Observable<object> {
 		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
@@ -37,6 +37,15 @@ export class AccountService {
 	changePassword(data: any): Observable<any> {
 		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
 		return this.httpClient.patch(`${this._apiUriChangePassword}`, data, {
+			headers: this.httpHeaders,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	getDeviceAuthList(data: any): Observable<any> {
+		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
+		let apiUriDeviceAuth: string = `${this._apiUriDeviceAuth}&page[number]=${data.page}`;
+
+		return this.httpClient.get(`${apiUriDeviceAuth}`, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
