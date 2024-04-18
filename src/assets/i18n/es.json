@@ -49,5 +49,11 @@
 	"delete": "Eliminar",
 	"save": "Guardar",
 	"update": "Actualizar",
-	"change": "Cambiar"
+	"change": "Cambiar",
+
+	"confirmLogout": "¿Estás seguro de que deseas cerrar esta sesión?",
+	"confirmDelete": "¿Estás seguro de que deseas eliminar este registro?",
+	"confirmAction": "¿Estás seguro de que deseas realizar esta acción?",
+	"yesConfirm": "Sí, confirmar",
+	"noCancel": "No, cancelar"
 }

@@ -49,5 +49,11 @@
 	"delete": "Delete",
 	"save": "Save",
 	"update": "Update",
-	"change": "Change"
+	"change": "Change",
+
+	"confirmLogout": "Are you sure you want to log out?",
+	"confirmDelete": "Are you sure you want to delete this record?",
+	"confirmAction": "Are you sure you want to perform this action?",
+	"yesConfirm": "Yes, confirm",
+	"noCancel": "No, cancel"
 }
