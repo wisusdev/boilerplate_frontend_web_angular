@@ -28,10 +28,9 @@
 					<li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
 						<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownTheme" role="button"> <i class="bi bi-person-circle"></i></a>
 						<div ngbDropdownMenu aria-labelledby="navbarDropdownTheme" class="dropdown-menu">
-							<a class="dropdown-item" routerLink="account/profile">{{'Profile' | translate}}</a>
-							<a class="dropdown-item" href="#">{{'Settings' | translate}}</a>
+							<a class="dropdown-item" routerLink="account/profile">{{'profile' | translate}}</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#" (click)="logout($event)">{{'Logout' | translate}}</a>
+							<a class="dropdown-item" href="#" (click)="logout($event)">{{'logout' | translate}}</a>
 						</div>
 					</li>
 				}
