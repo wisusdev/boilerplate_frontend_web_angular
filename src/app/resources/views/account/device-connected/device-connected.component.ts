@@ -3,13 +3,16 @@ import {AccountService} from "../account.service";
 import {ToastService} from "../../../../data/Services/Toast.service";
 import {Handle} from "../../../../data/Exceptions/Handle";
 import {catchError, tap} from "rxjs";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ConfirmationDialogComponent} from "../../../components/confirmation-dialog/confirmation-dialog.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
 	selector: 'app-device-connected',
 	templateUrl: './device-connected.component.html',
 })
 export class DeviceConnectedComponent implements OnInit {
-	constructor(private accountService: AccountService, private toast: ToastService, private handleMessage: Handle) {
+	constructor(private accountService: AccountService, private translate: TranslateService, private handleMessage: Handle, private modalService: NgbModal ) {
 	}
 
 	devices: any = [];
@@ -35,6 +38,19 @@ export class DeviceConnectedComponent implements OnInit {
 			}),
 			catchError(this.handleMessage.errorHandle)
 		).subscribe();
+	}
+
+	openConfirmationModal(deviceId: number) {
+		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
+		modalRef.componentInstance.title = this.translate.instant('logout');
+		modalRef.componentInstance.message = this.translate.instant('confirmAction');
+		modalRef.componentInstance.confirmText = this.translate.instant('yesConfirm');
+		modalRef.componentInstance.cancelText = this.translate.instant('noCancel');
+		modalRef.result.then((result) => {
+			if (result) {
+				this.logoutDevice(deviceId);
+			}
+		}, (reason) => {});
 	}
 
 	logoutDevice(deviceId: number) {
