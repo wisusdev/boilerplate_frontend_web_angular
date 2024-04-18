@@ -19,13 +19,14 @@ import {ProfileComponent} from "./resources/views/account/profile/profile.compon
 import {AccountMenuListComponent} from "./resources/views/account/account-menu-list/account-menu-list.component";
 import {ChangePasswordComponent} from "./resources/views/account/change-password/change-password.component";
 import {DeviceConnectedComponent} from "./resources/views/account/device-connected/device-connected.component";
+import {ConfirmationDialogComponent} from "./resources/components/confirmation-dialog/confirmation-dialog.component";
 
 import {
 	NgbCollapse,
 	NgbDropdown,
 	NgbDropdownItem,
 	NgbDropdownMenu,
-	NgbDropdownToggle, 
+	NgbDropdownToggle,
 	NgbPaginationModule
 } from "@ng-bootstrap/ng-bootstrap";
 
@@ -40,7 +41,8 @@ import {
 		ProfileComponent,
 		AccountMenuListComponent,
 		ChangePasswordComponent,
-		DeviceConnectedComponent
+		DeviceConnectedComponent,
+		ConfirmationDialogComponent
 	],
 	imports: [
 		BrowserModule,
