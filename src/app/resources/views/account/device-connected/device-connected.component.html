@@ -8,13 +8,12 @@
 				<div class="col-md-6" *ngFor="let device of devices?.data">
 					<div class="card mb-4">
 						<div class="card-header d-flex justify-content-between">
-							<p class="mb-0">{{'deviceConnectedIn' | translate}} {{ device.country }}</p>
+							<p class="mb-0">{{device.login_at}}</p>
 							<p class="mb-0">
 								<button class="btn btn-sm btn-danger" value="{{device.id}}" (click)="logoutDevice(device.id)">Cerrar sesión</button>
 							</p>
 						</div>
 						<div class="card-body" >
-							<p class="mb-0">Fecha: <span class="fw-bold">{{device.login_at}}</span></p>
 							<p class="mb-0">Ubicación: <span class="fw-bold">{{ device.country }}</span></p>
 							<p class="mb-0">Dispositivo: <span class="fw-bold">{{ device.os }}</span></p>
 							<p class="mb-0">Navegador: <span class="fw-bold">{{ device.browser }}</span></p>
