@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../Auth.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ToastService} from "../../../../data/Services/Toast.service";
-import {ErrorMessages} from "../../../../data/Interfaces/Errors.interface";
-import {catchError, of, tap} from "rxjs";
-import {Handle} from "../../../../data/Exceptions/Handle";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "../auth.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ToastService } from "../../../../data/Services/Toast.service";
+import { ErrorMessages } from "../../../../data/Interfaces/Errors.interface";
+import { catchError, of, tap } from "rxjs";
+import { Handle } from "../../../../data/Exceptions/Handle";
 
 @Component({
 	selector: 'app-reset-password',
