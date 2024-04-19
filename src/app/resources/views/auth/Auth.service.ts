@@ -6,8 +6,8 @@ import { catchError } from "rxjs/operators";
 import { authUserModel } from '../../../data/Interfaces/Token.interface';
 import { Handle } from "../../../data/Exceptions/Handle";
 import { Api } from "../../../config/Api";
-import {LoginUserInterface} from "../../../data/Interfaces/Auth/LoginUser.interface";
-import {ForgotPassword} from "../../../data/Interfaces/Auth/ForgotPassword.interface";
+import { LoginUserInterface } from "../../../data/Interfaces/Auth/LoginUser.interface";
+import { ForgotPassword } from "../../../data/Interfaces/Auth/ForgotPassword.interface";
 import { ResetPassword } from '../../../data/Interfaces/Auth/ResetPassword.interface';
 
 @Injectable({
@@ -40,8 +40,6 @@ export class AuthService {
 	}
 
 	logout(): Observable<object> {
-		const token: string | null = localStorage.getItem('access_token');
-		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${token}` });
 		return this.httpClient.post(`${this._apiUriLogout}`, {}, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
