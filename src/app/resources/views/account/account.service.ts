@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Api} from "../../../config/Api";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, Observable} from "rxjs";
-import {Handle} from "../../../data/Exceptions/Handle";
-import {ProfileUpdateInterface} from "../../../data/Interfaces/Account/ProfileUpdate.interface";
-import {profileUpdateResponse} from "../../../data/Interfaces/Account/ProfileUpdateResponse.interface";
+import { Injectable } from '@angular/core';
+import { Api } from "../../../config/Api";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { catchError, Observable } from "rxjs";
+import { Handle } from "../../../data/Exceptions/Handle";
+import { ProfileUpdateInterface } from "../../../data/Interfaces/Account/ProfileUpdate.interface";
+import { profileUpdateResponse } from "../../../data/Interfaces/Account/ProfileUpdateResponse.interface";
 import { Auth } from 'src/app/data/Providers/Auth';
 
 @Injectable({
@@ -19,31 +19,27 @@ export class AccountService {
 
 	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
-	constructor(private httpClient: HttpClient, private handleMessage: Handle) {}
+	constructor(private httpClient: HttpClient, private handleMessage: Handle) { }
 
 	getInfoProfile(): Observable<object> {
-		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
 		return this.httpClient.get(`${this._apiUriAccount}`, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	updateProfile(data: ProfileUpdateInterface): Observable<profileUpdateResponse> {
-		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
 		return this.httpClient.patch<profileUpdateResponse>(`${this._apiUriAccount}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	changePassword(data: any): Observable<any> {
-		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
 		return this.httpClient.patch(`${this._apiUriChangePassword}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	getDeviceAuthList(data: any): Observable<any> {
-		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
 		let apiUriDeviceAuth: string = `${this._apiUriDeviceAuth}&page[number]=${data.page}`;
 
 		return this.httpClient.get(`${apiUriDeviceAuth}`, {
@@ -53,7 +49,7 @@ export class AccountService {
 
 	logoutDeviceAuth(data: any): Observable<any> {
 		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
- 		return this.httpClient.post(`${this._apiUriLogoutDevice}`, data, {
+		return this.httpClient.post(`${this._apiUriLogoutDevice}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
