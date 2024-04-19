@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../Auth.service";
+import { AuthService } from "../auth.service";
 import { ErrorMessages } from "../../../../data/Interfaces/Errors.interface";
 import { Handle } from "../../../../data/Exceptions/Handle";
 import { of, tap } from "rxjs";
 import { catchError } from "rxjs/operators";
-import {LoginUserInterface} from "../../../../data/Interfaces/Auth/LoginUser.interface";
-import {app} from "../../../../config/App";
+import { LoginUserInterface } from "../../../../data/Interfaces/Auth/LoginUser.interface";
+import { app } from "../../../../config/App";
 
 @Component({
 	selector: 'app-login',
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 				this.handleMessage.handleResponse('Successfully login', this.formUser, app.redirectAuth)
 			}),
 			catchError(error => {
-				if(typeof error === 'object') {
+				if (typeof error === 'object') {
 					for (let key in error) {
 						let keyName = error[key]['title'].split('.')[1];
 						this.errorMessages[keyName] = error[key]['detail'];
