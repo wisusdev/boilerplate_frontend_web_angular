@@ -18,6 +18,7 @@
 	"login": "Log in",
 	"dontHaveAccount": "Don't have an account?",
 	"registerHere": "Register here",
+	"deleteAccount": "Delete Account",
 
 	"register": "Register",
 	"orRegisterWith": "Or register with",
@@ -54,6 +55,7 @@
 	"confirmLogout": "Are you sure you want to log out?",
 	"confirmDelete": "Are you sure you want to delete this record?",
 	"confirmAction": "Are you sure you want to perform this action?",
+	"confirmDeleteAccount": "Are you sure you want to delete your account?",
 	"yesConfirm": "Yes, confirm",
 	"noCancel": "No, cancel"
 }

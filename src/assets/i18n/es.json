@@ -18,6 +18,7 @@
 	"login": "Iniciar sesión",
 	"dontHaveAccount": "¿No tienes una cuenta?",
 	"registerHere": "Regístrate aquí",
+	"deleteAccount": "Eliminar cuenta",
 
 	"register": "Registrarse",
 	"orRegisterWith": "O regístrate con",
@@ -54,6 +55,7 @@
 	"confirmLogout": "¿Estás seguro de que deseas cerrar esta sesión?",
 	"confirmDelete": "¿Estás seguro de que deseas eliminar este registro?",
 	"confirmAction": "¿Estás seguro de que deseas realizar esta acción?",
+	"confirmDeleteAccount": "¿Estás seguro de que deseas eliminar tu cuenta?",
 	"yesConfirm": "Sí, confirmar",
 	"noCancel": "No, cancelar"
 }
