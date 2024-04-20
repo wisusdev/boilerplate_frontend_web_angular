@@ -4,7 +4,7 @@ import {AccountRoutingModule} from "./resources/views/account/account-routing.mo
 import {AuthRoutingModule} from "./resources/views/auth/auth-routing.module";
 
 const routes: Routes = [
-
+	{ path: '', redirectTo: 'auth/login', pathMatch: 'full' }
 ];
 
 @NgModule({
