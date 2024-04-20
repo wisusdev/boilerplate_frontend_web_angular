@@ -7,7 +7,6 @@ import {ResetPasswordComponent} from "./reset-password/reset-password.component"
 import {NgModule} from "@angular/core";
 
 const routes: Routes = [
-	{ path: '', redirectTo: 'auth/login', pathMatch: 'full'},
 	{ path: 'auth/login', component: LoginComponent, canActivate: [guestGuard]},
 	{ path: 'auth/register', component: RegisterComponent, canActivate: [guestGuard] },
 	{ path: 'auth/forgot-password', component: ForgotPasswordComponent, canActivate: [guestGuard]},
