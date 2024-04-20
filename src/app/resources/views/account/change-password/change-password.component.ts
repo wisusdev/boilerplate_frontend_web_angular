@@ -43,15 +43,15 @@ export class ChangePasswordComponent implements OnInit {
 		}
 	}
 
-	get f() { 
-		return this.formChangePassword.controls; 
+	get f() {
+		return this.formChangePassword.controls;
 	}
 
 	onSubmit() {
-		if (this.formChangePassword.invalid) { 
+		if (this.formChangePassword.invalid) {
 			this.toast.show({ message: 'Please fill in all required fields', className: 'bg-warning text-light'});
-			return 
-		};
+			return
+		}
 
 		if (this.formChangePassword.value.password !== this.formChangePassword.value.password_confirmation) {
 			this.toast.show({ message: 'Password and Confirm Password do not match', className: 'bg-warning  text-light'});
