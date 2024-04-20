@@ -40,7 +40,6 @@ import {
 		ResetPasswordComponent,
 		NavbarComponent,
 		ProfileComponent,
-		AccountMenuListComponent,
 		ChangePasswordComponent,
 		DeviceConnectedComponent,
 		ConfirmationDialogComponent
@@ -66,7 +65,8 @@ import {
 		NgbDropdownMenu,
 		NgbCollapse,
 		NgOptimizedImage,
-		NgbPaginationModule
+		NgbPaginationModule,
+		AccountMenuListComponent
 	],
 	providers: [
 		provideHttpClient(
@@ -77,7 +77,7 @@ import {
 		)
 	],
 	exports: [
-		AccountMenuListComponent
+
 	],
 	bootstrap: [AppComponent]
 })
