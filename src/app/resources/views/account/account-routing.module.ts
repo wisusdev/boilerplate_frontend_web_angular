@@ -4,12 +4,13 @@ import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {ChangePasswordComponent} from "./change-password/change-password.component";
 import {DeviceConnectedComponent} from "./device-connected/device-connected.component";
+import {DeleteAccountComponent} from "./delete-account/delete-account.component";
 
 const routes: Routes = [
-	{path: '', redirectTo: 'account/profile', pathMatch: 'full'},
 	{path: 'account/profile', component: ProfileComponent, canActivate: [authGuard]},
 	{path: 'account/change-password', component: ChangePasswordComponent, canActivate: [authGuard]},
-	{path: 'account/device-connected', component: DeviceConnectedComponent, canActivate: [authGuard]}
+	{path: 'account/device-connected', component: DeviceConnectedComponent, canActivate: [authGuard]},
+	{path: 'account/delete-account', component: DeleteAccountComponent, canActivate: [authGuard]}
 ];
 
 @NgModule({
