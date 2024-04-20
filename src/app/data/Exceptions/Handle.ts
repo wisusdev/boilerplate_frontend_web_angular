@@ -4,6 +4,7 @@ import {Observable, pipe, throwError} from "rxjs";
 import { Router } from "@angular/router";
 import { ToastService } from "../Services/Toast.service";
 import { FormGroup } from "@angular/forms";
+import {app} from "../../config/App";
 
 @Injectable({
 	providedIn: 'root'
@@ -24,7 +25,7 @@ export abstract class Handle {
 		return throwError(() => errorMessage);
 	}
 
-	handleResponse(response: any, form: FormGroup, route: string = '/profile') {
+	handleResponse(response: any, form: FormGroup, route: string = app.redirectAuth) {
 		form.reset();
 		this.router.navigate([route]);
 		this.toast.show({ message: response, className: 'bg-success text-light', delay: 5000 });
