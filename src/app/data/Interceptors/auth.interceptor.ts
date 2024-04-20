@@ -17,12 +17,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 	return next(authReq).pipe(
 		catchError((error) => {
-			console.log(error.status);
 			if (error.status === 401) {
 				localStorage.clear();
 				router.navigate([app.redirectLogout]);
 			}
-			throw 'Error';
+
+			throw error;
 		})
 	);
 };
