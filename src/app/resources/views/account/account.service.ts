@@ -16,6 +16,7 @@ export class AccountService {
 	private _apiUriChangePassword: string = this._apiUri + '/account/change-password';
 	private _apiUriDeviceAuth: string = this._apiUri + '/account/devices-auth-list?fields[device_infos]=id,login_at,browser,os,ip,country';
 	private _apiUriLogoutDevice: string = this._apiUri + '/account/logout-device';
+	private _apiUriDeleteAccount: string = this._apiUri + '/account/delete-account';
 
 	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
@@ -48,8 +49,13 @@ export class AccountService {
 	}
 
 	logoutDeviceAuth(data: any): Observable<any> {
-		this.httpHeaders = new HttpHeaders({ ...Api.headers, 'Authorization': `Bearer ${Auth.token()}` });
 		return this.httpClient.post(`${this._apiUriLogoutDevice}`, data, {
+			headers: this.httpHeaders,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	deleteAccount(userId: string): Observable<any> {
+		return this.httpClient.delete(`${this._apiUriDeleteAccount}/${userId}`, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
