@@ -32,8 +32,8 @@ export class DeviceConnectedComponent implements OnInit {
 		this.accountService.getDeviceAuthList(data).pipe(
 			tap((data: any) => {
 				this.devices = data.data;
-				this.totalPages = data.data.last_page;
-				this.pageNumber = data.data.current_page;
+				this.totalPages = data.last_page;
+				this.pageNumber = data.current_page;
 				this.pages = Array.from({length: this.totalPages}, (_, i) => i + 1);
 			}),
 			catchError(this.handleMessage.errorHandle)
