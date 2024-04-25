@@ -1,6 +1,9 @@
 <header class="app-header">
 	<a class="app-header__logo" href="index.html">{{ appName }}</a>
-	<span class="app-sidebar__toggle p-cursor" data-toggle="sidebar" href="#" (click)="toggleMenu()" aria-label="Hide Sidebar"></span>
+	
+	@if(loggedIn){
+		<span class="app-sidebar__toggle p-cursor" data-toggle="sidebar" href="#" (click)="toggleMenu()" aria-label="Hide Sidebar"></span>
+	}
 
 	<ul class="app-nav">
 		<li class="dropdown" ngbDropdown display="dynamic" placement="bottom-end">
@@ -24,10 +27,10 @@
 
 		@if(!loggedIn){
 			<li class="dropdown">
-				<a class="app-nav__item" routerLink="auth/login">{{'login' | translate}}</a>
+				<a class="app-nav__item text-decoration-none" routerLink="auth/login">{{'login' | translate}}</a>
 			</li>
 			<li class="dropdown">
-				<a class="app-nav__item" routerLink="auth/register">{{'register' | translate}}</a>
+				<a class="app-nav__item text-decoration-none" routerLink="auth/register">{{'register' | translate}}</a>
 			</li>
 		}
 	</ul>
