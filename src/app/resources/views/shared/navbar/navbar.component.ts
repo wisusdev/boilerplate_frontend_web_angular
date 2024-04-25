@@ -13,6 +13,7 @@ import {
 	NgbDropdownToggle
 } from '@ng-bootstrap/ng-bootstrap';
 import { DOCUMENT, NgForOf } from "@angular/common";
+import {catchError, of, tap} from "rxjs";
 
 @Component({
 	selector: 'app-navbar',
@@ -53,32 +54,31 @@ export class NavbarComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.authUser.status().subscribe((response) => {
-			this.loggedIn = response;
-		}, (error) => {
-			console.log(error);
+		this.authUser.status().pipe().subscribe((status: boolean) => {
+			this.loggedIn = status;
 		});
 	}
 
 	logout($event: MouseEvent) {
 		$event.preventDefault();
-		this.authService.logout().subscribe(
-			(response) => {
+		this.authService.logout().pipe(
+			tap(() => {
 				this.loggedIn = false;
 				localStorage.removeItem('access_token');
 				localStorage.removeItem('user');
 				localStorage.removeItem('user_key');
 				this.router.navigateByUrl(app.redirectLogout);
-			},
-			(error) => {
+			}),
+			catchError((error) => {
 				if (error[0].status == 401) {
 					localStorage.removeItem('access_token');
 					localStorage.removeItem('user');
 					localStorage.removeItem('user_key');
 					this.router.navigateByUrl(app.redirectLogout);
 				}
-			}
-		);
+				return of(false);
+			})
+		).subscribe();
 	}
 
 	switchLanguage(language: string, $event: MouseEvent) {
@@ -90,11 +90,11 @@ export class NavbarComponent implements OnInit {
 	}
 
 	toggleMenu() {
-		const body = this.document.body;
-		if (body.classList.contains('sidenav-toggled')) {
-			this.renderer.removeClass(body, 'sidenav-toggled');
+		const main = this.document.querySelector('main') as HTMLElement;
+		if (main.classList.contains('sidenav-toggled')) {
+			this.renderer.removeClass(main, 'sidenav-toggled');
 		} else {
-			this.renderer.addClass(body, 'sidenav-toggled');
+			this.renderer.addClass(main, 'sidenav-toggled');
 		}
 	}
 }
