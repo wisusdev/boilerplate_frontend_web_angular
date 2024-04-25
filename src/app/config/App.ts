@@ -6,7 +6,7 @@ export const app = {
 	app_url: 'http://localhost:4200',
 
 	/* Redirect after login */
-	redirectAuth: '/account/profile',
+	redirectAuth: '/home',
 
 	/* Redirect after logout */
 	redirectLogout: '/auth/login',
