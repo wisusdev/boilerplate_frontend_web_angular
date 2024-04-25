@@ -10,4 +10,6 @@ export const app = {
 
 	/* Redirect after logout */
 	redirectLogout: '/auth/login',
+
+	placeholderImage: '/assets/images/profile.png',
 }
