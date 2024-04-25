@@ -36,6 +36,9 @@
 
 	"home": "Home",
 	"profile": "Profile",
+	"settings": "Settings",
+	"users": "Users",
+	"rolesAndPermissions": "Roles & Permissions",
 	"devicesConnected": "Devices Connected",
 	"deviceConnectedIn": "Device connected in",
 	"logout": "Log out",

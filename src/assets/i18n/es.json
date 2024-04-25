@@ -36,6 +36,9 @@
 
 	"home": "Inicio",
 	"profile": "Perfil",
+	"settings": "Configuración",
+	"users": "Usuarios",
+	"rolesAndPermissions": "Roles y permisos",
 	"devicesConnected": "Dispositivos conectados",
 	"deviceConnectedIn": "Dispositivo conectado en",
 	"logout": "Cerrar sesión",
