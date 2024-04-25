@@ -7,6 +7,7 @@ import {of, tap} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {Handle} from "../../../../data/Exceptions/Handle";
 import {ToastService} from "../../../../data/Services/Toast.service";
+import { app } from 'src/app/config/App';
 
 @Component({
 	selector: 'app-profile',
@@ -53,9 +54,10 @@ export class ProfileComponent implements OnInit {
 
 	initFormProfile() {
 		let userData = localStorage.getItem('user');
+
 		if (userData) {
 			let dataProfile = JSON.parse(userData);
-			this.avatarUrl = dataProfile.avatar || "/assets/images/profile.png"
+			this.avatarUrl = dataProfile.avatar || app.placeholderImage;
 
 			this.formProfile = this.formBuilder.group({
 				first_name: [dataProfile.first_name, Validators.required],
