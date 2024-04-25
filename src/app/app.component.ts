@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import {app} from "./config/App";
+import {Component, TemplateRef, ViewChild} from '@angular/core';
 
 @Component({
 	selector: 'app-root',
@@ -7,5 +6,5 @@ import {app} from "./config/App";
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	title = app.name;
+
 }
