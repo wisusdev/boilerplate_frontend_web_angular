@@ -1,10 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Router, RouterLink} from "@angular/router";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {AuthService} from '../../auth/auth.service';
-import {Auth} from '../../../../data/Providers/Auth';
-import {app} from "../../../../config/App";
-import {Lang} from "../../../../config/Lang";
+import { Component, EventEmitter, Inject, OnInit, Output, Renderer2 } from '@angular/core';
+import { Router, RouterLink } from "@angular/router";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { AuthService } from '../../auth/auth.service';
+import { Auth } from '../../../../data/Providers/Auth';
+import { app } from "../../../../config/App";
+import { Lang } from "../../../../config/Lang";
 import {
 	NgbCollapse,
 	NgbDropdown,
@@ -12,7 +12,7 @@ import {
 	NgbDropdownMenu,
 	NgbDropdownToggle
 } from '@ng-bootstrap/ng-bootstrap';
-import {NgForOf} from "@angular/common";
+import { DOCUMENT, NgForOf } from "@angular/common";
 
 @Component({
 	selector: 'app-navbar',
@@ -35,8 +35,15 @@ export class NavbarComponent implements OnInit {
 	public appName: string = app.name;
 	public availableLangNavbarArray: any[] = [];
 
-	constructor(private router: Router, public translate: TranslateService, private authService: AuthService, private authUser: Auth) {
-		this.availableLangNavbarArray = Object.entries(Lang.availableLang).map(([key, value]) => ({key, ...value}));
+	constructor(
+		private router: Router,
+		public translate: TranslateService,
+		private authService: AuthService,
+		private authUser: Auth,
+		private renderer: Renderer2,
+		@Inject(DOCUMENT) private document: Document
+	) {
+		this.availableLangNavbarArray = Object.entries(Lang.availableLang).map(([key, value]) => ({ key, ...value }));
 		translate.addLangs(Object.keys(Lang.availableLang));
 		for (let lang of this.availableLangNavbarArray) {
 			if (lang.default) {
@@ -47,11 +54,10 @@ export class NavbarComponent implements OnInit {
 
 	ngOnInit() {
 		this.authUser.status().subscribe((response) => {
-				this.loggedIn = response;
-			}, (error) => {
-				console.log(error);
-			}
-		);
+			this.loggedIn = response;
+		}, (error) => {
+			console.log(error);
+		});
 	}
 
 	logout($event: MouseEvent) {
@@ -80,6 +86,15 @@ export class NavbarComponent implements OnInit {
 		this.translate.use(language);
 		if (typeof localStorage !== 'undefined') {
 			localStorage.setItem('language', language);
+		}
+	}
+
+	toggleMenu() {
+		const body = this.document.body;
+		if (body.classList.contains('sidenav-toggled')) {
+			this.renderer.removeClass(body, 'sidenav-toggled');
+		} else {
+			this.renderer.addClass(body, 'sidenav-toggled');
 		}
 	}
 }
