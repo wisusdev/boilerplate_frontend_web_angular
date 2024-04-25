@@ -21,6 +21,7 @@ import { ChangePasswordComponent } from "./resources/views/account/change-passwo
 import { DeviceConnectedComponent } from "./resources/views/account/device-connected/device-connected.component";
 import { ConfirmationDialogComponent } from "./resources/components/confirmation-dialog/confirmation-dialog.component";
 import { authInterceptor } from './data/Interceptors/auth.interceptor';
+import {SidebarComponent} from "./resources/views/shared/sidebar/sidebar.component";
 
 import {
 	NgbCollapse,
@@ -38,7 +39,6 @@ import {
 		RegisterComponent,
 		ForgotPasswordComponent,
 		ResetPasswordComponent,
-		NavbarComponent,
 		ProfileComponent,
 		ChangePasswordComponent,
 		DeviceConnectedComponent,
@@ -66,7 +66,9 @@ import {
 		NgbCollapse,
 		NgOptimizedImage,
 		NgbPaginationModule,
-		AccountMenuListComponent
+		AccountMenuListComponent,
+		SidebarComponent,
+		NavbarComponent
 	],
 	providers: [
 		provideHttpClient(
