@@ -5,7 +5,6 @@ import { catchError, Observable } from "rxjs";
 import { Handle } from "../../../data/Exceptions/Handle";
 import { ProfileUpdateInterface } from "../../../data/Interfaces/Account/ProfileUpdate.interface";
 import { profileUpdateResponse } from "../../../data/Interfaces/Account/ProfileUpdateResponse.interface";
-import { Auth } from 'src/app/data/Providers/Auth';
 
 @Injectable({
 	providedIn: 'root'
