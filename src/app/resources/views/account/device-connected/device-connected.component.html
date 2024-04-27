@@ -24,8 +24,8 @@
 			</div>
 			@if (devices?.last_page > 1) {
 				<ngb-pagination [collectionSize]="totalPages * 10" [(page)]="pageNumber" [maxSize]="5" (pageChange)="setPage($event)">
-					<ng-template ngbPaginationPrevious>Prev</ng-template>
-					<ng-template ngbPaginationNext>Next</ng-template>
+					<ng-template ngbPaginationPrevious>{{'next' | translate}}</ng-template>
+                <ng-template ngbPaginationNext>{{'previous' | translate}}</ng-template>
 				</ngb-pagination>
 			}
 		</div>
