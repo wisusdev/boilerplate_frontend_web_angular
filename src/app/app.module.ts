@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgOptimizedImage } from "@angular/common";
 
 import { AppRoutingModule } from './app-routing.module';
