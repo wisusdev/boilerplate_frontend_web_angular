@@ -1,14 +1,13 @@
-
-.router-wrapper  {
-	position:  relative;
-	overflow:  hidden;
-	width:  100vw;
-	height:  calc(100%  -  47px);
-	perspective:  1200px;
-	transform-style:  preserve-3d;
+.router-wrapper {
+	position: relative;
+	overflow: hidden;
+	width: 100vw;
+	height: calc(100% - 47px);
+	perspective: 1200px;
+	transform-style: preserve-3d;
 }
 
-:host  {
+:host {
 	display: block;
 	position: absolute;
 	width: 100%;
@@ -55,4 +54,20 @@
 
 .p-cursor {
 	cursor: pointer;
+}
+
+.pagination {
+	margin-bottom: 0;
+}
+
+.activeSpan {
+	color: var(--bs-btn-active-color);
+	background-color: var(--bs-btn-active-bg);
+	border-color: var(--bs-btn-active-border-color);
+}
+
+.activeSpan::after {
+	content: "\2714";
+	display: inline-block;
+	color: var(--bs-btn-active-color);
 }
