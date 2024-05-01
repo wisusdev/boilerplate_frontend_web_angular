@@ -12,8 +12,13 @@ import {TranslateService} from "@ngx-translate/core";
 	templateUrl: './device-connected.component.html',
 })
 export class DeviceConnectedComponent implements OnInit {
-	constructor(private accountService: AccountService, private translate: TranslateService, private handleMessage: Handle, private modalService: NgbModal ) {
-	}
+
+	constructor(
+		private accountService: AccountService,
+		private translate: TranslateService,
+		private handleMessage: Handle,
+		private modalService: NgbModal
+	) {}
 
 	devices: any = [];
 	totalPages: number = 0;
