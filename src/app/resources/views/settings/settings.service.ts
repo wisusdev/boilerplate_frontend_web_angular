@@ -59,4 +59,28 @@ export class SettingsService {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
+
+	storeUser(data: any): any {
+		return this.httpClient.post(`${this._apiUriUsers}`, data, {
+			headers: this.httpHeaders,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	showUser(id: string): any {
+		return this.httpClient.get(`${this._apiUriUsers}/${id}`, {
+			headers: this.httpHeaders,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	updateUser(id: string, data: any): any {
+		return this.httpClient.patch(`${this._apiUriUsers}/${id}`, data, {
+			headers: this.httpHeaders,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	destroyUser(id: string): any {
+		return this.httpClient.delete(`${this._apiUriUsers}/${id}`, {
+			headers: this.httpHeaders,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
 }
