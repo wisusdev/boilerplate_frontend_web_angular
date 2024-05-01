@@ -25,4 +25,24 @@ export class ToastService {
 	clear() {
 		this.toasts.splice(0, this.toasts.length);
 	}
+
+	success(message: string) {
+		this.show({message, className: 'bg-success text-light'});
+	}
+
+	danger(message: string) {
+		this.show({message, className: 'bg-danger text-light'});
+	}
+
+	warning(message: string) {
+		this.show({message, className: 'bg-warning text-light'});
+	}
+
+	info(message: string) {
+		this.show({message, className: 'bg-info text-light'});
+	}
+
+	primary(message: string) {
+		this.show({message, className: 'bg-primary text-light'});
+	}
 }
