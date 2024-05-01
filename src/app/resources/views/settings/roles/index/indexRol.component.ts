@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {SettingsService} from '../../settings.service';
 import {catchError, of, tap} from 'rxjs';
 import {NgFor} from '@angular/common';
-import {TranslateModule} from "@ngx-translate/core";
-import {NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {RouterLink} from "@angular/router";
 import { Toast, ToastService } from 'src/app/data/Services/Toast.service';
+import {ConfirmationDialogComponent} from "../../../../components/confirmation-dialog/confirmation-dialog.component";
 
 interface RoleResponse {
 	data: Role[];
@@ -71,7 +72,12 @@ export class IndexRolComponent implements OnInit {
 	pageNumber: number = 1;
 	pages: number[] = [];
 
-	constructor(private settings: SettingsService, private toast: ToastService) {}
+	constructor(
+		private settings: SettingsService,
+		private toast: ToastService,
+		private modalService: NgbModal,
+		private translate: TranslateService,
+	) {}
 
 	ngOnInit() {
 		this.getRoles();
@@ -94,16 +100,26 @@ export class IndexRolComponent implements OnInit {
 	}
 
 	deleteRole(role: any) {
-		this.settings.destroyRole(role.id).pipe(
-			tap(() => {
-				this.getRoles();
-				this.toast.show({message: 'Role deleted successfully', className: 'bg-warning text-light'});
-			}),
-			catchError((error: any) => {
-				console.error(error);
-				return of(null);
-			})
-		).subscribe();
+		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
+		modalRef.componentInstance.title = this.translate.instant('logout');
+		modalRef.componentInstance.message = this.translate.instant('confirmAction');
+		modalRef.componentInstance.confirmText = this.translate.instant('yesConfirm');
+		modalRef.componentInstance.cancelText = this.translate.instant('noCancel');
+		modalRef.result.then((result) => {
+			if (result) {
+				this.settings.destroyRole(role.id).pipe(
+					tap(() => {
+						this.getRoles();
+						this.toast.show({message: 'Role deleted successfully', className: 'bg-warning text-light'});
+					}),
+					catchError((error: any) => {
+						console.error(error);
+						return of(null);
+					})
+				).subscribe();
+			}
+		}, (reason) => {});
+
 	}
 
 	setPage(pageNumber: number): void {
