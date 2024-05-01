@@ -19,7 +19,12 @@ export class ProfileComponent implements OnInit {
 	public selectAvatar: string = '';
 	public allowedTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/webp'];
 
-	constructor(private formBuilder: FormBuilder, private accountService: AccountService, private handleMessage: Handle, private toast: ToastService) {
+	constructor(
+		private formBuilder: FormBuilder,
+		private accountService: AccountService,
+		private handleMessage: Handle,
+		private toast: ToastService
+	) {
 		this.availableLang = Object.entries(Lang.availableLang).map(([key, value]) => ({ key, ...value }));
 	}
 
