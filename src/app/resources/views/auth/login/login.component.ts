@@ -1,19 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../auth.service";
-import { ErrorMessages } from "../../../../data/Interfaces/Errors.interface";
-import { Handle } from "../../../../data/Exceptions/Handle";
-import { of, tap } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { LoginUserInterface } from "../../../../data/Interfaces/Auth/LoginUser.interface";
-import { app } from "../../../../config/App";
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../auth.service";
+import {ErrorMessages} from "../../../../data/Interfaces/Errors.interface";
+import {Handle} from "../../../../data/Exceptions/Handle";
+import {of, tap} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {app} from "../../../../config/App";
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-	constructor(private formBuilder: FormBuilder, private authService: AuthService, private handleMessage: Handle) { }
+
+	constructor(
+		private formBuilder: FormBuilder,
+		private authService: AuthService,
+		private handleMessage: Handle
+	) {
+	}
 
 	formUser!: FormGroup;
 
@@ -29,13 +34,11 @@ export class LoginComponent implements OnInit {
 		};
 	}
 
-	@Input()
-	userModel!: LoginUserInterface;
-
 	ngOnInit() {
 		this.formUser = this.formBuilder.group({
+			type: 'users',
 			email: ['', Validators.required],
-			password: ['', Validators.required]
+			password: ['', Validators.required],
 		});
 
 		if (this.formUser !== undefined) {
@@ -44,14 +47,13 @@ export class LoginComponent implements OnInit {
 	}
 
 	onSubmit() {
-		let userLoginData = this.formatFormUser(this.formUser.value);
 		this.resetErrorMessages();
-		this.authService.login(userLoginData).pipe(
+		this.authService.login(this.formUser.value).pipe(
 			tap(response => {
-				if (response && response.data.attributes.token) {
+				if (response && response.data.relationships.access.token) {
 					localStorage.setItem('user', JSON.stringify(response.data.attributes.user));
 					localStorage.setItem('user_key', response.data.id);
-					localStorage.setItem('access_token', response.data.attributes.token);
+					localStorage.setItem('access_token', response.data.relationships.access.token);
 				}
 				this.handleMessage.handleResponse('Successfully login', this.formUser, app.redirectAuth)
 			}),
@@ -66,14 +68,5 @@ export class LoginComponent implements OnInit {
 				return of(null);
 			})
 		).subscribe();
-	}
-
-	formatFormUser(formUser: any) {
-		return {
-			"data": {
-				"email": formUser.email,
-				"password": formUser.password
-			}
-		}
 	}
 }
