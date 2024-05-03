@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { RegisterUserInterface } from "../../../data/Interfaces/Auth/RegisterUser.interface";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { authUserModel } from '../../../data/Interfaces/Token.interface';
 import { Handle } from "../../../data/Exceptions/Handle";
 import { Api } from "../../../config/Api";
-import { LoginUserInterface } from "../../../data/Interfaces/Auth/LoginUser.interface";
 import { ForgotPassword } from "../../../data/Interfaces/Auth/ForgotPassword.interface";
 import { ResetPassword } from '../../../data/Interfaces/Auth/ResetPassword.interface';
+import {loginRequestInterface} from "../../../data/Requests/loginRequest.interface";
+import {loginResponseInterface} from "../../../data/Responses/loginResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -27,8 +27,8 @@ export class AuthService {
 
 	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
-	login(data: LoginUserInterface): Observable<authUserModel> {
-		return this.httpClient.post<authUserModel>(`${this._apiUriLogin}`, data, {
+	login(data: loginRequestInterface): Observable<loginResponseInterface> {
+		return this.httpClient.post<loginResponseInterface>(`${this._apiUriLogin}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
