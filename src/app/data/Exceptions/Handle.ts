@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { HttpErrorResponse } from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {HttpErrorResponse} from "@angular/common/http";
 import {Observable, pipe, throwError} from "rxjs";
-import { Router } from "@angular/router";
-import { ToastService } from "../Services/Toast.service";
-import { FormGroup } from "@angular/forms";
+import {Router} from "@angular/router";
+import {ToastService} from "../Services/Toast.service";
+import {FormGroup} from "@angular/forms";
 import {app} from "../../config/App";
 
 @Injectable({
@@ -11,7 +11,10 @@ import {app} from "../../config/App";
 })
 export abstract class Handle {
 
-	protected constructor(private router: Router, private toast: ToastService) { }
+	protected constructor(
+		private router: Router,
+		private toast: ToastService
+	) {}
 
 	errorHandle(error: HttpErrorResponse): Observable<never> {
 		let errorMessage: string = '';
@@ -27,17 +30,18 @@ export abstract class Handle {
 
 	handleResponse(response: any, form: FormGroup, route: string = app.redirectAuth) {
 		form.reset();
-		this.router.navigate([route]);
-		this.toast.show({ message: response, className: 'bg-success text-light', delay: 5000 });
+		this.router.navigate([route]).then(responseRoute => {
+			this.toast.success(response);
+		});
 	}
 
 	handleError(error: any) {
 		if (typeof error === 'object') {
 			for (let key in error) {
-				this.toast.show({ message: error[key]['detail'], className: 'bg-danger text-light', delay: 5000 });
+				this.toast.danger(error[key]['detail']);
 			}
 		} else {
-			this.toast.show({ message: error, className: 'bg-danger text-light', delay: 5000 });
+			this.toast.danger(error);
 		}
 	}
 }
