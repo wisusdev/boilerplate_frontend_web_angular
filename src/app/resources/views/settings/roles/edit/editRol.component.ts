@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { SettingsService } from "../../settings.service";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KeyValuePipe, NgClass, NgForOf } from '@angular/common';
-import { ErrorMessages } from 'src/app/data/Interfaces/Errors.interface';
+import { ErrorMessagesInterface } from 'src/app/data/Interfaces/Errors.interface';
 import { catchError, of, tap } from 'rxjs';
 import { ToastService } from 'src/app/data/Services/Toast.service';
 
@@ -29,14 +29,14 @@ export class EditRolComponent implements OnInit {
 	roleId: string = '';
 
 	constructor(
-		private route: ActivatedRoute, 
-		private settingsService: SettingsService, 
-		private formBuilder: FormBuilder, 
+		private route: ActivatedRoute,
+		private settingsService: SettingsService,
+		private formBuilder: FormBuilder,
 		private router: Router,
 		private toast: ToastService
-	) {}
+	) { }
 
-	errorMessages: ErrorMessages = {
+	errorMessages: ErrorMessagesInterface = {
 		name: ''
 	}
 
@@ -59,7 +59,7 @@ export class EditRolComponent implements OnInit {
 				this.selectedPermissions = data.data.permissions.map((permission: any) => permission.name);
 			}),
 			catchError(error => {
-				if(error[0].status === '404'){
+				if (error[0].status === '404') {
 					this.router.navigate(['/settings/roles']);
 				}
 				return of(null);
@@ -99,7 +99,7 @@ export class EditRolComponent implements OnInit {
 			tap((response) => {
 				this.formRole.reset();
 				this.selectedPermissions = [];
-				this.toast.show({message: 'Role updated successfully'});
+				this.toast.show({ message: 'Role updated successfully' });
 				this.router.navigate(['/settings/roles']);
 			}),
 			catchError((error: any) => {
