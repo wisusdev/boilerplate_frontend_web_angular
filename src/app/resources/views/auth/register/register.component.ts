@@ -1,21 +1,31 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { RegisterUserInterface } from "../../../../data/Interfaces/Auth/RegisterUser.interface";
-import { AuthService } from "../auth.service";
-import { Handle } from 'src/app/data/Exceptions/Handle';
-import { catchError, of, tap } from 'rxjs';
-import { ErrorMessages } from 'src/app/data/Interfaces/Errors.interface';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../auth.service";
+import {Handle} from 'src/app/data/Exceptions/Handle';
+import {catchError, of, tap} from 'rxjs';
+import {ErrorMessagesInterface} from 'src/app/data/Interfaces/Errors.interface';
+import {TranslateService} from "@ngx-translate/core";
+import {app} from "../../../../config/App";
+import {ToastService} from "../../../../data/Services/Toast.service";
 
 @Component({
 	selector: 'app-register',
 	templateUrl: './register.component.html'
 })
-export class RegisterComponent {
-	constructor(private formBuilder: FormBuilder, private authUser: AuthService, private handleMessage: Handle) { }
+export class RegisterComponent implements OnInit {
+
+	constructor(
+		private formBuilder: FormBuilder,
+		private authUser: AuthService,
+		private handleMessage: Handle,
+		private translate: TranslateService,
+		private toast: ToastService
+	) {
+	}
 
 	formUser!: FormGroup;
 
-	errorMessages: ErrorMessages = {
+	errorMessages: ErrorMessagesInterface = {
 		username: '',
 		first_name: '',
 		last_name: '',
@@ -35,17 +45,17 @@ export class RegisterComponent {
 		};
 	}
 
-	@Input()
-	userModel!: RegisterUserInterface;
-
 	ngOnInit() {
 		this.formUser = this.formBuilder.group({
-			username: ['', Validators.required],
+			type: 'users',
+			username: ['', [Validators.required, Validators.minLength(3)]],
 			first_name: ['', Validators.required],
 			last_name: ['', Validators.required],
-			email: ['', Validators.required],
-			password: ['', Validators.required],
-			password_confirmation: ['', Validators.required]
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', [Validators.required, Validators.minLength(8)]],
+			password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
+		}, {
+			validator: this.mustMatch('password', 'password_confirmation')
 		});
 
 		if (this.formUser !== undefined) {
@@ -53,35 +63,39 @@ export class RegisterComponent {
 		}
 	}
 
-	onSubmit() {
-		let userRegisterData = this.formatFormUser(this.formUser.value);
-		this.resetErrorMessages();
-		this.authUser.register(userRegisterData).pipe(
-			tap(response => this.handleMessage.handleResponse('User created successfully', this.formUser, '/auth/login')),
-			catchError(error => {
-				if(typeof error === 'object') {
-					for (let key in error) {
-						let keyName = error[key]['title'].split('.')[1];
-						this.errorMessages[keyName] = error[key]['detail'];
-					}
-				}
-				this.handleMessage.handleError(error);
-				return of(null);
-			})
-		).subscribe();
-	}
+	mustMatch(controlName: string, matchingControlName: string) {
+		return (formGroup: FormGroup) => {
+			const control = formGroup.controls[controlName];
+			const matchingControl = formGroup.controls[matchingControlName];
 
-	formatFormUser(formUser: any) {
-		return {
-			"data": {
-				"username": formUser.username,
-				"first_name": formUser.first_name,
-				"last_name": formUser.last_name,
-				"email": formUser.email,
-				"password": formUser.password,
-				"password_confirmation": formUser.password_confirmation
+			if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
+				return;
+			}
+
+			if (control.value !== matchingControl.value) {
+				matchingControl.setErrors({ mustMatch: true });
+			} else {
+				matchingControl.setErrors(null);
 			}
 		}
 	}
 
+	onSubmit() {
+		this.resetErrorMessages();
+		this.authUser.register(this.formUser.value).pipe(
+			tap(response => {
+				this.handleMessage.handleResponse(this.translate.instant('message.registrationSuccessful'), this.formUser, app.redirectToLogin)
+			}),
+			catchError(error => {
+				if (typeof error === 'object') {
+					for (let key in error) {
+						let keyName = error[key]['title'].split('.')[2];
+						this.errorMessages[keyName] = error[key]['detail'];
+					}
+				}
+				this.toast.danger(this.translate.instant('message.registrationFailed'));
+				return of(null);
+			})
+		).subscribe();
+	}
 }
