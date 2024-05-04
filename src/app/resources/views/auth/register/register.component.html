@@ -10,27 +10,39 @@
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                <input type="text" class="form-control" id="username" formControlName="username" name="username" autocomplete="username" placeholder="{{'username' | translate}}">
+                                <input type="text" class="form-control" [ngClass]="{'is-invalid': errorMessages['username']}" id="username" formControlName="username" name="username" autocomplete="username" placeholder="{{'username' | translate}}">
+	                            <div class="invalid-feedback">
+		                            {{ errorMessages['username'] | translate }}
+	                            </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                    <input type="text" class="form-control" id="first_name" formControlName="first_name" name="first_name" placeholder="{{'firstname' | translate}}">
+                                    <input type="text" class="form-control" [ngClass]="{'is-invalid': errorMessages['first_name']}" id="first_name" formControlName="first_name" name="first_name" placeholder="{{'firstname' | translate}}">
+	                                <div class="invalid-feedback">
+		                                {{ errorMessages['first_name'] | translate }}
+	                                </div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                    <input type="text" class="form-control" id="last_name" formControlName="last_name" name="last_name" placeholder="{{'lastname' | translate}}">
+                                    <input type="text" class="form-control" [ngClass]="{'is-invalid': errorMessages['last_name']}" id="last_name" formControlName="last_name" name="last_name" placeholder="{{'lastname' | translate}}">
+	                                <div class="invalid-feedback">
+		                                {{ errorMessages['last_name'] | translate }}
+	                                </div>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input type="email" class="form-control" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+                                <input type="email" class="form-control" [ngClass]="{'is-invalid': errorMessages['email']}" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+	                            <div class="invalid-feedback">
+		                            {{ errorMessages['email'] | translate }}
+	                            </div>
                             </div>
                         </div>
 
@@ -38,14 +50,20 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                    <input type="password" class="form-control" id="password" formControlName="password" name="password" autocomplete="new-password" placeholder="{{'password' | translate}}">
+                                    <input type="password" class="form-control" [ngClass]="{'is-invalid': errorMessages['password']}" id="password" formControlName="password" name="password" autocomplete="new-password" placeholder="{{'password' | translate}}">
+	                                <div class="invalid-feedback">
+		                                {{ errorMessages['password'] | translate }}
+	                                </div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-4">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                    <input type="password" class="form-control" id="password_confirmation" formControlName="password_confirmation" name="password_confirmation" autocomplete="new-password" placeholder="{{'confirmPassword' | translate}}">
+                                    <input type="password" class="form-control" [ngClass]="{'is-invalid': errorMessages['password_confirmation']}" id="password_confirmation" formControlName="password_confirmation" name="password_confirmation" autocomplete="new-password" placeholder="{{'confirmPassword' | translate}}">
+	                                <div class="invalid-feedback">
+		                                {{ errorMessages['password_confirmation'] | translate }}
+	                                </div>
                                 </div>
                             </div>
                         </div>
