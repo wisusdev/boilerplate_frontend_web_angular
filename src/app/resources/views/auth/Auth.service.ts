@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { RegisterUserInterface } from "../../../data/Interfaces/Auth/RegisterUser.interface";
-import { Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { Handle } from "../../../data/Exceptions/Handle";
-import { Api } from "../../../config/Api";
-import { ForgotPassword } from "../../../data/Interfaces/Auth/ForgotPassword.interface";
-import { ResetPassword } from '../../../data/Interfaces/Auth/ResetPassword.interface';
-import {loginRequestInterface} from "../../../data/Requests/loginRequest.interface";
-import {loginResponseInterface} from "../../../data/Responses/loginResponse.interface";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {Handle} from "../../../data/Exceptions/Handle";
+import {Api} from "../../../config/Api";
+import {LoginRequestInterface} from "../../../data/Interfaces/Requests/loginRequest.interface";
+import {LoginResponseInterface} from "../../../data/Interfaces/Responses/loginResponse.interface";
+import {RegisterRequestInterface} from "../../../data/Interfaces/Requests/registerRequest.interface";
+import {RegisterResponseInterface} from "../../../data/Interfaces/Responses/registerResponse.interface";
+import {ForgotPasswordRequestInterface} from "../../../data/Interfaces/Requests/forgotPasswordRequest.interface";
+import {ForgotPasswordResponseInterface} from "../../../data/Interfaces/Responses/forgotPasswordResponse.interface";
+import {ResetPasswordRequestInterface} from "../../../data/Interfaces/Requests/resetPasswordRequest.interface";
+import {ResetPasswordResponseInterface} from "../../../data/Interfaces/Responses/resetPasswordResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -22,19 +25,22 @@ export class AuthService {
 	private _apiUriForgotPassword = this._apiUri + '/auth/forgot-password';
 	private _apiUriResetPassword = this._apiUri + '/auth/reset-password';
 
-	constructor(private httpClient: HttpClient, private handleMessage: Handle) {
+	constructor(
+		private httpClient: HttpClient,
+		private handleMessage: Handle
+	) {
 	}
 
 	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
-	login(data: loginRequestInterface): Observable<loginResponseInterface> {
-		return this.httpClient.post<loginResponseInterface>(`${this._apiUriLogin}`, data, {
+	login(data: LoginRequestInterface): Observable<LoginResponseInterface> {
+		return this.httpClient.post<LoginResponseInterface>(`${this._apiUriLogin}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	register(data: RegisterUserInterface): Observable<object> {
-		return this.httpClient.post(`${this._apiUriRegister}`, data, {
+	register(data: RegisterRequestInterface): Observable<RegisterResponseInterface> {
+		return this.httpClient.post<RegisterResponseInterface>(`${this._apiUriRegister}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
@@ -51,14 +57,14 @@ export class AuthService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	forgotPassword(data: ForgotPassword): Observable<object> {
-		return this.httpClient.post(`${this._apiUriForgotPassword}`, data, {
+	forgotPassword(data: ForgotPasswordRequestInterface): Observable<ForgotPasswordResponseInterface> {
+		return this.httpClient.post<ForgotPasswordResponseInterface>(`${this._apiUriForgotPassword}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	resetPassword(data: ResetPassword): Observable<object> {
-		return this.httpClient.post(`${this._apiUriResetPassword}`, data, {
+	resetPassword(data: ResetPasswordRequestInterface): Observable<ResetPasswordResponseInterface> {
+		return this.httpClient.post<ResetPasswordResponseInterface>(`${this._apiUriResetPassword}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
