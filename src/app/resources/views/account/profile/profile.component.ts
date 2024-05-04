@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ErrorMessages} from "../../../../data/Interfaces/Errors.interface";
+import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interface";
 import {AccountService} from "../account.service";
 import {Lang} from "../../../../config/Lang";
 import {of, tap} from "rxjs";
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
 
 	formProfile!: FormGroup;
 
-	errorMessages: ErrorMessages = {
+	errorMessages: ErrorMessagesInterface = {
 		first_name: '',
 		last_name: '',
 		email: '',
