@@ -51,7 +51,7 @@ export class DeleteAccountComponent {
 				tap((response) => {
 					this.toast.show({message: 'Account deleted successfully', className: 'bg-success text-light'});
 					localStorage.clear();
-					this.router.navigate([app.redirectLogout]);
+					this.router.navigate([app.redirectToLogin]);
 				}),
 				catchError(this.handleMessage.errorHandle)
 			).subscribe();
