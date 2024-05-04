@@ -1,0 +1,68 @@
+<div class="card">
+	<div class="card-header d-flex justify-content-between align-items-center">
+		<h4 class="card-title">{{'new' | translate}}</h4>
+		<a routerLink="/settings/users" class="btn btn-primary btn-sm">{{ 'back' | translate }}</a>
+	</div>
+	<form [formGroup]="formUser" (ngSubmit)="onSubmit()">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-4 mb-3">
+					<div class="input-group">
+						<span class="input-group-text"><i class="bi bi-person"></i></span>
+						<input type="text" class="form-control" id="username" formControlName="username" name="username" autocomplete="username" placeholder="{{'userName' | translate}}">
+					</div>
+				</div>
+				<div class="col-md-4 mb-3">
+					<div class="input-group">
+						<span class="input-group-text"><i class="bi bi-envelope"></i></span>
+						<input type="email" class="form-control" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
+					</div>
+				</div>
+				<div class="col-md-4 mb-3">
+					<div class="input-group">
+						<span class="input-group-text"><i class="bi bi-check2-square"></i></span>
+						<select class="form-select" name="roles" id="roles" formControlName="roles">
+							<option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<div class="input-group">
+						<span class="input-group-text"><i class="bi bi-person"></i></span>
+						<input type="text" class="form-control" id="first_name" formControlName="first_name" name="first_name" placeholder="{{'firstName' | translate}}">
+					</div>
+				</div>
+				<div class="col-md-6 mb-3">
+					<div class="input-group">
+						<span class="input-group-text"><i class="bi bi-person"></i></span>
+						<input type="text" class="form-control" id="last_name" formControlName="last_name" name="last_name" placeholder="{{'lastName' | translate}}">
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 mb-4">
+					<div class="input-group">
+						<span class="input-group-text"><i class="bi bi-lock"></i></span>
+						<input type="password" class="form-control" id="password" formControlName="password" name="password" autocomplete="new-password" placeholder="{{'password' | translate}}">
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-4">
+					<div class="input-group">
+						<span class="input-group-text"><i class="bi bi-lock"></i></span>
+						<input type="password" class="form-control" id="password_confirmation" formControlName="password_confirmation" name="password_confirmation" autocomplete="new-password" placeholder="{{'confirmPassword' | translate}}">
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="card-footer d-flex justify-content-end align-items-center">
+			<a routerLink="/settings/users" class="btn btn-secondary me-2">{{ 'cancel' | translate }}</a>
+			<button type="submit" class="btn btn-primary">{{ 'save' | translate }}</button>
+		</div>
+	</form>
+</div>

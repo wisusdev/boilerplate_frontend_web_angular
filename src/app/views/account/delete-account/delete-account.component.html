@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 mb-3">
+			<app-account-menu-list></app-account-menu-list>
+		</div>
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-body">
+					<div class="d-grid gap-2">
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-account" (click)="openConfirmationDialog()">
+							{{'deleteAccount' | translate}} <i class="bi bi-trash"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

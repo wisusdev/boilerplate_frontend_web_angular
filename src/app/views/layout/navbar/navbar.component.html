@@ -1,0 +1,37 @@
+<header class="app-header">
+	<a class="app-header__logo" href="../../../../index.html">{{ appName }}</a>
+
+	@if(loggedIn){
+		<span class="app-sidebar__toggle p-cursor" data-toggle="sidebar" href="#" (click)="toggleMenu()" aria-label="Hide Sidebar"></span>
+	}
+
+	<ul class="app-nav">
+		<li class="dropdown" ngbDropdown display="dynamic" placement="bottom-end">
+			<a class="app-nav__item" tabindex="0" ngbDropdownToggle id="navbarDropdownLang" role="button"> <i class="bi bi-translate"></i></a>
+			<div ngbDropdownMenu aria-labelledby="navbarDropdownLang" class="dropdown-menu dropdown-menu-right">
+				<a *ngFor="let language of availableLangNavbarArray" ngbDropdownItem href="#" (click)="switchLanguage(language.key, $event)">
+					{{ language.name }}
+				</a>
+			</div>
+		</li>
+
+		@if (loggedIn){
+			<li class="dropdown" ngbDropdown display="dynamic" placement="bottom-end">
+				<a class="app-nav__item" tabindex="0" ngbDropdownToggle id="navbarDropdownTheme" role="button"> <i class="bi bi-person-circle"></i></a>
+				<div ngbDropdownMenu aria-labelledby="navbarDropdownTheme" class="dropdown-menu">
+					<a class="dropdown-item" routerLink="account/profile">{{'profile' | translate}}</a>
+					<a class="dropdown-item" href="#" (click)="logout($event)">{{'logout' | translate}}</a>
+				</div>
+			</li>
+		}
+
+		@if(!loggedIn){
+			<li class="dropdown">
+				<a class="app-nav__item text-decoration-none" routerLink="auth/login">{{'login' | translate}}</a>
+			</li>
+			<li class="dropdown">
+				<a class="app-nav__item text-decoration-none" routerLink="auth/register">{{'register' | translate}}</a>
+			</li>
+		}
+	</ul>
+</header>

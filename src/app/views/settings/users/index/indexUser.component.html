@@ -1,0 +1,40 @@
+<div class="card">
+	<div class="card-header">
+		<div class="d-flex justify-content-between align-items-center">
+			<h4>{{ 'users' | translate }}</h4>
+			<a class="btn btn-primary" routerLink="/settings/users/create">{{ 'create' | translate }} <i class="bi bi-plus"></i></a>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="table-response">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>{{'name' | translate}}</th>
+						<th>{{'userName' | translate}}</th>
+						<th>{{'email' | translate}}</th>
+						<th>{{'verified' | translate}}</th>
+						<th>{{'created' | translate}}</th>
+						<th>{{'updated' | translate}}</th>
+						<th>{{'actions' | translate }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let user of users">
+						<td>{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
+						<td>{{ user.attributes.username }}</td>
+						<td>{{ user.attributes.email }}</td>
+						<td>{{ user.attributes.email_verified_at | date }}</td>
+						<td>{{ user.attributes.created_at | date }}</td>
+						<td>{{ user.attributes.updated_at | date }}</td>
+						<td>
+							<a class="btn btn-sm btn-primary me-2" routerLink="/settings/users/edit/{{ user.id }}">{{ 'edit' | translate }} <i class="bi bi-pencil-square"></i></a>
+							<a class="btn btn-sm btn-light me-2" routerLink="/settings/users/show/{{ user.id }}">{{ 'show' | translate }} <i class="bi bi-eye"></i></a>
+							<button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">{{ 'delete' | translate }}<i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
