@@ -28,7 +28,7 @@ export abstract class Handle {
 		return throwError(() => errorMessage);
 	}
 
-	handleResponse(response: any, form: FormGroup, route: string = app.redirectAuth) {
+	handleResponse(response: any, form: FormGroup, route: string = app.redirectToHome) {
 		form.reset();
 		this.router.navigate([route]).then(responseRoute => {
 			this.toast.success(response);
