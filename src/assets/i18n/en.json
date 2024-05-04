@@ -140,10 +140,15 @@
 		"emailAlreadyVerified": "Your email has already been verified",
 		"emailVerificationSent": "A verification link has been sent to your email",
 		"resetPasswordEmailSent": "A password reset link has been sent to your email",
+		"failingSendingEmail": "An error occurred while sending the link",
 		"passwordResetSuccess": "Your password has been successfully reset",
 		"passwordChangedSuccessfully": "Your password has been successfully changed",
 		"accountDeletedSuccessfully": "Your account has been successfully deleted",
 		"deviceNotFound": "No device found",
-		"deviceLoggedOutSuccessfully": "The device has successfully logged out"
+		"deviceLoggedOutSuccessfully": "The device has successfully logged out",
+		"loginSuccessful": "You have successfully logged in",
+		"loginFailed": "Login failed",
+		"registrationSuccessful": "You have successfully registered",
+		"registrationFailed": "Registration failed"
 	}
 }

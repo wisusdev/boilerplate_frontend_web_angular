@@ -140,10 +140,15 @@
 		"emailAlreadyVerified": "Tu correo electrónico ya ha sido verificado",
 		"emailVerificationSent": "Se ha enviado un enlace de verificación a tu correo electrónico",
 		"resetPasswordEmailSent": "Se ha enviado un enlace de restablecimiento de contraseña a tu correo electrónico",
+		"failingSendingEmail": "No se pudo enviar el enlace de restablecimiento de contraseña",
 		"passwordResetSuccess": "Tu contraseña ha sido restablecida con éxito",
 		"passwordChangedSuccessfully": "Tu contraseña ha sido cambiada con éxito",
 		"accountDeletedSuccessfully": "Tu cuenta ha sido eliminada con éxito",
 		"deviceNotFound": "No se encontró ningún dispositivo",
-		"deviceLoggedOutSuccessfully": "El dispositivo ha cerrado sesión con éxito"
+		"deviceLoggedOutSuccessfully": "El dispositivo ha cerrado sesión con éxito",
+		"loginSuccessful": "Has iniciado sesión con éxito",
+		"loginFailed": "No se pudo iniciar sesión",
+		"registrationSuccessful": "Te has registrado con éxito",
+		"registrationFailed": "No se pudo completar el registro"
 	}
 }
