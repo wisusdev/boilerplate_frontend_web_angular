@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ErrorMessages } from 'src/app/data/Interfaces/Errors.interface';
+import { ErrorMessagesInterface } from 'src/app/data/Interfaces/Errors.interface';
 import { Auth } from 'src/app/data/Providers/Auth';
 import { AccountService } from '../account.service';
 import { catchError, of, tap } from 'rxjs';
@@ -17,7 +17,7 @@ export class ChangePasswordComponent implements OnInit {
 
 	formChangePassword!: FormGroup;
 
-	errorMessages: ErrorMessages = {
+	errorMessages: ErrorMessagesInterface = {
 		current_password: '',
 		password: '',
 		password_confirmation: ''
