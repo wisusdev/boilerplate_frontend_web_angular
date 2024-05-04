@@ -142,6 +142,7 @@
 		"resetPasswordEmailSent": "Se ha enviado un enlace de restablecimiento de contraseña a tu correo electrónico",
 		"failingSendingEmail": "No se pudo enviar el enlace de restablecimiento de contraseña",
 		"passwordResetSuccess": "Tu contraseña ha sido restablecida con éxito",
+		"passwordResetError": "No se pudo restablecer tu contraseña",
 		"passwordChangedSuccessfully": "Tu contraseña ha sido cambiada con éxito",
 		"accountDeletedSuccessfully": "Tu cuenta ha sido eliminada con éxito",
 		"deviceNotFound": "No se encontró ningún dispositivo",

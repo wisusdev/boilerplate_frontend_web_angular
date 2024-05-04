@@ -142,6 +142,7 @@
 		"resetPasswordEmailSent": "A password reset link has been sent to your email",
 		"failingSendingEmail": "An error occurred while sending the link",
 		"passwordResetSuccess": "Your password has been successfully reset",
+		"passwordResetFailed": "Password reset failed",
 		"passwordChangedSuccessfully": "Your password has been successfully changed",
 		"accountDeletedSuccessfully": "Your account has been successfully deleted",
 		"deviceNotFound": "No device found",
