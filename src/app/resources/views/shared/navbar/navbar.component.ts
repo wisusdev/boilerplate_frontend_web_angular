@@ -67,14 +67,14 @@ export class NavbarComponent implements OnInit {
 				localStorage.removeItem('access_token');
 				localStorage.removeItem('user');
 				localStorage.removeItem('user_key');
-				this.router.navigateByUrl(app.redirectLogout);
+				this.router.navigateByUrl(app.redirectToLogin);
 			}),
 			catchError((error) => {
 				if (error[0].status == 401) {
 					localStorage.removeItem('access_token');
 					localStorage.removeItem('user');
 					localStorage.removeItem('user_key');
-					this.router.navigateByUrl(app.redirectLogout);
+					this.router.navigateByUrl(app.redirectToLogin);
 				}
 				return of(false);
 			})
