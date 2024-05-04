@@ -1,3 +1,3 @@
-export interface ErrorMessages {
+export interface ErrorMessagesInterface {
 	[key: string]: string;
 }
