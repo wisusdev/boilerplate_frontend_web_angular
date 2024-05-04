@@ -13,7 +13,7 @@
                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
                                 <input type="email" class="form-control" [ngClass]="{'is-invalid': errorMessages['email']}" id="email" formControlName="email" name="email" autocomplete="email" placeholder="{{'email' | translate}}">
 								<div class="invalid-feedback">
-									{{ errorMessages['email'] }}
+									{{ errorMessages['email'] | translate }}
 								</div>
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                                 <span class="input-group-text"><i class="bi bi-lock"></i></span>
                                 <input type="password" class="form-control" [ngClass]="{'is-invalid': errorMessages['password']}" id="password" formControlName="password" name="password" autocomplete="off" placeholder="{{'password' | translate}}">
 								<div class="invalid-feedback">
-									{{ errorMessages['password'] }}
+									{{ errorMessages['password'] | translate }}
 								</div>
                             </div>
                         </div>
