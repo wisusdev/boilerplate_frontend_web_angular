@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ErrorMessages} from "../../../../../data/Interfaces/Errors.interface";
+import {ErrorMessagesInterface} from "../../../../../data/Interfaces/Errors.interface";
 import {SettingsService} from "../../settings.service";
 import {NgForOf} from "@angular/common";
 import {ToastService} from "../../../../../data/Services/Toast.service";
@@ -30,7 +30,7 @@ export class CreateUserComponent implements OnInit {
 		private translate: TranslateService,
 	) {}
 
-	errorMessages: ErrorMessages = {
+	errorMessages: ErrorMessagesInterface = {
 		username: '',
 		first_name: '',
 		last_name: '',
