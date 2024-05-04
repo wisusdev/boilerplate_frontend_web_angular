@@ -6,7 +6,7 @@ import {catchError, of, tap} from "rxjs";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {ErrorMessages} from "../../../../../data/Interfaces/Errors.interface";
+import {ErrorMessagesInterface} from "../../../../../data/Interfaces/Errors.interface";
 
 @Component({
 	selector: 'app-edit-user',
@@ -36,7 +36,7 @@ export class EditUserComponent implements OnInit {
 	) {
 	}
 
-	errorMessages: ErrorMessages = {
+	errorMessages: ErrorMessagesInterface = {
 		username: '',
 		first_name: '',
 		last_name: '',
