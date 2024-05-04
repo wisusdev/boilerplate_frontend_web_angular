@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Api } from "../../../config/Api";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, Observable } from "rxjs";
-import { Handle } from "../../../data/Exceptions/Handle";
-import { ProfileUpdateInterface } from "../../../data/Interfaces/Account/ProfileUpdate.interface";
-import { profileUpdateResponse } from "../../../data/Interfaces/Account/ProfileUpdateResponse.interface";
+import {Injectable} from '@angular/core';
+import {Api} from "../../../config/Api";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {catchError, Observable} from "rxjs";
+import {Handle} from "../../../data/Exceptions/Handle";
+import {ProfileUpdateInterface} from "../../../data/Interfaces/Requests/ProfileUpdate.interface";
+import {profileUpdateResponse} from "../../../data/Interfaces/Responses/ProfileUpdateResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -19,7 +19,11 @@ export class AccountService {
 
 	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
 
-	constructor(private httpClient: HttpClient, private handleMessage: Handle) { }
+	constructor(
+		private httpClient: HttpClient,
+		private handleMessage: Handle
+	) {
+	}
 
 	getInfoProfile(): Observable<object> {
 		return this.httpClient.get(`${this._apiUriAccount}`, {
