@@ -7,6 +7,8 @@ import {Handle} from "../../../data/Exceptions/Handle";
 import {ToastService} from "../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../data/Interfaces/Errors.interface";
 import {mustMatch} from "../../../data/Vendor/mustMatch";
+import {app} from "../../../config/App";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
 	selector: 'app-reset-password',
@@ -19,6 +21,7 @@ export class ResetPasswordComponent implements OnInit {
 		private authService: AuthService,
 		private handleMessage: Handle,
 		private toast: ToastService,
+		private translate: TranslateService,
 	) {
 	}
 
@@ -43,11 +46,10 @@ export class ResetPasswordComponent implements OnInit {
 		})
 
 		this.formResetPassword = this.formBuilder.group({
+			type: 'reset-password',
 			token: this.token,
 			password: ['', [Validators.required, Validators.minLength(8)]],
 			password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
-		}, {
-			validator: mustMatch('password', 'password_confirmation')
 		});
 
 		if (this.formResetPassword !== undefined) {
@@ -59,15 +61,16 @@ export class ResetPasswordComponent implements OnInit {
 		this.resetErrorMessages();
 		this.authService.resetPassword(this.formResetPassword.value).pipe(
 			tap(response => {
-				this.handleMessage.handleResponse('Successfully reset password', this.formResetPassword, '/auth/login');
+				this.handleMessage.handleResponse(this.translate.instant('message.passwordResetSuccess'), this.formResetPassword, app.redirectToLogin);
 			}),
 			catchError(error => {
 				if (typeof error === 'object') {
 					for (let key in error) {
-						let keyName = error[key]['title'].split('.')[1];
+						let keyName = error[key]['title'].split('.')[2];
 						this.errorMessages[keyName] = error[key]['detail'];
 					}
 				}
+				this.toast.danger(this.translate.instant('message.passwordResetError'));
 				return of(null);
 			})
 		).subscribe();
