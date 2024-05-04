@@ -3,7 +3,7 @@ import {SettingsService} from "../../settings.service";
 import {KeyValuePipe, NgClass, NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ErrorMessages} from "../../../../../data/Interfaces/Errors.interface";
+import {ErrorMessagesInterface} from "../../../../../data/Interfaces/Errors.interface";
 import {catchError, of, tap} from "rxjs";
 import {Handle} from "../../../../../data/Exceptions/Handle";
 import {ToastService} from "../../../../../data/Services/Toast.service";
@@ -29,7 +29,7 @@ export class CreateRolComponent implements OnInit {
 
 	constructor(private settingsService: SettingsService, private formBuilder: FormBuilder, private handleMessage: Handle, private toast: ToastService) { }
 
-	errorMessages: ErrorMessages = {
+	errorMessages: ErrorMessagesInterface = {
 		name: ''
 	}
 
