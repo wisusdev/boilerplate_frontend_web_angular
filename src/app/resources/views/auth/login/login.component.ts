@@ -1,11 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
-import {ErrorMessages} from "../../../../data/Interfaces/Errors.interface";
+import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interface";
 import {Handle} from "../../../../data/Exceptions/Handle";
 import {of, tap} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {app} from "../../../../config/App";
+import {TranslateService} from "@ngx-translate/core";
+import {ToastService} from "../../../../data/Services/Toast.service";
 
 @Component({
 	selector: 'app-login',
@@ -16,13 +18,15 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
-		private handleMessage: Handle
+		private handleMessage: Handle,
+		private translate: TranslateService,
+		private toast: ToastService
 	) {
 	}
 
 	formUser!: FormGroup;
 
-	errorMessages: ErrorMessages = {
+	errorMessages: ErrorMessagesInterface = {
 		email: '',
 		password: ''
 	};
@@ -38,7 +42,7 @@ export class LoginComponent implements OnInit {
 		this.formUser = this.formBuilder.group({
 			type: 'users',
 			email: ['', Validators.required],
-			password: ['', Validators.required],
+			password: ['', [Validators.required, Validators.minLength(8)]],
 		});
 
 		if (this.formUser !== undefined) {
@@ -55,16 +59,16 @@ export class LoginComponent implements OnInit {
 					localStorage.setItem('user_key', response.data.id);
 					localStorage.setItem('access_token', response.data.relationships.access.token);
 				}
-				this.handleMessage.handleResponse('Successfully login', this.formUser, app.redirectAuth)
+				this.handleMessage.handleResponse(this.translate.instant('message.loginSuccessful'), this.formUser, app.redirectToHome)
 			}),
 			catchError(error => {
 				if (typeof error === 'object') {
 					for (let key in error) {
-						let keyName = error[key]['title'].split('.')[1];
+						let keyName = error[key]['title'].split('.')[2];
 						this.errorMessages[keyName] = error[key]['detail'];
 					}
 				}
-				this.handleMessage.handleError(error);
+				this.toast.danger(this.translate.instant('message.loginFailed'));
 				return of(null);
 			})
 		).subscribe();
