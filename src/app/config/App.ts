@@ -6,10 +6,10 @@ export const app = {
 	app_url: 'http://localhost:4200',
 
 	/* Redirect after login */
-	redirectAuth: '/home',
+	redirectToHome: '/home',
 
 	/* Redirect after logout */
-	redirectLogout: '/auth/login',
+	redirectToLogin: '/auth/login',
 
 	placeholderImage: '/assets/images/profile.png',
 }
