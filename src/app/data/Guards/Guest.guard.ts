@@ -12,7 +12,7 @@ export const guestGuard: CanActivateFn = () => {
 		if(!isLoggedIn){
 			return true;
 		} else {
-			router.createUrlTree([app.redirectAuth]);
+			router.createUrlTree([app.redirectToHome]);
 			return false;
 		}
 	}));
