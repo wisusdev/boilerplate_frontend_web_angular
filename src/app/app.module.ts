@@ -20,9 +20,9 @@ import {AccountMenuListComponent} from "./resources/views/account/account-menu-l
 import {ChangePasswordComponent} from "./resources/views/account/change-password/change-password.component";
 import {DeviceConnectedComponent} from "./resources/views/account/device-connected/device-connected.component";
 import {ConfirmationDialogComponent} from "./resources/components/confirmation-dialog/confirmation-dialog.component";
-import {authInterceptor} from './data/Interceptors/auth.interceptor';
+import {headerTokenInterceptor} from './data/Interceptors/headerToken.interceptor';
 import {SidebarComponent} from "./resources/views/shared/sidebar/sidebar.component";
-import {formatInterceptor} from "./data/Interceptors/format.interceptor";
+import {formatRequestInterceptor} from "./data/Interceptors/formatRequest.interceptor";
 
 import {
 	NgbCollapse,
@@ -75,8 +75,8 @@ import {
 		provideHttpClient(
 			withFetch(),
 			withInterceptors([
-				authInterceptor,
-				formatInterceptor
+				headerTokenInterceptor,
+				formatRequestInterceptor
 			])
 		)
 	],
