@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
+import {catchError, Observable} from 'rxjs';
 import { Api } from 'src/app/config/Api';
 import { Handle } from 'src/app/data/Exceptions/Handle';
+import {IndexRoleInterface} from "../../data/Interfaces/Responses/indexRole.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -18,8 +19,8 @@ export class SettingsService {
 
 	constructor(private httpClient: HttpClient, private handleMessage: Handle) { }
 
-	indexRoles(): any {
-		return this.httpClient.get(`${this._apiUriRoles}`, {
+	indexRoles(): Observable<IndexRoleInterface> {
+		return this.httpClient.get<IndexRoleInterface>(`${this._apiUriRoles}`, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
