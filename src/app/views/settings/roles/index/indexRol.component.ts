@@ -1,54 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {SettingsService} from '../../settings.service';
 import {catchError, of, tap} from 'rxjs';
-import {NgFor} from '@angular/common';
+import {NgFor, NgIf} from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
-import {RouterLink} from "@angular/router";
-import { Toast, ToastService } from 'src/app/data/Services/Toast.service';
+import {Router, RouterLink} from "@angular/router";
+import {ToastService} from 'src/app/data/Services/Toast.service';
 import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/confirmation-dialog.component";
-
-interface RoleResponse {
-	data: Role[];
-	links: Links;
-	meta: Meta;
-}
-
-interface Role {
-	type: string;
-	id: string;
-	name: string;
-	permissions: Permission[];
-}
-
-interface Permission {
-	id: string;
-	name: string;
-}
-
-interface Links {
-	first: string;
-	last: string;
-	prev: null | string;
-	next: null | string;
-}
-
-interface Meta {
-	current_page: number;
-	from: number;
-	last_page: number;
-	links: MetaLink[];
-	path: string;
-	per_page: number;
-	to: number;
-	total: number;
-}
-
-interface MetaLink {
-	url: null | string;
-	label: string;
-	active: boolean;
-}
+import {IndexRoleInterface} from "../../../../data/Interfaces/Responses/indexRole.interface";
+import {PermissionService} from "../../../../data/Services/permission.service";
+import {app} from "../../../../config/App";
+import {redirectToHomeWithMessage} from "../../../../data/Vendor/redirectTo";
 
 @Component({
 	selector: 'app-index-rol',
@@ -60,6 +22,7 @@ interface MetaLink {
 		NgbPaginationPrevious,
 		NgbPaginationNext,
 		RouterLink,
+		NgIf,
 	],
 	templateUrl: './indexRol.component.html'
 })
@@ -77,15 +40,22 @@ export class IndexRolComponent implements OnInit {
 		private toast: ToastService,
 		private modalService: NgbModal,
 		private translate: TranslateService,
-	) {}
+		protected permissions: PermissionService,
+		private router: Router,
+	) {
+	}
 
 	ngOnInit() {
-		this.getRoles();
+		if (this.permissions.hasPermission('roles:index')) {
+			this.getRoles();
+		} else {
+			redirectToHomeWithMessage(this.router, this.toast, this.translate)
+		}
 	}
 
 	getRoles() {
 		this.settings.indexRoles().pipe(
-			tap((data: RoleResponse) => {
+			tap((data: IndexRoleInterface) => {
 				this.roles = data.data;
 				this.lastPage = data.meta.last_page;
 				this.totalPages = data.meta.last_page;
@@ -93,7 +63,10 @@ export class IndexRolComponent implements OnInit {
 				this.pages = Array.from({length: this.totalPages}, (_, i) => i + 1);
 			}),
 			catchError((error: any) => {
-				console.error(error);
+				this.toast.show({
+					message: this.translate.instant('errorAsOccurred'),
+					className: 'bg-danger text-light'
+				});
 				return of(null);
 			})
 		).subscribe();
@@ -101,13 +74,16 @@ export class IndexRolComponent implements OnInit {
 
 	deleteRole(role: any) {
 		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
-		modalRef.componentInstance.title = this.translate.instant('logout');
+		modalRef.componentInstance.title = this.translate.instant('deleteRecord');
 		modalRef.result.then((result) => {
 			if (result) {
 				this.settings.destroyRole(role.id).pipe(
 					tap(() => {
 						this.getRoles();
-						this.toast.show({message: 'Role deleted successfully', className: 'bg-warning text-light'});
+						this.toast.show({
+							message: this.translate.instant('recordDeleted'),
+							className: 'bg-warning text-light'
+						});
 					}),
 					catchError((error: any) => {
 						console.error(error);
@@ -115,26 +91,13 @@ export class IndexRolComponent implements OnInit {
 					})
 				).subscribe();
 			}
-		}, (reason) => {});
+		}, (reason) => {
+		});
 
 	}
 
 	setPage(pageNumber: number): void {
 		this.pageNumber = pageNumber;
 		this.getRoles();
-	}
-
-	formatFormRole(rolName: string, SelectedPermissions: string[]) {
-		return {
-			"data": {
-				"type": "roles",
-				"attributes": {
-					"role": {
-						"name": rolName,
-					},
-					"permissions": SelectedPermissions
-				}
-			}
-		}
 	}
 }
