@@ -6,7 +6,7 @@
 		</div>
 	</div>
 	<div class="card-body">
-		<div class="table-response">
+		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -28,9 +28,11 @@
 						<td>{{ user.attributes.created_at | date }}</td>
 						<td>{{ user.attributes.updated_at | date }}</td>
 						<td>
-							<a class="btn btn-sm btn-primary me-2" routerLink="/settings/users/edit/{{ user.id }}">{{ 'edit' | translate }} <i class="bi bi-pencil-square"></i></a>
-							<a class="btn btn-sm btn-light me-2" routerLink="/settings/users/show/{{ user.id }}">{{ 'show' | translate }} <i class="bi bi-eye"></i></a>
-							<button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">{{ 'delete' | translate }}<i class="bi bi-trash"></i></button>
+							<div class="d-flex flex-row">
+								<a class="btn btn-sm btn-primary me-2" routerLink="/settings/users/edit/{{ user.id }}">{{ 'edit' | translate }} <i class="bi bi-pencil-square"></i></a>
+								<a class="btn btn-sm btn-light me-2" routerLink="/settings/users/show/{{ user.id }}">{{ 'show' | translate }} <i class="bi bi-eye"></i></a>
+								<button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">{{ 'delete' | translate }}<i class="bi bi-trash"></i></button>
+							</div>
 						</td>
 					</tr>
 				</tbody>
