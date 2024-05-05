@@ -14,7 +14,7 @@ export interface LoginResponseInterface {
         };
         relationships: {
             roles: string[];
-            permissions: any[];
+            permissions: string[];
             access: {
                 token: string;
                 token_type: string;
