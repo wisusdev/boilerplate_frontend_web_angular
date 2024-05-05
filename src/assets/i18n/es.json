@@ -150,6 +150,7 @@
 		"loginSuccessful": "Has iniciado sesión con éxito",
 		"loginFailed": "No se pudo iniciar sesión",
 		"registrationSuccessful": "Te has registrado con éxito",
-		"registrationFailed": "No se pudo completar el registro"
+		"registrationFailed": "No se pudo completar el registro",
+		"permissionNotGranted": "No tienes permiso para realizar esta acción"
 	}
 }

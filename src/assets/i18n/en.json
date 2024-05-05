@@ -150,6 +150,7 @@
 		"loginSuccessful": "You have successfully logged in",
 		"loginFailed": "Login failed",
 		"registrationSuccessful": "You have successfully registered",
-		"registrationFailed": "Registration failed"
+		"registrationFailed": "Registration failed",
+		"permissionNotGranted": "Permission not granted"
 	}
 }
