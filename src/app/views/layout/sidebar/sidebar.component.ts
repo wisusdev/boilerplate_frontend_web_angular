@@ -2,6 +2,8 @@ import { Component, ElementRef, AfterViewInit, ViewChildren, QueryList, Renderer
 import { app } from '../../../config/App';
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {PermissionService} from "../../../data/Services/permission.service";
+import {NgIf} from "@angular/common";
 
 @Component({
 	selector: 'app-sidebar',
@@ -9,7 +11,8 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 	imports: [
 		TranslateModule,
 		RouterLink,
-		RouterLinkActive
+		RouterLinkActive,
+		NgIf
 	],
 	templateUrl: './sidebar.component.html',
 })
@@ -19,7 +22,11 @@ export class SidebarComponent implements OnInit {
 	userAvatar: string = '';
 	userFullName: string = '';
 
-	constructor(private el: ElementRef, private renderer: Renderer2) { }
+	constructor(
+		private el: ElementRef,
+		private renderer: Renderer2,
+		protected permissionService: PermissionService
+	) { }
 
 	ngOnInit() {
 		let userData = localStorage.getItem('user');
