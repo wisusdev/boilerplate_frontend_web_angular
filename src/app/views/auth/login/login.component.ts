@@ -56,6 +56,8 @@ export class LoginComponent implements OnInit {
 			tap(response => {
 				if (response && response.data.relationships.access.token) {
 					localStorage.setItem('user', JSON.stringify(response.data.attributes.user));
+					localStorage.setItem('roles', JSON.stringify(response.data.relationships.roles));
+					localStorage.setItem('permissions', JSON.stringify(response.data.relationships.permissions));
 					localStorage.setItem('user_key', response.data.id);
 					localStorage.setItem('access_token', response.data.relationships.access.token);
 				}
