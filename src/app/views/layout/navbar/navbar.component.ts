@@ -64,16 +64,12 @@ export class NavbarComponent implements OnInit {
 		this.authService.logout().pipe(
 			tap(() => {
 				this.loggedIn = false;
-				localStorage.removeItem('access_token');
-				localStorage.removeItem('user');
-				localStorage.removeItem('user_key');
+				localStorage.clear();
 				this.router.navigateByUrl(app.redirectToLogin);
 			}),
 			catchError((error) => {
 				if (error[0].status == 401) {
-					localStorage.removeItem('access_token');
-					localStorage.removeItem('user');
-					localStorage.removeItem('user_key');
+					localStorage.clear();
 					this.router.navigateByUrl(app.redirectToLogin);
 				}
 				return of(false);
