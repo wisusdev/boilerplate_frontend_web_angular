@@ -4,6 +4,10 @@ import {catchError, Observable} from 'rxjs';
 import { Api } from 'src/app/config/Api';
 import { Handle } from 'src/app/data/Exceptions/Handle';
 import {IndexRoleInterface} from "../../data/Interfaces/Responses/indexRole.interface";
+import {IndexPermissionsInterface} from "../../data/Interfaces/Responses/indexPermissions.interface";
+import {StoreRoleRequestInterface} from "../../data/Interfaces/Requests/storeRoleRequest.interface";
+import {UpdateStoreRoleResponseInterface} from "../../data/Interfaces/Responses/updateStoreRoleResponseInterface";
+import {ShowRoleResponseInterface} from "../../data/Interfaces/Responses/showRoleResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -15,73 +19,71 @@ export class SettingsService {
 	private _apiUriPermissions: string = this._apiUri + '/permissions';
 	private _apiUriUsers: string = this._apiUri + '/users';
 
-	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
-
 	constructor(private httpClient: HttpClient, private handleMessage: Handle) { }
 
 	indexRoles(): Observable<IndexRoleInterface> {
 		return this.httpClient.get<IndexRoleInterface>(`${this._apiUriRoles}`, {
-			headers: this.httpHeaders,
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	storeRole(data: any): any {
-		return this.httpClient.post(`${this._apiUriRoles}`, data, {
-			headers: this.httpHeaders,
+	storeRole(data: StoreRoleRequestInterface): Observable<UpdateStoreRoleResponseInterface> {
+		return this.httpClient.post<UpdateStoreRoleResponseInterface>(`${this._apiUriRoles}`, data, {
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	showRole(id: string): any {
-		return this.httpClient.get(`${this._apiUriRoles}/${id}`, {
-			headers: this.httpHeaders,
+	showRole(id: string): Observable<ShowRoleResponseInterface> {
+		return this.httpClient.get<ShowRoleResponseInterface>(`${this._apiUriRoles}/${id}`, {
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	updateRole(id: string, data: any): any {
-		return this.httpClient.patch(`${this._apiUriRoles}/${id}`, data, {
-			headers: this.httpHeaders,
+	updateRole(id: string, data: StoreRoleRequestInterface): Observable<UpdateStoreRoleResponseInterface> {
+		return this.httpClient.patch<UpdateStoreRoleResponseInterface>(`${this._apiUriRoles}/${id}`, data, {
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	destroyRole(id: string): any {
 		return this.httpClient.delete(`${this._apiUriRoles}/${id}`, {
-			headers: this.httpHeaders,
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	indexPermissions(): any {
-		return this.httpClient.get(`${this._apiUriPermissions}`, {
-			headers: this.httpHeaders,
+	indexPermissions(): Observable<IndexPermissionsInterface> {
+		return this.httpClient.get<IndexPermissionsInterface>(`${this._apiUriPermissions}`, {
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	indexUsers(): any {
 		return this.httpClient.get(`${this._apiUriUsers}`, {
-			headers: this.httpHeaders,
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	storeUser(data: any): any {
 		return this.httpClient.post(`${this._apiUriUsers}`, data, {
-			headers: this.httpHeaders,
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	showUser(id: string): any {
 		return this.httpClient.get(`${this._apiUriUsers}/${id}`, {
-			headers: this.httpHeaders,
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	updateUser(id: string, data: any): any {
 		return this.httpClient.patch(`${this._apiUriUsers}/${id}`, data, {
-			headers: this.httpHeaders,
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
 	destroyUser(id: string): any {
 		return this.httpClient.delete(`${this._apiUriUsers}/${id}`, {
-			headers: this.httpHeaders,
+			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 }
