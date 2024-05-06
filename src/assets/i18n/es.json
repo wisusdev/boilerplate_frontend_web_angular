@@ -130,7 +130,14 @@
 		"passwordIncorrect": "La contraseña proporcionada es incorrecta",
 		"deviceIdIsRequired": "El ID del dispositivo es requerido",
 		"deviceIdMustBeString": "El ID del dispositivo debe ser una cadena de texto",
-		"deviceIdNotExists": "No se encontró ningún dispositivo con este ID"
+		"deviceIdNotExists": "No se encontró ningún dispositivo con este ID",
+		"nameRequired": "El nombre es requerido",
+		"nameString": "El nombre debe ser texto",
+		"nameMax": "El nombre es demasiado largo",
+		"nameMin": "El nombre es demasiado corto",
+		"nameUnique": "El nombre ya está en uso",
+		"permissionsRequired": "Los permisos son requeridos",
+		"permissionsArray": "Los permisos deben ser un array"
 	},
 
 	"message": {

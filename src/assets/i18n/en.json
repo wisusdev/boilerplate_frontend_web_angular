@@ -130,7 +130,14 @@
 		"passwordIncorrect": "The provided password is incorrect",
 		"deviceIdIsRequired": "Device ID is required",
 		"deviceIdMustBeString": "Device ID must be a string",
-		"deviceIdNotExists": "No device found with this ID"
+		"deviceIdNotExists": "No device found with this ID",
+		"nameRequired": "Name is required",
+		"nameString": "Name must be a string",
+		"nameMax": "Name is too long",
+		"nameMin": "Name is too short",
+		"nameUnique": "Name is already in use",
+		"permissionsRequired": "Permissions are required",
+		"permissionsArray": "Permissions must be an array"
 	},
 
 	"message": {
