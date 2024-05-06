@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {SettingsService} from "../../settings.service";
 import {KeyValuePipe, NgClass, NgForOf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {catchError, of, tap} from "rxjs";
 import {Handle} from "../../../../data/Exceptions/Handle";
 import {ToastService} from "../../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interface";
+import {redirectToHomeWithMessage} from "../../../../data/Vendor/redirectTo";
+import {IndexPermissionsInterface} from "../../../../data/Interfaces/Responses/indexPermissions.interface";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 @Component({
 	selector: 'app-create-rol',
@@ -16,7 +19,8 @@ import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interfa
 		NgForOf,
 		RouterLink,
 		ReactiveFormsModule,
-		NgClass
+		NgClass,
+		TranslateModule
 	],
 	templateUrl: './createRol.component.html'
 })
@@ -31,7 +35,9 @@ export class CreateRolComponent implements OnInit {
 		private settingsService: SettingsService,
 		private formBuilder: FormBuilder,
 		private handleMessage: Handle,
-		private toast: ToastService
+		private toast: ToastService,
+		private route: Router,
+		private translate: TranslateService
 	) { }
 
 	errorMessages: ErrorMessagesInterface = {
@@ -45,21 +51,32 @@ export class CreateRolComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.settingsService.indexPermissions().pipe().subscribe((response: any) => {
-			this.permissions = response;
-
-			this.permissions.forEach(permission => {
-				const prefix = permission.name.split(':')[0];
-				if (!this.permissionsGrouped[prefix]) {
-					this.permissionsGrouped[prefix] = [];
-				}
-				this.permissionsGrouped[prefix].push(permission);
-			});
-		});
+		this.settingsService.indexPermissions().pipe(
+			tap((response: IndexPermissionsInterface) => {
+				this.permissions = response.data.attributes;
+				this.permissions.forEach((permission: any) => {
+					const group = permission.name.split(':')[0];
+					if (!this.permissionsGrouped[group]) {
+						this.permissionsGrouped[group] = [];
+					}
+					this.permissionsGrouped[group].push(permission);
+				});
+			}),
+			catchError((error: any) => {
+				this.handleMessage.handleError(error);
+				return of(null);
+			})
+		).subscribe();
 
 		this.formRole = this.formBuilder.group({
+			type: 'roles',
+			permissions: [],
 			name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
 		});
+
+		if (this.formRole !== undefined) {
+			this.formRole.patchValue(this.formRole);
+		}
 	}
 
 	togglePermission(permission: string) {
@@ -72,38 +89,30 @@ export class CreateRolComponent implements OnInit {
 	}
 
 	storeRole(){
-		let formRole = this.formatFormRole(this.formRole.value);
+		this.formRole.patchValue({
+			permissions: this.selectedPermissions
+		});
+
 		this.resetErrorMessages();
-		this.settingsService.storeRole(formRole).pipe(
+
+		this.settingsService.storeRole(this.formRole.value).pipe(
 			tap((response) => {
 				this.formRole.reset();
 				this.selectedPermissions = [];
-				this.toast.show({message: 'Role created successfully'});
+				this.route.navigate(['/settings/roles']).then((response) => {
+					this.toast.success(this.translate.instant('recordCreated'));
+				})
 			}),
 			catchError((error: any) => {
 				if (typeof error === 'object') {
 					for (let key in error) {
-						let keyName = error[key]['title'].split('.')[3];
+						let keyName = error[key]['title'].split('.')[2];
 						this.errorMessages[keyName] = error[key]['detail'];
 					}
 				}
-				this.handleMessage.handleError(error);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe();
-	}
-
-	formatFormRole(formRole: any){
-		return {
-			"data": {
-				"type": "roles",
-				"attributes": {
-					"role": {
-						"name": formRole.name,
-					},
-					"permissions": this.selectedPermissions
-				}
-			}
-		}
 	}
 }
