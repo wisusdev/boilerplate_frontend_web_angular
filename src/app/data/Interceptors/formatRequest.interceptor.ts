@@ -4,9 +4,9 @@ export const formatRequestInterceptor: HttpInterceptorFn = (req, next) => {
 
 	let cloneRequest = req.clone();
 
-	if(req.body !== null && typeof req.body === 'object'){
+	if (req.body !== null && typeof req.body === 'object') {
 
-		let requestBody = (req.body as any);
+		let requestBody = {...req.body as any};
 		const requestType = requestBody.type;
 		delete requestBody.type;
 
