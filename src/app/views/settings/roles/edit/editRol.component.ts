@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { SettingsService } from "../../settings.service";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { KeyValuePipe, NgClass, NgForOf } from '@angular/common';
-import { ErrorMessagesInterface } from 'src/app/data/Interfaces/Errors.interface';
-import { catchError, of, tap } from 'rxjs';
-import { ToastService } from 'src/app/data/Services/Toast.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {SettingsService} from "../../settings.service";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {KeyValuePipe, NgClass, NgForOf} from '@angular/common';
+import {ErrorMessagesInterface} from 'src/app/data/Interfaces/Errors.interface';
+import {catchError, of, tap} from 'rxjs';
+import {ToastService} from 'src/app/data/Services/Toast.service';
+import {ShowRoleResponseInterface} from "../../../../data/Interfaces/Responses/showRoleResponse.interface";
+import {IndexPermissionsInterface} from "../../../../data/Interfaces/Responses/indexPermissions.interface";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 @Component({
 	selector: 'app-edit-rol',
@@ -15,11 +18,13 @@ import { ToastService } from 'src/app/data/Services/Toast.service';
 		NgForOf,
 		ReactiveFormsModule,
 		NgClass,
-		RouterLink
+		RouterLink,
+		TranslateModule,
 	],
 	templateUrl: './editRol.component.html'
 })
 export class EditRolComponent implements OnInit {
+
 	permissions: Array<any> = [];
 	permissionsGrouped: { [key: string]: any[] } = {};
 	selectedPermissions: string[] = [];
@@ -33,8 +38,10 @@ export class EditRolComponent implements OnInit {
 		private settingsService: SettingsService,
 		private formBuilder: FormBuilder,
 		private router: Router,
-		private toast: ToastService
-	) { }
+		private toast: ToastService,
+		private translate: TranslateService
+	) {
+	}
 
 	errorMessages: ErrorMessagesInterface = {
 		name: ''
@@ -51,36 +58,52 @@ export class EditRolComponent implements OnInit {
 			this.roleId = params['id'];
 		});
 
+		this.formRole = this.formBuilder.group({
+			type: 'roles',
+			id: this.roleId,
+			permissions: this.selectedPermissions,
+			name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
+		});
+
+		this.getRole();
+	}
+
+	getRole() {
 		this.settingsService.showRole(this.roleId).pipe(
-			tap((data: any) => {
-				this.formRole.setValue({
-					name: data.data.name,
+			tap((response: ShowRoleResponseInterface) => {
+				this.formRole.patchValue({
+					name: response.data.name,
 				});
-				this.selectedPermissions = data.data.permissions.map((permission: any) => permission.name);
+				this.selectedPermissions = response.data.permissions.map((permission: any) => permission.name);
+				this.getPermissions();
 			}),
 			catchError(error => {
-				if (error[0].status === '404') {
-					this.router.navigate(['/settings/roles']);
+				if (error[0] && error[0].status === '404') {
+					this.router.navigate(['/settings/roles']).then(() => {
+
+					});
 				}
 				return of(null);
 			})
 		).subscribe();
+	}
 
-		this.settingsService.indexPermissions().pipe().subscribe((response: any) => {
-			this.permissions = response;
-
-			this.permissions.forEach(permission => {
-				const prefix = permission.name.split(':')[0];
-				if (!this.permissionsGrouped[prefix]) {
-					this.permissionsGrouped[prefix] = [];
-				}
-				this.permissionsGrouped[prefix].push(permission);
-			});
-		});
-
-		this.formRole = this.formBuilder.group({
-			name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
-		});
+	getPermissions() {
+		this.settingsService.indexPermissions().pipe(
+			tap((response: IndexPermissionsInterface) => {
+				this.permissions = response.data.attributes;
+				this.permissions.forEach((permission: any) => {
+					const group = permission.name.split(':')[0];
+					if (!this.permissionsGrouped[group]) {
+						this.permissionsGrouped[group] = [];
+					}
+					this.permissionsGrouped[group].push(permission);
+				});
+			}),
+			catchError((error: any) => {
+				return of(null);
+			})
+		).subscribe();
 	}
 
 	togglePermission(permission: string) {
@@ -93,39 +116,30 @@ export class EditRolComponent implements OnInit {
 	}
 
 	updateRole() {
-		let formRole = this.formatFormRole(this.formRole.value);
+		this.formRole.patchValue({
+			permissions: this.selectedPermissions
+		});
+
 		this.resetErrorMessages();
-		this.settingsService.updateRole(this.roleId, formRole).pipe(
+
+		this.settingsService.updateRole(this.roleId, this.formRole.value).pipe(
 			tap((response) => {
 				this.formRole.reset();
 				this.selectedPermissions = [];
-				this.toast.show({ message: 'Role updated successfully' });
-				this.router.navigate(['/settings/roles']);
+				this.router.navigate(['/settings/roles']).then(() => {
+					this.toast.success(this.translate.instant('recordUpdated'));
+				});
 			}),
 			catchError((error: any) => {
 				if (typeof error === 'object') {
 					for (let key in error) {
-						let keyName = error[key]['title'].split('.')[3];
+						let keyName = error[key]['title'].split('.')[2];
 						this.errorMessages[keyName] = error[key]['detail'];
 					}
 				}
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe();
-	}
-
-	formatFormRole(formRole: any) {
-		return {
-			"data": {
-				"type": "roles",
-				"id": this.roleId,
-				"attributes": {
-					"role": {
-						"name": formRole.name,
-					},
-					"permissions": this.selectedPermissions
-				}
-			}
-		}
 	}
 }
