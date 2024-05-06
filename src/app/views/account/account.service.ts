@@ -4,7 +4,7 @@ import {catchError, Observable} from "rxjs";
 import {Api} from "../../config/Api";
 import {Handle} from "../../data/Exceptions/Handle";
 import {profileUpdateResponse} from "../../data/Interfaces/Responses/ProfileUpdateResponse.interface";
-import {ProfileUpdateInterface} from "../../data/Interfaces/Requests/ProfileUpdate.interface";
+import {ProfileUpdateRequestInterface} from "../../data/Interfaces/Requests/profileUpdateRequest.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -31,7 +31,7 @@ export class AccountService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	updateProfile(data: ProfileUpdateInterface): Observable<profileUpdateResponse> {
+	updateProfile(data: ProfileUpdateRequestInterface): Observable<profileUpdateResponse> {
 		return this.httpClient.patch<profileUpdateResponse>(`${this._apiUriAccount}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
