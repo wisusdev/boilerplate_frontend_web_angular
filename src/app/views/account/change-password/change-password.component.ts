@@ -1,19 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { ErrorMessagesInterface } from 'src/app/data/Interfaces/Errors.interface';
 import { Auth } from 'src/app/data/Providers/Auth';
 import { AccountService } from '../account.service';
 import { catchError, of, tap } from 'rxjs';
 import { Handle } from 'src/app/data/Exceptions/Handle';
 import { ToastService } from 'src/app/data/Services/Toast.service';
+import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
+import {TranslateModule} from "@ngx-translate/core";
+import {NgClass} from "@angular/common";
 
 @Component({
 	selector: 'app-change-password',
+	standalone: true,
+	imports: [
+		AccountMenuListComponent,
+		TranslateModule,
+		ReactiveFormsModule,
+		NgClass
+	],
 	templateUrl: './change-password.component.html',
 })
 export class ChangePasswordComponent implements OnInit {
 
-	constructor(private formBuilder: FormBuilder, private accountService: AccountService, private toast: ToastService, private handleMessage: Handle) { }
+	constructor(
+		private formBuilder: FormBuilder,
+		private accountService: AccountService,
+		private toast: ToastService,
+		private handleMessage: Handle
+	) { }
 
 	formChangePassword!: FormGroup;
 
