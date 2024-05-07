@@ -1,13 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from "../account.service";
 import {catchError, tap} from "rxjs";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {TranslateService} from "@ngx-translate/core";
+import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {Handle} from "../../../data/Exceptions/Handle";
 import {ConfirmationDialogComponent} from "../../shared/confirmation-dialog/confirmation-dialog.component";
+import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
+import {NgForOf} from "@angular/common";
 
 @Component({
 	selector: 'app-device-connected',
+	standalone: true,
+	imports: [
+		AccountMenuListComponent,
+		NgbPagination,
+		NgbPaginationPrevious,
+		TranslateModule,
+		NgbPaginationNext,
+		NgForOf
+	],
 	templateUrl: './device-connected.component.html',
 })
 export class DeviceConnectedComponent implements OnInit {
