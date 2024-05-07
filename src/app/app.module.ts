@@ -40,9 +40,6 @@ import {ThemeComponent} from "./views/shared/theme/theme.component";
 		RegisterComponent,
 		ForgotPasswordComponent,
 		ResetPasswordComponent,
-		ProfileComponent,
-		ChangePasswordComponent,
-		DeviceConnectedComponent,
 		ConfirmationDialogComponent
 	],
 	imports: [
