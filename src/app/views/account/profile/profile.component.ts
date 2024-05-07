@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AccountService} from "../account.service";
 import {of, tap} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -8,9 +8,19 @@ import {Handle} from "../../../data/Exceptions/Handle";
 import {ToastService} from "../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../data/Interfaces/Errors.interface";
 import {Lang} from "../../../config/Lang";
+import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
+import {TranslateModule} from "@ngx-translate/core";
+import {NgClass} from "@angular/common";
 
 @Component({
 	selector: 'app-profile',
+	standalone: true,
+	imports: [
+		AccountMenuListComponent,
+		TranslateModule,
+		ReactiveFormsModule,
+		NgClass
+	],
 	templateUrl: './profile.component.html'
 })
 export class ProfileComponent implements OnInit {
