@@ -6,6 +6,7 @@ import {RouterLink} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastService} from "../../../../data/Services/Toast.service";
 import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/confirmation-dialog.component";
+import {catchError, of, tap} from "rxjs";
 
 @Component({
 	selector: 'app-index-users',
@@ -14,8 +15,7 @@ import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/c
 		NgFor,
 		TranslateModule,
 		RouterLink,
-		DatePipe,
-
+		DatePipe
 	],
 	templateUrl: './indexUser.component.html',
 })
@@ -40,18 +40,19 @@ export class IndexUserComponent implements OnInit {
 	}
 
 	getUsers() {
-		this.settingsService.indexUsers().subscribe(
-			(response: any) => {
+		this.settingsService.indexUsers().pipe(
+			tap((response) => {
 				this.users = response.data;
 				this.lastPage = response.meta.last_page;
 				this.totalPages = response.meta.last_page;
 				this.pageNumber = response.meta.current_page;
 				this.pages = Array.from({length: this.totalPages}, (_, i) => i + 1);
-			},
-			(error: any) => {
-				console.error(error);
-			}
-		);
+			}),
+			catchError((error) => {
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
+		).subscribe();
 	}
 
 	deleteUser(id: string) {
@@ -63,14 +64,14 @@ export class IndexUserComponent implements OnInit {
 				this.settingsService.destroyUser(id).subscribe(
 					(response: any) => {
 						this.getUsers();
-						this.toast.show({message: this.translate.instant('recordDeleted'), className: 'bg-warning text-white'})
+						this.toast.success(this.translate.instant('recordDeleted'));
 					},
 					(error: any) => {
 						console.error(error);
-						this.toast.show({message: this.translate.instant('errorAsOccurred'), className: 'bg-danger text-white'})
+						this.toast.danger(this.translate.instant('errorAsOccurred'));
 					}
 				);
 			}
-		}, (reason) => {});
+		});
 	}
 }
