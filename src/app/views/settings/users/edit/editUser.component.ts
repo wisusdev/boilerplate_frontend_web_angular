@@ -64,24 +64,22 @@ export class EditUserComponent implements OnInit {
 		});
 
 		this.settingsService.showUser(this.userId).pipe(
-			tap((response: any) => {
+			tap((response) => {
 				let userData = response.data.attributes;
 				let roles = response.data.relationships.roles;
 
-				this.formUser.setValue({
+				this.formUser.patchValue({
 					username: userData.username,
 					first_name: userData.first_name,
 					last_name: userData.last_name,
 					email: userData.email,
-					password: '',
-					password_confirmation: '',
 					roles: roles
 				});
 
 				this.getRoles();
 			}),
 			catchError((error: any) => {
-				if (error[0].status !== '200') {
+				if (error && error[0] && error[0].status !== '200') {
 					this.router.navigate(['/settings/users']).then(() => {
 						this.toast.warning(this.translate.instant('recordNotFound'));
 					});
@@ -91,13 +89,15 @@ export class EditUserComponent implements OnInit {
 		).subscribe();
 
 		this.formUser = this.formBuilder.group({
-			username: ['', Validators.required],
-			first_name: ['', Validators.required],
-			last_name: ['', Validators.required],
-			email: ['', Validators.required],
-			password: [''],
-			password_confirmation: [''],
-			roles: ['', Validators.required]
+			type: 'users',
+			id: this.userId,
+			username: ['', [Validators.required, Validators.minLength(3)]],
+			first_name: ['', [Validators.required, Validators.minLength(3)]],
+			last_name: ['', [Validators.required, Validators.minLength(3)]],
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', [Validators.minLength(8)]],
+			password_confirmation: ['', [Validators.minLength(8)]],
+			roles: [[], [Validators.required]]
 		});
 	}
 
@@ -115,9 +115,18 @@ export class EditUserComponent implements OnInit {
 	}
 
 	onSubmit() {
-		let dataUser = this.formatRoles(this.formUser.value);
 		this.resetErrorMessages();
-		this.settingsService.updateUser(this.userId, dataUser).subscribe((response: any) => {
+		let rolesValue = this.formUser.get('roles')!.value;
+
+		if (!Array.isArray(rolesValue)) {
+			rolesValue = [rolesValue];
+		}
+
+		const rolesControl = this.formUser.get('roles');
+		if (rolesControl) {
+			rolesControl.setValue(rolesValue);
+		}
+		this.settingsService.updateUser(this.userId, this.formUser.value).subscribe((response: any) => {
 			this.router.navigate(['/settings/users']).then(() => {
 				this.toast.success(this.translate.instant('recordUpdated'));
 			});
