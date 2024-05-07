@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SettingsService} from "../../settings.service";
-import {NgForOf} from "@angular/common";
+import {NgClass, NgForOf} from "@angular/common";
 import {ToastService} from "../../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interface";
+import {catchError, of, tap} from "rxjs";
 
 @Component({
 	selector: 'app-create-user',
@@ -15,7 +16,8 @@ import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interfa
 		TranslateModule,
 		FormsModule,
 		ReactiveFormsModule,
-		NgForOf
+		NgForOf,
+		NgClass
 	],
 	templateUrl: './createUser.component.html',
 })
@@ -28,7 +30,9 @@ export class CreateUserComponent implements OnInit {
 		private settingsService: SettingsService,
 		private toast: ToastService,
 		private translate: TranslateService,
-	) {}
+		private route: Router
+	) {
+	}
 
 	errorMessages: ErrorMessagesInterface = {
 		username: '',
@@ -54,56 +58,64 @@ export class CreateUserComponent implements OnInit {
 
 	ngOnInit() {
 		this.formUser = this.formBuilder.group({
-			username: '',
-			first_name: '',
-			last_name: '',
-			email: '',
-			password: '',
-			password_confirmation: '',
-			roles: []
+			type: 'users',
+			username: ['', [Validators.required, Validators.minLength(3)]],
+			first_name: ['', [Validators.required, Validators.minLength(3)]],
+			last_name: ['', [Validators.required, Validators.minLength(3)]],
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', [Validators.required, Validators.minLength(8)]],
+			password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
+			roles: [[], [Validators.required]]
 		});
 
-		this.settingsService.indexRoles().subscribe((response: any) => {
-			this.roles = response.data;
-			this.formUser.patchValue({
-				roles: this.roles.length > 0 ? this.roles[0].name : ''
+		this.getRoles();
+	}
+
+	getRoles() {
+		this.settingsService.indexRoles().pipe(
+			tap((response) => {
+				this.roles = response.data;
+				this.formUser.patchValue({
+					roles: this.roles.length > 0 ? this.roles[0].name : ''
+				})
+			}),
+			catchError((error) => {
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
 			})
-		});
+		).subscribe();
 	}
 
 	onSubmit() {
-		let dataUser = this.formatUserRoles(this.formUser.value);
-
 		this.resetErrorMessages();
-		this.settingsService.storeUser(dataUser).subscribe(
-			(response: any) => {
-				this.formUser.reset();
-				this.toast.show({message: this.translate.instant('recordCreated')});
+		let rolesValue = this.formUser.get('roles')!.value;
 
-			},
-			(error: any) => {
-				if (error.status === 422) {
-					this.resetErrorMessages();
-					this.toast.show({message: this.translate.instant('errorAsOccurred')});
-				}
-			}
-		);
-	}
-
-	formatUserRoles(dataUser: any) {
-		return {
-			'data': {
-				'type': 'users',
-				'attributes': {
-					'username': dataUser.username,
-					'first_name': dataUser.first_name,
-					'last_name': dataUser.last_name,
-					'email': dataUser.email,
-					'password': dataUser.password,
-					'password_confirmation': dataUser.password_confirmation,
-					'roles': [dataUser.roles]
-				}
-			}
+		if (!Array.isArray(rolesValue)) {
+			rolesValue = [rolesValue];
 		}
+
+		const rolesControl = this.formUser.get('roles');
+		if (rolesControl) {
+			rolesControl.setValue(rolesValue);
+		}
+
+		this.settingsService.storeUser(this.formUser.value).pipe(
+			tap((response: any) => {
+				this.formUser.reset();
+				this.route.navigate(['/settings/users']).then(() => {
+					this.toast.success(this.translate.instant('recordCreated'));
+				});
+			}),
+			catchError((error) => {
+				if (typeof error === 'object') {
+					for (let key in error) {
+						let keyName = error[key]['title'].split('.')[2];
+						this.errorMessages[keyName] = error[key]['detail'];
+					}
+				}
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
+		).subscribe();
 	}
 }
