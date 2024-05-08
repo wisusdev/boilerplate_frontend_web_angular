@@ -13,10 +13,10 @@
 						</p>
 					</div>
 					<div class="card-body" >
-						<p class="mb-0">Ubicación: <span class="fw-bold">{{ device.attributes.country }}</span></p>
-						<p class="mb-0">Dispositivo: <span class="fw-bold">{{ device.attributes.os }}</span></p>
-						<p class="mb-0">Navegador: <span class="fw-bold">{{ device.attributes.browser }}</span></p>
-						<p class="mb-0">IP: <span class="fw-bold">{{ device.attributes.ip }}</span></p>
+						<p class="mb-0">{{ 'country' | translate }}: <span class="fw-bold">{{ device.attributes.country }}</span></p>
+						<p class="mb-0">{{ 'device' | translate }}: <span class="fw-bold">{{ device.attributes.os }}</span></p>
+						<p class="mb-0">{{ 'browser' | translate }}: <span class="fw-bold">{{ device.attributes.browser }}</span></p>
+						<p class="mb-0">{{ 'ipAddress' | translate }}: <span class="fw-bold">{{ device.attributes.ip }}</span></p>
 					</div>
 				</div>
 			</div>
