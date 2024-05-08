@@ -1,4 +1,4 @@
-import { Component, ElementRef, AfterViewInit, ViewChildren, QueryList, Renderer2, OnInit } from '@angular/core';
+import { Component, ElementRef, Renderer2, OnInit } from '@angular/core';
 import { app } from '../../../config/App';
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterLink, RouterLinkActive} from "@angular/router";
