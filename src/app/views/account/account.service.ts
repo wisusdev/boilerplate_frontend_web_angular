@@ -5,6 +5,11 @@ import {Api} from "../../config/Api";
 import {Handle} from "../../data/Exceptions/Handle";
 import {profileUpdateResponse} from "../../data/Interfaces/Responses/ProfileUpdateResponse.interface";
 import {ProfileUpdateRequestInterface} from "../../data/Interfaces/Requests/profileUpdateRequest.interface";
+import {ChangePasswordRequestInterface} from "../../data/Interfaces/Requests/changePasswordRequest.interface";
+import {ChangePasswordResponseInterface} from "../../data/Interfaces/Responses/changePasswordResponse.interface";
+import {GetDeviceAuthListResponseInterface} from "../../data/Interfaces/Responses/getDeviceAuthListResponse.interface";
+import {LogoutDeviceAuthRequestInterface} from "../../data/Interfaces/Requests/logoutDeviceAuthRequest.interface";
+import {LogoutDeviceAuthResponseInterface} from "../../data/Interfaces/Responses/logoutDeviceAuthResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -37,22 +42,21 @@ export class AccountService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	changePassword(data: any): Observable<any> {
-		return this.httpClient.patch(`${this._apiUriChangePassword}`, data, {
+	changePassword(data: ChangePasswordRequestInterface): Observable<ChangePasswordResponseInterface> {
+		return this.httpClient.patch<ChangePasswordResponseInterface>(`${this._apiUriChangePassword}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	getDeviceAuthList(data: any): Observable<any> {
+	getDeviceAuthList(data: any): Observable<GetDeviceAuthListResponseInterface> {
 		let apiUriDeviceAuth: string = `${this._apiUriDeviceAuth}&page[number]=${data.page}`;
-
-		return this.httpClient.get(`${apiUriDeviceAuth}`, {
+		return this.httpClient.get<GetDeviceAuthListResponseInterface>(`${apiUriDeviceAuth}`, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	logoutDeviceAuth(data: any): Observable<any> {
-		return this.httpClient.post(`${this._apiUriLogoutDevice}`, data, {
+	logoutDeviceAuth(data: LogoutDeviceAuthRequestInterface): Observable<LogoutDeviceAuthResponseInterface> {
+		return this.httpClient.post<LogoutDeviceAuthResponseInterface>(`${this._apiUriLogoutDevice}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
