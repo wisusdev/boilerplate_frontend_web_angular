@@ -96,6 +96,11 @@
 	"yesConfirm": "Sí, confirmar",
 	"noCancel": "No, cancelar",
 
+	"country": "País",
+	"device": "Dispositivo",
+	"browser": "Navegador",
+	"ipAddress": "Dirección IP",
+
 	"validation": {
 		"dataRequired": "Los datos son requeridos",
 		"dataArray": "Los datos deben ser un array",
