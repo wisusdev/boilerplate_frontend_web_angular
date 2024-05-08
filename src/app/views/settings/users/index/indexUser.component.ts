@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, PipeTransform} from '@angular/core';
 import {SettingsService} from '../../settings.service';
-import {DatePipe, NgFor} from '@angular/common';
+import {AsyncPipe, DatePipe, DecimalPipe, NgFor} from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {RouterLink} from "@angular/router";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {ToastService} from "../../../../data/Services/Toast.service";
 import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/confirmation-dialog.component";
-import {catchError, of, tap} from "rxjs";
-import {FormsModule} from "@angular/forms";
+import {catchError, map, Observable, of, startWith, tap} from "rxjs";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {UserData} from "../../../../data/Interfaces/Responses/indexUserResponseInterface";
 
 @Component({
 	selector: 'app-index-users',
@@ -17,25 +18,35 @@ import {FormsModule} from "@angular/forms";
 		TranslateModule,
 		RouterLink,
 		DatePipe,
-		FormsModule
+		FormsModule,
+		AsyncPipe,
+		ReactiveFormsModule,
+		NgbPagination,
+		NgbPaginationNext,
+		NgbPaginationPrevious
+	],
+	providers: [
+		DecimalPipe
 	],
 	templateUrl: './indexUser.component.html',
 })
 export class IndexUserComponent implements OnInit {
-	users: Array<any> = [];
-	filteredUsers: Array<any> = [];
-	searchText: string = '';
 
 	lastPage: number = 0;
 	totalPages: number = 0;
 	pageNumber: number = 1;
 	pages: number[] = [];
 
+	users: UserData[] = [];
+	filteredUsers$!: Observable<UserData[]>;
+	filter = new FormControl('', {nonNullable: true});
+
 	constructor(
 		private settingsService: SettingsService,
 		private toast: ToastService,
 		private translate: TranslateService,
-		private modalService: NgbModal
+		private modalService: NgbModal,
+		private pipe: DecimalPipe,
 	) {
 	}
 
@@ -43,11 +54,27 @@ export class IndexUserComponent implements OnInit {
 		this.getUsers();
 	}
 
+	search(text: string, pipe: PipeTransform, users: UserData[]): UserData[] {
+		return users.filter(user => {
+			const term = text.toLowerCase();
+			return (
+				user.attributes.first_name.toLowerCase().includes(term) ||
+				user.attributes.last_name.toLowerCase().includes(term) ||
+				user.attributes.username.toLowerCase().includes(term) ||
+				user.attributes.email.toLowerCase().includes(term)
+			);
+		});
+	}
+
 	getUsers() {
 		this.settingsService.indexUsers().pipe(
 			tap((response) => {
 				this.users = response.data;
-				this.filteredUsers = [...this.users];
+				this.filteredUsers$ = this.filter.valueChanges.pipe(
+					startWith(''),
+					map(text => this.search(text, this.pipe, this.users))
+				);
+
 				this.lastPage = response.meta.last_page;
 				this.totalPages = response.meta.last_page;
 				this.pageNumber = response.meta.current_page;
@@ -60,16 +87,6 @@ export class IndexUserComponent implements OnInit {
 		).subscribe();
 	}
 
-	filterUsers() {
-		if (this.searchText) {
-			this.filteredUsers = this.users.filter(user =>
-				user.attributes.first_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-				user.attributes.last_name.toLowerCase().includes(this.searchText.toLowerCase())
-			);
-		} else {
-			this.filteredUsers = [...this.users];
-		}
-	}
 
 	deleteUser(id: string) {
 		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
@@ -89,5 +106,10 @@ export class IndexUserComponent implements OnInit {
 				);
 			}
 		});
+	}
+
+	setPage(pageNumber: number): void {
+		this.pageNumber = pageNumber;
+		this.getUsers();
 	}
 }
