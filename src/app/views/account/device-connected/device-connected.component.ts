@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from "../account.service";
-import {catchError, tap} from "rxjs";
+import {catchError, of, tap} from "rxjs";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {Handle} from "../../../data/Exceptions/Handle";
 import {ConfirmationDialogComponent} from "../../shared/confirmation-dialog/confirmation-dialog.component";
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
 import {NgForOf} from "@angular/common";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ToastService} from "../../../data/Services/Toast.service";
+
 
 @Component({
 	selector: 'app-device-connected',
@@ -23,19 +26,29 @@ import {NgForOf} from "@angular/common";
 })
 export class DeviceConnectedComponent implements OnInit {
 
-	constructor(
-		private accountService: AccountService,
-		private translate: TranslateService,
-		private handleMessage: Handle,
-		private modalService: NgbModal
-	) {}
-
-	devices: any = [];
+	devices: Array<any> = [];
+	lastPage: number = 0;
 	totalPages: number = 0;
 	pageNumber: number = 1;
 	pages: number[] = [];
 
+	formDevice!: FormGroup;
+
+	constructor(
+		private formBuilder: FormBuilder,
+		private accountService: AccountService,
+		private translate: TranslateService,
+		private handleMessage: Handle,
+		private modalService: NgbModal,
+		private toast: ToastService
+	) {}
+
 	ngOnInit(): void {
+		this.formDevice = this.formBuilder.group({
+			type: 'logout-device',
+			id: '',
+			device_id: ''
+		});
 		this.getDevices();
 	}
 
@@ -45,10 +58,11 @@ export class DeviceConnectedComponent implements OnInit {
 		}
 
 		this.accountService.getDeviceAuthList(data).pipe(
-			tap((data: any) => {
-				this.devices = data.data;
-				this.totalPages = data.last_page;
-				this.pageNumber = data.current_page;
+			tap((dataResponse) => {
+				this.devices = dataResponse.data;
+				this.lastPage = dataResponse.meta.last_page;
+				this.totalPages = dataResponse.meta.last_page;
+				this.pageNumber = dataResponse.meta.current_page;
 				this.pages = Array.from({length: this.totalPages}, (_, i) => i + 1);
 			}),
 			catchError(this.handleMessage.errorHandle)
@@ -65,12 +79,20 @@ export class DeviceConnectedComponent implements OnInit {
 	}
 
 	logoutDevice(deviceId: number) {
-		let logoutDeviceData = this.formatLogoutDevice(deviceId.toString());
-		this.accountService.logoutDeviceAuth(logoutDeviceData).pipe(
+		this.formDevice.patchValue({
+			id: deviceId,
+			device_id: deviceId
+		} );
+
+		this.accountService.logoutDeviceAuth(this.formDevice.value).pipe(
 			tap(() => {
+				this.toast.success(this.translate.instant('recordDeleted'));
 				this.getDevices();
 			}),
-			catchError(this.handleMessage.errorHandle)
+			catchError(() => {
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
 		).subscribe();
 
 	}
@@ -78,15 +100,5 @@ export class DeviceConnectedComponent implements OnInit {
 	setPage(pageNumber: number): void {
 		this.pageNumber = pageNumber;
 		this.getDevices();
-	}
-
-	formatLogoutDevice(deviceId: string) {
-		return {
-			"data": {
-				"attributes": {
-					"device_id": deviceId
-				}
-			}
-		}
 	}
 }
