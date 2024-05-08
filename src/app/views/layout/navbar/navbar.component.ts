@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { AuthService } from '../../auth/auth.service';
@@ -32,7 +32,6 @@ import {Lang} from "../../../config/Lang";
 })
 export class NavbarComponent implements OnInit {
 	public loggedIn: boolean = false;
-	public isMenuCollapsed: boolean = true;
 	public appName: string = app.name;
 	public availableLangNavbarArray: any[] = [];
 
