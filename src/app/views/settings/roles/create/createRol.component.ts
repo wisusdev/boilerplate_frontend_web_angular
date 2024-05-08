@@ -7,7 +7,6 @@ import {catchError, of, tap} from "rxjs";
 import {Handle} from "../../../../data/Exceptions/Handle";
 import {ToastService} from "../../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interface";
-import {redirectToHomeWithMessage} from "../../../../data/Vendor/redirectTo";
 import {IndexPermissionsInterface} from "../../../../data/Interfaces/Responses/indexPermissions.interface";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
