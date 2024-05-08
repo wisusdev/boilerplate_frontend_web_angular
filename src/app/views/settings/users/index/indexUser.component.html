@@ -1,9 +1,11 @@
 <div class="card">
 	<div class="card-header">
 		<div class="d-flex justify-content-between align-items-center">
-			<h4>{{ 'users' | translate }}</h4>
-			<div>
-				<input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="filterUsers()" placeholder="Search users">
+			<div class="d-flex align-items-center">
+				<h4 class="me-3">{{ 'users' | translate }}</h4>
+				<input id="table-filtering-search" class="form-control" placeholder="{{ 'search' | translate }}" type="text" [formControl]="filter" />
+			</div>
+			<div class="d-flex align-items-center">
 				<a class="btn btn-primary" routerLink="/settings/users/create">{{ 'create' | translate }} <i class="bi bi-plus"></i></a>
 			</div>
 		</div>
@@ -13,6 +15,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
+						<th scope="col">#</th>
 						<th>{{'name' | translate}}</th>
 						<th>{{'userName' | translate}}</th>
 						<th>{{'email' | translate}}</th>
@@ -23,7 +26,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let user of filteredUsers">
+					<tr *ngFor="let user of filteredUsers$ | async; let i = index">
+						<td>{{ i + 1 }}</td>
 						<td>{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
 						<td>{{ user.attributes.username }}</td>
 						<td>{{ user.attributes.email }}</td>
@@ -42,4 +46,12 @@
 			</table>
 		</div>
 	</div>
+	@if(lastPage > 1){
+		<div class="card-footer">
+			<ngb-pagination [collectionSize]="totalPages * 10" [(page)]="pageNumber" [maxSize]="5" (pageChange)="setPage($event)">
+				<ng-template ngbPaginationPrevious>{{'next' | translate}}</ng-template>
+				<ng-template ngbPaginationNext>{{'previous' | translate}}</ng-template>
+			</ngb-pagination>
+		</div>
+	}
 </div>
