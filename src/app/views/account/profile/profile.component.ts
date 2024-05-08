@@ -9,8 +9,8 @@ import {ToastService} from "../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../data/Interfaces/Errors.interface";
 import {Lang} from "../../../config/Lang";
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
-import {TranslateModule} from "@ngx-translate/core";
-import {NgClass} from "@angular/common";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {NgClass, NgForOf} from "@angular/common";
 
 @Component({
 	selector: 'app-profile',
@@ -19,7 +19,8 @@ import {NgClass} from "@angular/common";
 		AccountMenuListComponent,
 		TranslateModule,
 		ReactiveFormsModule,
-		NgClass
+		NgClass,
+		NgForOf
 	],
 	templateUrl: './profile.component.html'
 })
@@ -28,12 +29,14 @@ export class ProfileComponent implements OnInit {
 	public avatarUrl: string = '';
 	public selectAvatar: string = '';
 	public allowedTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/webp'];
+	userId: string = '';
 
 	constructor(
 		private formBuilder: FormBuilder,
 		private accountService: AccountService,
 		private handleMessage: Handle,
-		private toast: ToastService
+		private toast: ToastService,
+		private translate: TranslateService
 	) {
 		this.availableLang = Object.entries(Lang.availableLang).map(([key, value]) => ({ key, ...value }));
 	}
@@ -64,6 +67,7 @@ export class ProfileComponent implements OnInit {
 	profileModel!: any;
 
 	ngOnInit() {
+		this.userId = localStorage.getItem('user_key') || '';
 		this.initFormProfile();
 	}
 
@@ -75,6 +79,8 @@ export class ProfileComponent implements OnInit {
 			this.avatarUrl = dataProfile.avatar || app.placeholderImage;
 
 			this.formProfile = this.formBuilder.group({
+				type: 'profile',
+				id: this.userId,
 				first_name: [dataProfile.first_name, Validators.required],
 				last_name: [dataProfile.last_name, Validators.required],
 				email: [dataProfile.email, Validators.required],
@@ -111,16 +117,16 @@ export class ProfileComponent implements OnInit {
 	}
 
 	updateUserProfile() {
-		let formProfile = this.formatFormProfile(this.formProfile.value);
 		this.resetErrorMessages();
-		this.accountService.updateProfile(formProfile).pipe(
+		this.accountService.updateProfile(this.formProfile.value).pipe(
 			tap(response => {
 				if (response.data) {
 					localStorage.setItem('user', JSON.stringify(response.data.attributes));
 					this.avatarFile.nativeElement.value = '';
 					let uniqueString = new Date().getTime();
 					this.avatarUrl = (response.data.attributes.avatar || "/assets/images/profile.png") + "?v=" + uniqueString;
-					this.toast.show({ message: 'Successfully update profile'});
+					this.toast.success(this.translate.instant('recordUpdated'));
+
 				}
 			}),
 			catchError(error => {
@@ -130,26 +136,9 @@ export class ProfileComponent implements OnInit {
 						this.errorMessages[keyName] = error[key]['detail'];
 					}
 				}
-				this.handleMessage.handleError(error);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe();
 	}
-
-	formatFormProfile(formProfile: any) {
-		return {
-			"data": {
-				"type": "profiles",
-				"id": localStorage.getItem('user_key') || '',
-				"attributes": {
-					"first_name": formProfile.first_name,
-					"last_name": formProfile.last_name,
-					"email": formProfile.email,
-					"avatar": this.selectAvatar || '',
-					"language": formProfile.language
-				}
-			}
-		}
-	}
-
 }
