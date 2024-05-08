@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {catchError, of, tap} from "rxjs";
 import {Handle} from "../../../data/Exceptions/Handle";
 import {ToastService} from "../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../data/Interfaces/Errors.interface";
-import {mustMatch} from "../../../data/Vendor/mustMatch";
 import {app} from "../../../config/App";
 import {TranslateService} from "@ngx-translate/core";
 
