@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {Handle} from 'src/app/data/Exceptions/Handle';
@@ -6,7 +6,6 @@ import {catchError, of, tap} from 'rxjs';
 import {ErrorMessagesInterface} from 'src/app/data/Interfaces/Errors.interface';
 import {TranslateService} from "@ngx-translate/core";
 import {ToastService} from "../../../data/Services/Toast.service";
-import {mustMatch} from "../../../data/Vendor/mustMatch";
 import {app} from "../../../config/App";
 
 @Component({
