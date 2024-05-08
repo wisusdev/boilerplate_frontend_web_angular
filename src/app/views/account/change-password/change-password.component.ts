@@ -7,7 +7,7 @@ import { catchError, of, tap } from 'rxjs';
 import { Handle } from 'src/app/data/Exceptions/Handle';
 import { ToastService } from 'src/app/data/Services/Toast.service';
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
 
 @Component({
@@ -27,7 +27,8 @@ export class ChangePasswordComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private accountService: AccountService,
 		private toast: ToastService,
-		private handleMessage: Handle
+		private handleMessage: Handle,
+		private translate: TranslateService
 	) { }
 
 	formChangePassword!: FormGroup;
@@ -48,6 +49,8 @@ export class ChangePasswordComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.formChangePassword = this.formBuilder.group({
+			type: 'change-password',
+			id: Auth.userId(),
 			current_password: ['', Validators.required],
 			password: ['', [Validators.required, Validators.minLength(8)]],
 			password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
@@ -63,22 +66,11 @@ export class ChangePasswordComponent implements OnInit {
 	}
 
 	onSubmit() {
-		if (this.formChangePassword.invalid) {
-			this.toast.show({ message: 'Please fill in all required fields', className: 'bg-warning text-light'});
-			return
-		}
-
-		if (this.formChangePassword.value.password !== this.formChangePassword.value.password_confirmation) {
-			this.toast.show({ message: 'Password and Confirm Password do not match', className: 'bg-warning  text-light'});
-			return;
-		}
-
-		let userChangePasswordData = this.formatChangePassword(this.formChangePassword.value);
 		this.resetErrorMessages();
-		this.accountService.changePassword(userChangePasswordData).pipe(
+		this.accountService.changePassword(this.formChangePassword.value).pipe(
 			tap(response => {
 				this.formChangePassword.reset();
-				this.toast.show({ message: 'Successfully changed password' });
+				this.toast.success(this.translate.instant('message.passwordChangedSuccessfully'));
 			}),
 			catchError(error => {
 				if (typeof error === 'object') {
@@ -87,24 +79,10 @@ export class ChangePasswordComponent implements OnInit {
 						this.errorMessages[keyName] = error[key]['detail'];
 					}
 				}
-				this.handleMessage.handleError(error);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe();
 
-	}
-
-	formatChangePassword(formUser: any) {
-		return {
-			"data": {
-				"type": "profiles",
-				"id": Auth.userId(),
-				"attributes": {
-					"current_password": formUser.current_password,
-					"password": formUser.password,
-					"password_confirmation": formUser.password_confirmation
-				}
-			}
-		};
 	}
 }
