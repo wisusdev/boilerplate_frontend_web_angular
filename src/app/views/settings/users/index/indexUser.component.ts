@@ -7,6 +7,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastService} from "../../../../data/Services/Toast.service";
 import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/confirmation-dialog.component";
 import {catchError, of, tap} from "rxjs";
+import {FormsModule} from "@angular/forms";
 
 @Component({
 	selector: 'app-index-users',
@@ -15,12 +16,15 @@ import {catchError, of, tap} from "rxjs";
 		NgFor,
 		TranslateModule,
 		RouterLink,
-		DatePipe
+		DatePipe,
+		FormsModule
 	],
 	templateUrl: './indexUser.component.html',
 })
 export class IndexUserComponent implements OnInit {
 	users: Array<any> = [];
+	filteredUsers: Array<any> = [];
+	searchText: string = '';
 
 	lastPage: number = 0;
 	totalPages: number = 0;
@@ -43,6 +47,7 @@ export class IndexUserComponent implements OnInit {
 		this.settingsService.indexUsers().pipe(
 			tap((response) => {
 				this.users = response.data;
+				this.filteredUsers = [...this.users];
 				this.lastPage = response.meta.last_page;
 				this.totalPages = response.meta.last_page;
 				this.pageNumber = response.meta.current_page;
@@ -53,6 +58,17 @@ export class IndexUserComponent implements OnInit {
 				return of(null);
 			})
 		).subscribe();
+	}
+
+	filterUsers() {
+		if (this.searchText) {
+			this.filteredUsers = this.users.filter(user =>
+				user.attributes.first_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+				user.attributes.last_name.toLowerCase().includes(this.searchText.toLowerCase())
+			);
+		} else {
+			this.filteredUsers = [...this.users];
+		}
 	}
 
 	deleteUser(id: string) {

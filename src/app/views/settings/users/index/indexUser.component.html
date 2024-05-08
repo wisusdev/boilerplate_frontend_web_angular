@@ -2,7 +2,10 @@
 	<div class="card-header">
 		<div class="d-flex justify-content-between align-items-center">
 			<h4>{{ 'users' | translate }}</h4>
-			<a class="btn btn-primary" routerLink="/settings/users/create">{{ 'create' | translate }} <i class="bi bi-plus"></i></a>
+			<div>
+				<input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="filterUsers()" placeholder="Search users">
+				<a class="btn btn-primary" routerLink="/settings/users/create">{{ 'create' | translate }} <i class="bi bi-plus"></i></a>
+			</div>
 		</div>
 	</div>
 	<div class="card-body">
@@ -20,7 +23,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let user of users">
+					<tr *ngFor="let user of filteredUsers">
 						<td>{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
 						<td>{{ user.attributes.username }}</td>
 						<td>{{ user.attributes.email }}</td>
