@@ -57,6 +57,13 @@ export class NavbarComponent implements OnInit {
 		this.authUser.status().pipe().subscribe((status: boolean) => {
 			this.loggedIn = status;
 		});
+
+		const language: string | null = localStorage.getItem('language') || app.lang;
+		if (language) {
+			this.translate.use(language);
+		} else {
+			this.translate.use(this.translate.getDefaultLang());
+		}
 	}
 
 	logout($event: MouseEvent) {
@@ -65,12 +72,12 @@ export class NavbarComponent implements OnInit {
 			tap(() => {
 				this.loggedIn = false;
 				localStorage.clear();
-				this.router.navigateByUrl(app.redirectToLogin);
+				this.router.navigate([app.redirectToLogin]).then();
 			}),
 			catchError((error) => {
 				if (error[0].status == 401) {
 					localStorage.clear();
-					this.router.navigateByUrl(app.redirectToLogin);
+					this.router.navigate([app.redirectToLogin]).then();
 				}
 				return of(false);
 			})
@@ -80,9 +87,7 @@ export class NavbarComponent implements OnInit {
 	switchLanguage(language: string, $event: MouseEvent) {
 		$event.preventDefault();
 		this.translate.use(language);
-		if (typeof localStorage !== 'undefined') {
-			localStorage.setItem('language', language);
-		}
+		localStorage.setItem('language', language);
 	}
 
 	toggleMenu() {
