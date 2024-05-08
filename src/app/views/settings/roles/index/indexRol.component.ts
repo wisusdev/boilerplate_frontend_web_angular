@@ -9,7 +9,6 @@ import {ToastService} from 'src/app/data/Services/Toast.service';
 import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/confirmation-dialog.component";
 import {IndexRoleInterface} from "../../../../data/Interfaces/Responses/indexRole.interface";
 import {PermissionService} from "../../../../data/Services/permission.service";
-import {app} from "../../../../config/App";
 import {redirectToHomeWithMessage} from "../../../../data/Vendor/redirectTo";
 
 @Component({
