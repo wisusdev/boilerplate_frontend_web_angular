@@ -4,7 +4,7 @@ import {NgOptimizedImage} from "@angular/common";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HttpClient, HttpClientModule, provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
+import {HttpClient, withFetch, withInterceptors, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -14,9 +14,6 @@ import {LoginComponent} from "./views/auth/login/login.component";
 import {RegisterComponent} from "./views/auth/register/register.component";
 import {ForgotPasswordComponent} from "./views/auth/forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./views/auth/reset-password/reset-password.component";
-import {ProfileComponent} from "./views/account/profile/profile.component";
-import {ChangePasswordComponent} from "./views/account/change-password/change-password.component";
-import {DeviceConnectedComponent} from "./views/account/device-connected/device-connected.component";
 import {AccountMenuListComponent} from "./views/account/account-menu-list/account-menu-list.component";
 import {SidebarComponent} from "./views/layout/sidebar/sidebar.component";
 import {NavbarComponent} from "./views/layout/navbar/navbar.component";
@@ -42,9 +39,8 @@ import {ThemeComponent} from "./views/shared/theme/theme.component";
 		ResetPasswordComponent,
 		ConfirmationDialogComponent
 	],
-	imports: [
-		BrowserModule,
-		HttpClientModule,
+	exports: [],
+	bootstrap: [AppComponent], imports: [BrowserModule,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
@@ -66,19 +62,14 @@ import {ThemeComponent} from "./views/shared/theme/theme.component";
 		NgbPaginationModule,
 		AccountMenuListComponent,
 		SidebarComponent,
-		NavbarComponent
-	],
+		NavbarComponent],
 	providers: [
-		provideHttpClient(
-			withFetch(),
-			withInterceptors([
-				headerTokenInterceptor,
-				formatRequestInterceptor
-			])
-		)
-	],
-	exports: [],
-	bootstrap: [AppComponent]
+		provideHttpClient(withFetch(), withInterceptors([
+			headerTokenInterceptor,
+			formatRequestInterceptor
+		])),
+		provideHttpClient(withInterceptorsFromDi())
+	]
 })
 export class AppModule {
 }
