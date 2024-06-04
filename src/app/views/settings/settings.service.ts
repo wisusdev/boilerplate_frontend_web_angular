@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {catchError, Observable} from 'rxjs';
 import {Api} from 'src/app/config/Api';
 import {Handle} from 'src/app/data/Exceptions/Handle';
-import {IndexRoleInterface} from "../../data/Interfaces/Responses/indexRole.interface";
+import {IndexRoleResponseInterface} from "../../data/Interfaces/Responses/indexRoleResponseInterface";
 import {IndexPermissionsInterface} from "../../data/Interfaces/Responses/indexPermissions.interface";
 import {StoreRoleRequestInterface} from "../../data/Interfaces/Requests/storeRoleRequest.interface";
 import {UpdateStoreRoleResponseInterface} from "../../data/Interfaces/Responses/updateStoreRoleResponseInterface";
@@ -29,8 +29,8 @@ export class SettingsService {
 	) {
 	}
 
-	indexRoles(): Observable<IndexRoleInterface> {
-		return this.httpClient.get<IndexRoleInterface>(`${this._apiUriRoles}`, {
+	indexRoles(): Observable<IndexRoleResponseInterface> {
+		return this.httpClient.get<IndexRoleResponseInterface>(`${this._apiUriRoles}`, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
