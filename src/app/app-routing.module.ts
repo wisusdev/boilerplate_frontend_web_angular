@@ -5,6 +5,7 @@ import {HomeComponent} from "./views/home/home.component";
 import {AccountRoutingModule} from "./views/account/account-routing.module";
 import {AuthRoutingModule} from "./views/auth/auth-routing.module";
 import {SettingsRoutingModule} from "./views/settings/settings-routing.module";
+import {ServicesRoutingModule} from "./views/services/services-routing.module";
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
 		RouterModule.forRoot(routes),
 		AccountRoutingModule,
 		AuthRoutingModule,
-		SettingsRoutingModule
+		SettingsRoutingModule,
+		ServicesRoutingModule
 	],
 	exports: [RouterModule]
 })
