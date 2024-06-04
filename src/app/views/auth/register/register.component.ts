@@ -1,15 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {Handle} from 'src/app/data/Exceptions/Handle';
 import {catchError, of, tap} from 'rxjs';
 import {ErrorMessagesInterface} from 'src/app/data/Interfaces/Errors.interface';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ToastService} from "../../../data/Services/Toast.service";
 import {app} from "../../../config/App";
+import {NgClass} from "@angular/common";
 
 @Component({
 	selector: 'app-register',
+	standalone: true,
+	imports: [
+		TranslateModule,
+		ReactiveFormsModule,
+		NgClass
+	],
 	templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
