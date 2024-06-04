@@ -1,0 +1,75 @@
+<div class="modal-header">
+	<h4 class="modal-title">{{'new' | translate }}</h4>
+	<button type="button" class="btn-close" aria-describedby="modal-title" (click)="cancel()"></button>
+</div>
+<form [formGroup]="formPackage" (ngSubmit)="submit()">
+	<div class="modal-body">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="name" class="form-label">{{'name' | translate }}</label>
+						<input type="text" class="form-control" id="name" formControlName="name">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="price" class="form-label">{{'price' | translate }}</label>
+						<input type="number" class="form-control" id="price" formControlName="price" >
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="interval" class="form-label">{{'interval' | translate }}</label>
+						<select class="form-select" id="interval" formControlName="interval">
+							<option value="day">{{'day' | translate }}</option>
+							<option value="week">{{'week' | translate }}</option>
+							<option value="month">{{'month' | translate }}</option>
+							<option value="year">{{'year' | translate }}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="interval_count" class="form-label">{{'interval_count' | translate }}</label>
+						<input type="number" class="form-control" id="interval_count" formControlName="interval_count">
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="mb-3">
+						<label for="trial_days" class="form-label">{{'trial_days' | translate }}</label>
+						<input type="number" class="form-control" id="trial_days" formControlName="trial_days">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="mb-3">
+						<label for="max_users" class="form-label">{{'max_users' | translate }}</label>
+						<input type="number" class="form-control" id="max_users" formControlName="max_users">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="mb-3">
+						<label for="active" class="form-label">{{'active' | translate }}</label>
+						<select class="form-select" id="active" formControlName="active">
+							<option value="1">{{'yes' | translate }}</option>
+							<option value="0">{{'no' | translate }}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="description" class="form-label">{{'description' | translate }}</label>
+				<textarea class="form-control" id="description" formControlName="description"></textarea>
+			</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="submit()">{{cancelText}}</button>
+		<button type="submit" [disabled]="!formPackage.valid" class="btn btn-primary">{{confirmText}}</button>
+	</div>
+</form>
