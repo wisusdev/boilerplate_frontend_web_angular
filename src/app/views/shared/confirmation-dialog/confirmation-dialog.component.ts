@@ -4,6 +4,7 @@ import {TranslateService} from "@ngx-translate/core";
 
 @Component({
 	selector: 'app-confirmation-dialog',
+	standalone: true,
 	templateUrl: './confirmation-dialog.component.html',
 })
 export class ConfirmationDialogComponent {
