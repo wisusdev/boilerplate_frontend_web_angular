@@ -7,7 +7,7 @@ import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from 
 import {Router, RouterLink} from "@angular/router";
 import {ToastService} from 'src/app/data/Services/Toast.service';
 import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/confirmation-dialog.component";
-import {IndexRoleInterface} from "../../../../data/Interfaces/Responses/indexRole.interface";
+import {IndexRoleResponseInterface} from "../../../../data/Interfaces/Responses/indexRoleResponseInterface";
 import {PermissionService} from "../../../../data/Services/permission.service";
 import {redirectToHomeWithMessage} from "../../../../data/Vendor/redirectTo";
 
@@ -54,7 +54,7 @@ export class IndexRolComponent implements OnInit {
 
 	getRoles() {
 		this.settings.indexRoles().pipe(
-			tap((data: IndexRoleInterface) => {
+			tap((data: IndexRoleResponseInterface) => {
 				this.roles = data.data;
 				this.lastPage = data.meta.last_page;
 				this.totalPages = data.meta.last_page;
