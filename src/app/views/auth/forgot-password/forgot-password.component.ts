@@ -1,16 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {catchError, of, tap} from "rxjs";
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {Handle} from "../../../data/Exceptions/Handle";
 import {ToastService} from "../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../data/Interfaces/Errors.interface";
 import {app} from "../../../config/App";
+import {NgClass} from "@angular/common";
 
 @Component({
 	selector: 'app-forgot-password',
+	standalone: true,
 	templateUrl: './forgot-password.component.html',
+	imports: [
+		TranslateModule,
+		ReactiveFormsModule,
+		NgClass
+	]
 })
 export class ForgotPasswordComponent implements OnInit {
 
