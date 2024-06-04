@@ -1,16 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../auth.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {catchError, of, tap} from "rxjs";
 import {Handle} from "../../../data/Exceptions/Handle";
 import {ToastService} from "../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../data/Interfaces/Errors.interface";
 import {app} from "../../../config/App";
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {NgClass} from "@angular/common";
 
 @Component({
 	selector: 'app-reset-password',
+	standalone: true,
+	imports: [
+		TranslateModule,
+		ReactiveFormsModule,
+		NgClass
+	],
 	templateUrl: './reset-password.component.html'
 })
 export class ResetPasswordComponent implements OnInit {
