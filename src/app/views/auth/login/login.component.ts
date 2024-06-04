@@ -1,16 +1,25 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {of, tap} from "rxjs";
 import {catchError} from "rxjs/operators";
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {Handle} from "../../../data/Exceptions/Handle";
 import {ToastService} from "../../../data/Services/Toast.service";
 import {ErrorMessagesInterface} from "../../../data/Interfaces/Errors.interface";
 import {app} from "../../../config/App";
+import {NgClass} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
 	selector: 'app-login',
+	standalone: true,
+	imports: [
+		TranslateModule,
+		ReactiveFormsModule,
+		NgClass,
+		RouterLink
+	],
 	templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
