@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgOptimizedImage} from "@angular/common";
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClient, withFetch, withInterceptors, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
@@ -10,10 +9,6 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {headerTokenInterceptor} from './data/Interceptors/headerToken.interceptor';
 import {formatRequestInterceptor} from "./data/Interceptors/formatRequest.interceptor";
-import {LoginComponent} from "./views/auth/login/login.component";
-import {RegisterComponent} from "./views/auth/register/register.component";
-import {ForgotPasswordComponent} from "./views/auth/forgot-password/forgot-password.component";
-import {ResetPasswordComponent} from "./views/auth/reset-password/reset-password.component";
 import {AccountMenuListComponent} from "./views/account/account-menu-list/account-menu-list.component";
 import {SidebarComponent} from "./views/layout/sidebar/sidebar.component";
 import {NavbarComponent} from "./views/layout/navbar/navbar.component";
@@ -26,21 +21,19 @@ import {
 	NgbDropdownToggle,
 	NgbPaginationModule
 } from "@ng-bootstrap/ng-bootstrap";
-import {ConfirmationDialogComponent} from "./views/shared/confirmation-dialog/confirmation-dialog.component";
 import {ToastComponent} from "./views/shared/toast/toast.component";
 import {ThemeComponent} from "./views/shared/theme/theme.component";
 
 @NgModule({
 	declarations: [
-		AppComponent,
-		LoginComponent,
-		RegisterComponent,
-		ForgotPasswordComponent,
-		ResetPasswordComponent,
-		ConfirmationDialogComponent
+		AppComponent
 	],
 	exports: [],
-	bootstrap: [AppComponent], imports: [BrowserModule,
+	bootstrap: [
+		AppComponent
+	],
+	imports: [
+		BrowserModule,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
@@ -62,7 +55,8 @@ import {ThemeComponent} from "./views/shared/theme/theme.component";
 		NgbPaginationModule,
 		AccountMenuListComponent,
 		SidebarComponent,
-		NavbarComponent],
+		NavbarComponent
+	],
 	providers: [
 		provideHttpClient(withFetch(), withInterceptors([
 			headerTokenInterceptor,
