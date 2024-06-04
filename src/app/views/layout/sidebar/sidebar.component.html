@@ -14,6 +14,26 @@
             </a>
         </li>
 		<li class="treeview" (click)="toggleTreeView($event)">
+			<a class="app-menu__item" href="#" data-toggle="treeview">
+				<i class="app-menu__icon bi bi-receipt"></i>
+				<span class="app-menu__label">{{'services' | translate}}</span>
+				<i class="treeview-indicator bi bi-chevron-right"></i>
+			</a>
+			<ul class="treeview-menu">
+				<li>
+					<a class="treeview-item" routerLink="/services/packages" routerLinkActive="active">
+						<i class="icon bi bi-box"></i> {{'packages' | translate}}
+					</a>
+				</li>
+
+				<li>
+					<a class="treeview-item" routerLink="/services/subscriptions" routerLinkActive="active">
+						<i class="icon bi bi-calendar-range-fill"></i> {{'subscriptions' | translate}}
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="treeview" (click)="toggleTreeView($event)">
 			@if (permissionService.hasPermission('users:index') || permissionService.hasPermission('roles:index')){
             <a class="app-menu__item" href="#" data-toggle="treeview">
 	            <i class="app-menu__icon bi bi-sliders"></i>
