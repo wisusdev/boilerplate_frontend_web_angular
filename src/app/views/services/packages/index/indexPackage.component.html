@@ -2,7 +2,7 @@
 	<div class="card-header">
 		<div class="d-flex justify-content-between align-items-center">
 			<h4 class="card-title">{{'packages' | translate}}</h4>
-			<a class="btn btn-primary" (click)="createPackage()">{{ 'create' | translate }} <i class="ms-2 bi bi-plus"></i></a>
+			<a class="btn btn-primary" (click)="showFormPackageModal()">{{ 'create' | translate }} <i class="ms-2 bi bi-plus"></i></a>
 		</div>
 	</div>
 	<div class="card-body">
@@ -29,8 +29,8 @@
 						<td>{{ pkg.attributes.updated_at | date:'dd/MM/yyyy' }}</td>
 						<td>
 							<div class="d-flex flex-row">
-								<a class="btn btn-sm btn-primary me-2" >{{ 'edit' | translate }} <i class="ms-2 bi bi-pencil-square"></i></a>
-								<button class="btn btn-sm btn-danger" >{{ 'delete' | translate }}<i class="ms-2 bi bi-trash"></i></button>
+								<a class="btn btn-sm btn-primary me-2" (click)="showFormPackageModal(pkg.id)">{{ 'edit' | translate }} <i class="ms-2 bi bi-pencil-square"></i></a>
+								<button class="btn btn-sm btn-danger" (click)="deletePackage(pkg.id)">{{ 'delete' | translate }}<i class="ms-2 bi bi-trash"></i></button>
 							</div>
 						</td>
 					</tr>
