@@ -8,6 +8,7 @@ import {ToastService} from "../../../../data/Services/Toast.service";
 import {DatePipe, NgForOf} from "@angular/common";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormPackageComponent} from "../form/formPackage.component";
+import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
 	selector: 'app-index-package',
@@ -33,7 +34,8 @@ export class IndexPackageComponent implements OnInit {
 		private translate: TranslateService,
 		private services: ServicesService,
 		private modalService: NgbModal,
-	) {}
+	) {
+	}
 
 	ngOnInit() {
 		this.getPackages();
@@ -56,35 +58,67 @@ export class IndexPackageComponent implements OnInit {
 		).subscribe();
 	}
 
-	createPackage() {
-		const modalRef = this.modalService.open(FormPackageComponent, {size: 'lg', centered: true});
-		modalRef.componentInstance.typeAction = 'create';
+	showFormPackageModal(packageId?: string) {
+		const modalRef = this.modalService.open(FormPackageComponent, {
+			size: 'lg',
+			centered: true,
+			backdrop: 'static',
+			keyboard: false
+		});
+
+		modalRef.componentInstance.typeAction = packageId ? 'edit' : 'create';
+
+		if (packageId) {
+			modalRef.componentInstance.packageId = packageId;
+		}
 
 		modalRef.result.then((result) => {
 			if (result.type === 'create') {
-				this.services.createService(result.data).pipe(
-					tap(() => {
-						this.toast.success(this.translate.instant('createdSuccessfully'));
-						this.getPackages();
-					}),
-					catchError((error) => {
-						this.toast.danger(this.translate.instant('errorAsOccurred'));
-						return of(null);
-					})
-				).subscribe();
+				this.createPackage(result);
+			}
+
+			if (result.type === 'edit') {
+				result.data.id = packageId;
+				this.editPackage(packageId!, result);
 			}
 		}, (reason) => {});
 	}
 
-	editPackage(packageId: number) {
-		const modalRef = this.modalService.open(FormPackageComponent, {size: 'lg', centered: true});
-		modalRef.componentInstance.typeAction = 'edit';
+	createPackage(result: any) {
+		this.services.createService(result.data).pipe(
+			tap(() => {
+				this.toast.success(this.translate.instant('createdSuccessfully'));
+				this.getPackages();
+			}),
+			catchError((error) => {
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
+		).subscribe();
+	}
+
+	editPackage(id:string, result: any) {
+		this.services.updateService(id, result.data).pipe(
+			tap(() => {
+				this.toast.success(this.translate.instant('updatedSuccessfully'));
+				this.getPackages();
+			}),
+			catchError((error) => {
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
+		).subscribe();
+	}
+
+	deletePackage(packageId: string) {
+		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
+		modalRef.componentInstance.title = this.translate.instant('deleteRecord');
 
 		modalRef.result.then((result) => {
-			if (result.type === 'edit') {
-				this.services.updateService(result.data).pipe(
+			if (result === true) {
+				this.services.deleteService(packageId).pipe(
 					tap(() => {
-						this.toast.success(this.translate.instant('updatedSuccessfully'));
+						this.toast.success(this.translate.instant('recordDeleted'));
 						this.getPackages();
 					}),
 					catchError((error) => {
@@ -93,7 +127,7 @@ export class IndexPackageComponent implements OnInit {
 					})
 				).subscribe();
 			}
-		}, (reason) => {});
+		});
 	}
 
 	setPage(pageNumber: number): void {
