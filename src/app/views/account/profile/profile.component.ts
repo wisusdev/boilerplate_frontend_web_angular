@@ -63,8 +63,7 @@ export class ProfileComponent implements OnInit {
 		};
 	}
 
-	@Input()
-	profileModel!: any;
+	@Input() profileModel!: any;
 
 	ngOnInit() {
 		this.userId = localStorage.getItem('user_key') || '';
