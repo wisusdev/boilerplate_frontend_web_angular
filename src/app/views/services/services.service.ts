@@ -4,6 +4,9 @@ import {HttpClient} from "@angular/common/http";
 import {Handle} from "../../data/Exceptions/Handle";
 import {catchError, Observable} from "rxjs";
 import {IndexPackageRequestInterface} from "../../data/Interfaces/Requests/indexPackageRequest.interface";
+import {ShowPackageResponseInterface} from "../../data/Interfaces/Responses/showPackageResponse.interface";
+import {StoreUpdatePackageRequestInterface} from "../../data/Interfaces/Requests/storeUpdatePackageRequest.interface";
+import {StoreUpdatePackageResponseInterface} from "../../data/Interfaces/Responses/storeUpdatePackageResponde.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -23,14 +26,26 @@ export class ServicesService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	createService(data: any): Observable<any> {
-		return this.httpClient.post(`${this._apiUriPackage}`, data, {
+	createService(data: StoreUpdatePackageRequestInterface): Observable<StoreUpdatePackageResponseInterface> {
+		return this.httpClient.post<StoreUpdatePackageResponseInterface>(`${this._apiUriPackage}`, data, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	updateService(data: any): Observable<any> {
-		return this.httpClient.put(`${this._apiUriPackage}/${data.id}`, data, {
+	showService(id: string): Observable<ShowPackageResponseInterface> {
+		return this.httpClient.get<ShowPackageResponseInterface>(`${this._apiUriPackage}/${id}`, {
+			headers: Api.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	updateService(id: string, data: StoreUpdatePackageRequestInterface): Observable<StoreUpdatePackageResponseInterface> {
+		return this.httpClient.put<StoreUpdatePackageResponseInterface>(`${this._apiUriPackage}/${id}`, data, {
+			headers: Api.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	deleteService(id: string): Observable<any> {
+		return this.httpClient.delete(`${this._apiUriPackage}/${id}`, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
