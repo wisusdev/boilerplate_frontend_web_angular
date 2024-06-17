@@ -3,6 +3,9 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Auth} from "../../../../data/Providers/Auth";
+import {ServicesService} from "../../services.service";
+import {catchError, of, tap} from "rxjs";
+import {ToastService} from "../../../../data/Services/Toast.service";
 
 @Component({
 	selector: 'app-form-packages',
@@ -15,7 +18,8 @@ import {Auth} from "../../../../data/Providers/Auth";
 })
 export class FormPackageComponent implements OnInit {
 
-	typeAction = input<string>();
+	@Input() typeAction: string = 'create';
+	@Input() packageId: string = '';
 
 	confirmText: string = this.translate.instant('save');
 	cancelText: string = this.translate.instant('cancel');
@@ -24,13 +28,16 @@ export class FormPackageComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		public activeModal: NgbActiveModal,
 		private translate: TranslateService,
+		private services: ServicesService,
+		private toast: ToastService,
 	) {}
 
 	formPackage!: FormGroup;
 
 	ngOnInit() {
-		if(this.typeAction.toString() === 'create') {
-			this.initForm();
+		this.initForm();
+		if(this.typeAction === 'edit') {
+			this.getPackage(this.packageId);
 		}
 	}
 
@@ -53,15 +60,25 @@ export class FormPackageComponent implements OnInit {
 		}
 	}
 
+	getPackage(packageId: string) {
+		this.services.showService(packageId).pipe(
+			tap((response) => {
+				console.log(response);
+				this.formPackage.patchValue(response.data.attributes);
+			}),
+			catchError((error) => {
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
+		).subscribe();
+	}
+
 	public submit() {
-		if(this.typeAction.toString() === 'create') {
-			this.activeModal.close({
-				type: 'create',
-				data: this.formPackage.value
-			});
-		} else {
-			console.log('update');
-		}
+		const actionType = this.typeAction === 'create' ? 'create' : 'edit';
+		this.activeModal.close({
+			type: actionType,
+			data: this.formPackage.value
+		});
 	}
 
 	public confirm() {
