@@ -7,6 +7,7 @@ import {IndexPackageRequestInterface} from "../../data/Interfaces/Requests/index
 import {ShowPackageResponseInterface} from "../../data/Interfaces/Responses/showPackageResponse.interface";
 import {StoreUpdatePackageRequestInterface} from "../../data/Interfaces/Requests/storeUpdatePackageRequest.interface";
 import {StoreUpdatePackageResponseInterface} from "../../data/Interfaces/Responses/storeUpdatePackageResponde.interface";
+import {IndexSubscriptionsResponseInterface} from "../../data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -14,12 +15,14 @@ import {StoreUpdatePackageResponseInterface} from "../../data/Interfaces/Respons
 export class ServicesService {
 	private _apiUri: string = Api.api_url_v1;
 	private _apiUriPackage: string = this._apiUri + '/packages';
+	private _apiUriSubscription: string = this._apiUri + '/subscriptions';
 
 	constructor(
 		private httpClient: HttpClient,
 		private handleMessage: Handle
 	) {}
 
+	/* PACKAGES */
 	indexServices(): Observable<IndexPackageRequestInterface> {
 		return this.httpClient.get<IndexPackageRequestInterface>(`${this._apiUriPackage}`, {
 			headers: Api.headers,
@@ -46,6 +49,13 @@ export class ServicesService {
 
 	deleteService(id: string): Observable<any> {
 		return this.httpClient.delete(`${this._apiUriPackage}/${id}`, {
+			headers: Api.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	/* SUBSCRIPTIONS */
+	indexSubscriptions(): Observable<IndexSubscriptionsResponseInterface> {
+		return this.httpClient.get<IndexSubscriptionsResponseInterface>(`${this._apiUriSubscription}`, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
