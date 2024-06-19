@@ -4,7 +4,12 @@ export interface Package {
 	attributes: {
 		name: string;
 		description: string;
+		max_users: number;
+		interval: string;
+		interval_count: number;
 		price: string;
+		trial_days: number;
+		active: boolean;
 		created_at: string;
 		updated_at: string;
 	};
