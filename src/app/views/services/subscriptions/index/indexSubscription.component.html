@@ -1,1 +1,50 @@
-<p>index works!</p>
+<div class="card">
+	<div class="card-header">
+		<div class="d-flex justify-content-between align-items-center">
+			<h4 class="card-title">{{'subscriptions' | translate}}</h4>
+			<a class="btn btn-primary">{{ 'create' | translate }} <i class="ms-2 bi bi-plus"></i></a>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th>{{'name' | translate}}</th>
+						<th>{{'start_date' | translate}}</th>
+						<th>{{'end_date' | translate}}</th>
+						<th>{{'trial_ends_at' | translate}}</th>
+						<th>{{'package_price' | translate}}</th>
+						<th>{{'package_details' | translate}}</th>
+						<th>{{'created_by' | translate}}</th>
+						<th>{{'payment_method' | translate}}</th>
+						<th>{{'payment_transaction_id' | translate}}</th>
+						<th>{{'status' | translate}}</th>
+						<th>{{'actions' | translate}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let subscription of subscriptions; let i = index">
+						<td>{{ i + 1 }}</td>
+						<td>{{ subscription.relationships.user.attributes.first_name }} {{subscription.relationships.user.attributes.last_name }}</td>
+						<td>{{ subscription.attributes.start_date | date:'dd/MM/yyyy' }}</td>
+						<td>{{ subscription.attributes.end_date | date:'dd/MM/yyyy' }}</td>
+						<td>{{ subscription.attributes.trial_ends_at | date:'dd/MM/yyyy' }}</td>
+						<td>${{ subscription.attributes.package_price }}</td>
+						<td>{{ subscription.attributes.package_details }}</td>
+						<td>{{ subscription.relationships.createBy.attributes.first_name }} {{ subscription.relationships.createBy.attributes.last_name }}</td>
+						<td class="fw-bolder">{{ subscription.attributes.payment_method }}</td>
+						<td>{{ subscription.attributes.payment_transaction_id }}</td>
+						<td>{{ subscription.attributes.status | translate }}</td>
+						<td>
+							<div class="d-flex flex-row">
+								<a class="btn btn-sm btn-primary me-2">{{ 'edit' | translate }} <i class="ms-2 bi bi-pencil-square"></i></a>
+								<button class="btn btn-sm btn-danger">{{ 'delete' | translate }}<i class="ms-2 bi bi-trash"></i></button>
+							</div>
+						</td>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
