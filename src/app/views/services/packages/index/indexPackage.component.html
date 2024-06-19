@@ -13,10 +13,12 @@
 						<th scope="col">#</th>
 						<th>{{'name' | translate}}</th>
 						<th>{{'description' | translate}}</th>
+						<th>{{'interval' | translate}}</th>
 						<th>{{'price' | translate}}</th>
-						<th>{{'created' | translate}}</th>
+						<th>{{'trial_days' | translate}}</th>
+						<th>{{'active' | translate}}</th>
 						<th>{{'updated' | translate}}</th>
-						<th>{{'actions' | translate }}</th>
+						<th>{{'actions' | translate}}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,8 +26,10 @@
 						<td>{{ i + 1 }}</td>
 						<td>{{ pkg.attributes.name }}</td>
 						<td>{{ pkg.attributes.description }}</td>
+						<td>{{ pkg.attributes.interval | translate }}</td>
 						<td>${{ pkg.attributes.price }}</td>
-						<td>{{ pkg.attributes.created_at | date:'dd/MM/yyyy' }}</td>
+						<td>{{ pkg.attributes.trial_days }}</td>
+						<td>{{ pkg.attributes.active ? translate.instant('yes') : translate.instant('no')}}</td>
 						<td>{{ pkg.attributes.updated_at | date:'dd/MM/yyyy' }}</td>
 						<td>
 							<div class="d-flex flex-row">
