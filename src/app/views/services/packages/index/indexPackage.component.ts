@@ -22,6 +22,7 @@ import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/c
 	templateUrl: './indexPackage.component.html'
 })
 export class IndexPackageComponent implements OnInit {
+
 	lastPage: number = 0;
 	totalPages: number = 0;
 	pageNumber: number = 1;
@@ -31,7 +32,7 @@ export class IndexPackageComponent implements OnInit {
 
 	constructor(
 		private toast: ToastService,
-		private translate: TranslateService,
+		protected translate: TranslateService,
 		private services: ServicesService,
 		private modalService: NgbModal,
 	) {
@@ -87,7 +88,7 @@ export class IndexPackageComponent implements OnInit {
 	createPackage(result: any) {
 		this.services.createService(result.data).pipe(
 			tap(() => {
-				this.toast.success(this.translate.instant('createdSuccessfully'));
+				this.toast.success(this.translate.instant('recordCreated'));
 				this.getPackages();
 			}),
 			catchError((error) => {
@@ -100,7 +101,7 @@ export class IndexPackageComponent implements OnInit {
 	editPackage(id:string, result: any) {
 		this.services.updateService(id, result.data).pipe(
 			tap(() => {
-				this.toast.success(this.translate.instant('updatedSuccessfully'));
+				this.toast.success(this.translate.instant('recordUpdated'));
 				this.getPackages();
 			}),
 			catchError((error) => {
