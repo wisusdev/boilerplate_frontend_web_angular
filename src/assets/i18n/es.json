@@ -113,6 +113,19 @@
 	"ipAddress": "Dirección IP",
 	"close": "Cerrar",
 
+	"start_date": "Inicio",
+	"end_date": "Finalización",
+	"trial_ends_at": "Prueba finaliza",
+	"package_price": "Precio",
+	"package_details": "Detalles",
+	"created_by": "Creado por",
+	"payment_method": "Método de pago",
+	"payment_transaction_id": "ID de transacción",
+	"approved": "Aprobado",
+	"waiting": "Esperando",
+	"declined": "Rechazado",
+	"cancelled": "Cancelado",
+
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
 		"dataRequired": "Los datos son requeridos",

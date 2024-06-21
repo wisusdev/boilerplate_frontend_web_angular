@@ -45,7 +45,6 @@
 	"devicesConnected": "Devices Connected",
 	"deviceConnectedIn": "Device connected in",
 	"logout": "Log out",
-	"close": "Close",
 
 	"nameError": "I'm sure you must have a name!",
 	"phoneNo": "Phone Number",
@@ -112,6 +111,20 @@
 	"device": "Device",
 	"browser": "Browser",
 	"ipAddress": "IP Address",
+	"close": "Cerrar",
+
+	"start_date": "Start date",
+	"end_date": "End date",
+	"trial_ends_at": "Trial ends at",
+	"package_price": "Package price",
+	"package_details": "Package details",
+	"created_by": "Created by",
+	"payment_method": "Payment method",
+	"payment_transaction_id": "Payment transaction ID",
+	"approved": "Approved",
+	"waiting": "Waiting",
+	"declined": "Declined",
+	"cancelled": "Cancelled",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
