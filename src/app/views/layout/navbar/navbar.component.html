@@ -1,5 +1,5 @@
 <header class="app-header">
-	<a class="app-header__logo" href="../../../../index.html">{{ appName }}</a>
+	<a class="app-header__logo" routerLink="/">{{ appName }}</a>
 
 	@if(loggedIn){
 		<span class="app-sidebar__toggle p-cursor" data-toggle="sidebar" href="#" (click)="toggleMenu()" aria-label="Hide Sidebar"></span>
