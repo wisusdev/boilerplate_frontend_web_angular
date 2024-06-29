@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { AuthService } from '../../auth/auth.service';
 import {
 	NgbCollapse,
 	NgbDropdown,
@@ -14,6 +13,8 @@ import {catchError, of, tap} from "rxjs";
 import {app} from "../../../config/App";
 import {Auth} from "../../../data/Providers/Auth";
 import {Lang} from "../../../config/Lang";
+import {AuthService} from "../../public/auth/auth.service";
+import {routesException} from "../../../data/Vendor/RoutesException";
 
 @Component({
 	selector: 'app-navbar',
@@ -97,4 +98,6 @@ export class NavbarComponent implements OnInit {
 			this.renderer.addClass(main, 'sidenav-toggled');
 		}
 	}
+
+	protected readonly routesException = routesException;
 }
