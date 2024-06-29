@@ -9,7 +9,6 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {headerTokenInterceptor} from './data/Interceptors/headerToken.interceptor';
 import {formatRequestInterceptor} from "./data/Interceptors/formatRequest.interceptor";
-import {AccountMenuListComponent} from "./views/account/account-menu-list/account-menu-list.component";
 import {SidebarComponent} from "./views/layout/sidebar/sidebar.component";
 import {NavbarComponent} from "./views/layout/navbar/navbar.component";
 
@@ -23,6 +22,7 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import {ToastComponent} from "./views/shared/toast/toast.component";
 import {ThemeComponent} from "./views/shared/theme/theme.component";
+import {AccountMenuListComponent} from "./views/admin/account/account-menu-list/account-menu-list.component";
 
 @NgModule({
 	declarations: [
