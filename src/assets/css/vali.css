@@ -15293,7 +15293,7 @@ fieldset:disabled .btn {
 
 .app-content {
 	min-height: calc(100vh - 50px);
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 	padding: 30px;
 	background-color: var(--bs-secondary-bg);
 	-webkit-transition: margin-left 0.3s ease;
@@ -15342,7 +15342,7 @@ fieldset:disabled .btn {
 
 /*----- Componant: Top Navigation Bar ----- */
 .app-header {
-	position: fixed;
+	position: relative;
 	left: 0;
 	right: 0;
 	top: 0;
