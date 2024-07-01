@@ -3,9 +3,9 @@
         <i id="changeIcon" class="bi bi-circle-half"></i>
     </button>
     <div ngbDropdownMenu aria-labelledby="dropdownTheme">
-        <button ngbDropdownItem (click)="toggle('light', $event)"><i class="bi bi-brightness-high-fill"></i> Light</button>
-        <button ngbDropdownItem (click)="toggle('dark', $event)"><i class="bi bi-moon-fill"></i> Dark</button>
-        <button ngbDropdownItem (click)="toggle('auto', $event)"><i class="bi bi-circle-half"></i> System</button>
+        <button ngbDropdownItem (click)="toggle('light', $event)"><i class="bi bi-brightness-high-fill"></i> {{'light' | translate}}</button>
+        <button ngbDropdownItem (click)="toggle('dark', $event)"><i class="bi bi-moon-fill"></i> {{'dark' | translate}}</button>
+        <button ngbDropdownItem (click)="toggle('auto', $event)"><i class="bi bi-circle-half"></i> {{'auto' | translate}}</button>
     </div>
 </div>
 

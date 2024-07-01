@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ThemeService} from "../../../data/Services/Theme.service";
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from "@ng-bootstrap/ng-bootstrap";
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
 	selector: 'app-theme',
@@ -9,7 +10,8 @@ import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from "
 		NgbDropdown,
 		NgbDropdownMenu,
 		NgbDropdownItem,
-		NgbDropdownToggle
+		NgbDropdownToggle,
+		TranslateModule
 	],
 	templateUrl: './theme.component.html',
 })
