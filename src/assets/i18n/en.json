@@ -127,6 +127,10 @@
 	"declined": "Declined",
 	"cancelled": "Cancelled",
 
+	"light": "Light",
+	"dark": "Dark",
+	"auto": "Auto",
+
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
 		"dataRequired": "Data is required",

@@ -127,6 +127,10 @@
 	"declined": "Rechazado",
 	"cancelled": "Cancelado",
 
+	"light": "Claro",
+	"dark": "Oscuro",
+	"auto": "Automático",
+
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
 		"dataRequired": "Los datos son requeridos",
