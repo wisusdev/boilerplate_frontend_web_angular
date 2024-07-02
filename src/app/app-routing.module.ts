@@ -8,12 +8,13 @@ import {SettingsRoutingModule} from "./views/admin/settings/settings-routing.mod
 import {AuthRoutingModule} from "./views/public/auth/auth-routing.module";
 import {ServicesRoutingModule} from "./views/admin/services/services-routing.module";
 import { PublicServicesComponent } from './views/public/services/public-services.component';
+import {PayServiceComponent} from "./views/public/pay-service/pay-service.component";
 
 const routes: Routes = [
 	{path: '', component: WelcomeComponent},
 	{path: 'home', component: HomeComponent, canActivate: [authGuard]},
 	{path: 'plans', component: PublicServicesComponent},
-	{path: 'plans/:id', component: PublicServicesComponent},
+	{path: 'plans/:id', component: PayServiceComponent},
 	{path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
