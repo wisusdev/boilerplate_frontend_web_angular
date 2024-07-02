@@ -1,6 +1,6 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Auth} from './data/Providers/Auth';
-import {routesException} from "./data/Vendor/RoutesException";
+import {RouteExceptionService} from "./data/Services/route-exception.service";
 
 @Component({
 	selector: 'app-root',
@@ -10,7 +10,8 @@ import {routesException} from "./data/Vendor/RoutesException";
 export class AppComponent implements OnInit {
 
 	constructor(
-		private authUser: Auth
+		private authUser: Auth,
+		private routeExceptionService: RouteExceptionService,
 	) {
 	}
 
@@ -23,5 +24,7 @@ export class AppComponent implements OnInit {
 		});
 	}
 
-	protected readonly routesException = routesException;
+	exceptionRoute(): boolean {
+		return this.routeExceptionService.exceptionRoute();
+	}
 }

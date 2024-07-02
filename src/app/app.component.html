@@ -2,11 +2,11 @@
 
 	<app-navbar></app-navbar>
 
-	@if(loggedIn && !routesException.exceptionRoute()){
+	@if(loggedIn && !exceptionRoute()){
 		<app-sidebar></app-sidebar>
 	}
 
-	<div [ngClass]="{'app-content': loggedIn && !routesException.exceptionRoute(), 'container mt-4': routesException.exceptionRoute() || !loggedIn}">
+	<div [ngClass]="{'app-content': loggedIn && !exceptionRoute(), 'container mt-4': exceptionRoute() || !loggedIn}">
 		<router-outlet></router-outlet>
 	</div>
 
