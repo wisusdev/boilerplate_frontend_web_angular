@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ToastService } from 'src/app/data/Services/Toast.service';
 import { Package } from 'src/app/data/Interfaces/Requests/indexPackageRequest.interface';
 import { NgFor } from '@angular/common';
 import {ServicesService} from "../../admin/services/services.service";
+import {RouterLink} from '@angular/router';
+import { ToastService } from 'src/app/data/Services/Toast.service';
 
 @Component({
 	selector: 'app-public-services',
 	standalone: true,
 	imports: [
 		NgFor,
+		RouterLink,
 		TranslateModule
 	],
 	templateUrl: './public-services.component.html'
