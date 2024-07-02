@@ -14,7 +14,7 @@ import {app} from "../../../config/App";
 import {Auth} from "../../../data/Providers/Auth";
 import {Lang} from "../../../config/Lang";
 import {AuthService} from "../../public/auth/auth.service";
-import {routesException} from "../../../data/Vendor/RoutesException";
+import {RouteExceptionService} from "../../../data/Services/route-exception.service";
 
 @Component({
 	selector: 'app-navbar',
@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit {
 		public translate: TranslateService,
 		private authService: AuthService,
 		private authUser: Auth,
+		private routeExceptionService: RouteExceptionService,
 		private renderer: Renderer2,
 		@Inject(DOCUMENT) private document: Document
 	) {
@@ -99,5 +100,7 @@ export class NavbarComponent implements OnInit {
 		}
 	}
 
-	protected readonly routesException = routesException;
+	exceptionRoute(): boolean {
+		return this.routeExceptionService.exceptionRoute();
+	}
 }
