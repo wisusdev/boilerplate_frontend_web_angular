@@ -53,6 +53,12 @@ export class ServicesService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
+	publicShowService(id: string): Observable<ShowPackageResponseInterface> {
+		return this.httpClient.get<ShowPackageResponseInterface>(`${this._apiUri}/public/packages/${id}`, {
+			headers: Api.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
 	updateService(id: string, data: StoreUpdatePackageRequestInterface): Observable<StoreUpdatePackageResponseInterface> {
 		return this.httpClient.put<StoreUpdatePackageResponseInterface>(`${this._apiUriPackage}/${id}`, data, {
 			headers: Api.headers,
