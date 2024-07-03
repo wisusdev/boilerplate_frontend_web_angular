@@ -131,6 +131,8 @@
 	"dark": "Dark",
 	"auto": "Auto",
 
+	"pay_with": "Pay with",
+
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
 		"dataRequired": "Data is required",

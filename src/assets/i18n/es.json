@@ -131,6 +131,8 @@
 	"dark": "Oscuro",
 	"auto": "Automático",
 
+	"pay_with": "Pagar con",
+
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
 		"dataRequired": "Los datos son requeridos",
