@@ -1,6 +1,6 @@
 export const app = {
 	/* Application Name */
-	name: 'Angular App',
+	name: 'Web Care',
 
 	/* Application Version */
 	version: '1.0.0',
