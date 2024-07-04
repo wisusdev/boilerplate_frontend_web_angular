@@ -5,6 +5,7 @@
  * ================================*/
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,400i,700);
 @import url(https://fonts.googleapis.com/css?family=Niconne);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,700);
 
 /*!
  * Bootstrap  v5.3.2 (https://getbootstrap.com/)
@@ -15308,7 +15309,7 @@ fieldset:disabled .btn {
 
 @media (max-width: 767px) {
 	.app-content {
-		margin-top: 50px;
+		/*margin-top: 50px;*/
 		min-width: 100%;
 	}
 }
@@ -15350,7 +15351,7 @@ fieldset:disabled .btn {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	background-color: #00695C;
+	background-color: var(--bs-yellow);
 	z-index: 1030;
 	padding-right: 15px;
 }
@@ -15373,10 +15374,10 @@ fieldset:disabled .btn {
 	flex: 1 0 auto;
 	color: #fff;
 	text-align: center;
-	font-family: "Niconne";
+	font-family: "Montserrat", serif;
 	padding: 0 15px;
 	font-size: 26px;
-	font-weight: 400;
+	font-weight: 600;
 	line-height: 50px;
 	text-decoration: none;
 }
@@ -15388,7 +15389,7 @@ fieldset:disabled .btn {
 		flex: 0 0 auto;
 		display: block;
 		width: 230px;
-		background-color: #005046;
+		background-color: var(--bs-black);
 	}
 }
 
@@ -15424,7 +15425,7 @@ fieldset:disabled .btn {
 .app-sidebar__toggle:focus,
 .app-sidebar__toggle:hover {
 	color: #fff;
-	background-color: #00362f;
+	background-color: var(--bs-orange);
 	text-decoration: none;
 }
 
