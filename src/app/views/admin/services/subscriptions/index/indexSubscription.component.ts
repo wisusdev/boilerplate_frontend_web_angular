@@ -4,8 +4,8 @@ import {ServicesService} from "../../services.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, of, tap} from "rxjs";
 import {DatePipe, NgForOf} from "@angular/common";
-import {SubscriptionData} from "../../../../../data/Interfaces/Responses/indexSubscriptionsResponse.interface";
-import {ToastService} from "../../../../../data/Services/Toast.service";
+import {SubscriptionData} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
+import {ToastService} from "@data/Services/Toast.service";
 
 @Component({
 	selector: 'app-index-subscription',
