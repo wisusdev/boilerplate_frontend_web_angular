@@ -6,9 +6,9 @@ import {catchError, of, tap} from "rxjs";
 import {DatePipe, NgForOf} from "@angular/common";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormPackageComponent} from "../form/formPackage.component";
-import {Package} from "../../../../../data/Interfaces/Requests/indexPackageRequest.interface";
-import {ToastService} from "../../../../../data/Services/Toast.service";
-import {ConfirmationDialogComponent} from "../../../../shared/confirmation-dialog/confirmation-dialog.component";
+import {Package} from "@data/Interfaces/Requests/indexPackageRequest.interface";
+import {ToastService} from "@data/Services/Toast.service";
+import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
 	selector: 'app-index-package',
@@ -43,7 +43,7 @@ export class IndexPackageComponent implements OnInit {
 	}
 
 	getPackages() {
-		this.services.indexServices().pipe(
+		this.services.indexPackage().pipe(
 			tap((response) => {
 				this.packages = response.data;
 
@@ -86,7 +86,7 @@ export class IndexPackageComponent implements OnInit {
 	}
 
 	createPackage(result: any) {
-		this.services.createService(result.data).pipe(
+		this.services.createPackage(result.data).pipe(
 			tap(() => {
 				this.toast.success(this.translate.instant('recordCreated'));
 				this.getPackages();
@@ -99,7 +99,7 @@ export class IndexPackageComponent implements OnInit {
 	}
 
 	editPackage(id:string, result: any) {
-		this.services.updateService(id, result.data).pipe(
+		this.services.updatePackage(id, result.data).pipe(
 			tap(() => {
 				this.toast.success(this.translate.instant('recordUpdated'));
 				this.getPackages();
@@ -117,7 +117,7 @@ export class IndexPackageComponent implements OnInit {
 
 		modalRef.result.then((result) => {
 			if (result === true) {
-				this.services.deleteService(packageId).pipe(
+				this.services.deletePackage(packageId).pipe(
 					tap(() => {
 						this.toast.success(this.translate.instant('recordDeleted'));
 						this.getPackages();
