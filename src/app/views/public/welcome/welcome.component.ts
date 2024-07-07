@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {PublicServicesComponent} from "../services/public-services.component";
+import {PublicPackagesComponent} from "../services/package/public-packages.component";
 
 @Component({
 	selector: 'app-welcome',
 	standalone: true,
 	imports: [
-		PublicServicesComponent
+		PublicPackagesComponent
 	],
 	templateUrl: './welcome.component.html'
 })
