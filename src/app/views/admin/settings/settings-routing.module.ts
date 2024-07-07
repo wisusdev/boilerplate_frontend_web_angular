@@ -7,7 +7,7 @@ import {EditUserComponent} from "./users/edit/editUser.component";
 import {CreateRolComponent} from "./roles/create/createRol.component";
 import {EditRolComponent} from "./roles/edit/editRol.component";
 import { ShowUserComponent } from "./users/show/show.component";
-import {authGuard} from "../../../data/Guards/Auth.guard";
+import {authGuard} from "@data/Guards/Auth.guard";
 
 const router: Routes = [
 	{path: 'settings/users', component: IndexUserComponent, canActivate: [authGuard], data: {permissions: 'users.index'}},
