@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ThemeService} from "../../../data/Services/Theme.service";
+import {ThemeService} from "@data/Services/theme.service";
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from "@ng-bootstrap/ng-bootstrap";
 import {TranslateModule} from "@ngx-translate/core";
 
