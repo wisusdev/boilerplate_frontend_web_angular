@@ -1,19 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
-import {Api} from "../../../config/Api";
-import {Handle} from "../../../data/Exceptions/Handle";
-import {IndexPackageRequestInterface} from "../../../data/Interfaces/Requests/indexPackageRequest.interface";
-import {
-	StoreUpdatePackageResponseInterface
-} from "../../../data/Interfaces/Responses/storeUpdatePackageResponde.interface";
-import {
-	StoreUpdatePackageRequestInterface
-} from "../../../data/Interfaces/Requests/storeUpdatePackageRequest.interface";
-import {ShowPackageResponseInterface} from "../../../data/Interfaces/Responses/showPackageResponse.interface";
-import {
-	IndexSubscriptionsResponseInterface
-} from "../../../data/Interfaces/Responses/indexSubscriptionsResponse.interface";
+import {Api} from "@config/Api";
+import {Handle} from "@data/Exceptions/Handle";
+import {IndexPackageRequestInterface} from "@data/Interfaces/Requests/indexPackageRequest.interface";
+import {StoreUpdatePackageResponseInterface} from "@data/Interfaces/Responses/storeUpdatePackageResponde.interface";
+import {StoreUpdatePackageRequestInterface} from "@data/Interfaces/Requests/storeUpdatePackageRequest.interface";
+import {ShowPackageResponseInterface} from "@data/Interfaces/Responses/showPackageResponse.interface";
+import {IndexSubscriptionsResponseInterface} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -29,43 +23,31 @@ export class ServicesService {
 	) {}
 
 	/* PACKAGES */
-	indexServices(): Observable<IndexPackageRequestInterface> {
+	indexPackage(): Observable<IndexPackageRequestInterface> {
 		return this.httpClient.get<IndexPackageRequestInterface>(`${this._apiUriPackage}`, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	publicIndexServices(): Observable<IndexPackageRequestInterface> {
-		return this.httpClient.get<IndexPackageRequestInterface>(`${this._apiUri}/public/packages`, {
-			headers: Api.headers,
-		}).pipe(catchError(this.handleMessage.errorHandle));
-	}
-
-	createService(data: StoreUpdatePackageRequestInterface): Observable<StoreUpdatePackageResponseInterface> {
+	createPackage(data: StoreUpdatePackageRequestInterface): Observable<StoreUpdatePackageResponseInterface> {
 		return this.httpClient.post<StoreUpdatePackageResponseInterface>(`${this._apiUriPackage}`, data, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	showService(id: string): Observable<ShowPackageResponseInterface> {
+	showPackage(id: string): Observable<ShowPackageResponseInterface> {
 		return this.httpClient.get<ShowPackageResponseInterface>(`${this._apiUriPackage}/${id}`, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	publicShowService(id: string): Observable<ShowPackageResponseInterface> {
-		return this.httpClient.get<ShowPackageResponseInterface>(`${this._apiUri}/public/packages/${id}`, {
-			headers: Api.headers,
-		}).pipe(catchError(this.handleMessage.errorHandle));
-	}
-
-	updateService(id: string, data: StoreUpdatePackageRequestInterface): Observable<StoreUpdatePackageResponseInterface> {
+	updatePackage(id: string, data: StoreUpdatePackageRequestInterface): Observable<StoreUpdatePackageResponseInterface> {
 		return this.httpClient.put<StoreUpdatePackageResponseInterface>(`${this._apiUriPackage}/${id}`, data, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	deleteService(id: string): Observable<any> {
+	deletePackage(id: string): Observable<any> {
 		return this.httpClient.delete(`${this._apiUriPackage}/${id}`, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
