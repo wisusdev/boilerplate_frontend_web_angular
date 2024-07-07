@@ -4,7 +4,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {NgIf} from "@angular/common";
 import {SettingsService} from "../../settings.service";
 import {NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkButton, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {PermissionService} from "../../../../../data/Services/permission.service";
+import {PermissionService} from "@data/Services/permission.service";
 
 @Component({
 	selector: 'app-index-config',

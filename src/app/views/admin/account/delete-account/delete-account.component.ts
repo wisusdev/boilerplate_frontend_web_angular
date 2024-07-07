@@ -5,10 +5,10 @@ import {AccountService} from "../account.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, tap} from "rxjs";
 import {Router} from "@angular/router";
-import {Handle} from "../../../../data/Exceptions/Handle";
-import {ToastService} from "../../../../data/Services/Toast.service";
-import {ConfirmationDialogComponent} from "../../../shared/confirmation-dialog/confirmation-dialog.component";
-import {app} from "../../../../config/App";
+import {Handle} from "@data/Exceptions/Handle";
+import {ToastService} from "@data/Services/Toast.service";
+import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
+import {app} from "@config/App";
 
 @Component({
 	selector: 'app-delete-account',

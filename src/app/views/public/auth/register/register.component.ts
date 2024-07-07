@@ -6,8 +6,8 @@ import {catchError, of, tap} from 'rxjs';
 import {ErrorMessagesInterface} from 'src/app/data/Interfaces/Errors.interface';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
-import {ToastService} from "../../../../data/Services/Toast.service";
-import {app} from "../../../../config/App";
+import {ToastService} from "@data/Services/Toast.service";
+import {app} from "@config/App";
 
 @Component({
 	selector: 'app-register',

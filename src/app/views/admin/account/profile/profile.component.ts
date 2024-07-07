@@ -7,10 +7,10 @@ import { app } from 'src/app/config/App';
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass, NgForOf} from "@angular/common";
-import {Handle} from "../../../../data/Exceptions/Handle";
-import {ToastService} from "../../../../data/Services/Toast.service";
-import {Lang} from "../../../../config/Lang";
-import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interface";
+import {Handle} from "@data/Exceptions/Handle";
+import {ToastService} from "@data/Services/Toast.service";
+import {Lang} from "@config/Lang";
+import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 
 @Component({
 	selector: 'app-profile',

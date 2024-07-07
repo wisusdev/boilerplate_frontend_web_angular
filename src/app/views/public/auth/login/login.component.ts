@@ -6,10 +6,10 @@ import {catchError} from "rxjs/operators";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {Handle} from "../../../../data/Exceptions/Handle";
-import {ToastService} from "../../../../data/Services/Toast.service";
-import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interface";
-import {app} from "../../../../config/App";
+import {Handle} from "@data/Exceptions/Handle";
+import {ToastService} from "@data/Services/Toast.service";
+import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
+import {app} from "@config/App";
 
 @Component({
 	selector: 'app-login',

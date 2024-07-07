@@ -5,10 +5,10 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {catchError, of, tap} from "rxjs";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
-import {Handle} from "../../../../data/Exceptions/Handle";
-import {ToastService} from "../../../../data/Services/Toast.service";
-import {ErrorMessagesInterface} from "../../../../data/Interfaces/Errors.interface";
-import {app} from "../../../../config/App";
+import {Handle} from "@data/Exceptions/Handle";
+import {ToastService} from "@data/Services/Toast.service";
+import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
+import {app} from "@config/App";
 
 @Component({
 	selector: 'app-reset-password',

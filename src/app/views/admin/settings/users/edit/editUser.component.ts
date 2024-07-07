@@ -5,8 +5,8 @@ import {catchError, of, tap} from "rxjs";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {ToastService} from "../../../../../data/Services/Toast.service";
-import {ErrorMessagesInterface} from "../../../../../data/Interfaces/Errors.interface";
+import {ToastService} from "@data/Services/Toast.service";
+import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 
 @Component({
 	selector: 'app-edit-user',
