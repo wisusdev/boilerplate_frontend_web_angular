@@ -4,8 +4,8 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ServicesService} from "../../services.service";
 import {catchError, of, tap} from "rxjs";
-import {ToastService} from "../../../../../data/Services/Toast.service";
-import {Auth} from "../../../../../data/Providers/Auth";
+import {ToastService} from "@data/Services/Toast.service";
+import {Auth} from "@data/Providers/Auth";
 
 @Component({
 	selector: 'app-form-packages',
@@ -61,7 +61,7 @@ export class FormPackageComponent implements OnInit {
 	}
 
 	getPackage(packageId: string) {
-		this.services.showService(packageId).pipe(
+		this.services.showPackage(packageId).pipe(
 			tap((response) => {
 				console.log(response);
 				this.formPackage.patchValue(response.data.attributes);
