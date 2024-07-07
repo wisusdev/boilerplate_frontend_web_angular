@@ -27,6 +27,9 @@
 		],
 		"paths": {
 			"@env/*": ["src/environments/*"],
+			"@config/*": ["src/app/config/*"],
+			"@data/*": ["src/app/data/*"],
+			"@views/*": ["src/app/views/*"],
 		}
 	},
 	"angularCompilerOptions": {
