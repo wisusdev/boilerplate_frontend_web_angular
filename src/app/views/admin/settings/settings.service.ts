@@ -1,17 +1,17 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, Observable} from 'rxjs';
 import {Api} from 'src/app/config/Api';
 import {Handle} from 'src/app/data/Exceptions/Handle';
-import {IndexRoleResponseInterface} from "../../../data/Interfaces/Responses/indexRoleResponseInterface";
-import {StoreRoleRequestInterface} from "../../../data/Interfaces/Requests/storeRoleRequest.interface";
-import {UpdateStoreRoleResponseInterface} from "../../../data/Interfaces/Responses/updateStoreRoleResponseInterface";
-import {ShowRoleResponseInterface} from "../../../data/Interfaces/Responses/showRoleResponse.interface";
-import {IndexPermissionsInterface} from "../../../data/Interfaces/Responses/indexPermissions.interface";
-import {IndexUserResponseInterface, UserData} from "../../../data/Interfaces/Responses/indexUserResponseInterface";
-import {StoreUserRequestInterface} from "../../../data/Interfaces/Requests/storeUserRequest.interface";
-import {StoreUserResponseInterface} from "../../../data/Interfaces/Responses/storeUserResponse.interface";
-import {ShowUserResponseInterface} from "../../../data/Interfaces/Responses/showUserResponse.interface";
+import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleResponseInterface";
+import {StoreRoleRequestInterface} from "@data/Interfaces/Requests/storeRoleRequest.interface";
+import {UpdateStoreRoleResponseInterface} from "@data/Interfaces/Responses/updateStoreRoleResponseInterface";
+import {ShowRoleResponseInterface} from "@data/Interfaces/Responses/showRoleResponse.interface";
+import {IndexPermissionsInterface} from "@data/Interfaces/Responses/indexPermissions.interface";
+import {IndexUserResponseInterface, UserData} from "@data/Interfaces/Responses/indexUserResponseInterface";
+import {StoreUserRequestInterface} from "@data/Interfaces/Requests/storeUserRequest.interface";
+import {StoreUserResponseInterface} from "@data/Interfaces/Responses/storeUserResponse.interface";
+import {ShowUserResponseInterface} from "@data/Interfaces/Responses/showUserResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
