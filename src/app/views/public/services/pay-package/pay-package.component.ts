@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {Auth} from "@data/Providers/Auth";
 import {LoginComponent} from "../../auth/login/login.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {ServicesService} from "@views/admin/services/services.service";
 import {ActivatedRoute} from "@angular/router";
 import {catchError, of, tap} from "rxjs";
 import {PackageData} from "@data/Interfaces/Responses/showPackageResponse.interface";
 import {CurrencyPipe} from "@angular/common";
 import {PublicService} from "@views/public/services/public.service";
+import {ToastService} from "@data/Services/Toast.service";
 
 interface UserProfile {
 	id: string;
@@ -63,6 +63,7 @@ export class PayPackageComponent implements OnInit {
 		protected translate: TranslateService,
 		private services: PublicService,
 		private route: ActivatedRoute,
+		private toast: ToastService
 	) {
 	}
 
@@ -86,7 +87,7 @@ export class PayPackageComponent implements OnInit {
 				this.package = response.data;
 			}),
 			catchError((error) => {
-				console.error(error);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe()
