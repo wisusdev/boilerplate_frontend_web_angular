@@ -1,5 +1,7 @@
 export const exceptionOfRoutesForAdministrationPanel = [
 	'/',
 	'/plans',
-	'/plans/:id'
+	'/plans/:id',
+	'/payment-success/:id',
+	'/payment-cancelled'
 ]
