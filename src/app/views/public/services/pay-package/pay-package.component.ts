@@ -38,7 +38,7 @@ export class PayPackageComponent implements OnInit {
 		attributes: {
 			name: '',
 			description: '',
-			max_users: 0,
+			limits: '',
 			interval: '',
 			interval_count: 0,
 			price: '',
@@ -107,7 +107,7 @@ export class PayPackageComponent implements OnInit {
 				console.log(response);
 			}),
 			catchError((error) => {
-				console.error(error);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe();
