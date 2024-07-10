@@ -4,7 +4,7 @@ export interface Package {
 	attributes: {
 		name: string;
 		description: string;
-		max_users: number;
+		limits: string;
 		interval: string;
 		interval_count: number;
 		price: string;
