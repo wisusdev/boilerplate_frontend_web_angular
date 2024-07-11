@@ -104,6 +104,9 @@ export class PayPackageComponent implements OnInit {
 
 		this.services.publicStoreSubscription(data).pipe(
 			tap((response) => {
+				if(payment_method === 'paypal'){
+					window.location.href = response.approve_url;
+				}
 				console.log(response);
 			}),
 			catchError((error) => {
