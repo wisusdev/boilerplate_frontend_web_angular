@@ -34,4 +34,10 @@ export class PublicService {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
+
+	publicUpdateSubscription(paymentTransactionId: string, data: object): Observable<any> {
+		return this.httpClient.put<any>(`${this._apiUri}/public/subscriptions/${paymentTransactionId}`, data, {
+			headers: Api.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
 }
