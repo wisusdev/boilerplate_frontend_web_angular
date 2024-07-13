@@ -36,7 +36,7 @@ export class PublicService {
 	}
 
 	publicUpdateSubscription(paymentTransactionId: string, data: object): Observable<any> {
-		return this.httpClient.put<any>(`${this._apiUri}/public/subscriptions/${paymentTransactionId}`, data, {
+		return this.httpClient.patch<any>(`${this._apiUri}/public/subscriptions/validate/${paymentTransactionId}`, data, {
 			headers: Api.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
