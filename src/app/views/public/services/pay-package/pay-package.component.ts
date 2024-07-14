@@ -107,10 +107,9 @@ export class PayPackageComponent implements OnInit {
 				if(payment_method === 'paypal'){
 					window.location.href = response.approve_url;
 				}
-				console.log(response);
 			}),
 			catchError((error) => {
-				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				this.toast.danger(this.translate.instant(error[0]['detail']));
 				return of(null);
 			})
 		).subscribe();
