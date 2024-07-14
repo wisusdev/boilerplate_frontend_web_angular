@@ -131,7 +131,11 @@
 	"dark": "Dark",
 	"auto": "Auto",
 
+	"packages": "Packages",
+	"subscriptions": "Subscriptions",
 	"pay_with": "Pay with",
+	"downloadInvoice": "Download Invoice",
+	"cancelSubscription": "Cancel Subscription",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
@@ -178,7 +182,8 @@
 		"nameMin": "Name is too short",
 		"nameUnique": "Name is already in use",
 		"permissionsRequired": "Permissions are required",
-		"permissionsArray": "Permissions must be an array"
+		"permissionsArray": "Permissions must be an array",
+		"subscriptionAlreadyExists": "A subscription already exists with this plan"
 	},
 
 	"message": {

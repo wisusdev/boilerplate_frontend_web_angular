@@ -131,7 +131,11 @@
 	"dark": "Oscuro",
 	"auto": "Automático",
 
+	"packages": "Paquetes",
+	"subscriptions": "Suscripciones",
 	"pay_with": "Pagar con",
+	"downloadInvoice": "Descargar factura",
+	"cancelSubscription": "Cancelar suscripción",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
@@ -178,7 +182,8 @@
 		"nameMin": "El nombre es demasiado corto",
 		"nameUnique": "El nombre ya está en uso",
 		"permissionsRequired": "Los permisos son requeridos",
-		"permissionsArray": "Los permisos deben ser un array"
+		"permissionsArray": "Los permisos deben ser un array",
+		"subscriptionAlreadyExists": "Ya tienes una suscripción con este plan"
 	},
 
 	"message": {
