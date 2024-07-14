@@ -1,17 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
-import {Api} from "../../../config/Api";
-import {Handle} from "../../../data/Exceptions/Handle";
-import {ProfileUpdateRequestInterface} from "../../../data/Interfaces/Requests/profileUpdateRequest.interface";
-import {profileUpdateResponse} from "../../../data/Interfaces/Responses/ProfileUpdateResponse.interface";
-import {ChangePasswordRequestInterface} from "../../../data/Interfaces/Requests/changePasswordRequest.interface";
-import {ChangePasswordResponseInterface} from "../../../data/Interfaces/Responses/changePasswordResponse.interface";
-import {
-	GetDeviceAuthListResponseInterface
-} from "../../../data/Interfaces/Responses/getDeviceAuthListResponse.interface";
-import {LogoutDeviceAuthRequestInterface} from "../../../data/Interfaces/Requests/logoutDeviceAuthRequest.interface";
-import {LogoutDeviceAuthResponseInterface} from "../../../data/Interfaces/Responses/logoutDeviceAuthResponse.interface";
+import {Api} from "@config/Api";
+import {Handle} from "@data/Exceptions/Handle";
+import {ProfileUpdateRequestInterface} from "@data/Interfaces/Requests/profileUpdateRequest.interface";
+import {profileUpdateResponse} from "@data/Interfaces/Responses/ProfileUpdateResponse.interface";
+import {ChangePasswordRequestInterface} from "@data/Interfaces/Requests/changePasswordRequest.interface";
+import {ChangePasswordResponseInterface} from "@data/Interfaces/Responses/changePasswordResponse.interface";
+import {GetDeviceAuthListResponseInterface} from "@data/Interfaces/Responses/getDeviceAuthListResponse.interface";
+import {LogoutDeviceAuthRequestInterface} from "@data/Interfaces/Requests/logoutDeviceAuthRequest.interface";
+import {LogoutDeviceAuthResponseInterface} from "@data/Interfaces/Responses/logoutDeviceAuthResponse.interface";
+import {IndexSubscriptionsResponseInterface} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -65,6 +64,12 @@ export class AccountService {
 
 	deleteAccount(userId: string): Observable<any> {
 		return this.httpClient.delete(`${this._apiUriDeleteAccount}/${userId}`, {
+			headers: this.httpHeaders,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	getAccountSubscriptions(): Observable<IndexSubscriptionsResponseInterface> {
+		return this.httpClient.get<IndexSubscriptionsResponseInterface>(`${this._apiUri}/account/subscriptions`, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
