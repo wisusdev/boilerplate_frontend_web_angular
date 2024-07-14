@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="col-md-4 mb-3">
+		<app-account-menu-list></app-account-menu-list>
+	</div>
+	<div class="col-md-8">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">{{'subscriptions' | translate}}</h4>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th>{{'name' | translate}}</th>
+							<th>{{'start_date' | translate}}</th>
+							<th>{{'package_price' | translate}}</th>
+							<th>{{'package_details' | translate}}</th>
+							<th>{{'payment_method' | translate}}</th>
+							<th>{{'payment_transaction_id' | translate}}</th>
+							<th>{{'actions' | translate}}</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor="let subscription of userSubscriptions; let i = index">
+							<td>{{ subscription.relationships.user.attributes.first_name }} {{subscription.relationships.user.attributes.last_name }}</td>
+							<td>{{ subscription.attributes.start_date | date:'dd/MM/yyyy' }}</td>
+							<td>${{ subscription.attributes.package_price }}</td>
+							<td>{{ subscription.attributes.package_details }}</td>
+							<td class="fw-bolder text-uppercase">{{ subscription.attributes.payment_method }}</td>
+							<td>{{ subscription.attributes.payment_transaction_id }}</td>
+							<td>
+								<div ngbDropdown container="body">
+									<button class="btn btn-sm btn-primary" ngbDropdownToggle></button>
+									<div ngbDropdownMenu class="dropdown-menu-end dropdown-menu-lg-start">
+										<button class="dropdown-item">{{ 'downloadInvoice' | translate }}</button>
+										<div class="dropdown-divider"></div>
+										<button class="dropdown-item text-white bg-danger">{{ 'cancelSubscription' | translate }}</button>
+									</div>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
