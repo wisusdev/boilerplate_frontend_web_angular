@@ -33,14 +33,15 @@
 						<td>${{ subscription.attributes.package_price }}</td>
 						<td>{{ subscription.attributes.package_details }}</td>
 						<td>{{ subscription.relationships.createBy.attributes.first_name }} {{ subscription.relationships.createBy.attributes.last_name }}</td>
-						<td class="fw-bolder">{{ subscription.attributes.payment_method }}</td>
+						<td class="fw-bolder text-uppercase">{{ subscription.attributes.payment_method }}</td>
 						<td>{{ subscription.attributes.payment_transaction_id }}</td>
-						<td>{{ subscription.attributes.status | translate }}</td>
+						<td><span class="fs-6 badge" [ngClass]="'text-bg-' + status[subscription.attributes.status]" >{{ subscription.attributes.status | translate }}</span></td>
 						<td>
 							<div class="d-flex flex-row">
 								<a class="btn btn-sm btn-primary me-2">{{ 'show' | translate }} <i class="ms-2 bi bi-eye-fill"></i></a>
 							</div>
 						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
