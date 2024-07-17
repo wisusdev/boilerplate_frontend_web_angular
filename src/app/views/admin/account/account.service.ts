@@ -73,4 +73,17 @@ export class AccountService {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
+
+	downloadInvoice(subscriptionID: string): Observable<any> {
+		return this.httpClient.get(`${this._apiUri}/account/subscriptions/invoice/${subscriptionID}`, {
+			headers: this.httpHeaders,
+			responseType: 'blob',
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	cancelSubscription(subscriptionID: string, data: any): Observable<any> {
+		return this.httpClient.patch(`${this._apiUri}/account/subscriptions/cancel/${subscriptionID}`, data,{
+			headers: this.httpHeaders,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
 }
