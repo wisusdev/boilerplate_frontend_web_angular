@@ -75,7 +75,7 @@ export class AccountSubscriptionsComponent implements OnInit {
 				a.href = url;
 				a.download = `invoice-${year}${month}${day}${hours}${minutes}${seconds}.pdf`;
 				document.body.appendChild(a);
-				
+
 				a.click();
 				window.URL.revokeObjectURL(url);
 				document.body.removeChild(a);
@@ -97,10 +97,10 @@ export class AccountSubscriptionsComponent implements OnInit {
 
 		this.accountService.cancelSubscription(subscriptionID, data).pipe(
 			tap((response: any) => {
-				console.log(response);
+				this.toast.success(this.translate.instant('recordUpdated'));
 			}),
 			catchError((error) => {
-				console.log(error);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe();
