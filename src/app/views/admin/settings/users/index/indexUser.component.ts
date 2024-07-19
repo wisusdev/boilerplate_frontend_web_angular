@@ -93,7 +93,7 @@ export class IndexUserComponent implements OnInit {
 		modalRef.componentInstance.title = this.translate.instant('deleteRecord');
 
 		modalRef.result.then((result) => {
-			if (result) {
+			if (result['status']) {
 				this.settingsService.destroyUser(id).subscribe(
 					(response: any) => {
 						this.getUsers();

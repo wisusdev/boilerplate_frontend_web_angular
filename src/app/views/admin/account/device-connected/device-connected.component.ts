@@ -72,7 +72,7 @@ export class DeviceConnectedComponent implements OnInit {
 	openConfirmationModal(deviceId: number) {
 		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
 		modalRef.result.then((result) => {
-			if (result) {
+			if (result['status']) {
 				this.logoutDevice(deviceId);
 			}
 		}, (reason) => {});

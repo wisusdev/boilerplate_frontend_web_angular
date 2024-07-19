@@ -75,7 +75,7 @@ export class IndexRolComponent implements OnInit {
 		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
 		modalRef.componentInstance.title = this.translate.instant('deleteRecord');
 		modalRef.result.then((result) => {
-			if (result) {
+			if (result['status']) {
 				this.settings.destroyRole(role.id).pipe(
 					tap(() => {
 						this.getRoles();

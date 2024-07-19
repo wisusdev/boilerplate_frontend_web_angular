@@ -116,7 +116,7 @@ export class IndexPackageComponent implements OnInit {
 		modalRef.componentInstance.title = this.translate.instant('deleteRecord');
 
 		modalRef.result.then((result) => {
-			if (result === true) {
+			if (result['status']) {
 				this.services.deletePackage(packageId).pipe(
 					tap(() => {
 						this.toast.success(this.translate.instant('recordDeleted'));

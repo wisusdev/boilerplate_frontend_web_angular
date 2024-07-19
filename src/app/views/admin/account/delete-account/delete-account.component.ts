@@ -38,7 +38,7 @@ export class DeleteAccountComponent {
 		modalRef.componentInstance.confirmText = this.translate.instant('yesConfirm');
 		modalRef.componentInstance.cancelText = this.translate.instant('noCancel');
 		modalRef.result.then((result) => {
-			if (result) {
+			if (result['status']) {
 				this.deleteAccount();
 			}
 		}, (reason) => {
