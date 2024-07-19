@@ -6,7 +6,8 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {catchError, of, tap} from "rxjs";
 import {SubscriptionData} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 import {DatePipe, NgForOf} from "@angular/common";
-import {NgbDropdown, NgbDropdownMenu, NgbDropdownToggle} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDropdown, NgbDropdownMenu, NgbDropdownToggle, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
 	selector: 'app-subscriptions',
@@ -27,7 +28,8 @@ export class AccountSubscriptionsComponent implements OnInit {
 	constructor(
 		private accountService: AccountService,
 		private toast: ToastService,
-		private translate: TranslateService
+		private translate: TranslateService,
+		private modalService: NgbModal
 	) {}
 
 	lastPage: number = 0;
@@ -43,7 +45,6 @@ export class AccountSubscriptionsComponent implements OnInit {
 	getAccountServices() {
 		this.accountService.getAccountSubscriptions().pipe(
 			tap((response: any) => {
-				console.log(response);
 				this.userSubscriptions = response.data;
 
 				this.lastPage = response.meta.last_page;
@@ -52,7 +53,7 @@ export class AccountSubscriptionsComponent implements OnInit {
 				this.pages = Array.from({length: this.totalPages}, (_, i) => i + 1);
 			}),
 			catchError((error) => {
-				console.log(error);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe();
@@ -89,21 +90,32 @@ export class AccountSubscriptionsComponent implements OnInit {
 
 	cancelSubscription(subscriptionID: string) {
 
-		const data = {
-			"type": "subscriptions",
-			"id": subscriptionID,
-			"reason": "User requested"
-		}
+		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
 
-		this.accountService.cancelSubscription(subscriptionID, data).pipe(
-			tap((response: any) => {
-				this.toast.success(this.translate.instant('recordUpdated'));
-			}),
-			catchError((error) => {
-				this.toast.danger(this.translate.instant('errorAsOccurred'));
-				return of(null);
-			})
-		).subscribe();
+		modalRef.componentInstance.title = this.translate.instant('cancelSubscription');
+		modalRef.componentInstance.reason = true;
+
+		modalRef.result.then((result) => {
+			if (result['status']) {
+
+				const data = {
+					"type": "subscriptions",
+					"id": subscriptionID,
+					"reason": result['reason']
+				}
+
+				this.accountService.cancelSubscription(subscriptionID, data).pipe(
+					tap((response: any) => {
+						this.toast.success(this.translate.instant('recordUpdated'));
+						this.getAccountServices();
+					}),
+					catchError((error) => {
+						this.toast.danger(this.translate.instant('errorAsOccurred'));
+						return of(null);
+					})
+				).subscribe();
+			}
+		});
 	}
 
 }
