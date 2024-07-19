@@ -136,6 +136,7 @@
 	"pay_with": "Pay with",
 	"downloadInvoice": "Download Invoice",
 	"cancelSubscription": "Cancel Subscription",
+	"reasonForCancellation": "Reason for cancellation",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
