@@ -90,7 +90,11 @@ export class AccountSubscriptionsComponent implements OnInit {
 
 	cancelSubscription(subscriptionID: string) {
 
-		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
+		const modalRef = this.modalService.open(ConfirmationDialogComponent, {
+			centered: true,
+			backdrop: 'static',
+			keyboard: false
+		});
 
 		modalRef.componentInstance.title = this.translate.instant('cancelSubscription');
 		modalRef.componentInstance.reason = true;
