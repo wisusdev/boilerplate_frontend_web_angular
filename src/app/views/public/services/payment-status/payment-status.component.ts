@@ -54,7 +54,9 @@ export class PaymentStatusComponent implements OnInit {
 
 		this.publicService.publicUpdateSubscription(this.packageId, data).pipe(
 			tap(() => {
-				this.toast.success(this.translate.instant('recordCreated'));
+				if (this.statusPayment === 'success') {
+					this.toast.success(this.translate.instant('recordCreated'));
+				}
 			}),
 			catchError(() => {
 				this.toast.danger(this.translate.instant('errorAsOccurred'));
