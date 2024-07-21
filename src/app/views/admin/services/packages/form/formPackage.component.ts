@@ -51,7 +51,7 @@ export class FormPackageComponent implements OnInit {
 			price: ['', Validators.required],
 			trial_days: [0, Validators.required],
 			active: ['', Validators.required],
-			description: ['', [Validators.required, Validators.min(10)]],
+			description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(127)]],
 			created_by: Auth.userId(),
 		});
 
