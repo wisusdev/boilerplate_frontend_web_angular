@@ -8,6 +8,11 @@ import {PackageData} from "@data/Interfaces/Responses/showPackageResponse.interf
 import {CurrencyPipe} from "@angular/common";
 import {PublicService} from "@views/public/services/public.service";
 import {ToastService} from "@data/Services/Toast.service";
+import {loadStripe, Stripe} from "@stripe/stripe-js";
+import {app} from "@config/App";
+import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
 
 interface UserProfile {
 	id: string;
@@ -23,7 +28,10 @@ interface UserProfile {
 	imports: [
 		LoginComponent,
 		TranslateModule,
-		CurrencyPipe
+		CurrencyPipe,
+		NgbCollapseModule,
+		ReactiveFormsModule,
+		FormsModule
 	],
 	templateUrl: './pay-package.component.html'
 })
@@ -31,6 +39,10 @@ export class PayPackageComponent implements OnInit {
 	public loggedIn: boolean = false;
 	public serviceId: string = '';
 	private userId: string = '';
+	private stripe: Stripe | null = null;
+	isCollapsed = true;
+	stripeSubscriptionForm!: FormGroup;
+	card: any;
 
 	public package: PackageData = {
 		type: '',
@@ -63,7 +75,9 @@ export class PayPackageComponent implements OnInit {
 		protected translate: TranslateService,
 		private services: PublicService,
 		private route: ActivatedRoute,
-		private toast: ToastService
+		private toast: ToastService,
+		private formBuilder: FormBuilder,
+		private http: HttpClient
 	) {
 	}
 
@@ -76,9 +90,14 @@ export class PayPackageComponent implements OnInit {
 			this.serviceId = params['id'];
 		});
 
+		this.stripeSubscriptionForm = this.formBuilder.group({
+			email: ['', [Validators.required, Validators.email]],
+		});
+
 		this.getUserProfile();
 		this.getUserId();
 		this.getPublicService();
+		this.payWithStripe().then();
 	}
 
 	getPublicService(id: string = this.serviceId){
@@ -127,5 +146,35 @@ export class PayPackageComponent implements OnInit {
 		if (userId) {
 			this.userId = userId;
 		}
+	}
+
+	async payWithStripe(){
+		this.stripe = await loadStripe(app.stripeKey);
+		const elements = this.stripe!.elements();
+		this.card = elements.create('card');
+		this.card.mount('#card-element');
+	}
+
+	async stripeSubscribe(){
+		if(this.stripeSubscriptionForm.valid){
+			return;
+		}
+
+		const email = this.stripeSubscriptionForm.get('email')?.value;
+
+		const {error, paymentMethod } = await this.stripe!.createPaymentMethod({
+			type: 'card',
+			card: this.card,
+			billing_details: {
+				email: email
+			}
+		});
+
+		if (error) {
+			console.error('Error creating payment method!', error);
+			return;
+		}
+
+		console.log(paymentMethod);
 	}
 }
