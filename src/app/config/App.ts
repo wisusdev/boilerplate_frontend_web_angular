@@ -18,4 +18,7 @@ export const app = {
 	redirectToLogin: '/auth/login',
 
 	placeholderImage: '/assets/images/profile.png',
+
+	/* Stripe Publishable Key */
+	stripeKey: 'pk_test_514mTJgJ4njti3TekWucEp5V5ejDQz7PtW7SNDoBLMt2fLBlFkszWzniNq5eWZunAch7HLOyDmQETF4uvVGEtzyLs00GsAftRIk',
 }
