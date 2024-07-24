@@ -137,6 +137,7 @@
 	"downloadInvoice": "Download Invoice",
 	"cancelSubscription": "Cancel Subscription",
 	"reasonForCancellation": "Reason for cancellation",
+	"processSubscription": "Process Subscription",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",

@@ -137,6 +137,7 @@
 	"downloadInvoice": "Descargar factura",
 	"cancelSubscription": "Cancelar suscripción",
 	"reasonForCancellation": "Motivo de cancelación",
+	"processSubscription": "Procesar suscripción",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
