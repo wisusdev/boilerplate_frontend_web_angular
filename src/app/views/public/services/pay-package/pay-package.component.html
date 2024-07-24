@@ -53,10 +53,22 @@
 					<div class="card-body">
 						<div class="d-grid gap-2">
 							<a class="btn btn-primary" (click)="storeSubscriptions('paypal')">{{ 'pay_with' | translate }} Paypal</a>
-							<a class="btn btn-stripe disabled">{{ 'pay_with' | translate }} Stripe</a>
+							<a class="btn btn-stripe" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">{{ 'pay_with' | translate }} Stripe</a>
+
+							<div class="card" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+								<div class="card-body">
+									<form (ngSubmit)="stripeSubscribe()" [formGroup]="stripeSubscriptionForm">
+										<input class="form-control mb-3" formControlName="email" placeholder="{{'email' | translate}}" required>
+										<div id="card-element" class="form-control mb-3"></div>
+										<button class="btn btn-primary float-end" type="submit" [disabled]="!stripeSubscriptionForm.valid">{{'processSubscription' | translate}}</button>
+									</form>
+								</div>
+							</div>
+
 							<a class="btn btn-serfinsa disabled">{{ 'pay_with' | translate }} Serfinsa</a>
 							<a class="btn btn-dark disabled">{{ 'pay_with' | translate }} N1co</a>
 						</div>
+
 					</div>
 				</div>
 			</div>
