@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
-import {Api} from "@config/Api";
 import {Handle} from "@data/Exceptions/Handle";
 import {ProfileUpdateRequestInterface} from "@data/Interfaces/Requests/profileUpdateRequest.interface";
 import {profileUpdateResponse} from "@data/Interfaces/Responses/ProfileUpdateResponse.interface";
@@ -11,19 +10,20 @@ import {GetDeviceAuthListResponseInterface} from "@data/Interfaces/Responses/get
 import {LogoutDeviceAuthRequestInterface} from "@data/Interfaces/Requests/logoutDeviceAuthRequest.interface";
 import {LogoutDeviceAuthResponseInterface} from "@data/Interfaces/Responses/logoutDeviceAuthResponse.interface";
 import {IndexSubscriptionsResponseInterface} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
+import {environment} from "@env/environment.development";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AccountService {
-	private _apiUri: string = Api.api_url_v1;
+	private _apiUri: string = environment.api_url_v1;
 	private _apiUriAccount: string = this._apiUri + '/account/profile';
 	private _apiUriChangePassword: string = this._apiUri + '/account/change-password';
 	private _apiUriDeviceAuth: string = this._apiUri + '/account/devices-auth-list?fields[device_infos]=id,login_at,browser,os,ip,country';
 	private _apiUriLogoutDevice: string = this._apiUri + '/account/logout-device';
 	private _apiUriDeleteAccount: string = this._apiUri + '/account/delete-account';
 
-	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
+	httpHeaders: HttpHeaders = new HttpHeaders(environment.headers);
 
 	constructor(
 		private httpClient: HttpClient,
