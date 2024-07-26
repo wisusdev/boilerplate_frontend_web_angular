@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 import {Handle} from "@data/Exceptions/Handle";
 import {ToastService} from "@data/Services/Toast.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
-import {app} from "@config/App";
+import {environment} from "@env/environment";
 
 @Component({
 	selector: 'app-delete-account',
@@ -52,7 +52,7 @@ export class DeleteAccountComponent {
 				tap((response) => {
 					this.toast.show({message: 'Account deleted successfully', className: 'bg-success text-light'});
 					localStorage.clear();
-					this.router.navigate([app.redirectToLogin]);
+					this.router.navigate([environment.redirectToLogin]);
 				}),
 				catchError(this.handleMessage.errorHandle)
 			).subscribe();
