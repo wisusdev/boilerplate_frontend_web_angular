@@ -8,7 +8,7 @@ import {NgClass} from "@angular/common";
 import {Handle} from "@data/Exceptions/Handle";
 import {ToastService} from "@data/Services/Toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
-import {app} from "@config/App";
+import {environment} from "@env/environment";
 
 @Component({
 	selector: 'app-reset-password',
@@ -67,7 +67,7 @@ export class ResetPasswordComponent implements OnInit {
 		this.resetErrorMessages();
 		this.authService.resetPassword(this.formResetPassword.value).pipe(
 			tap(response => {
-				this.handleMessage.handleResponse(this.translate.instant('message.passwordResetSuccess'), this.formResetPassword, app.redirectToLogin);
+				this.handleMessage.handleResponse(this.translate.instant('message.passwordResetSuccess'), this.formResetPassword, environment.redirectToLogin);
 			}),
 			catchError(error => {
 				if (typeof error === 'object') {
