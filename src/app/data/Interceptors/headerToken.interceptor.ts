@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import {catchError} from "rxjs";
 import {inject} from "@angular/core";
 import {Router} from "@angular/router";
-import {app} from "../../config/App";
+import {environment} from "@env/environment";
 
 export const headerTokenInterceptor: HttpInterceptorFn = (req, next) => {
 	const router = inject(Router);
@@ -21,7 +21,7 @@ export const headerTokenInterceptor: HttpInterceptorFn = (req, next) => {
 			catchError((error) => {
 				if (error.status === 401) {
 					localStorage.clear();
-					router.navigate([app.redirectToLogin]).then();
+					router.navigate([environment.redirectToLogin]).then();
 				}
 
 				throw error;
