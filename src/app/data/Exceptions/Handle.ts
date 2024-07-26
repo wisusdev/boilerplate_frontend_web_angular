@@ -4,7 +4,7 @@ import {Observable, pipe, throwError} from "rxjs";
 import {Router} from "@angular/router";
 import {ToastService} from "../Services/Toast.service";
 import {FormGroup} from "@angular/forms";
-import {app} from "../../config/App";
+import {environment} from "@env/environment";
 
 @Injectable({
 	providedIn: 'root'
@@ -28,7 +28,7 @@ export abstract class Handle {
 		return throwError(() => errorMessage);
 	}
 
-	handleResponse(response: any, form: FormGroup, route: string = app.redirectToHome) {
+	handleResponse(response: any, form: FormGroup, route: string = environment.redirectToHome) {
 		form.reset();
 		this.router.navigate([route]).then(responseRoute => {
 			this.toast.success(response);
