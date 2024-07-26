@@ -3,14 +3,13 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {AccountService} from "../account.service";
 import {of, tap} from "rxjs";
 import {catchError} from "rxjs/operators";
-import { app } from 'src/app/config/App';
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass, NgForOf} from "@angular/common";
 import {Handle} from "@data/Exceptions/Handle";
 import {ToastService} from "@data/Services/Toast.service";
-import {Lang} from "@config/Lang";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
+import {environment} from "@env/environment";
 
 @Component({
 	selector: 'app-profile',
@@ -38,7 +37,7 @@ export class ProfileComponent implements OnInit {
 		private toast: ToastService,
 		private translate: TranslateService
 	) {
-		this.availableLang = Object.entries(Lang.availableLang).map(([key, value]) => ({ key, ...value }));
+		this.availableLang = Object.entries(environment.availableLang).map(([key, value]) => ({ key, ...value }));
 	}
 
 	@ViewChild('avatarFile') avatarFile: any;
@@ -75,7 +74,7 @@ export class ProfileComponent implements OnInit {
 
 		if (userData) {
 			let dataProfile = JSON.parse(userData);
-			this.avatarUrl = dataProfile.avatar || app.placeholderImage;
+			this.avatarUrl = dataProfile.avatar || environment.placeholderImage;
 
 			this.formProfile = this.formBuilder.group({
 				type: 'profile',
