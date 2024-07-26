@@ -7,7 +7,7 @@ import {ErrorMessagesInterface} from 'src/app/data/Interfaces/Errors.interface';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
 import {ToastService} from "@data/Services/Toast.service";
-import {app} from "@config/App";
+import {environment} from "@env/environment";
 
 @Component({
 	selector: 'app-register',
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
 		this.resetErrorMessages();
 		this.authUser.register(this.formUser.value).pipe(
 			tap(response => {
-				this.handleMessage.handleResponse(this.translate.instant('message.registrationSuccessful'), this.formUser, app.redirectToLogin)
+				this.handleMessage.handleResponse(this.translate.instant('message.registrationSuccessful'), this.formUser, environment.redirectToLogin)
 			}),
 			catchError(error => {
 				if (typeof error === 'object') {
