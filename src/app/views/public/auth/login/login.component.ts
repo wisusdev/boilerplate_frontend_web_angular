@@ -9,7 +9,7 @@ import {RouterLink} from "@angular/router";
 import {Handle} from "@data/Exceptions/Handle";
 import {ToastService} from "@data/Services/Toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
-import {app} from "@config/App";
+import {environment} from "@env/environment";
 
 @Component({
 	selector: 'app-login',
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
 					localStorage.setItem('user_key', response.data.id);
 					localStorage.setItem('access_token', response.data.relationships.access.token);
 				}
-				this.handleMessage.handleResponse(this.translate.instant('message.loginSuccessful'), this.formUser, app.redirectToHome)
+				this.handleMessage.handleResponse(this.translate.instant('message.loginSuccessful'), this.formUser, environment.redirectToHome)
 			}),
 			catchError(error => {
 				if (typeof error === 'object') {
