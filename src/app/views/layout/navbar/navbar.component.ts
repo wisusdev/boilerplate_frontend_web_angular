@@ -10,11 +10,10 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { DOCUMENT, NgForOf } from "@angular/common";
 import {catchError, of, tap} from "rxjs";
-import {app} from "../../../config/App";
-import {Auth} from "../../../data/Providers/Auth";
-import {Lang} from "../../../config/Lang";
+import {Auth} from "@data/Providers/Auth";
 import {AuthService} from "../../public/auth/auth.service";
-import {RouteExceptionService} from "../../../data/Services/route-exception.service";
+import {RouteExceptionService} from "@data/Services/route-exception.service";
+import {environment} from "@env/environment";
 
 @Component({
 	selector: 'app-navbar',
@@ -33,7 +32,7 @@ import {RouteExceptionService} from "../../../data/Services/route-exception.serv
 })
 export class NavbarComponent implements OnInit {
 	public loggedIn: boolean = false;
-	public appName: string = app.name;
+	public appName: string = environment.name;
 	public availableLangNavbarArray: any[] = [];
 
 	constructor(
@@ -45,8 +44,8 @@ export class NavbarComponent implements OnInit {
 		private renderer: Renderer2,
 		@Inject(DOCUMENT) private document: Document
 	) {
-		this.availableLangNavbarArray = Object.entries(Lang.availableLang).map(([key, value]) => ({ key, ...value }));
-		translate.addLangs(Object.keys(Lang.availableLang));
+		this.availableLangNavbarArray = Object.entries(environment.availableLang).map(([key, value]) => ({ key, ...value }));
+		translate.addLangs(Object.keys(environment.availableLang));
 		for (let lang of this.availableLangNavbarArray) {
 			if (lang.default) {
 				translate.setDefaultLang(lang.key);
@@ -59,7 +58,7 @@ export class NavbarComponent implements OnInit {
 			this.loggedIn = status;
 		});
 
-		const language: string | null = localStorage.getItem('language') || app.lang;
+		const language: string | null = localStorage.getItem('language') || environment.lang;
 		if (language) {
 			this.translate.use(language);
 		} else {
@@ -73,12 +72,12 @@ export class NavbarComponent implements OnInit {
 			tap(() => {
 				this.loggedIn = false;
 				localStorage.clear();
-				this.router.navigate([app.redirectToLogin]).then();
+				this.router.navigate([environment.redirectToLogin]).then();
 			}),
 			catchError((error) => {
 				if (error[0].status == 401) {
 					localStorage.clear();
-					this.router.navigate([app.redirectToLogin]).then();
+					this.router.navigate([environment.redirectToLogin]).then();
 				}
 				return of(false);
 			})
