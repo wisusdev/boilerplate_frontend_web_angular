@@ -2,7 +2,7 @@ import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
 import {map, take} from "rxjs";
 import {Auth} from '../Providers/Auth';
-import {app} from "../../config/App";
+import {environment} from "@env/environment";
 
 export const authGuard: CanActivateFn = () => {
 	const authUser = inject(Auth);
@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = () => {
 		if(isLoggedIn) {
 			return true;
 		} else {
-			router.createUrlTree([app.redirectToLogin]);
+			router.createUrlTree([environment.redirectToLogin]);
 			return false;
 		}
 	}));
