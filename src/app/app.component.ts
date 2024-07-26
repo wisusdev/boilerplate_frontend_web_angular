@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Auth} from './data/Providers/Auth';
-import {RouteExceptionService} from "./data/Services/route-exception.service";
+import {Auth} from '@data/Providers/Auth';
+import {RouteExceptionService} from "@data/Services/route-exception.service";
 
 @Component({
 	selector: 'app-root',
