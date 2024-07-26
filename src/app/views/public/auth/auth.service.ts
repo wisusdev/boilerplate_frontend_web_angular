@@ -2,22 +2,22 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
-import {Api} from "../../../config/Api";
-import {Handle} from "../../../data/Exceptions/Handle";
-import {LoginResponseInterface} from "../../../data/Interfaces/Responses/loginResponse.interface";
-import {LoginRequestInterface} from "../../../data/Interfaces/Requests/loginRequest.interface";
-import {RegisterRequestInterface} from "../../../data/Interfaces/Requests/registerRequest.interface";
-import {RegisterResponseInterface} from "../../../data/Interfaces/Responses/registerResponse.interface";
-import {ForgotPasswordRequestInterface} from "../../../data/Interfaces/Requests/forgotPasswordRequest.interface";
-import {ForgotPasswordResponseInterface} from "../../../data/Interfaces/Responses/forgotPasswordResponse.interface";
-import {ResetPasswordRequestInterface} from "../../../data/Interfaces/Requests/resetPasswordRequest.interface";
-import {ResetPasswordResponseInterface} from "../../../data/Interfaces/Responses/resetPasswordResponse.interface";
+import {Handle} from "@data/Exceptions/Handle";
+import {LoginResponseInterface} from "@data/Interfaces/Responses/loginResponse.interface";
+import {LoginRequestInterface} from "@data/Interfaces/Requests/loginRequest.interface";
+import {RegisterRequestInterface} from "@data/Interfaces/Requests/registerRequest.interface";
+import {RegisterResponseInterface} from "@data/Interfaces/Responses/registerResponse.interface";
+import {ForgotPasswordRequestInterface} from "@data/Interfaces/Requests/forgotPasswordRequest.interface";
+import {ForgotPasswordResponseInterface} from "@data/Interfaces/Responses/forgotPasswordResponse.interface";
+import {ResetPasswordRequestInterface} from "@data/Interfaces/Requests/resetPasswordRequest.interface";
+import {ResetPasswordResponseInterface} from "@data/Interfaces/Responses/resetPasswordResponse.interface";
+import {environment} from "@env/environment";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AuthService {
-	private _apiUri = Api.api_url_v1;
+	private _apiUri = environment.api_url_v1;
 	private _apiUriLogin = this._apiUri + '/auth/login';
 	private _apiUriLogout = this._apiUri + '/auth/logout';
 	private _apiUriRefresh = this._apiUri + '/auth/refresh';
@@ -31,7 +31,7 @@ export class AuthService {
 	) {
 	}
 
-	httpHeaders: HttpHeaders = new HttpHeaders(Api.headers);
+	httpHeaders: HttpHeaders = new HttpHeaders(environment.headers);
 
 	login(data: LoginRequestInterface): Observable<LoginResponseInterface> {
 		return this.httpClient.post<LoginResponseInterface>(`${this._apiUriLogin}`, data, {
