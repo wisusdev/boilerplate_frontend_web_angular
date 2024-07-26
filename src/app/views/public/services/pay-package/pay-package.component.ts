@@ -9,10 +9,10 @@ import {CurrencyPipe} from "@angular/common";
 import {PublicService} from "@views/public/services/public.service";
 import {ToastService} from "@data/Services/Toast.service";
 import {loadStripe, Stripe} from "@stripe/stripe-js";
-import {app} from "@config/App";
 import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "@env/environment";
 
 interface UserProfile {
 	id: string;
@@ -149,7 +149,7 @@ export class PayPackageComponent implements OnInit {
 	}
 
 	async payWithStripe(){
-		this.stripe = await loadStripe(app.stripeKey);
+		this.stripe = await loadStripe(environment.stripeKey);
 		const elements = this.stripe!.elements();
 		this.card = elements.create('card');
 		this.card.mount('#card-element');
