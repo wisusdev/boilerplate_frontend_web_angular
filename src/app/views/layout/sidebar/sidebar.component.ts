@@ -1,9 +1,9 @@
 import { Component, ElementRef, Renderer2, OnInit } from '@angular/core';
-import { app } from '../../../config/App';
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {PermissionService} from "../../../data/Services/permission.service";
+import {PermissionService} from "@data/Services/permission.service";
 import {NgIf} from "@angular/common";
+import {environment} from "@env/environment";
 
 @Component({
 	selector: 'app-sidebar',
@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit {
 		let userData = localStorage.getItem('user');
 		if (userData) {
 			let dataProfile = JSON.parse(userData);
-			this.userAvatar = dataProfile.avatar || app.placeholderImage;
+			this.userAvatar = dataProfile.avatar || environment.placeholderImage;
 			this.userName = dataProfile.username;
 			this.userFullName = dataProfile.first_name + ' ' + dataProfile.last_name;
 		}
