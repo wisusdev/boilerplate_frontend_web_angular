@@ -3,7 +3,15 @@
 ```
 npm install
 ng serve
+
 ```
+
+## Build
+
+```
+ng build --configuration=production
+```
+
 
 ### Versions
 [Version Backend API (Laravel)](https://github.com/wisusdev/boilerplate_backend_api_laravel)
