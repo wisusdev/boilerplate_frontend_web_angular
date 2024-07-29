@@ -1,19 +1,16 @@
 <div class="modal-header">
-	<h4 class="modal-title">{{title}}</h4>
-	<button type="button" class="btn-close" aria-describedby="modal-title" (click)="cancel()"></button>
+    <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="btn-close" aria-describedby="modal-title" (click)="cancel()"></button>
 </div>
 <div class="modal-body">
-	@if (reason){
-		<div [formGroup]="formModal">
-			<label for="reason" class="form-label">{{this.translate.instant('reasonForCancellation')}}</label>
-			<textarea class="form-control" id="reason" rows="3" formControlName="reasonTextarea"></textarea>
-			<div class="invalid-feedback">{{this.translate.instant('reasonIsRequired')}}</div>
-		</div>
-	} @else {
-		<p>{{message}}</p>
-	}
+    <div *ngIf="reason" [formGroup]="formModal" >
+        <label for="reason" class="form-label">{{ this.translate.instant('reasonForCancellation') }}</label>
+        <textarea class="form-control" id="reason" rows="3" formControlName="reasonTextarea"></textarea>
+        <div class="invalid-feedback">{{ this.translate.instant('reasonIsRequired') }}</div>
+    </div>
+    <p *ngIf="!reason" class="mb-0">{{ message }}</p>
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-danger" (click)="confirm()" [disabled]="!formModal.valid">{{confirmText}}</button>
-	<button type="button" class="btn btn-secondary" (click)="cancel()">{{cancelText}}</button>
+    <button type="button" class="btn btn-danger" (click)="confirm()" [disabled]="reason && !formModal.valid">{{ confirmText }}</button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">{{ cancelText }}</button>
 </div>
