@@ -115,6 +115,6 @@ export class FormPackageComponent implements OnInit {
 	}
 
 	public cancel() {
-		this.activeModal.dismiss(false);
+		this.activeModal.close(false);
 	}
 }
