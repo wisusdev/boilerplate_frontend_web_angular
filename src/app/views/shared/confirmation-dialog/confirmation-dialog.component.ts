@@ -55,6 +55,6 @@ export class ConfirmationDialogComponent implements OnInit{
 	}
 
 	public cancel() {
-		this.activeModal.dismiss(this.data);
+		this.activeModal.close(this.data);
 	}
 }
