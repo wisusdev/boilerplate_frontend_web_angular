@@ -11,7 +11,7 @@ import {IndexUserResponseInterface, UserData} from "@data/Interfaces/Responses/i
 import {StoreUserRequestInterface} from "@data/Interfaces/Requests/storeUserRequest.interface";
 import {StoreUserResponseInterface} from "@data/Interfaces/Responses/storeUserResponse.interface";
 import {ShowUserResponseInterface} from "@data/Interfaces/Responses/showUserResponse.interface";
-import {environment} from "@env/environment.development";
+import {environment} from "@env/environment";
 
 @Injectable({
 	providedIn: 'root'

@@ -10,7 +10,7 @@ import {GetDeviceAuthListResponseInterface} from "@data/Interfaces/Responses/get
 import {LogoutDeviceAuthRequestInterface} from "@data/Interfaces/Requests/logoutDeviceAuthRequest.interface";
 import {LogoutDeviceAuthResponseInterface} from "@data/Interfaces/Responses/logoutDeviceAuthResponse.interface";
 import {IndexSubscriptionsResponseInterface} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
-import {environment} from "@env/environment.development";
+import {environment} from "@env/environment";
 
 @Injectable({
 	providedIn: 'root'

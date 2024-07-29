@@ -7,7 +7,7 @@ import {StoreUpdatePackageResponseInterface} from "@data/Interfaces/Responses/st
 import {StoreUpdatePackageRequestInterface} from "@data/Interfaces/Requests/storeUpdatePackageRequest.interface";
 import {ShowPackageResponseInterface} from "@data/Interfaces/Responses/showPackageResponse.interface";
 import {IndexSubscriptionsResponseInterface} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
-import {environment} from "@env/environment.development";
+import {environment} from "@env/environment";
 
 @Injectable({
 	providedIn: 'root'
