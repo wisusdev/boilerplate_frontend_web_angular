@@ -104,8 +104,6 @@ export class EditUserComponent implements OnInit {
 	getRoles() {
 		this.settingsService.indexRoles().subscribe((response: any) => {
 			this.roles = response.data;
-			console.log(this.roles);
-			console.log(this.formUser.value.roles);
 			if (this.formUser.value.roles.length === 0) {
 				this.formUser.patchValue({
 					roles: this.roles.length > 0 ? [this.roles[0].name] : []
