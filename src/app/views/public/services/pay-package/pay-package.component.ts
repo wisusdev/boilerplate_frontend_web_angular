@@ -82,6 +82,8 @@ export class PayPackageComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.getUserProfile();
+
 		this.authUser.status().pipe().subscribe((status: boolean) => {
 			this.loggedIn = status;
 		});
@@ -91,10 +93,9 @@ export class PayPackageComponent implements OnInit {
 		});
 
 		this.stripeSubscriptionForm = this.formBuilder.group({
-			email: ['', [Validators.required, Validators.email]],
+			email: [this.userProfile.email, [Validators.required, Validators.email]],
 		});
 
-		this.getUserProfile();
 		this.getUserId();
 		this.getPublicService();
 		this.payWithStripe().then();
