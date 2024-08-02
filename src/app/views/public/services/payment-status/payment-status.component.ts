@@ -42,7 +42,10 @@ export class PaymentStatusComponent implements OnInit {
 			}
 		});
 
-		this.updateStatusPayment();
+		if(this.subscriptionId){
+			this.updateStatusPayment();
+		}
+
 	}
 
 	updateStatusPayment() {
