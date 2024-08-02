@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Auth} from "@data/Providers/Auth";
 import {LoginComponent} from "../../auth/login/login.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, of, tap} from "rxjs";
 import {PackageData} from "@data/Interfaces/Responses/showPackageResponse.interface";
 import {CurrencyPipe} from "@angular/common";
@@ -11,7 +11,6 @@ import {ToastService} from "@data/Services/Toast.service";
 import {loadStripe, Stripe} from "@stripe/stripe-js";
 import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
 import {environment} from "@env/environment";
 
 interface UserProfile {
@@ -43,6 +42,7 @@ export class PayPackageComponent implements OnInit {
 	isCollapsed = true;
 	stripeSubscriptionForm!: FormGroup;
 	card: any;
+	paymentMethodId: string = '';
 
 	public package: PackageData = {
 		type: '',
@@ -77,7 +77,7 @@ export class PayPackageComponent implements OnInit {
 		private route: ActivatedRoute,
 		private toast: ToastService,
 		private formBuilder: FormBuilder,
-		private http: HttpClient
+		private router: Router
 	) {
 	}
 
@@ -120,12 +120,19 @@ export class PayPackageComponent implements OnInit {
 			package_id: this.package.id,
 			created_by: this.userId,
 			payment_method: payment_method,
+			stripe_payment_method: this.paymentMethodId
 		};
 
 		this.services.publicStoreSubscription(data).pipe(
 			tap((response) => {
-				if(payment_method === 'paypal'){
+				if(payment_method === 'paypal' && response.approve_url){
 					window.location.href = response.approve_url;
+				}
+
+				if (payment_method === 'stripe' && response.status === 'succeeded') {
+					this.router.navigate(['/payment-success/' + this.package.id]).then(responseRoute => {
+						this.toast.success(response);
+					});
 				}
 			}),
 			catchError((error) => {
@@ -157,7 +164,7 @@ export class PayPackageComponent implements OnInit {
 	}
 
 	async stripeSubscribe(){
-		if(this.stripeSubscriptionForm.valid){
+		if(!this.stripeSubscriptionForm.valid){
 			return;
 		}
 
@@ -176,6 +183,8 @@ export class PayPackageComponent implements OnInit {
 			return;
 		}
 
-		console.log(paymentMethod);
+		this.paymentMethodId = paymentMethod!.id;
+
+		this.storeSubscriptions('stripe');
 	}
 }
