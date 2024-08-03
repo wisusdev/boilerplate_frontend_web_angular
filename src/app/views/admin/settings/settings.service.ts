@@ -2,7 +2,6 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, Observable} from 'rxjs';
 import {Handle} from 'src/app/data/Exceptions/Handle';
-import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleResponseInterface";
 import {StoreRoleRequestInterface} from "@data/Interfaces/Requests/storeRoleRequest.interface";
 import {UpdateStoreRoleResponseInterface} from "@data/Interfaces/Responses/updateStoreRoleResponseInterface";
 import {ShowRoleResponseInterface} from "@data/Interfaces/Responses/showRoleResponse.interface";
@@ -12,6 +11,7 @@ import {StoreUserRequestInterface} from "@data/Interfaces/Requests/storeUserRequ
 import {StoreUserResponseInterface} from "@data/Interfaces/Responses/storeUserResponse.interface";
 import {ShowUserResponseInterface} from "@data/Interfaces/Responses/showUserResponse.interface";
 import {environment} from "@env/environment";
+import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
