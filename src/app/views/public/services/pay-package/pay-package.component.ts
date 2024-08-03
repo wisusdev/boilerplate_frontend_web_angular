@@ -5,13 +5,17 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, of, tap} from "rxjs";
 import {PackageData} from "@data/Interfaces/Responses/showPackageResponse.interface";
-import {CurrencyPipe} from "@angular/common";
+import {CurrencyPipe, NgForOf} from "@angular/common";
 import {PublicService} from "@views/public/services/public.service";
 import {ToastService} from "@data/Services/Toast.service";
 import {loadStripe, Stripe} from "@stripe/stripe-js";
 import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {environment} from "@env/environment";
+import {WompiRequest} from "@data/Requests/wompi-request";
+import {CreditCardNumberMaskDirective} from "@data/Directives/credit-card-number-mask.directive";
+import {CreditCardCvvMaskDirective} from "@data/Directives/credit-card-cvv-mask.directive";
+import {Pais, Territorio} from "@data/Interfaces/Responses/getWompiRegions.interface";
 
 interface UserProfile {
 	id: string;
@@ -30,19 +34,34 @@ interface UserProfile {
 		CurrencyPipe,
 		NgbCollapseModule,
 		ReactiveFormsModule,
-		FormsModule
+		FormsModule,
+		NgForOf,
+		CreditCardNumberMaskDirective,
+		CreditCardCvvMaskDirective,
 	],
 	templateUrl: './pay-package.component.html'
 })
 export class PayPackageComponent implements OnInit {
+
 	public loggedIn: boolean = false;
 	public serviceId: string = '';
 	private userId: string = '';
 	private stripe: Stripe | null = null;
-	isCollapsed = true;
+	stripeIsCollapsed = true;
+	wompiIsCollapsed = true;
+
 	stripeSubscriptionForm!: FormGroup;
+	wompiSubscriptionForm!: FormGroup;
+
 	card: any;
 	paymentMethodId: string = '';
+	months: number[] = Array.from({ length: 12 }, (_, i) => i + 1);
+
+	currentYear: number = new Date().getFullYear();
+	years: number[] = Array.from({ length: 11 }, (_, i) => this.currentYear + i);
+
+	countries: Pais[] = [];
+	territories: Territorio[] = [];
 
 	public package: PackageData = {
 		type: '',
@@ -93,7 +112,23 @@ export class PayPackageComponent implements OnInit {
 		});
 
 		this.stripeSubscriptionForm = this.formBuilder.group({
+			email: [this.userProfile.email, [Validators.required, Validators.email]]
+		});
+
+		this.wompiSubscriptionForm = this.formBuilder.group({
+			card_number: ['', [Validators.required, WompiRequest.creditCardNumber],],
+			cvv: ['', [Validators.required, WompiRequest.cvv],],
+			expiration_month: [1, Validators.required],
+			expiration_year: [this.currentYear, Validators.required],
+			first_name: [this.userProfile.first_name, Validators.required],
+			last_name: [this.userProfile.last_name, Validators.required],
 			email: [this.userProfile.email, [Validators.required, Validators.email]],
+			country: ['', [Validators.required]],
+			state: ['', [Validators.required]],
+			city: ['', Validators.required],
+			address: ['', Validators.required],
+			postal_code: ['', Validators.required],
+			phone: ['', Validators.required],
 		});
 
 		this.getUserId();
@@ -186,5 +221,35 @@ export class PayPackageComponent implements OnInit {
 		this.paymentMethodId = paymentMethod!.id;
 
 		this.storeSubscriptions('stripe');
+	}
+
+	toggleWompi(){
+		this.wompiIsCollapsed = !this.wompiIsCollapsed;
+
+		if(this.countries.length === 0){
+			this.getWompiRegions();
+		}
+	}
+
+	getWompiRegions(){
+		this.services.getWompiRegions().pipe(
+			tap((response) => {
+				this.countries = Object.values(response);
+			}),
+			catchError((error) => {
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
+		).subscribe();
+	}
+
+	onCountryChange(event: Event) {
+		const selectedCountryId = (event.target as HTMLSelectElement).value;
+		const selectedCountry = this.countries.find(country => country.id === selectedCountryId);
+		this.territories = selectedCountry ? selectedCountry.territorios : [];
+	}
+
+	wompiPayment(){
+		console.log('Wompi Payment');
 	}
 }
