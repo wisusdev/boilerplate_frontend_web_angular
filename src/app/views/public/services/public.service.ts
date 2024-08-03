@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {Handle} from "@data/Exceptions/Handle";
 import {ShowPackageResponseInterface} from "@data/Interfaces/Responses/showPackageResponse.interface";
 import {environment} from "@env/environment";
+import {WompiPaisesResponse} from "@data/Interfaces/Responses/getWompiRegions.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -37,6 +38,12 @@ export class PublicService {
 
 	publicUpdateSubscription(paymentTransactionId: string, data: object): Observable<any> {
 		return this.httpClient.patch<any>(`${this._apiUri}/public/subscriptions/validate/${paymentTransactionId}`, data, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	getWompiRegions(): Observable<WompiPaisesResponse> {
+		return this.httpClient.get<WompiPaisesResponse>(`${this._apiUri}/public/wompi/regions`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
