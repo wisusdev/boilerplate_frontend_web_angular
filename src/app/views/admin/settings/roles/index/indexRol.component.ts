@@ -8,8 +8,8 @@ import {Router, RouterLink} from "@angular/router";
 import {ToastService} from 'src/app/data/Services/Toast.service';
 import {PermissionService} from "@data/Services/permission.service";
 import {redirectToHomeWithMessage} from "@data/Vendor/redirectTo";
-import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleResponseInterface";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
+import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleResponse.interface";
 
 @Component({
 	selector: 'app-index-rol',
