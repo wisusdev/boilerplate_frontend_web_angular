@@ -138,6 +138,15 @@
 	"cancelSubscription": "Cancel Subscription",
 	"reasonForCancellation": "Reason for cancellation",
 	"processSubscription": "Process Subscription",
+	"cardNumber": "Card Number",
+	"expirationMonth": "Expiration Month",
+	"expirationYear": "Expiration Year",
+	"cvv": "CVV",
+	"state": "State",
+	"city": "City",
+	"address": "Address",
+	"postalCode": "Postal Code",
+	"phone": "Phone",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",

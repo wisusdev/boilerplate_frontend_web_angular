@@ -138,6 +138,15 @@
 	"cancelSubscription": "Cancelar suscripción",
 	"reasonForCancellation": "Motivo de cancelación",
 	"processSubscription": "Procesar suscripción",
+	"cardNumber": "Número de tarjeta",
+	"expirationMonth": "Mes de vencimiento",
+	"expirationYear": "Año de vencimiento",
+	"cvv": "CVV",
+	"state": "Estado",
+	"city": "Ciudad",
+	"address": "Dirección",
+	"postalCode": "Código postal",
+	"phone": "Teléfono",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
