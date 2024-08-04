@@ -71,28 +71,28 @@
 									<form (ngSubmit)="wompiPayment()" [formGroup]="wompiSubscriptionForm">
 										<div class="row">
 											<div class="col-md mb-3">
-												<label for="card_number" class="form-label">Numero de tarjeta</label>
+												<label for="card_number" class="form-label">{{'cardNumber' | translate}}</label>
 												<input type="text" class="form-control" id="card_number" name="numeroTarjeta" formControlName="card_number" creditCardNumberMaskDirective>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="col-md-5 mb-3">
-												<label for="expiration_month" class="form-label">Mes de vencimiento</label>
+												<label for="expiration_month" class="form-label">{{'expirationMonth' | translate}}</label>
 												<select class="form-select" id="expiration_month" formControlName="expiration_month">
 													<option *ngFor="let month of months" [value]="month">{{ month < 10 ? '0' + month : month }}</option>
 												</select>
 											</div>
 
 											<div class="col-md-5 mb-3">
-												<label for="expiration_year" class="form-label">Año de vencimiento</label>
+												<label for="expiration_year" class="form-label">{{'expirationYear' | translate}}</label>
 												<select class="form-select" id="expiration_year" formControlName="expiration_year">
 													<option *ngFor="let year of years" [value]="year">{{ year }}</option>
 												</select>
 											</div>
 
 											<div class="col-md-2 mb-3">
-												<label for="cvv" class="form-label">CVV</label>
+												<label for="cvv" class="form-label">{{'cvv' | translate}}</label>
 												<input type="text" class="form-control" id="cvv" formControlName="cvv" creditCardCvvMask>
 											</div>
 										</div>

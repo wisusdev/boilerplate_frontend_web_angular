@@ -250,6 +250,7 @@ export class PayPackageComponent implements OnInit {
 	}
 
 	wompiPayment(){
-		console.log('Wompi Payment');
+		const formValue = this.wompiSubscriptionForm.value;
+		console.log(formValue);
 	}
 }
