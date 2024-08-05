@@ -5,7 +5,7 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, of, tap} from "rxjs";
 import {PackageData} from "@data/Interfaces/Responses/showPackageResponse.interface";
-import {CurrencyPipe, NgForOf} from "@angular/common";
+import {CurrencyPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {PublicService} from "@views/public/services/public.service";
 import {ToastService} from "@data/Services/Toast.service";
 import {loadStripe, Stripe} from "@stripe/stripe-js";
@@ -38,6 +38,8 @@ interface UserProfile {
 		NgForOf,
 		CreditCardNumberMaskDirective,
 		CreditCardCvvMaskDirective,
+		NgClass,
+		NgIf,
 	],
 	templateUrl: './pay-package.component.html'
 })
@@ -47,6 +49,9 @@ export class PayPackageComponent implements OnInit {
 	public serviceId: string = '';
 	private userId: string = '';
 	private stripe: Stripe | null = null;
+
+	private formData: object = {};
+
 	stripeIsCollapsed = true;
 	wompiIsCollapsed = true;
 
@@ -116,7 +121,7 @@ export class PayPackageComponent implements OnInit {
 		});
 
 		this.wompiSubscriptionForm = this.formBuilder.group({
-			card_number: ['', [Validators.required, WompiRequest.creditCardNumber],],
+			card_number: ['', [Validators.required, WompiRequest.creditCardNumberWithMask()],],
 			cvv: ['', [Validators.required, WompiRequest.cvv],],
 			expiration_month: [1, Validators.required],
 			expiration_year: [this.currentYear, Validators.required],
@@ -150,12 +155,12 @@ export class PayPackageComponent implements OnInit {
 
 	storeSubscriptions(payment_method: string){
 		let data = {
+			...this.formData,
 			type: 'subscriptions',
 			user_id: this.userId,
 			package_id: this.package.id,
 			created_by: this.userId,
-			payment_method: payment_method,
-			stripe_payment_method: this.paymentMethodId
+			payment_method: payment_method
 		};
 
 		this.services.publicStoreSubscription(data).pipe(
@@ -165,6 +170,12 @@ export class PayPackageComponent implements OnInit {
 				}
 
 				if (payment_method === 'stripe' && response.status === 'succeeded') {
+					this.router.navigate(['/payment-success/' + this.package.id]).then(responseRoute => {
+						this.toast.success(response);
+					});
+				}
+
+				if (payment_method === 'wompi' && response.status === 'approved') {
 					this.router.navigate(['/payment-success/' + this.package.id]).then(responseRoute => {
 						this.toast.success(response);
 					});
@@ -218,7 +229,7 @@ export class PayPackageComponent implements OnInit {
 			return;
 		}
 
-		this.paymentMethodId = paymentMethod!.id;
+		this.formData = {...this.formData, payment_method_id: paymentMethod!.id};
 
 		this.storeSubscriptions('stripe');
 	}
@@ -251,6 +262,7 @@ export class PayPackageComponent implements OnInit {
 
 	wompiPayment(){
 		const formValue = this.wompiSubscriptionForm.value;
-		console.log(formValue);
+		this.formData = {...this.formData, ...formValue};
+		this.storeSubscriptions('wompi');
 	}
 }
