@@ -15,7 +15,7 @@ const routes: Routes = [
 	{path: '', component: WelcomeComponent},
 	{path: 'home', component: HomeComponent, canActivate: [authGuard]},
 	{path: 'plans', component: PublicPackagesComponent},
-	{path: 'plans/:id', component: PayPackageComponent, canActivate: [authGuard]},
+	{path: 'plans/:id', component: PayPackageComponent},
 	{path: 'payment-success/:id', component: PaymentStatusComponent, canActivate: [authGuard]},
 	{path: 'payment-cancelled/:id', component: PaymentStatusComponent, canActivate: [authGuard]},
 	{path: '**', redirectTo: '', pathMatch: 'full'}
