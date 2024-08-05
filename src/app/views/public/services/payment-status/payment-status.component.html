@@ -1,13 +1,13 @@
 @if (statusPayment === 'success') {
 	<div class="alert alert-success" role="alert">
-		<h4 class="alert-heading"><i class="bi bi-check-circle"></i> Payment Success</h4>
-		<p>Your payment has been successfully processed. Thank you for your payment.</p>
-		<p>Check your email for the payment receipt or visit your <a href="/account/profile">account</a> page.</p>
+		<h4 class="alert-heading"><i class="bi bi-check-circle"></i> {{"paymentSuccessful" | translate}}</h4>
+		<p>{{"thankYouForPayment" | translate}}</p>
+		<p>{{"checkYourEmailOrYourAccount" | translate}} <a href="/account/profile">{{"here" | translate}}</a></p>
 	</div>
 } @else {
 	<div class="alert alert-danger" role="alert">
-		<h4 class="alert-heading"><i class="bi bi-exclamation-circle"></i> Payment Failed</h4>
-		<p>Your payment has been failed. Please try again.</p>
+		<h4 class="alert-heading"><i class="bi bi-exclamation-circle"></i> {{"paymentFailed" | translate}}</h4>
+		<p>{{"paymentFailedMessage" | translate}}</p>
 	</div>
 }
 

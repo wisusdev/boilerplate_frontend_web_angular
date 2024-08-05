@@ -3,12 +3,14 @@ import {ActivatedRoute} from "@angular/router";
 import {PublicService} from "@views/public/services/public.service";
 import {catchError, of, tap} from "rxjs";
 import {ToastService} from "@data/Services/Toast.service";
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 @Component({
 	selector: 'app-payment-status',
 	standalone: true,
-	imports: [],
+	imports: [
+		TranslateModule
+	],
 	templateUrl: './payment-status.component.html'
 })
 export class PaymentStatusComponent implements OnInit {
