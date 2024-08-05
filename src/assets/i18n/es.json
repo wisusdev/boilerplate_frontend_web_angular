@@ -147,6 +147,18 @@
 	"address": "Dirección",
 	"postalCode": "Código postal",
 	"phone": "Teléfono",
+	"attention": "¡Atención!",
+	"needToLogin": "Para pagar por los servicios, necesitas iniciar sesión.",
+	"here": "aquí",
+	"ifYouDontHaveAccount": "Si no tienes una cuenta, puedes registrarte",
+	"orIfYouAlreadyHaveAccount": "o si ya tienes una cuenta, puedes iniciar sesión",
+	"paySubscription": "Pagar suscripción",
+	"availablePaymentMethods": "Métodos de pago disponibles",
+	"serviceData": "Datos del servicio",
+	"packageToBeSubscribed": "Paquete a suscribir",
+	"packagePrice": "Precio del paquete",
+	"subscriptionInterval": "Intervalo de suscripción",
+	"buyer": "Comprador",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
