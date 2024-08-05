@@ -3,11 +3,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="alert alert-info" role="alert">
-					<h4 class="alert-heading">¡Atención!</h4>
-					<p>Para poder realizar el pago de servicios, es necesario que inicies sesión.</p>
+					<h4 class="alert-heading">{{'attention' | translate}}</h4>
+					<p>{{'needToLogin' | translate}}</p>
 					<hr>
-					<p class="mb-0">Si no tienes una cuenta, puedes registrarte <a href="/auth/registro">aquí</a> o si
-						ya tienes una cuenta, puedes iniciar sesión <a href="/auth/login">aquí</a>.</p>
+					<p class="mb-0">{{'ifYouDontHaveAccount' | translate}} <a href="/auth/registro">{{'here' | translate}}</a> {{'orIfYouAlreadyHaveAccount' | translate}} <a href="/auth/login">{{'here' | translate}}</a>.</p>
 				</div>
 			</div>
 		</div>
@@ -16,7 +15,7 @@
 	<div class="container">
 		<div class="card mb-3">
 			<div class="card-body">
-				<h1 class="fs-3">Pagar Servicio {{ package.attributes.name }}</h1>
+				<h1 class="fs-3">{{'paySubscription' | translate}} {{ package.attributes.name }}</h1>
 			</div>
 		</div>
 
@@ -24,23 +23,23 @@
 			<div class="col-md-6">
 				<div class="card mb-3">
 					<div class="card-header">
-						<p class="card-title mb-0">Datos del Servicio</p>
+						<p class="card-title mb-0">{{'serviceData' | translate}}</p>
 					</div>
 					<div class="card-body">
-						<p>Paquete a contratar: <span class="fw-bold">{{ package.attributes.name }}</span></p>
-						<p>Precio del paquete: <span class="fw-bold">{{ package.attributes.price | currency }}</span></p>
-						<p>Intervalo de suscripción: <span class="fw-bold">{{ package.attributes.interval | translate }}</span></p>
-						<p><span class="fw-bold">Descripción:</span> {{ package.attributes.description }}</p>
+						<p>{{"packageToBeSubscribed" | translate}}: <span class="fw-bold">{{ package.attributes.name }}</span></p>
+						<p>{{"packagePrice" | translate }}: <span class="fw-bold">{{ package.attributes.price | currency }}</span></p>
+						<p>{{"subscriptionInterval" | translate}}: <span class="fw-bold">{{ package.attributes.interval | translate }}</span></p>
+						<p><span class="fw-bold">{{"description" | translate}}:</span> {{ package.attributes.description }}</p>
 					</div>
 				</div>
 
 				<div class="card mb-3">
 					<div class="card-header">
-						<p class="card-title mb-0">Detalles del comprador</p>
+						<p class="card-title mb-0">{{"buyer" | translate}}</p>
 					</div>
 					<div class="card-body">
-						<p>Nombre: <span class="fw-bold">{{ userProfile.first_name }} {{ userProfile.last_name }}</span></p>
-						<p>Correo Electrónico: <span class="fw-bold">{{ userProfile.email }}</span></p>
+						<p>{{'name' | translate}}: <span class="fw-bold">{{ userProfile.first_name }} {{ userProfile.last_name }}</span></p>
+						<p>{{'email' | translate}}: <span class="fw-bold">{{ userProfile.email }}</span></p>
 					</div>
 				</div>
 			</div>
@@ -48,7 +47,7 @@
 			<div class="col-md-6">
 				<div class="card mb-3">
 					<div class="card-header">
-						<p class="card-title mb-0">Métodos de pago disponibles</p>
+						<p class="card-title mb-0">{{'availablePaymentMethods' | translate}}</p>
 					</div>
 					<div class="card-body">
 						<div class="d-grid gap-2">
@@ -72,7 +71,7 @@
 										<div class="row">
 											<div class="col-md mb-3">
 												<label for="card_number" class="form-label">{{'cardNumber' | translate}}</label>
-												<input type="text" class="form-control" id="card_number" name="numeroTarjeta" formControlName="card_number" creditCardNumberMaskDirective>
+												<input type="text" class="form-control" id="card_number" formControlName="card_number" creditCardNumberMaskDirective>
 											</div>
 										</div>
 
@@ -156,6 +155,7 @@
 									</form>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
