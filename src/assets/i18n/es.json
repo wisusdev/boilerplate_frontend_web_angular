@@ -159,6 +159,11 @@
 	"packagePrice": "Precio del paquete",
 	"subscriptionInterval": "Intervalo de suscripción",
 	"buyer": "Comprador",
+	"paymentSuccessful": "Pago exitoso",
+	"thankYouForPayment": "Su pago se ha procesado correctamente. Gracias por su pago.",
+	"paymentFailed": "Pago fallido",
+	"checkYourEmailOrYourAccount": "Por favor, revise su correo electrónico o su cuenta para más detalles",
+	"paymentFailedMessage": "Lo sentimos, su pago no se ha procesado correctamente. Por favor, inténtelo de nuevo más tarde.",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",

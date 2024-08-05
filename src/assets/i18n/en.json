@@ -159,6 +159,11 @@
 	"packagePrice": "Package Price",
 	"subscriptionInterval": "Subscription Interval",
 	"buyer": "Buyer",
+	"paymentSuccessful": "Payment Successful",
+	"thankYouForPayment": "Thank you for your payment. Your payment has been processed successfully.",
+	"paymentFailed": "Payment failed",
+	"checkYourEmailOrYourAccount": "Please check your email or your account for more details",
+	"paymentFailedMessage": "Sorry, your payment was not processed successfully. Please try again later.",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
