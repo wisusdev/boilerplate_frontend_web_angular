@@ -28,7 +28,7 @@ export class CreditCardNumberMaskDirective {
 		}
 	}
 
-	private detectCardType(cardNumber: string): string {
+	public detectCardType(cardNumber: string): string {
 		const patterns: { [key: string]: RegExp } = {
 			VISA: /^4[0-9]{0,}$/,
 			MASTERCARD: /^(5[1-5]|2[2-7])[0-9]{0,}$/,
