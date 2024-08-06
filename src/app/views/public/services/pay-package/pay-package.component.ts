@@ -171,13 +171,13 @@ export class PayPackageComponent implements OnInit {
 
 				if (payment_method === 'stripe' && response.status === 'succeeded') {
 					this.router.navigate(['/payment-success/' + this.package.id]).then(responseRoute => {
-						this.toast.success(response);
+						this.toast.success(this.translate.instant('paymentSuccessful'));
 					});
 				}
 
 				if (payment_method === 'wompi' && response.status === 'approved') {
 					this.router.navigate(['/payment-success/' + this.package.id]).then(responseRoute => {
-						this.toast.success(response);
+						this.toast.success(this.translate.instant('paymentSuccessful'));
 					});
 				}
 			}),
