@@ -164,6 +164,8 @@
 	"paymentFailed": "Pago fallido",
 	"checkYourEmailOrYourAccount": "Por favor, revise su correo electrónico o su cuenta para más detalles",
 	"paymentFailedMessage": "Lo sentimos, su pago no se ha procesado correctamente. Por favor, inténtelo de nuevo más tarde.",
+	"allUsers": "Todos los usuarios",
+	"general": "General",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
