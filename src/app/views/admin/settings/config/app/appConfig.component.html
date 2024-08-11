@@ -1,0 +1,106 @@
+<div class="card">
+	<div class="card-header d-flex justify-content-between align-items-center">
+		<h4 class="card-title">{{'general' | translate}}</h4>
+	</div>
+	<form [formGroup]="formApp" (ngSubmit)="saveAppSettings()">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="name" class="form-label">{{'nameApp' | translate}}</label>
+						<input type="text" class="form-control" id="name" [ngClass]="{'is-invalid': errorMessages['name']}" formControlName="name" name="name" placeholder="{{'name' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['name'] }}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="phone" class="form-label">{{'phone' | translate}}</label>
+						<input type="text" class="form-control" id="phone" [ngClass]="{'is-invalid': errorMessages['phone']}" formControlName="phone" name="phone" placeholder="{{'phone' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['phone'] }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="mt-0">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="email" class="form-label">{{'email' | translate}}</label>
+						<input type="text" class="form-control" id="email" [ngClass]="{'is-invalid': errorMessages['email']}" formControlName="email" name="email" placeholder="{{'email' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['email'] }}
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="url_api" class="form-label">{{'urlFrontend' | translate}}</label>
+						<input type="text" class="form-control" id="url_api" [ngClass]="{'is-invalid': errorMessages['url_api']}" formControlName="url_api" name="url_api" placeholder="{{'urlApi' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['url_api'] }}
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="timezone" class="form-label">{{'timezone' | translate}}</label>
+						<select class="form-select" id="timezone" [ngClass]="{'is-invalid': errorMessages['timezone']}" formControlName="timezone" name="timezone">
+							<option value="">{{'select' | translate}}</option>
+							<option *ngFor="let timezone of timezones" [value]="timezone">{{timezone}}</option>
+						</select>
+						<div class="invalid-feedback">
+							{{ errorMessages['timezone'] }}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="url_frontend" class="form-label">{{'urlFrontendApp' | translate}}</label>
+						<input type="text" class="form-control" id="url_frontend" [ngClass]="{'is-invalid': errorMessages['url_frontend']}" formControlName="url_frontend" name="url_frontend" placeholder="{{'urlFrontendApp' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['url_frontend'] }}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="mb-3">
+						<label for="description" class="form-label">{{'description' | translate}}</label>
+						<textarea class="form-control" id="description" [ngClass]="{'is-invalid': errorMessages['description']}" formControlName="description" name="description" placeholder="{{'description' | translate}}"></textarea>
+						<div class="invalid-feedback">
+							{{ errorMessages['description'] }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="mt-0">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="logo" class="form-label">{{'logo' | translate}}</label>
+						<input type="file" class="form-control" id="logo" [ngClass]="{'is-invalid': errorMessages['logo']}" formControlName="logo" name="logo" placeholder="{{'logo' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['logo'] }}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="mb-3">
+						<label for="favicon" class="form-label">{{'favicon' | translate}}</label>
+						<input type="file" class="form-control" id="favicon" [ngClass]="{'is-invalid': errorMessages['favicon']}" formControlName="favicon" name="favicon" placeholder="{{'favicon' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['favicon'] }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer d-flex justify-content-end">
+			<button [disabled]="!formApp.valid" type="submit" class="btn btn-primary">{{'save' | translate}}</button>
+		</div>
+	</form>
+</div>
