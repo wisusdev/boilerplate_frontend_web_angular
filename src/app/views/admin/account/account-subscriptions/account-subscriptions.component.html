@@ -39,8 +39,8 @@
 											<button class="dropdown-item"><i class="bi bi-file-arrow-down-fill"></i> {{ 'retryPayment' | translate }}</button>
 										}
 
-										@if (subscription.attributes.status === 'approved'){
-											<button class="dropdown-item" (click)="downloadInvoice(subscription.id)"><i class="bi bi-file-arrow-down-fill"></i> {{ 'downloadInvoice' | translate }}</button>
+										<button class="dropdown-item" (click)="downloadInvoice(subscription.id)"><i class="bi bi-file-arrow-down-fill"></i> {{ 'downloadInvoice' | translate }}</button>
+										@if (subscription.attributes.status === 'approved' && (subscription.attributes.payment_method === 'paypal' || subscription.attributes.payment_method === 'stripe')){
 											<div class="dropdown-divider"></div>
 											<button class="dropdown-item text-white bg-danger" (click)="cancelSubscription(subscription.id)"><i class="bi bi-exclamation-circle-fill"></i> {{ 'cancelSubscription' | translate }}</button>
 										}
