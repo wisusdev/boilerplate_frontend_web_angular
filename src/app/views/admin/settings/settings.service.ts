@@ -94,4 +94,17 @@ export class SettingsService {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
+
+	// Settings
+	getSettings(key: string): Observable<any> {
+		return this.httpClient.get<any>(`${this._apiUri}/settings?filter[key]=${key}`, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	updateSettings(data: any): Observable<any> {
+		return this.httpClient.patch<any>(`${this._apiUri}/settings/${data.id}`, data, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
 }
