@@ -8,6 +8,7 @@ import {CreateRolComponent} from "./roles/create/createRol.component";
 import {EditRolComponent} from "./roles/edit/editRol.component";
 import { ShowUserComponent } from "./users/show/show.component";
 import {authGuard} from "@data/Guards/Auth.guard";
+import {AppConfigComponent} from "@views/admin/settings/config/app/appConfig.component";
 
 const router: Routes = [
 	{path: 'settings/users', component: IndexUserComponent, canActivate: [authGuard], data: {permissions: 'users.index'}},
@@ -18,6 +19,8 @@ const router: Routes = [
 	{path: 'settings/roles', component: IndexRolComponent, canActivate: [authGuard], data: {permissions: 'roles.index'}},
 	{path: 'settings/roles/create', component: CreateRolComponent, canActivate: [authGuard], data: {permissions: 'roles.create'}},
 	{path: 'settings/roles/edit/:id', component: EditRolComponent, canActivate: [authGuard], data: {permissions: 'roles.edit'}},
+
+	{path: 'settings/app', component: AppConfigComponent, canActivate: [authGuard], data: {permissions: 'app.index'}},
 ];
 
 @NgModule({
