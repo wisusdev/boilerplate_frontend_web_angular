@@ -36,20 +36,36 @@
 		<li class="treeview" (click)="toggleTreeView($event)">
 			@if (permissionService.hasPermission('users:index') || permissionService.hasPermission('roles:index')){
             <a class="app-menu__item" href="#" data-toggle="treeview">
-	            <i class="app-menu__icon bi bi-sliders"></i>
-	            <span class="app-menu__label">{{'settings' | translate}}</span>
+	            <i class="app-menu__icon bi bi-people-fill"></i>
+	            <span class="app-menu__label">{{'users' | translate}}</span>
 	            <i class="treeview-indicator bi bi-chevron-right"></i>
             </a>
 			}
 			<ul class="treeview-menu">
 				<li *ngIf="permissionService.hasPermission('users:index')">
 					<a class="treeview-item" routerLink="/settings/users" routerLinkActive="active">
-						<i class="icon bi bi-people-fill"></i> {{'users' | translate }}
+						<i class="icon bi bi-people"></i> {{'allUsers' | translate }}
 					</a>
 				</li>
 				<li *ngIf="permissionService.hasPermission('users:index')">
 					<a class="treeview-item" routerLink="/settings/roles" routerLinkActive="active">
 						<i class="icon bi-person-fill-lock"></i> {{'rolesAndPermissions' | translate }}
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="treeview" (click)="toggleTreeView($event)">
+			@if (permissionService.hasPermission('settings:index')){
+				<a class="app-menu__item" href="#" data-toggle="treeview">
+					<i class="app-menu__icon bi bi-sliders2"></i>
+					<span class="app-menu__label">{{'settings' | translate}}</span>
+					<i class="treeview-indicator bi bi-chevron-right"></i>
+				</a>
+			}
+			<ul class="treeview-menu">
+				<li *ngIf="permissionService.hasPermission('settings:update')">
+					<a class="treeview-item" routerLink="/settings/app" routerLinkActive="active">
+						<i class="icon bi bi-gear-fill"></i> {{'general' | translate }}
 					</a>
 				</li>
 			</ul>
