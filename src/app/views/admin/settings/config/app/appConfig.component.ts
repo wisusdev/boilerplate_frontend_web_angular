@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {SettingsService} from "../../settings.service";
 import {PermissionService} from "@data/Services/permission.service";
@@ -7,6 +7,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {NgClass, NgForOf} from "@angular/common";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 import {ToastService} from "@data/Services/Toast.service";
+import {FileHelperService} from "@data/Services/file-helper-service.service";
+import {environment} from "@env/environment";
 
 @Component({
 	selector: 'app-config',
@@ -25,12 +27,17 @@ export class AppConfigComponent implements OnInit {
 		private settings: SettingsService,
 		private formBuilder: FormBuilder,
 		private toast: ToastService,
-		private translate: TranslateService
+		private translate: TranslateService,
+		private fileHelperService: FileHelperService
 	) {
 	}
 
+	@ViewChild('logoFile') logoFile: any;
+	@ViewChild('faviconFile') faviconFile: any;
+
 	formApp!: FormGroup;
 	timezones: string[] = [];
+	public allowedTypes = environment.allowImageTypes;
 
 	errorMessages: ErrorMessagesInterface = {
 		name: ''
@@ -100,5 +107,17 @@ export class AppConfigComponent implements OnInit {
 
 		this.formApp.patchValue(formValues);
 		this.timezones = data.data.relationships.timezones;
+	}
+
+	onLogoSelected(event: any) {
+		this.fileHelperService.handleFileSelection(event, (base64: string) => {
+			this.formApp.patchValue({logo: base64});
+		});
+	}
+
+	onFaviconSelected(event: any) {
+		this.fileHelperService.handleFileSelection(event, (base64: string) => {
+			this.formApp.patchValue({favicon: base64});
+		});
 	}
 }
