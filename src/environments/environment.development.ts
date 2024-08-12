@@ -45,4 +45,7 @@ export const environment = {
 			'dir': 'ltr',
 		}
 	},
+
+	allowImageTypes: ['image/png', 'image/jpg', 'image/jpeg', 'image/webp'],
+	allowImageSize: 1048576, // 1MB
 };
