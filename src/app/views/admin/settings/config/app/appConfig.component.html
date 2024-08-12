@@ -82,7 +82,7 @@
 				<div class="col-md-6">
 					<div class="mb-3">
 						<label for="logo" class="form-label">{{'logo' | translate}}</label>
-						<input type="file" class="form-control" id="logo" [ngClass]="{'is-invalid': errorMessages['logo']}" formControlName="logo" name="logo" placeholder="{{'logo' | translate}}">
+						<input type="file" class="form-control" id="logo" #logoFile (change)="onLogoSelected($event)" [accept]="allowedTypes" [ngClass]="{'is-invalid': errorMessages['logo']}">
 						<div class="invalid-feedback">
 							{{ errorMessages['logo'] }}
 						</div>
@@ -91,7 +91,7 @@
 				<div class="col-md-6">
 					<div class="mb-3">
 						<label for="favicon" class="form-label">{{'favicon' | translate}}</label>
-						<input type="file" class="form-control" id="favicon" [ngClass]="{'is-invalid': errorMessages['favicon']}" formControlName="favicon" name="favicon" placeholder="{{'favicon' | translate}}">
+						<input type="file" class="form-control" id="favicon" #faviconFile (change)="onFaviconSelected($event)" [accept]="allowedTypes" [ngClass]="{'is-invalid': errorMessages['favicon']}">						
 						<div class="invalid-feedback">
 							{{ errorMessages['favicon'] }}
 						</div>
