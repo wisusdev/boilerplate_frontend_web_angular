@@ -10,6 +10,7 @@ import {Handle} from "@data/Exceptions/Handle";
 import {ToastService} from "@data/Services/Toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 import {environment} from "@env/environment";
+import {FileHelperService} from "@data/Services/file-helper-service.service";
 
 @Component({
 	selector: 'app-profile',
@@ -27,15 +28,15 @@ export class ProfileComponent implements OnInit {
 	public availableLang: any[] = [];
 	public avatarUrl: string = '';
 	public selectAvatar: string = '';
-	public allowedTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/webp'];
+	public allowedTypes = environment.allowImageTypes;
 	userId: string = '';
 
 	constructor(
 		private formBuilder: FormBuilder,
 		private accountService: AccountService,
-		private handleMessage: Handle,
 		private toast: ToastService,
-		private translate: TranslateService
+		private translate: TranslateService,
+		private fileHelperService: FileHelperService
 	) {
 		this.availableLang = Object.entries(environment.availableLang).map(([key, value]) => ({ key, ...value }));
 	}
@@ -89,25 +90,9 @@ export class ProfileComponent implements OnInit {
 	}
 
 	onFileSelected(event: any) {
-		this.handleFileSelection(event);
-	}
-
-	handleFileSelection(event: any) {
-		let selectAvatar = <File>event.target.files[0];
-
-		if (!this.allowedTypes.includes(selectAvatar.type)) {
-			this.handleMessage.handleError('Invalid file type')
-			event.target.value = '';
-			return;
-		}
-
-		const reader = new FileReader();
-		reader.onload = () => {
-			this.selectAvatar = reader.result as string;
-			this.selectAvatar = this.selectAvatar.replace(/^data:image\/[a-z]+;base64,/, '');
-		}
-
-		reader.readAsDataURL(selectAvatar);
+		this.fileHelperService.handleFileSelection(event, (base64: string) => {
+			this.selectAvatar = base64;
+		});
 	}
 
 	onSubmit() {
@@ -124,7 +109,6 @@ export class ProfileComponent implements OnInit {
 					let uniqueString = new Date().getTime();
 					this.avatarUrl = (response.data.attributes.avatar || "/assets/images/profile.png") + "?v=" + uniqueString;
 					this.toast.success(this.translate.instant('recordUpdated'));
-
 				}
 			}),
 			catchError(error => {
