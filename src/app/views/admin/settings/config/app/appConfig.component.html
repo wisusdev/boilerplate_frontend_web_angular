@@ -87,15 +87,17 @@
 							{{ errorMessages['logo'] }}
 						</div>
 					</div>
+					<img [src]="logoUrl" class="rounded img-profile" id="logoImg" alt="profile-picture">
 				</div>
 				<div class="col-md-6">
 					<div class="mb-3">
 						<label for="favicon" class="form-label">{{'favicon' | translate}}</label>
-						<input type="file" class="form-control" id="favicon" #faviconFile (change)="onFaviconSelected($event)" [accept]="allowedTypes" [ngClass]="{'is-invalid': errorMessages['favicon']}">						
+						<input type="file" class="form-control" id="favicon" #faviconFile (change)="onFaviconSelected($event)" [accept]="allowedTypes" [ngClass]="{'is-invalid': errorMessages['favicon']}">
 						<div class="invalid-feedback">
 							{{ errorMessages['favicon'] }}
 						</div>
 					</div>
+					<img [src]="faviconUrl" class="rounded img-profile" id="faviconImg" alt="profile-picture">
 				</div>
 			</div>
 		</div>
