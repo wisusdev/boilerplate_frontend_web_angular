@@ -20,7 +20,9 @@ export const environment = {
 	/* Redirect after logout */
 	redirectToLogin: '/auth/login',
 
-	placeholderImage: '/assets/images/profile.png',
+	profileImage: '/assets/images/profile.png',
+
+	placeholderImage: '/assets/images/placeholder.png',
 
 	/* Stripe Publishable Key */
 	stripeKey: 'pk_test_514mTJgJ4njti3TekWucEp5V5ejDQz7PtW7SNDoBLMt2fLBlFkszWzniNq5eWZunAch7HLOyDmQETF4uvVGEtzyLs00GsAftRIk',
