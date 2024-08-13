@@ -10,7 +10,7 @@ import {Handle} from "@data/Exceptions/Handle";
 import {ToastService} from "@data/Services/Toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 import {environment} from "@env/environment";
-import {FileHelperService} from "@data/Services/file-helper-service.service";
+import {FileHelperService} from "@data/Services/file-helper.service";
 
 @Component({
 	selector: 'app-profile',
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
 
 		if (userData) {
 			let dataProfile = JSON.parse(userData);
-			this.avatarUrl = dataProfile.avatar || environment.placeholderImage;
+			this.avatarUrl = dataProfile.avatar || environment.profileImage;
 
 			this.formProfile = this.formBuilder.group({
 				type: 'profile',
