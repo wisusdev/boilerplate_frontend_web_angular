@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {NgClass, NgForOf} from "@angular/common";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 import {ToastService} from "@data/Services/Toast.service";
-import {FileHelperService} from "@data/Services/file-helper-service.service";
+import {FileHelperService} from "@data/Services/file-helper.service";
 import {environment} from "@env/environment";
 
 @Component({
@@ -38,6 +38,8 @@ export class AppConfigComponent implements OnInit {
 	formApp!: FormGroup;
 	timezones: string[] = [];
 	public allowedTypes = environment.allowImageTypes;
+	public logoUrl: string = '';
+	public faviconUrl: string = '';
 
 	errorMessages: ErrorMessagesInterface = {
 		name: ''
@@ -72,7 +74,6 @@ export class AppConfigComponent implements OnInit {
 		this.settings.getSettings('app').pipe(
 			tap((response) => {
 				this.setDataForm(response);
-				console.log('Settings loaded');
 			}),
 			catchError((error) => {
 				this.toast.danger(this.translate.instant('errorAsOccurred'));
@@ -96,17 +97,26 @@ export class AppConfigComponent implements OnInit {
 	}
 
 	setDataForm(data: any) {
+		const { id, type, attributes, relationships } = data.data;
+		const { name, url_api, url_frontend, description, email, phone, address, timezone, logo, favicon } = attributes;
+
 		const formValues = {
-			id: data.data.id,
-			type: data.data.type,
-			...data.data.attributes
+			id,
+			type,
+			name,
+			url_api,
+			url_frontend,
+			description,
+			email,
+			phone,
+			address,
+			timezone,
 		};
 
-		if (formValues.logo) formValues.logo = '';
-		if (formValues.favicon) formValues.favicon = '';
-
 		this.formApp.patchValue(formValues);
-		this.timezones = data.data.relationships.timezones;
+		this.timezones = relationships.timezones;
+		this.logoUrl = logo || environment.placeholderImage;
+		this.faviconUrl = favicon || environment.placeholderImage;
 	}
 
 	onLogoSelected(event: any) {
