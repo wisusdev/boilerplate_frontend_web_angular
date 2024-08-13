@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit {
 		let userData = localStorage.getItem('user');
 		if (userData) {
 			let dataProfile = JSON.parse(userData);
-			this.userAvatar = dataProfile.avatar || environment.placeholderImage;
+			this.userAvatar = dataProfile.avatar || environment.profileImage;
 			this.userName = dataProfile.username;
 			this.userFullName = dataProfile.first_name + ' ' + dataProfile.last_name;
 		}
