@@ -16,6 +16,7 @@ export class ServicesService {
 	private _apiUri: string = environment.api_url_v1;
 	private _apiUriPackage: string = this._apiUri + '/packages';
 	private _apiUriSubscription: string = this._apiUri + '/subscriptions';
+	private _apiUriInvoice: string = this._apiUri + '/invoices';
 
 	constructor(
 		private httpClient: HttpClient,
@@ -59,4 +60,49 @@ export class ServicesService {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
+
+	/* INVOICES */
+	indexInvoices(): Observable<any> {
+		return this.httpClient.get<any>(`${this._apiUriInvoice}`, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	storeInvoice(data: any): Observable<any> {
+		return this.httpClient.post<any>(`${this._apiUriInvoice}`, data, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	showInvoice(id: string): Observable<any> {
+		return this.httpClient.get<any>(`${this._apiUriInvoice}/${id}`, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	updateInvoice(id: string, data: any): Observable<any> {
+		return this.httpClient.put<any>(`${this._apiUriInvoice}/${id}`, data, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	destroyInvoice(id: string): Observable<any> {
+		return this.httpClient.delete<any>(`${this._apiUriInvoice}/${id}`, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	payInvoice(id: string): Observable<any> {
+		return this.httpClient.post<any>(`${this._apiUriInvoice}/${id}/pay`, {}, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+	cancelInvoice(id: string): Observable<any> {
+		return this.httpClient.post<any>(`${this._apiUriInvoice}/${id}/cancel`, {}, {
+			headers: environment.headers,
+		}).pipe(catchError(this.handleMessage.errorHandle));
+	}
+
+
 }
