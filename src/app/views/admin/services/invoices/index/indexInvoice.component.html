@@ -1,0 +1,47 @@
+<div class="card">
+	<div class="card-header">
+		<div class="d-flex justify-content-between align-items-center">
+			<h4 class="card-title">{{'invoices' | translate}}</h4>
+			<a class="btn btn-primary">{{ 'create' | translate }} <i class="ms-2 bi bi-plus"></i></a>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>{{'invoice_number' | translate}}</th>
+						<th>{{'invoice_date' | translate}}</th>
+						<th>{{'due_date' | translate}}</th>
+						<th>{{'total_amount' | translate}}</th>
+						<th>{{'status' | translate}}</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let invoice of invoices; let i = index">
+						<td>{{ invoice.attributes.invoice_number }}</td>
+						<td>{{ invoice.attributes.invoice_date | date:'dd/MM/yyyy' }}</td>
+						<td>{{ invoice.attributes.due_date | date:'dd/MM/yyyy' }}</td>
+						<td>${{ invoice.attributes.total_amount }}</td>
+						<td>{{ invoice.attributes.status | translate}}</td>
+						<td>
+							<div class="d-flex flex-row">
+								<a class="btn btn-sm btn-primary me-2">{{ 'edit' | translate }} <i class="ms-2 bi bi-pencil-square"></i></a>
+								<button class="btn btn-sm btn-danger" (click)="deleteInvoice(invoice.id)">{{ 'delete' | translate }}<i class="ms-2 bi bi-trash"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	@if(lastPage > 1){
+		<div class="card-footer">
+			<ngb-pagination [collectionSize]="totalPages * 10" [(page)]="pageNumber" [maxSize]="5" (pageChange)="setPage($event)">
+				<ng-template ngbPaginationPrevious>{{'next' | translate}}</ng-template>
+				<ng-template ngbPaginationNext>{{'previous' | translate}}</ng-template>
+			</ngb-pagination>
+		</div>
+	}
+</div>
