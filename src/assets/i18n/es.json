@@ -166,6 +166,8 @@
 	"paymentFailedMessage": "Lo sentimos, su pago no se ha procesado correctamente. Por favor, inténtelo de nuevo más tarde.",
 	"allUsers": "Todos los usuarios",
 	"general": "General",
+	"services": "Servicios",
+	"invoices": "Facturas",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",

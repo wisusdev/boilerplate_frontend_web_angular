@@ -166,6 +166,8 @@
 	"paymentFailedMessage": "Sorry, your payment was not processed successfully. Please try again later.",
 	"allUsers": "All Users",
 	"general": "General",
+	"services": "Services",
+	"invoices": "Invoices",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
