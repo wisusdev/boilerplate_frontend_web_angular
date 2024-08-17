@@ -7,6 +7,7 @@ import {InvoiceData} from "@data/Interfaces/Responses/indexInvoicesResponse.inte
 import {DatePipe, NgForOf} from "@angular/common";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
 	selector: 'app-index-invoices',
@@ -17,7 +18,8 @@ import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/con
 		DatePipe,
 		NgbPagination,
 		NgbPaginationNext,
-		NgbPaginationPrevious
+		NgbPaginationPrevious,
+		RouterLink
 	],
 	templateUrl: './indexInvoice.component.html'
 })
