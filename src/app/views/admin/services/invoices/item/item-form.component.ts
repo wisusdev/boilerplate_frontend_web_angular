@@ -9,8 +9,7 @@ import {FormsModule} from "@angular/forms";
 		TranslateModule,
 		FormsModule
 	],
-	templateUrl: './item-form.component.html',
-	styleUrl: './item-form.component.css'
+	templateUrl: './item-form.component.html'
 })
 export class ItemFormComponent {
 	quantity: number = 0;
