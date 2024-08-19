@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
 
@@ -13,10 +13,16 @@ import {FormsModule} from "@angular/forms";
 })
 export class ItemFormComponent {
 	quantity: number = 0;
+	@Input() index!: number;
 
 	@Output() quantityChange = new EventEmitter<number>();
+	@Output() remove = new EventEmitter<void>();
 
 	onQuantityChange() {
 		this.quantityChange.emit(this.quantity);
+	}
+
+	removeItem() {
+		this.remove.emit();
 	}
 }
