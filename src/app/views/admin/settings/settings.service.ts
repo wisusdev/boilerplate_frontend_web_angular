@@ -65,8 +65,8 @@ export class SettingsService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	indexUsers(): Observable<IndexUserResponseInterface> {
-		return this.httpClient.get<IndexUserResponseInterface>(`${this._apiUriUsers}`, {
+	indexUsers(pageSize: number = 15, pageNumber: number = 1, filterType: string = 'first_name', filterValue: string = '', order: string = '-', sort: string = 'id'): Observable<IndexUserResponseInterface> {
+		return this.httpClient.get<IndexUserResponseInterface>(`${this._apiUriUsers}?page[size]=${pageSize}&page[number]=${pageNumber}&filter[${filterType}]=${filterValue}&sort=${order}${sort}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
