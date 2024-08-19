@@ -15,7 +15,7 @@
 			</select>
 		</div>
 	</div>
-	<div class="col-md-5">
+	<div class="col-md-4">
 		<div class="form-group">
 			<label class="form-label">{{'description' | translate}}</label>
 			<input type="text" class="form-control" name="description" required>
@@ -26,5 +26,8 @@
 			<label class="form-label">{{'quantity' | translate}}</label>
 			<input type="number" class="form-control" name="quantity" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange()" required>
 		</div>
+	</div>
+	<div class="col-md d-flex align-items-end justify-content-end">
+		<span class="btn btn-danger float-end" (click)="removeItem()"><i class="bi bi-x-circle m-0"></i></span>
 	</div>
 </div>
