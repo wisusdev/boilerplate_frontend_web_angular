@@ -24,8 +24,8 @@ export class ServicesService {
 	) {}
 
 	/* PACKAGES */
-	indexPackage(): Observable<IndexPackageRequestInterface> {
-		return this.httpClient.get<IndexPackageRequestInterface>(`${this._apiUriPackage}`, {
+	indexPackage(pageSize: number = 15, pageNumber: number = 1, filterType: string = 'name', filterValue: string = '', order: string = '-', sort: string = 'id'): Observable<IndexPackageRequestInterface> {
+		return this.httpClient.get<IndexPackageRequestInterface>(`${this._apiUriPackage}?page[size]=${pageSize}&page[number]=${pageNumber}&filter[${filterType}]=${filterValue}&sort=${order}${sort}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
