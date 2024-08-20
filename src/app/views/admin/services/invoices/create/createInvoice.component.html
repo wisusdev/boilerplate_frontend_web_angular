@@ -12,9 +12,6 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label class="form-label">{{'client' | translate}}</label>
-						<!--<select class="form-select" id="client" name="client" (click)="getUsers()" required>
-							<option value="">{{'select' | translate}} {{'client' | translate}}</option>
-						</select>-->
 						<ng-select [items]="users"
 						           bindLabel="first_name"
 						           bindValue="id"
