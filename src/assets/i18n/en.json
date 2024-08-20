@@ -38,6 +38,7 @@
 	"profile": "Profile",
 	"settings": "Settings",
 	"users": "Users",
+	"user": "User",
 	"rol": "Role",
 	"roles": "Roles",
 	"permissions": "Permissions",
@@ -132,6 +133,7 @@
 	"auto": "Auto",
 
 	"packages": "Packages",
+	"package": "Package",
 	"subscriptions": "Subscriptions",
 	"pay_with": "Pay with",
 	"downloadInvoice": "Download Invoice",
@@ -168,6 +170,8 @@
 	"general": "General",
 	"services": "Services",
 	"invoices": "Invoices",
+	"select": "Select",
+	"a": "a",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",

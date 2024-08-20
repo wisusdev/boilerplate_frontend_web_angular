@@ -38,6 +38,7 @@
 	"profile": "Perfil",
 	"settings": "Configuración",
 	"users": "Usuarios",
+	"user": "Usuario",
 	"rol": "Rol",
 	"roles": "Roles",
 	"permissions": "Permisos",
@@ -90,7 +91,7 @@
 	"deleteConfirmation": "¿Estás seguro de que quieres borrar este registro?",
 	"preferences": "Preferencias",
 	"price": "Precio",
-	"interval_count": "Numero de intervalos",
+	"interval_count": "Número de intervalos",
 	"interval": "Intervalo",
 	"trial_days": "Días de prueba",
 	"max_users": "Limite de usuarios",
@@ -132,6 +133,7 @@
 	"auto": "Automático",
 
 	"packages": "Paquetes",
+	"package": "Paquete",
 	"subscriptions": "Suscripciones",
 	"pay_with": "Pagar con",
 	"downloadInvoice": "Descargar factura",
@@ -168,6 +170,8 @@
 	"general": "General",
 	"services": "Servicios",
 	"invoices": "Facturas",
+	"select": "Seleccione",
+	"a": "un",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
