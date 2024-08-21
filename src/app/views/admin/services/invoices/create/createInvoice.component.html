@@ -11,11 +11,11 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label class="form-label">{{'client' | translate}}</label>
+						<label class="form-label">{{'user' | translate}}</label>
 						<ng-select [items]="users"
 						           bindLabel="first_name"
 						           bindValue="id"
-						           placeholder="{{'select' | translate}} {{'client' | translate}}"
+						           placeholder="{{'select' | translate}} {{'a' | translate}} {{'user' | translate | lowercase}}"
 						           formControlName="user_id"
 						           (open)="getUsers()"
 						           (search)="searchUsers($event.term)"
@@ -57,16 +57,50 @@
 	</div>
 
 	<div class="card">
-		<div class="card-header">
-			<span class="btn btn-secondary" (click)="addItem()">{{'add' | translate}}</span>
-		</div>
 		<div class="card-body">
-			<div *ngFor="let item of items; let i = index">
-				<app-item-form (quantityChange)="updateTotalQuantity($event, i)" (remove)="removeItem(i)" [index]="i"></app-item-form>
+			<div class="">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>{{'package' | translate}}</th>
+							<th>{{'interval' | translate}}</th>
+							<th>{{'description' | translate}}</th>
+							<th>{{'interval_count' | translate}}</th>
+							<th>{{'price' | translate}}</th>
+							<th>{{'actions' | translate}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let item of items; let i = index">
+							<td>
+								<ng-select
+									[items]="packages"
+									bindLabel="attributes.name"
+									bindValue="id"
+									placeholder="{{'select' | translate}} {{'a' | translate}} {{'package' | translate | lowercase}}"
+									(open)="getPackages()"
+									(search)="searchPackages($event.term)"
+									(change)="onPackageSelect($event, i)"
+									[searchable]="true"
+								></ng-select>
+							</td>
+							<td>{{ item.selectedPackage?.attributes.interval | translate }}</td>
+							<td>{{ item.selectedPackage?.attributes.description }}</td>
+							<td>{{ item.selectedPackage?.attributes.interval_count }}</td>
+							<td>{{ item.selectedPackage?.attributes.price }}</td>
+							<td>
+								<div class="d-flex flex-row">
+									<button class="btn btn-sm btn-danger me-2" (click)="removeItem(i)">{{'delete' | translate}}</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
-		<div class="card-footer">
-			<p class="fw-bold float-end">{{'total' | translate}}: <span>{{totalQuantity | number:'1.2-2'}}</span></p>
+		<div class="card-footer d-flex align-items-center justify-content-between">
+			<span class="btn btn-secondary float-start" (click)="addItem()">{{'add' | translate}}</span>
+			<p class="fw-bold float-end mb-0">{{'total' | translate}}: <span>{{totalPrice | number:'1.2-2'}}</span></p>
 		</div>
 	</div>
 </form>
