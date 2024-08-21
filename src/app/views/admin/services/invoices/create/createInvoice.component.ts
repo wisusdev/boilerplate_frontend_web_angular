@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateModule} from "@ngx-translate/core";
-import {DecimalPipe, LowerCasePipe, NgForOf} from "@angular/common";
+import {DecimalPipe, LowerCasePipe, NgForOf, TitleCasePipe} from "@angular/common";
 import {SettingsService} from "@views/admin/settings/settings.service";
 import {catchError, of, tap} from "rxjs";
 import {NgSelectModule} from "@ng-select/ng-select";
@@ -18,7 +18,8 @@ import {ServicesService} from "@views/admin/services/services.service";
 		NgSelectModule,
 		FormsModule,
 		ReactiveFormsModule,
-		LowerCasePipe
+		LowerCasePipe,
+		TitleCasePipe
 	],
 	templateUrl: './createInvoice.component.html'
 })
@@ -29,6 +30,8 @@ export class CreateInvoiceComponent implements OnInit {
 	items: any[] = [];
 	packages: Package[] = [];
 	totalPrice: number = 0;
+	invoiceStatus: string[] = ['paid', 'unpaid', 'partial'];
+	paymentMethods: string[] = ['paypal', 'stripe', 'wompi'];
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -37,9 +40,16 @@ export class CreateInvoiceComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		const today = new Date().toISOString().split('T')[0];
+		const dueDate = new Date();
+		dueDate.setDate(dueDate.getDate() + 15);
+		const formattedDueDate = dueDate.toISOString().split('T')[0];
+
 		this.invoiceForm = this.formBuilder.group({
 			type: 'invoice',
 			user_id: null,
+			invoice_date: today,
+			due_date: formattedDueDate,
 		});
 	}
 
