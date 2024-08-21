@@ -9,8 +9,8 @@
 	<div class="card mb-3">
 		<div class="card-body">
 			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
+				<div class="col-md-3">
+					<div class="form-group mb-3">
 						<label class="form-label">{{'user' | translate}}</label>
 						<ng-select [items]="users"
 						           bindLabel="first_name"
@@ -23,34 +23,52 @@
 						</ng-select>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="form-group">
+				<div class="col-md-3">
+					<div class="form-group mb-3">
 						<label for="paymentMethod" class="form-label">{{'paymentMethod' | translate}}</label>
 						<select class="form-select" id="paymentMethod" name="paymentMethod" required>
 							<option value="">{{'select' | translate}} {{'paymentMethod' | translate}}</option>
+							<option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod">{{ paymentMethod | translate | titlecase }}</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="form-group">
+				<div class="col-md-2">
+					<div class="form-group mb-3">
 						<label for="status" class="form-label">{{'status' | translate}}</label>
 						<select class="form-select" id="status" name="status" required>
 							<option value="">{{'select' | translate}} {{'status' | translate}}</option>
+							<option *ngFor="let status of invoiceStatus" [value]="status">{{ status | translate }}</option>
 						</select>
 					</div>
 				</div>
 
-				<hr class="mt-3">
+				<div class="col-md-2">
+					<div class="form-group mb-3">
+						<label for="invoice_date" class="form-label">{{'invoiceDate' | translate}}</label>
+						<input type="date" class="form-control" id="invoice_date" name="invoiceDate" formControlName="invoice_date" required>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group mb-3">
+						<label for="due_date" class="form-label">{{'dueDate' | translate}}</label>
+						<input type="date" class="form-control" id="due_date" formControlName="due_date" required>
 
+					</div>
+				</div>
+			</div>
+
+			<hr class="mt-3">
+
+			<div class="row">
 				<div class="col-md-4">
 					<input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-					<label class="btn btn-primary me-2" for="btn-check">Order confirmation</label>
+					<label class="btn btn-primary me-2 mb-3" for="btn-check">Order confirmation</label>
 
 					<input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
-					<label class="btn btn-primary me-2" for="btn-check-2">Generate invoice</label>
+					<label class="btn btn-primary me-2 mb-3" for="btn-check-2">Generate invoice</label>
 
 					<input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off">
-					<label class="btn btn-primary me-2" for="btn-check-3">Send email</label>
+					<label class="btn btn-primary me-2 mb-3" for="btn-check-3">Send email</label>
 				</div>
 			</div>
 		</div>
