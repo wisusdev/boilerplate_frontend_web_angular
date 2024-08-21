@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateModule} from "@ngx-translate/core";
-import {DecimalPipe, NgForOf} from "@angular/common";
-import {ItemFormComponent} from "@views/admin/services/invoices/item/item-form.component";
+import {DecimalPipe, LowerCasePipe, NgForOf} from "@angular/common";
 import {SettingsService} from "@views/admin/settings/settings.service";
 import {catchError, of, tap} from "rxjs";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {Package} from "@data/Interfaces/Requests/indexPackageRequest.interface";
+import {ServicesService} from "@views/admin/services/services.service";
 
 @Component({
 	selector: 'app-create-invoice',
@@ -13,25 +14,25 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
 	imports: [
 		TranslateModule,
 		NgForOf,
-		ItemFormComponent,
 		DecimalPipe,
 		NgSelectModule,
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		LowerCasePipe
 	],
 	templateUrl: './createInvoice.component.html'
 })
 export class CreateInvoiceComponent implements OnInit {
-	items = [0];
-	quantities: number[] = [];
-	totalQuantity: number = 0;
-	users: { id: string, first_name: string }[] = [];
-	selectedUser: string = '';
 
+	users: { id: string, first_name: string }[] = [];
 	invoiceForm!: FormGroup;
+	items: any[] = [];
+	packages: Package[] = [];
+	totalPrice: number = 0;
 
 	constructor(
 		private formBuilder: FormBuilder,
+		private services: ServicesService,
 		private settingsService: SettingsService,
 	) {}
 
@@ -40,22 +41,6 @@ export class CreateInvoiceComponent implements OnInit {
 			type: 'invoice',
 			user_id: null,
 		});
-	}
-
-	addItem() {
-		this.items.push(this.items.length);
-		this.quantities.push(0);
-	}
-
-	removeItem(index: number) {
-		this.items.splice(index, 1);
-		this.quantities.splice(index, 1);
-		this.updateTotalQuantity(0, index);
-	}
-
-	updateTotalQuantity(quantity: number, index: number) {
-		this.quantities[index] = quantity;
-		this.totalQuantity = this.quantities.reduce((total, qty) => total + qty, 0);
 	}
 
 	getUsers() {
@@ -90,6 +75,71 @@ export class CreateInvoiceComponent implements OnInit {
 			}),
 			catchError(error => {
 				console.error(error);
+				return of(null);
+			})
+		).subscribe();
+	}
+
+	addItem() {
+		this.items.push({
+			package: '',
+			interval: '',
+			description: '',
+			interval_count: 0,
+			price: 0,
+			selectedPackage: null,
+		});
+		this.calculateTotalPrice();
+	}
+
+	getPackages(){
+		if (!this.packages.length) {
+			this.fetchPackage();
+		}
+	}
+
+	searchPackages(searchTerm: string = '') {
+		const filteredUsers = this.packages.filter(pkg =>
+			pkg.attributes.name.toLowerCase().includes(searchTerm.toLowerCase())
+		);
+
+		if (filteredUsers.length) {
+			this.packages = filteredUsers;
+		} else {
+			this.fetchPackage(15, 1, 'name', searchTerm);
+		}
+	}
+
+	onPackageSelect(selectedPackage: Package | null, index: number) {
+		if (selectedPackage) {
+			this.items[index].selectedPackage = selectedPackage;
+			this.items[index].price = selectedPackage.attributes.price;
+		} else {
+			this.items[index].selectedPackage = null;
+			this.items[index].price = 0;
+		}
+		this.calculateTotalPrice();
+	}
+
+	calculateTotalPrice() {
+		this.totalPrice = this.items.reduce((total, item) => {
+			const price = parseFloat(item.price);
+			return total + (isNaN(price) ? 0 : price);
+		}, 0);
+	}
+
+	removeItem(index: number) {
+		this.items.splice(index, 1);
+		this.calculateTotalPrice();
+	}
+
+	private fetchPackage(pageSize: number = 15, pageNumber: number = 1, filterType: string = 'name', filterValue: string = '', order: string = '-', sort: string = 'id'){
+		this.services.indexPackage(pageSize, pageNumber, filterType, filterValue, order, sort).pipe(
+			tap(response => {
+				this.packages = response.data;
+			}),
+			catchError(error => {
+				console.log(error);
 				return of(null);
 			})
 		).subscribe();
