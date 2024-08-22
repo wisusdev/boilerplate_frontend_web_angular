@@ -6,6 +6,7 @@ import {catchError, of, tap} from "rxjs";
 import {DatePipe, NgClass, NgForOf} from "@angular/common";
 import {SubscriptionData} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 import {ToastService} from "@data/Services/Toast.service";
+import {RouterLink} from "@angular/router";
 
 interface StatusClass {
 	[key: string]: string;
@@ -18,7 +19,8 @@ interface StatusClass {
 		TranslateModule,
 		NgForOf,
 		DatePipe,
-		NgClass
+		NgClass,
+		RouterLink
 	],
 	templateUrl: './indexSubscription.component.html',
 })
