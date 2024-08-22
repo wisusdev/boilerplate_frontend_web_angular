@@ -172,6 +172,15 @@
 	"invoices": "Invoices",
 	"select": "Select",
 	"a": "a",
+	"paymentMethod": "Payment Method",
+	"invoiceDate": "Invoice Date",
+	"invoiceDueDate": "Invoice Due Date",
+	"orderConfirmation": "Order Confirmation",
+	"generateInvoice": "Generate Invoice",
+	"sendEmail": "Send Email",
+	"paid": "Paid",
+	"unpaid": "Unpaid",
+	"partial": "Partial",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
