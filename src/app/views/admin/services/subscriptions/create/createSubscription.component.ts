@@ -101,12 +101,14 @@ export class CreateSubscriptionComponent implements OnInit {
 
 	addItem() {
 		this.items.push({
+			item_id: '',
 			type: 'package',
-			id: '',
-			interval: '',
 			description: '',
-			interval_count: 0,
-			price: 0
+			quantity: 1,
+			unit_price: 0,
+			total_price: 0,
+
+			interval: '',
 		});
 		this.calculateTotalPrice();
 	}
@@ -131,12 +133,21 @@ export class CreateSubscriptionComponent implements OnInit {
 
 	onPackageSelect(selectedPackage: Package | null, index: number) {
 		if (selectedPackage) {
+			this.items[index].item_id = selectedPackage.id;
 			this.items[index].type = selectedPackage.type;
-			this.items[index].id = selectedPackage.id;
-			this.items[index].interval = selectedPackage.attributes.interval;
 			this.items[index].description = selectedPackage.attributes.description;
-			this.items[index].interval_count = selectedPackage.attributes.interval_count;
-			this.items[index].price = selectedPackage.attributes.price;
+			this.items[index].quantity = selectedPackage.attributes.interval_count;
+			this.items[index].interval = selectedPackage.attributes.interval;
+			this.items[index].unit_price = selectedPackage.attributes.price;
+
+			const price = parseFloat(selectedPackage.attributes.price);
+			const intervalCount = parseInt(selectedPackage.attributes.interval_count.toString(), 10);
+
+			if (!isNaN(price) && !isNaN(intervalCount)) {
+				this.items[index].total_price = price * intervalCount;
+			} else {
+				this.items[index].total_price = 0;
+			}
 		} else {
 			this.items.splice(index, 1);
 		}
@@ -147,7 +158,7 @@ export class CreateSubscriptionComponent implements OnInit {
 
 	calculateTotalPrice() {
 		this.totalPrice = this.items.reduce((total, item) => {
-			const price = parseFloat(item.price);
+			const price = parseFloat(item.total_price);
 			return total + (isNaN(price) ? 0 : price);
 		}, 0);
 	}
