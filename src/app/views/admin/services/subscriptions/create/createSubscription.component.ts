@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateModule} from "@ngx-translate/core";
-import {DecimalPipe, LowerCasePipe, NgForOf, TitleCasePipe} from "@angular/common";
+import {DecimalPipe, LowerCasePipe, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {SettingsService} from "@views/admin/settings/settings.service";
 import {catchError, of, tap} from "rxjs";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Package} from "@data/Interfaces/Requests/indexPackageRequest.interface";
 import {ServicesService} from "@views/admin/services/services.service";
-import {metadataRequest} from "@data/Requests/metadata-request";
+import {itemsRequest} from "@data/Requests/items-request";
+import {Auth} from "@data/Providers/Auth";
 
 @Component({
 	selector: 'app-create-subscription',
@@ -20,7 +21,8 @@ import {metadataRequest} from "@data/Requests/metadata-request";
 		FormsModule,
 		ReactiveFormsModule,
 		LowerCasePipe,
-		TitleCasePipe
+		TitleCasePipe,
+		NgIf
 	],
 	templateUrl: './createSubscription.component.html'
 })
@@ -50,14 +52,17 @@ export class CreateSubscriptionComponent implements OnInit {
 		this.invoiceForm = this.formBuilder.group({
 			type: 'invoice',
 			user_id: [null, Validators.required],
-			payment_method: ['', Validators.required],
-			status: ['unpaid', Validators.required],
+			created_by: Auth.userId(),
 			invoice_date: [today, Validators.required],
 			due_date: [formattedDueDate, Validators.required],
+			total_amount: 0,
+			status: ['unpaid', Validators.required],
+
+			payment_method: ['', Validators.required],
 			order_confirmation: [false, Validators.required],
 			generate_invoice: [false, Validators.required],
 			send_email: [false, Validators.required],
-			metadata: ['', metadataRequest()],
+			items: [this.items, itemsRequest()],
 		});
 	}
 
@@ -80,7 +85,8 @@ export class CreateSubscriptionComponent implements OnInit {
 	}
 
 	createInvoice() {
-		//this.generateMetadata();
+		//this.generateItems();
+		this.invoiceForm.patchValue({items: this.items});
 		console.log(this.invoiceForm.value);
 	}
 
@@ -138,7 +144,7 @@ export class CreateSubscriptionComponent implements OnInit {
 			this.items[index].description = selectedPackage.attributes.description;
 			this.items[index].quantity = selectedPackage.attributes.interval_count;
 			this.items[index].interval = selectedPackage.attributes.interval;
-			this.items[index].unit_price = selectedPackage.attributes.price;
+			this.items[index].unit_price = parseFloat(selectedPackage.attributes.price);
 
 			const price = parseFloat(selectedPackage.attributes.price);
 			const intervalCount = parseInt(selectedPackage.attributes.interval_count.toString(), 10);
@@ -153,7 +159,7 @@ export class CreateSubscriptionComponent implements OnInit {
 		}
 
 		this.calculateTotalPrice();
-		this.generateMetadata();
+		this.generateItems();
 	}
 
 	calculateTotalPrice() {
@@ -161,6 +167,8 @@ export class CreateSubscriptionComponent implements OnInit {
 			const price = parseFloat(item.total_price);
 			return total + (isNaN(price) ? 0 : price);
 		}, 0);
+
+		this.invoiceForm.patchValue({total_amount: this.totalPrice});
 	}
 
 	removeItem(index: number) {
@@ -180,21 +188,7 @@ export class CreateSubscriptionComponent implements OnInit {
 		).subscribe();
 	}
 
-	private generateMetadata() {
-		const metadata: { [key: string]: string[] } = {};
-
-		this.items.forEach(item => {
-			const type = item.type;
-			const id = item.id;
-
-			if (!metadata[type]) {
-				metadata[type] = [];
-			}
-
-			metadata[type].push(id);
-		});
-
-		this.invoiceForm.patchValue({metadata: JSON.stringify(metadata)});
-
+	private generateItems() {
+		this.invoiceForm.patchValue({items: this.items});
 	}
 }
