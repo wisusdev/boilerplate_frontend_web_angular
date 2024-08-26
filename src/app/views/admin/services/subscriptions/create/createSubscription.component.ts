@@ -85,9 +85,16 @@ export class CreateSubscriptionComponent implements OnInit {
 	}
 
 	createInvoice() {
-		//this.generateItems();
 		this.invoiceForm.patchValue({items: this.items});
-		console.log(this.invoiceForm.value);
+		this.services.storeInvoice(this.invoiceForm.value).pipe(
+			tap(response => {
+				console.log(response);
+			}),
+			catchError(error => {
+				console.error(error);
+				return of(null);
+			})
+		).subscribe();
 	}
 
 	private fetchUsers(pageSize: number = 15, pageNumber: number = 1, filterType: string = 'first_name', filterValue: string = '', order: string = '-', sort: string = 'id') {
