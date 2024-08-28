@@ -11,8 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 	imports: [
 		TranslateModule
 	],
-	templateUrl: './showInvoice.component.html',
-	styleUrl: './showInvoice.component.css'
+	templateUrl: './showInvoice.component.html'
 })
 export class ShowInvoiceComponent implements OnInit {
 	invoiceId: string = '';
