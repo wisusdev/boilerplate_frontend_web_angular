@@ -181,6 +181,8 @@
 	"paid": "Paid",
 	"unpaid": "Unpaid",
 	"partial": "Partial",
+	"invoiceNumber": "Invoice Number",
+	"totalAmount": "Total Amount",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",

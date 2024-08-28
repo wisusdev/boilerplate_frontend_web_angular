@@ -174,13 +174,15 @@
 	"a": "un",
 	"paymentMethod": "Método de pago",
 	"invoiceDate": "Fecha de la factura",
-	"invoiceDueDate": "Fecha de vencimiento de la factura",
+	"invoiceDueDate": "Fecha de vencimiento",
 	"orderConfirmation": "Confirmación de pedido",
 	"generateInvoice": "Generar factura",
 	"sendEmail": "Enviar correo electrónico",
 	"paid": "Pagado",
 	"unpaid": "No pagado",
 	"partial": "Parcial",
+	"invoiceNumber": "Número de factura",
+	"totalAmount": "Cantidad total",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
