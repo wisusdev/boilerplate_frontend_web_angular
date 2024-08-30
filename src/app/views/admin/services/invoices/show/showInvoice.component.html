@@ -1,10 +1,91 @@
 <div class="card">
 	<div class="card-header">
 		<div class="d-flex justify-content-between align-items-center">
-			<h4 class="card-title">{{'invoice' | translate}}</h4>
+			<h2 class="card-title text-uppercase text-start m-0">{{ 'invoice' | translate }}</h2>
 		</div>
 	</div>
 	<div class="card-body">
-
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-9 col-xl-8 col-xxl-7">
+				<div class="row gy-3 mb-3">
+					<div class="col-6">
+						<h2 class="text-uppercase text-start m-0">Invoice</h2>
+					</div>
+					<div class="col-6">
+						<a class="d-block text-end" href="#">
+							<!--<img src="" class="img-fluid" alt="BootstrapBrain Logo" width="135" height="44">-->
+						</a>
+					</div>
+					<div class="col-12">
+						<h4>From</h4>
+						<address>
+							<strong>BootstrapBrain</strong><br>
+							875 N Coast Hwybr<br>
+							Laguna Beach, California, 92651<br>
+							United States<br>
+							Phone: (949) 494-7695<br>
+							Email:
+						</address>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-12 col-sm-6 col-md-8">
+						<h4>Bill To</h4>
+						<address>
+							<strong>{{invoiceUser.first_name}} {{invoiceUser.last_name}}</strong><br>
+							Email: {{invoiceUser.email}}
+						</address>
+					</div>
+					<div class="col-12 col-sm-6 col-md-4">
+						<h4 class="row">
+							<span class="col-6">Invoice #</span>
+							<span class="col-6 text-sm-end">{{invoice.invoice_number}}</span>
+						</h4>
+						<div class="row">
+							<span class="col-6">Invoice Date</span>
+							<span class="col-6 text-sm-end">{{invoice.invoice_date}}</span>
+							<span class="col-6">Due Date</span>
+							<span class="col-6 text-sm-end">{{invoice.due_date}}</span>
+							<span class="col-6">Status</span>
+							<span class="col-6 text-sm-end fw-bold">{{invoice.status}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-12">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+								<tr>
+									<th scope="col" class="text-uppercase">Qty</th>
+									<th scope="col" class="text-uppercase">Product</th>
+									<th scope="col" class="text-uppercase text-end">Unit Price</th>
+									<th scope="col" class="text-uppercase text-end">Amount</th>
+								</tr>
+								</thead>
+								<tbody class="table-group-divider">
+								<tr *ngFor="let item of invoiceItems; let i = index">
+									<th scope="row">{{item.attributes.quantity}}</th>
+									<td>{{item.attributes.description}}</td>
+									<td class="text-end">{{item.attributes.unit_price}}</td>
+									<td class="text-end">{{item.attributes.total_price}}</td>
+								</tr>
+								<tr>
+									<th scope="row" colspan="3" class="text-uppercase text-end">{{'total' | translate}}</th>
+									<td class="text-end">${{invoice.total_amount}}</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 text-end">
+						<button type="submit" class="btn btn-primary mb-3">Download Invoice</button>
+						<button type="submit" class="btn btn-danger mb-3">Submit Payment</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
