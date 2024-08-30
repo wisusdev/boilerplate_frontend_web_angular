@@ -8,6 +8,7 @@ import {StoreUpdatePackageRequestInterface} from "@data/Interfaces/Requests/stor
 import {ShowPackageResponseInterface} from "@data/Interfaces/Responses/showPackageResponse.interface";
 import {IndexSubscriptionsResponseInterface} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 import {environment} from "@env/environment";
+import {ShowInvoiceResponseInterface} from "@data/Interfaces/Responses/showInvoiceResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -74,8 +75,8 @@ export class ServicesService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	showInvoice(id: string): Observable<any> {
-		return this.httpClient.get<any>(`${this._apiUriInvoice}/${id}`, {
+	showInvoice(id: string): Observable<ShowInvoiceResponseInterface> {
+		return this.httpClient.get<ShowInvoiceResponseInterface>(`${this._apiUriInvoice}/${id}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
