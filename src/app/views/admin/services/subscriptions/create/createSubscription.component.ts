@@ -116,6 +116,7 @@ export class CreateSubscriptionComponent implements OnInit {
 		this.items.push({
 			item_id: '',
 			type: 'package',
+			name: '',
 			description: '',
 			quantity: 1,
 			unit_price: 0,
@@ -148,6 +149,7 @@ export class CreateSubscriptionComponent implements OnInit {
 		if (selectedPackage) {
 			this.items[index].item_id = selectedPackage.id;
 			this.items[index].type = selectedPackage.type;
+			this.items[index].name = selectedPackage.attributes.name;
 			this.items[index].description = selectedPackage.attributes.description;
 			this.items[index].quantity = selectedPackage.attributes.interval_count;
 			this.items[index].interval = selectedPackage.attributes.interval;
