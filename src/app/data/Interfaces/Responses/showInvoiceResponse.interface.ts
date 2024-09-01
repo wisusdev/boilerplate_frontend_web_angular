@@ -3,6 +3,7 @@ export interface InvoiceItem {
 	id: string;
 	attributes: {
 		invoice_id: string;
+		name: string;
 		description: string;
 		quantity: number;
 		unit_price: string;
@@ -27,9 +28,11 @@ export interface InvoiceAttributes {
 	created_by: string;
 	invoice_number: string;
 	invoice_date: string;
-	due_date: string;
+	due_date: string | null;
 	total_amount: string;
 	status: string;
+	payment_method: string;
+	send_email: boolean;
 }
 
 export interface ShowInvoiceResponseInterface {
