@@ -6,7 +6,7 @@ import {RouterLink} from "@angular/router";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, map, Observable, of, startWith, tap} from "rxjs";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {UserData} from "@data/Interfaces/Responses/indexUserResponseInterface";
+import {UserData} from "@data/Interfaces/Responses/indexUserResponse.interface";
 import {ToastService} from "@data/Services/Toast.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
