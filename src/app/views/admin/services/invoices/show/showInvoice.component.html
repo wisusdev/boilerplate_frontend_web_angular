@@ -1,7 +1,8 @@
 <div class="card">
 	<div class="card-header">
-		<div class="d-flex justify-content-between align-items-center">
-			<h2 class="card-title text-uppercase text-start m-0">{{ 'invoice' | translate }}</h2>
+		<div class="d-flex justify-content-end align-items-center flex-row">
+			<button type="submit" class="btn btn-primary me-2">{{'downloadInvoice' | translate}}</button>
+			<button type="submit" class="btn btn-danger">{{'cancel' | translate}}</button>
 		</div>
 	</div>
 	<div class="card-body">
@@ -47,7 +48,9 @@
 							<span class="col-6">Due Date</span>
 							<span class="col-6 text-sm-end">{{invoice.due_date}}</span>
 							<span class="col-6">Status</span>
-							<span class="col-6 text-sm-end fw-bold">{{invoice.status}}</span>
+							<span class="col-6 text-sm-end fw-bold">{{invoice.status | titlecase}}</span>
+							<span class="col-6">{{'paymentMethod' | translate}}</span>
+							<span class="col-6 text-sm-end fw-bold">{{invoice.payment_method | titlecase}}</span>
 						</div>
 					</div>
 				</div>
@@ -66,7 +69,7 @@
 								<tbody class="table-group-divider">
 								<tr *ngFor="let item of invoiceItems; let i = index">
 									<th scope="row">{{item.attributes.quantity}}</th>
-									<td>{{item.attributes.description}}</td>
+									<td>{{item.attributes.name}} - {{ item.attributes.description | slice:0:100 }}{{ item.attributes.description.length > 100 ? '...' : '' }}</td>
 									<td class="text-end">{{item.attributes.unit_price}}</td>
 									<td class="text-end">{{item.attributes.total_price}}</td>
 								</tr>
@@ -77,12 +80,6 @@
 								</tbody>
 							</table>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 text-end">
-						<button type="submit" class="btn btn-primary mb-3">Download Invoice</button>
-						<button type="submit" class="btn btn-danger mb-3">Submit Payment</button>
 					</div>
 				</div>
 			</div>
