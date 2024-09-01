@@ -50,7 +50,7 @@ export class CreateSubscriptionComponent implements OnInit {
 		const formattedDueDate = dueDate.toISOString().split('T')[0];
 
 		this.invoiceForm = this.formBuilder.group({
-			type: 'invoice',
+			type: 'invoices',
 			user_id: [null, Validators.required],
 			created_by: Auth.userId(),
 			invoice_date: [today, Validators.required],
