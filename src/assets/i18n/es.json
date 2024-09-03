@@ -87,6 +87,7 @@
 	"recordFound": "Registro encontrado",
 	"recordNotFound": "Registro no encontrado",
 	"errorAsOccurred": "Ha ocurrido un error",
+	"updateRecord": "Actualizar registro",
 	"deleteRecord": "Eliminar registro",
 	"deleteConfirmation": "¿Estás seguro de que quieres borrar este registro?",
 	"preferences": "Preferencias",
