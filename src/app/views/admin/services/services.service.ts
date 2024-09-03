@@ -93,17 +93,16 @@ export class ServicesService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	payInvoice(id: string): Observable<any> {
-		return this.httpClient.post<any>(`${this._apiUriInvoice}/${id}/pay`, {}, {
+	changeStatusInvoice(id: string, data: object): Observable<ShowInvoiceResponseInterface> {
+		return this.httpClient.patch<ShowInvoiceResponseInterface>(`${this._apiUriInvoice}/${id}/status`, data, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	cancelInvoice(id: string): Observable<any> {
-		return this.httpClient.post<any>(`${this._apiUriInvoice}/${id}/cancel`, {}, {
+	downloadInvoice(id: string): Observable<any> {
+		return this.httpClient.get(`${this._apiUriInvoice}/${id}/download`, {
 			headers: environment.headers,
+			responseType: 'blob',
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
-
-
 }
