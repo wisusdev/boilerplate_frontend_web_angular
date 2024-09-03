@@ -1,8 +1,8 @@
 <div class="card">
 	<div class="card-header">
 		<div class="d-flex justify-content-end align-items-center flex-row">
-			<button type="submit" class="btn btn-primary me-2">{{'downloadInvoice' | translate}}</button>
-			<button type="submit" class="btn btn-danger">{{'cancel' | translate}}</button>
+			<button type="submit" class="btn btn-primary me-2" (click)="downloadInvoice(invoiceId)">{{'downloadInvoice' | translate}} <i class="ms-2 bi bi-file-earmark-arrow-down-fill"></i></button>
+			<button type="submit" class="btn btn-warning" (click)="changeStatus()">{{'cancel' | translate}} <i class="ms-2 bi bi-x-circle"></i></button>
 		</div>
 	</div>
 	<div class="card-body">
