@@ -103,9 +103,9 @@ export class AccountSubscriptionsComponent implements OnInit {
 			if (result['status']) {
 
 				const data = {
-					"type": "subscriptions",
-					"id": subscriptionID,
-					"reason": result['reason']
+					type: "subscriptions",
+					id: subscriptionID,
+					reason: result['reason']
 				}
 
 				this.accountService.cancelSubscription(subscriptionID, data).pipe(
