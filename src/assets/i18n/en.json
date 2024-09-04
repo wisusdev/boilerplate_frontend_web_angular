@@ -136,6 +136,7 @@
 	"packages": "Packages",
 	"package": "Package",
 	"subscriptions": "Subscriptions",
+	"pay": "Pay",
 	"pay_with": "Pay with",
 	"downloadInvoice": "Download Invoice",
 	"cancelSubscription": "Cancel Subscription",
