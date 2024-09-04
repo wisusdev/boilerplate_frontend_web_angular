@@ -6,13 +6,15 @@ import {ProfileComponent} from "@views/admin/account/profile/profile.component";
 import {ChangePasswordComponent} from "@views/admin/account/change-password/change-password.component";
 import {DeviceConnectedComponent} from "@views/admin/account/device-connected/device-connected.component";
 import {DeleteAccountComponent} from "@views/admin/account/delete-account/delete-account.component";
+import {AccountInvoiceShowComponent} from "@views/admin/account/account-invoice/show/accountInvoiceShow.component";
 
 const routes: Routes = [
 	{path: 'account/profile', component: ProfileComponent, canActivate: [authGuard]},
 	{path: 'account/change-password', component: ChangePasswordComponent, canActivate: [authGuard]},
 	{path: 'account/device-connected', component: DeviceConnectedComponent, canActivate: [authGuard]},
 	{path: 'account/delete-account', component: DeleteAccountComponent, canActivate: [authGuard]},
-	{path: 'account/subscriptions', component: AccountSubscriptionsComponent, canActivate: [authGuard]}
+	{path: 'account/subscriptions', component: AccountSubscriptionsComponent, canActivate: [authGuard]},
+	{path: 'account/invoices/show/:id', component: AccountInvoiceShowComponent, canActivate: [authGuard]}
 ];
 
 @NgModule({
