@@ -8,6 +8,7 @@ import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/Interfaces/Resp
 import {NgForOf, SlicePipe, TitleCasePipe} from "@angular/common";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {InvoiceShowBodyComponent} from "@views/shared/invoice-show-body/invoice-show-body.component";
 
 @Component({
 	selector: 'app-show-invoices',
@@ -16,7 +17,8 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 		TranslateModule,
 		NgForOf,
 		SlicePipe,
-		TitleCasePipe
+		TitleCasePipe,
+		InvoiceShowBodyComponent
 	],
 	templateUrl: './showInvoice.component.html'
 })
