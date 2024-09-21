@@ -4,7 +4,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Package } from '@data/Interfaces/Requests/indexPackageRequest.interface';
 import { NgFor } from '@angular/common';
 import {RouterLink} from '@angular/router';
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {PublicService} from "@views/public/services/public.service";
 
 @Component({

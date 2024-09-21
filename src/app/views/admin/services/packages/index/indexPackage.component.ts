@@ -7,7 +7,7 @@ import {DatePipe, NgForOf} from "@angular/common";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormPackageComponent} from "../form/formPackage.component";
 import {Package} from "@data/Interfaces/Requests/indexPackageRequest.interface";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
 @Component({

@@ -7,7 +7,7 @@ import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.c
 import {NgForOf} from "@angular/common";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Handle} from "@data/Exceptions/Handle";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
 

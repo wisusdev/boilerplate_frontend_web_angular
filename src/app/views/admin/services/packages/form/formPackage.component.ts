@@ -4,7 +4,7 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ServicesService} from "../../services.service";
 import {catchError, of, tap} from "rxjs";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {Auth} from "@data/Providers/Auth";
 
 @Component({

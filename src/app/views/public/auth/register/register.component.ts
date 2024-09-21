@@ -6,7 +6,7 @@ import {catchError, of, tap} from 'rxjs';
 import {ErrorMessagesInterface} from 'src/app/data/Interfaces/Errors.interface';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {environment} from "@env/environment";
 
 @Component({

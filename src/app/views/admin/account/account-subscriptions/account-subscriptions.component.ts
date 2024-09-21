@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountMenuListComponent} from "@views/admin/account/account-menu-list/account-menu-list.component";
 import {AccountService} from "@views/admin/account/account.service";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {catchError, of, tap} from "rxjs";
 import {SubscriptionData} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";

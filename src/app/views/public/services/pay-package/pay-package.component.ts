@@ -7,7 +7,7 @@ import {catchError, of, tap} from "rxjs";
 import {PackageData} from "@data/Interfaces/Responses/showPackageResponse.interface";
 import {CurrencyPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {PublicService} from "@views/public/services/public.service";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {loadStripe, Stripe} from "@stripe/stripe-js";
 import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";

@@ -6,7 +6,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {catchError, of, tap} from "rxjs";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {Handle} from "@data/Exceptions/Handle";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 
 @Component({

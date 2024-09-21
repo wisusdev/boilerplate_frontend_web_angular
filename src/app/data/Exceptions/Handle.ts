@@ -2,9 +2,9 @@ import {Injectable} from "@angular/core";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Observable, pipe, throwError} from "rxjs";
 import {Router} from "@angular/router";
-import {ToastService} from "../Services/Toast.service";
 import {FormGroup} from "@angular/forms";
 import {environment} from "@env/environment";
+import {ToastService} from "@data/Services/toast.service";
 
 @Injectable({
 	providedIn: 'root'

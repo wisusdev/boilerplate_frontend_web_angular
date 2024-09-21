@@ -5,10 +5,10 @@ import { Auth } from 'src/app/data/Providers/Auth';
 import { AccountService } from '../account.service';
 import { catchError, of, tap } from 'rxjs';
 import { Handle } from 'src/app/data/Exceptions/Handle';
-import { ToastService } from 'src/app/data/Services/Toast.service';
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
+import {ToastService} from "@data/Services/toast.service";
 
 @Component({
 	selector: 'app-change-password',

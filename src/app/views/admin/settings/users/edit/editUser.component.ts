@@ -5,7 +5,7 @@ import {catchError, of, tap} from "rxjs";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 
 @Component({

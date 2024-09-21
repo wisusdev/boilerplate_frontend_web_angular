@@ -5,8 +5,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {KeyValuePipe, NgClass, NgForOf} from '@angular/common';
 import {ErrorMessagesInterface} from 'src/app/data/Interfaces/Errors.interface';
 import {catchError, of, tap} from 'rxjs';
-import {ToastService} from 'src/app/data/Services/Toast.service';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {ToastService} from "@data/Services/toast.service";
 
 @Component({
 	selector: 'app-edit-rol',

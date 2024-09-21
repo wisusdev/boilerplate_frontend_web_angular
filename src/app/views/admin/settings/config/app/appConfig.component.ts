@@ -6,7 +6,7 @@ import {catchError, of, tap} from "rxjs";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgForOf} from "@angular/common";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {FileHelperService} from "@data/Services/file-helper.service";
 import {environment} from "@env/environment";
 

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicesService} from "@views/admin/services/services.service";
 import {catchError, of, tap} from "rxjs";
-import {ToastService} from "@data/Services/Toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {InvoiceData} from "@data/Interfaces/Responses/indexInvoicesResponse.interface";
 import {DatePipe, NgForOf} from "@angular/common";
