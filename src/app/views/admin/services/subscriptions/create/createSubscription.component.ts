@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {DecimalPipe, LowerCasePipe, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {SettingsService} from "@views/admin/settings/settings.service";
 import {catchError, of, tap} from "rxjs";
@@ -9,6 +9,7 @@ import {Package} from "@data/Interfaces/Requests/indexPackageRequest.interface";
 import {ServicesService} from "@views/admin/services/services.service";
 import {itemsRequest} from "@data/Requests/items-request";
 import {Auth} from "@data/Providers/Auth";
+import {ToastService} from "@data/Services/toast.service";
 
 @Component({
 	selector: 'app-create-subscription',
@@ -40,6 +41,8 @@ export class CreateSubscriptionComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private services: ServicesService,
 		private settingsService: SettingsService,
+		private toast: ToastService,
+		private translate: TranslateService,
 	) {
 	}
 
@@ -88,10 +91,12 @@ export class CreateSubscriptionComponent implements OnInit {
 		this.invoiceForm.patchValue({items: this.items});
 		this.services.storeInvoice(this.invoiceForm.value).pipe(
 			tap(response => {
-				console.log(response);
+				this.invoiceForm.reset();
+				this.items = [];
+				this.toast.success(this.translate.instant('recordCreated'));
 			}),
 			catchError(error => {
-				console.error(error);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
 		).subscribe();
