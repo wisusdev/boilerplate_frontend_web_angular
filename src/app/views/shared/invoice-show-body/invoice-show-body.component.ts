@@ -11,8 +11,7 @@ import {TranslateModule} from "@ngx-translate/core";
 		TitleCasePipe,
 		TranslateModule
 	],
-	templateUrl: './invoice-show-body.component.html',
-	styleUrl: './invoice-show-body.component.css'
+	templateUrl: './invoice-show-body.component.html'
 })
 export class InvoiceShowBodyComponent {
 	@Input() invoice: any;
