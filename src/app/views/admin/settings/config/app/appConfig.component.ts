@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {SettingsService} from "../../settings.service";
-import {PermissionService} from "@data/Services/permission.service";
 import {catchError, of, tap} from "rxjs";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgForOf} from "@angular/common";
@@ -23,7 +22,6 @@ import {environment} from "@env/environment";
 })
 export class AppConfigComponent implements OnInit {
 	constructor(
-		protected permissions: PermissionService,
 		private settings: SettingsService,
 		private formBuilder: FormBuilder,
 		private toast: ToastService,
