@@ -9,18 +9,19 @@ import {EditRolComponent} from "./roles/edit/editRol.component";
 import { ShowUserComponent } from "./users/show/show.component";
 import {authGuard} from "@data/Guards/Auth.guard";
 import {AppConfigComponent} from "@views/admin/settings/config/app/appConfig.component";
+import {PermissionGuard} from "@data/Guards/PermissionGuard";
 
 const router: Routes = [
-	{path: 'settings/users', component: IndexUserComponent, canActivate: [authGuard], data: {permissions: 'users.index'}},
-	{path: 'settings/users/create', component: CreateUserComponent, canActivate: [authGuard], data: {permissions: 'users.create'}},
-	{path: 'settings/users/show/:id', component: ShowUserComponent, canActivate: [authGuard], data: {permissions: 'users.show'}},
-	{path: 'settings/users/edit/:id', component: EditUserComponent, canActivate: [authGuard], data: {permissions: 'users.edit'}},
+	{path: 'settings/users', component: IndexUserComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'users:index'}},
+	{path: 'settings/users/create', component: CreateUserComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'users:create'}},
+	{path: 'settings/users/show/:id', component: ShowUserComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'users:show'}},
+	{path: 'settings/users/edit/:id', component: EditUserComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'users:edit'}},
 
-	{path: 'settings/roles', component: IndexRolComponent, canActivate: [authGuard], data: {permissions: 'roles.index'}},
-	{path: 'settings/roles/create', component: CreateRolComponent, canActivate: [authGuard], data: {permissions: 'roles.create'}},
-	{path: 'settings/roles/edit/:id', component: EditRolComponent, canActivate: [authGuard], data: {permissions: 'roles.edit'}},
+	{path: 'settings/roles', component: IndexRolComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'roles:index'}},
+	{path: 'settings/roles/create', component: CreateRolComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'roles:create'}},
+	{path: 'settings/roles/edit/:id', component: EditRolComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'roles:edit'}},
 
-	{path: 'settings/app', component: AppConfigComponent, canActivate: [authGuard], data: {permissions: 'app.index'}},
+	{path: 'settings/app', component: AppConfigComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'settings:app'}},
 ];
 
 @NgModule({
