@@ -38,7 +38,7 @@
 
 				<div class="col-md-6">
 					<div class="mb-3">
-						<label for="url_api" class="form-label">{{'urlFrontend' | translate}}</label>
+						<label for="url_api" class="form-label">{{'urlBackend' | translate}}</label>
 						<input type="text" class="form-control" id="url_api" [ngClass]="{'is-invalid': errorMessages['url_api']}" formControlName="url_api" name="url_api" placeholder="{{'urlApi' | translate}}">
 						<div class="invalid-feedback">
 							{{ errorMessages['url_api'] }}
@@ -60,7 +60,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="mb-3">
-						<label for="url_frontend" class="form-label">{{'urlFrontendApp' | translate}}</label>
+						<label for="url_frontend" class="form-label">{{'urlFrontend' | translate}}</label>
 						<input type="text" class="form-control" id="url_frontend" [ngClass]="{'is-invalid': errorMessages['url_frontend']}" formControlName="url_frontend" name="url_frontend" placeholder="{{'urlFrontendApp' | translate}}">
 						<div class="invalid-feedback">
 							{{ errorMessages['url_frontend'] }}
