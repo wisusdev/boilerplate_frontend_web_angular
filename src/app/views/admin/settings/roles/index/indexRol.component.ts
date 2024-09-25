@@ -6,7 +6,6 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {Router, RouterLink} from "@angular/router";
 import {PermissionService} from "@data/Services/permission.service";
-import {redirectToHomeWithMessage} from "@data/Vendor/redirectTo";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleResponse.interface";
 import {ToastService} from "@data/Services/toast.service";
@@ -39,17 +38,12 @@ export class IndexRolComponent implements OnInit {
 		private toast: ToastService,
 		private modalService: NgbModal,
 		private translate: TranslateService,
-		protected permissions: PermissionService,
-		private router: Router,
+		protected permissions: PermissionService
 	) {
 	}
 
 	ngOnInit() {
-		if (this.permissions.hasPermission('roles:index')) {
-			this.getRoles();
-		} else {
-			redirectToHomeWithMessage(this.router, this.toast, this.translate)
-		}
+		this.getRoles();
 	}
 
 	getRoles() {
