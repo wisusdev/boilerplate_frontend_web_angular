@@ -185,6 +185,13 @@
 	"partial": "Parcial",
 	"invoiceNumber": "Número de factura",
 	"totalAmount": "Cantidad total",
+	"nameApp": "Nombre de la aplicación",
+	"urlBackend": "URL Backend",
+	"timezone": "Zona horaria",
+	"urlFrontend": "URL Frontend",
+	"logo": "Logotipo",
+	"favicon": "Favicon",
+	"youDoNotHavePermission": "No tienes permiso para realizar esta acción",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",

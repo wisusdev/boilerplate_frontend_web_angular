@@ -185,6 +185,13 @@
 	"partial": "Partial",
 	"invoiceNumber": "Invoice Number",
 	"totalAmount": "Total Amount",
+	"nameApp": "Name App",
+	"urlBackend": "URL Backend",
+	"timezone": "Timezone",
+	"urlFrontend": "URL Frontend",
+	"logo": "Logo",
+	"favicon": "Favicon",
+	"youDoNotHavePermission": "You do not have permission to perform this action",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
