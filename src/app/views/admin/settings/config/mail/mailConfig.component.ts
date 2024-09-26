@@ -65,7 +65,6 @@ export class MailConfigComponent implements OnInit {
 				this.setDataForm(res);
 			}),
 			catchError((err) => {
-				console.error(err);
 				this.toast.danger(this.translate.instant('errorAsOccurred'));
 				return of(null);
 			})
