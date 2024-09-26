@@ -8,6 +8,7 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
 import {ToastService} from "@data/Services/toast.service";
 import {environment} from "@env/environment";
+import {RouterLink} from '@angular/router';
 
 @Component({
 	selector: 'app-register',
@@ -15,7 +16,8 @@ import {environment} from "@env/environment";
 	imports: [
 		TranslateModule,
 		ReactiveFormsModule,
-		NgClass
+		NgClass,
+		RouterLink
 	],
 	templateUrl: './register.component.html'
 })
