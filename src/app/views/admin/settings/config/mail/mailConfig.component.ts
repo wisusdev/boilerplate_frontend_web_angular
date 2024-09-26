@@ -1,15 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {SettingsService} from "@views/admin/settings/settings.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 import {catchError, of, tap} from "rxjs";
 import {ToastService} from "@data/Services/toast.service";
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {NgClass} from "@angular/common";
 
 @Component({
 	selector: 'app-mail',
 	standalone: true,
-	imports: [],
+	imports: [
+		TranslateModule,
+		ReactiveFormsModule,
+		NgClass
+	],
 	templateUrl: './mailConfig.component.html'
 })
 export class MailConfigComponent implements OnInit {
@@ -43,14 +48,14 @@ export class MailConfigComponent implements OnInit {
 		this.formMail = this.formBuilder.group({
 			id: '',
 			type: 'mail',
-			driver: '',
-			host: '',
-			port: '',
+			driver: ['', [Validators.required]],
+			host: ['', [Validators.required]],
+			port: ['', [Validators.required]],
 			encryption: '',
-			username: '',
-			password: '',
-			from_address: '',
-			from_name: ''
+			username: ['', [Validators.required]],
+			password: ['', [Validators.required]],
+			from_address: ['', [Validators.required]],
+			from_name: ['', [Validators.required]]
 		});
 	}
 
@@ -86,5 +91,20 @@ export class MailConfigComponent implements OnInit {
 		};
 
 		this.formMail.setValue(formValues);
+	}
+
+	saveMailSettings() {
+		this.resetErrorMessages();
+		this.settings.updateSettings(this.formMail.value).pipe(
+			tap((response) => {
+				this.setDataForm(response);
+				this.toast.success(this.translate.instant('recordUpdated'));
+			}),
+			catchError((err) => {
+				console.error(err);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
+		).subscribe();
 	}
 }
