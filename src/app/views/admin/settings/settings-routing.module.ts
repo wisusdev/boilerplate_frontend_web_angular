@@ -10,6 +10,7 @@ import { ShowUserComponent } from "./users/show/show.component";
 import {authGuard} from "@data/Guards/Auth.guard";
 import {AppConfigComponent} from "@views/admin/settings/config/app/appConfig.component";
 import {PermissionGuard} from "@data/Guards/PermissionGuard";
+import { MailConfigComponent } from "./config/mail/mailConfig.component";
 
 const router: Routes = [
 	{path: 'settings/users', component: IndexUserComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'users:index'}},
@@ -22,6 +23,7 @@ const router: Routes = [
 	{path: 'settings/roles/edit/:id', component: EditRolComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'roles:edit'}},
 
 	{path: 'settings/app', component: AppConfigComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'settings:app'}},
+	{path: 'settings/mail', component: MailConfigComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'settings:mail'}}
 ];
 
 @NgModule({
