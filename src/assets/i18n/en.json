@@ -192,6 +192,7 @@
 	"logo": "Logo",
 	"favicon": "Favicon",
 	"youDoNotHavePermission": "You do not have permission to perform this action",
+	"mail": "Mail",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",

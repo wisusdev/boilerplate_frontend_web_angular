@@ -192,6 +192,7 @@
 	"logo": "Logotipo",
 	"favicon": "Favicon",
 	"youDoNotHavePermission": "No tienes permiso para realizar esta acción",
+	"mail": "Correo",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
