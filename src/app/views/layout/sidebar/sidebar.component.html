@@ -75,6 +75,11 @@
 						<i class="icon bi bi-gear-fill"></i> {{'general' | translate }}
 					</a>
 				</li>
+				<li *ngIf="permissionService.hasPermission('settings:mail')">
+					<a class="treeview-item" routerLink="/settings/mail" routerLinkActive="active">
+						<i class="icon bi bi-envelope-at"></i> {{'mail' | translate }}
+					</a>
+				</li>
 			</ul>
 		</li>
 	</ul>
