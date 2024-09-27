@@ -193,6 +193,7 @@
 	"favicon": "Favicon",
 	"youDoNotHavePermission": "No tienes permiso para realizar esta acción",
 	"mail": "Correo",
+	"paymentGateway": "Pasarela de pago",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",
