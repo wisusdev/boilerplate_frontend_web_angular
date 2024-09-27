@@ -29,16 +29,16 @@
 					<input type="text" class="form-control" id="thousands_separator" formControlName="thousands_separator" placeholder="{{'thousandsSeparator' | translate}}">
 				</div>
 			</div>
-			
-			<hr>
-			<h5>{{'paypal' | translate}}</h5>
 
-			<div class="row shadow bg-secondary rounded">
-				<div formGroupName="payment_methods" class="col-md-6 mb-3">
+			<hr>
+
+
+			<div class="row bg-light rounded">
+				<h5>{{'paypal' | translate}}</h5>
+				<div formGroupName="payment_methods" class="col-md-2 mb-3">
 					<div formGroupName="paypal">
-						<label for="enabled" class="form-label">{{'enabled' | translate}}</label>
-						
-						<select class="form-select" id="enabled" name="enabled" formControlName="enabled" required>
+						<label for="status" class="form-label">{{'enabled' | translate}}</label>
+						<select class="form-select" id="status" name="enabled" formControlName="enabled" required>
 							<option value="">{{'select' | translate}} {{'a' | translate}} {{'status' | translate}}</option>
 							<option *ngFor="let enabled of paymentMethodsEnabled" [value]="enabled">{{ enabled }}</option>
 						</select>
@@ -48,32 +48,32 @@
 						</div>
 					</div>
 				</div>
-				<div formGroupName="payment_methods" class="col-md-6 mb-3">
+				<div formGroupName="payment_methods" class="col-md-2 mb-3">
 					<div formGroupName="paypal">
-						<label for="mode" class="form-label">{{'enabled' | translate}}</label>
-						
-						<select class="form-select" id="enabled" name="enabled" formControlName="enabled" required>
-							<option value="">{{'select' | translate}} {{'a' | translate}} {{'status' | translate}}</option>
+						<label for="mode" class="form-label">{{'mode' | translate}}</label>
+
+						<select class="form-select" id="mode" name="mode" formControlName="enabled" required>
+							<option value="">{{'select' | translate}} {{'a' | translate}} {{'mode' | translate}}</option>
 							<option *ngFor="let mode of paymentMethodsMode" [value]="mode">{{ mode | translate }}</option>
 						</select>
-						
+
 						<div class="invalid-feedback">
 							{{ errorMessages['mode'] }}
 						</div>
 					</div>
 				</div>
-				<div formGroupName="payment_methods" class="col-md-6 mb-3">
+				<div formGroupName="payment_methods" class="col-md-4 mb-3">
 					<div formGroupName="paypal">
-						<label for="key" class="form-label">{{'enabled' | translate}}</label>
+						<label for="key" class="form-label">{{'key' | translate}}</label>
 						<input type="text" class="form-control" id="key" [ngClass]="{'is-invalid': errorMessages['key']}" formControlName="key" name="key" placeholder="{{'key' | translate}}">
 						<div class="invalid-feedback">
 							{{ errorMessages['key'] }}
 						</div>
 					</div>
 				</div>
-				<div formGroupName="payment_methods" class="col-md-6 mb-3">
+				<div formGroupName="payment_methods" class="col-md-4 mb-3">
 					<div formGroupName="paypal">
-						<label for="secret" class="form-label">{{'enabled' | translate}}</label>
+						<label for="secret" class="form-label">{{'secret' | translate}}</label>
 						<input type="text" class="form-control" id="secret" [ngClass]="{'is-invalid': errorMessages['secret']}" formControlName="secret" name="secret" placeholder="{{'secret' | translate}}">
 						<div class="invalid-feedback">
 							{{ errorMessages['secret'] }}
