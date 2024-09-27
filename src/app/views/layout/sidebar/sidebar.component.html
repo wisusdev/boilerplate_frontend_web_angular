@@ -80,6 +80,11 @@
 						<i class="icon bi bi-envelope-at"></i> {{'mail' | translate }}
 					</a>
 				</li>
+				<li *ngIf="permissionService.hasPermission('settings:payment_gateway')">
+					<a class="treeview-item" routerLink="/settings/payment_gateway" routerLinkActive="active">
+						<i class="icon bi bi-credit-card"></i> {{'paymentGateway' | translate }}
+					</a>
+				</li>
 			</ul>
 		</li>
 	</ul>
