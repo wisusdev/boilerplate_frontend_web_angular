@@ -1,1 +1,86 @@
-<p>payment-gateway works!</p>
+<div class="card">
+	<div class="card-header d-flex justify-content-between align-items-center">
+		<h4 class="card-title">{{'paymentGateway' | translate}}</h4>
+	</div>
+	<form [formGroup]="formPaymentGateway" (ngSubmit)="savePaymentGatewaySettings()">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<label for="currency" class="form-label">{{'currency' | translate}}</label>
+					<input type="text" class="form-control" id="currency" [ngClass]="{'is-invalid': errorMessages['currency']}" formControlName="currency" name="currency" placeholder="{{'currency' | translate}}">
+					<div class="invalid-feedback">
+						{{ errorMessages['currency'] }}
+					</div>
+				</div>
+				<div class="col-md-6 mb-3">
+					<label for="currency_symbol" class="form-label">{{'currencySymbol' | translate}}</label>
+					<input type="text" class="form-control" id="currency_symbol" [ngClass]="{'is-invalid': errorMessages['currency_symbol']}" formControlName="currency_symbol" name="currency_symbol" placeholder="{{'currencySymbol' | translate}}">
+					<div class="invalid-feedback">
+						{{ errorMessages['currency_symbol'] }}
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="decimal_separator" class="form-label">{{'decimalSeparator' | translate}}</label>
+					<input type="text" class="form-control" id="decimal_separator" formControlName="decimal_separator" placeholder="{{'decimalSeparator' | translate}}">
+				</div>
+				<div class="col-md-6 mb-3">
+					<label for="thousands_separator" class="form-label">{{'thousandsSeparator' | translate}}</label>
+					<input type="text" class="form-control" id="thousands_separator" formControlName="thousands_separator" placeholder="{{'thousandsSeparator' | translate}}">
+				</div>
+			</div>
+			
+			<hr>
+			<h5>{{'paypal' | translate}}</h5>
+
+			<div class="row shadow bg-secondary rounded">
+				<div formGroupName="payment_methods" class="col-md-6 mb-3">
+					<div formGroupName="paypal">
+						<label for="enabled" class="form-label">{{'enabled' | translate}}</label>
+						
+						<select class="form-select" id="enabled" name="enabled" formControlName="enabled" required>
+							<option value="">{{'select' | translate}} {{'a' | translate}} {{'status' | translate}}</option>
+							<option *ngFor="let enabled of paymentMethodsEnabled" [value]="enabled">{{ enabled }}</option>
+						</select>
+
+						<div class="invalid-feedback">
+							{{ errorMessages['enabled'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-6 mb-3">
+					<div formGroupName="paypal">
+						<label for="mode" class="form-label">{{'enabled' | translate}}</label>
+						
+						<select class="form-select" id="enabled" name="enabled" formControlName="enabled" required>
+							<option value="">{{'select' | translate}} {{'a' | translate}} {{'status' | translate}}</option>
+							<option *ngFor="let mode of paymentMethodsMode" [value]="mode">{{ mode | translate }}</option>
+						</select>
+						
+						<div class="invalid-feedback">
+							{{ errorMessages['mode'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-6 mb-3">
+					<div formGroupName="paypal">
+						<label for="key" class="form-label">{{'enabled' | translate}}</label>
+						<input type="text" class="form-control" id="key" [ngClass]="{'is-invalid': errorMessages['key']}" formControlName="key" name="key" placeholder="{{'key' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['key'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-6 mb-3">
+					<div formGroupName="paypal">
+						<label for="secret" class="form-label">{{'enabled' | translate}}</label>
+						<input type="text" class="form-control" id="secret" [ngClass]="{'is-invalid': errorMessages['secret']}" formControlName="secret" name="secret" placeholder="{{'secret' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['secret'] }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
