@@ -50,7 +50,7 @@ export class PaymentGatewayConfigComponent implements OnInit {
 	private createPaymentMethodGroup() {
 		return this.formBuilder.group({
 		  enabled: false,
-		  mode: '',
+		  mode: 'sandbox',
 		  key: '',
 		  secret: ''
 		});
