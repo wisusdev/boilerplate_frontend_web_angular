@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {SettingsService} from "@views/admin/settings/settings.service";
 import {ToastService} from "@data/Services/toast.service";
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ErrorMessagesInterface} from "@data/Interfaces/Errors.interface";
 import {catchError, of, tap} from "rxjs";
-import {NgClass, NgForOf} from "@angular/common";
+import {LowerCasePipe, NgClass, NgForOf, TitleCasePipe, UpperCasePipe} from "@angular/common";
 
 @Component({
 	selector: 'app-payment-gateway',
@@ -15,13 +15,15 @@ import {NgClass, NgForOf} from "@angular/common";
 		ReactiveFormsModule,
 		NgClass,
 		NgForOf,
+		TitleCasePipe,
+		UpperCasePipe,
+		LowerCasePipe,
 	],
 	templateUrl: './payment-gateway-config.component.html'
 })
 export class PaymentGatewayConfigComponent implements OnInit {
 	formPaymentGateway!: FormGroup;
 
-	paymentMethodsEnabled: boolean[] = [true, false];
 	paymentMethodsMode: string[] = ['sandbox', 'live'];
 
 	constructor(
@@ -51,8 +53,8 @@ export class PaymentGatewayConfigComponent implements OnInit {
 		return this.formBuilder.group({
 		  enabled: false,
 		  mode: 'sandbox',
-		  key: '',
-		  secret: ''
+		  key: ['', [Validators.required]],
+		  secret: ['', [Validators.required]]
 		});
 	  }
 
@@ -60,10 +62,10 @@ export class PaymentGatewayConfigComponent implements OnInit {
 		this.formPaymentGateway = this.formBuilder.group({
 			id: '',
 			type: 'payment_gateway',
-			currency: '',
-			currency_symbol: '',
-			decimal_separator: '',
-			thousands_separator: '',
+			currency: ['', [Validators.required]],
+			currency_symbol: ['', [Validators.required]],
+			decimal_separator: ['', [Validators.required]],
+			thousands_separator: ['', [Validators.required]],
 			payment_methods: this.formBuilder.group({
 			  paypal: this.createPaymentMethodGroup(),
 			  stripe: this.createPaymentMethodGroup(),
@@ -104,6 +106,17 @@ export class PaymentGatewayConfigComponent implements OnInit {
 	}
 
 	savePaymentGatewaySettings() {
-		console.log(this.formPaymentGateway.value);
+		this.resetErrorMessages();
+		this.settings.updateSettings(this.formPaymentGateway.value).pipe(
+			tap((response) => {
+				this.setDataForm(response);
+				this.toast.success(this.translate.instant('recordUpdated'));
+			}),
+			catchError((err) => {
+				console.error(err);
+				this.toast.danger(this.translate.instant('errorAsOccurred'));
+				return of(null);
+			})
+		).subscribe();
 	}
 }
