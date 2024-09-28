@@ -194,6 +194,16 @@
 	"youDoNotHavePermission": "No tienes permiso para realizar esta acción",
 	"mail": "Correo",
 	"paymentGateway": "Pasarela de pago",
+	"enabled": "Habilitado",
+	"mode": "Modo",
+	"live": "Producción",
+	"sandbox": "Prueba",
+	"publicKey": "Clave pública",
+	"secretKey": "Clave secreta",
+	"currency": "Moneda",
+	"currencySymbol": "Símbolo de moneda",
+	"decimalSeparator": "Separador decimal",
+	"thousandsSeparator": "Separador de miles",
 
 	"validation": {
 		"thisFieldIsRequired": "Este campo es requerido",

@@ -194,6 +194,16 @@
 	"youDoNotHavePermission": "You do not have permission to perform this action",
 	"mail": "Mail",
 	"paymentGateway": "Payment Gateway",
+	"enabled": "Enabled",
+	"mode": "Mode",
+	"live": "Live",
+	"sandbox": "Sandbox",
+	"publicKey": "Public Key",
+	"secretKey": "Secret Key",
+	"currency": "Currency",
+	"currencySymbol": "Currency Symbol",
+	"decimalSeparator": "Decimal Separator",
+	"thousandsSeparator": "Thousands Separator",
 
 	"validation": {
 		"thisFieldIsRequired": "This field is required",
