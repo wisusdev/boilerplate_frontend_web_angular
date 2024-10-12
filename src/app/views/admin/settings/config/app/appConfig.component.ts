@@ -99,8 +99,6 @@ export class AppConfigComponent implements OnInit {
 		const { name, url_api, url_frontend, description, email, phone, address, timezone, logo, favicon } = attributes;
 
 		const formValues = {
-			id,
-			type,
 			name,
 			url_api,
 			url_frontend,
@@ -109,9 +107,14 @@ export class AppConfigComponent implements OnInit {
 			phone,
 			address,
 			timezone,
+			logo,
+			favicon
 		};
 
-		this.formApp.patchValue(formValues);
+
+		localStorage.setItem('app', JSON.stringify(formValues));
+
+		this.formApp.patchValue({ id, type, ...formValues });
 		this.timezones = relationships.timezones;
 		this.logoUrl = logo || environment.placeholderImage;
 		this.faviconUrl = favicon || environment.placeholderImage;
