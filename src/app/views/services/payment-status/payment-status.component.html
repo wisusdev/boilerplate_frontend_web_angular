@@ -1,0 +1,13 @@
+@if (statusPayment === 'success') {
+	<div class="alert alert-success" role="alert">
+		<h4 class="alert-heading"><i class="bi bi-check-circle"></i> {{"paymentSuccessful" | translate}}</h4>
+		<p>{{"thankYouForPayment" | translate}}</p>
+		<p>{{"checkYourEmailOrYourAccount" | translate}} <a href="/account/profile">{{"here" | translate}}</a></p>
+	</div>
+} @else {
+	<div class="alert alert-danger" role="alert">
+		<h4 class="alert-heading"><i class="bi bi-exclamation-circle"></i> {{"paymentFailed" | translate}}</h4>
+		<p>{{"paymentFailedMessage" | translate}}</p>
+	</div>
+}
+
