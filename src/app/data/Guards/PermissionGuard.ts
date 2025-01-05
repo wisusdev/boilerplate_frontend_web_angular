@@ -1,9 +1,9 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {PermissionService} from "../Services/permission.service";
-import {ToastService} from "@data/Services/toast.service";
 import {TranslateService} from "@ngx-translate/core";
 import {environment} from "@env/environment";
+import {PermissionService} from "@data/services/permission.service";
+import {ToastService} from "@data/services/toast.service";
 
 export const PermissionGuard: CanActivateFn = (route, state) => {
 
