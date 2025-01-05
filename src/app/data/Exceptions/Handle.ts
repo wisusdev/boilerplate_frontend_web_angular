@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Observable, pipe, throwError} from "rxjs";
+import {Observable, throwError} from "rxjs";
 import {Router} from "@angular/router";
 import {FormGroup} from "@angular/forms";
 import {environment} from "@env/environment";
-import {ToastService} from "@data/Services/toast.service";
+import {ToastService} from "@data/services/toast.service";
 
 @Injectable({
 	providedIn: 'root'
