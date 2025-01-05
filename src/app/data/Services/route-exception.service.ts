@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { exceptionOfRoutesForAdministrationPanel } from "../Vendor/RoutesException";
+import {exceptionOfRoutesForAdministrationPanel} from "@data/vendor/routes-exception";
 
 @Injectable({
 	providedIn: 'root'
