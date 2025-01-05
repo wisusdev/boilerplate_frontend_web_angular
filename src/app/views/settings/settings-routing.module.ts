@@ -9,7 +9,7 @@ import {EditRolComponent} from "./roles/edit/editRol.component";
 import { ShowUserComponent } from "./users/show/show.component";
 import {authGuard} from "@data/guards/auth.guard";
 import {AppConfigComponent} from "@views/settings/config/app/appConfig.component";
-import {PermissionGuard} from "@data/guards/permissionGuard";
+import {PermissionGuard} from "@data/guards/permission.guard";
 import { MailConfigComponent } from "./config/mail/mailConfig.component";
 import {PaymentGatewayConfigComponent} from "@views/settings/config/payment-gateway/payment-gateway-config.component";
 

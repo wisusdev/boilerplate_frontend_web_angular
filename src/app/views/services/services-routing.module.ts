@@ -6,7 +6,7 @@ import {authGuard} from "@data/guards/auth.guard";
 import {IndexInvoiceComponent} from "@views/services/invoices/index/indexInvoice.component";
 import {CreateSubscriptionComponent} from "@views/services/subscriptions/create/createSubscription.component";
 import {ShowInvoiceComponent} from "@views/services/invoices/show/showInvoice.component";
-import { PermissionGuard } from "@data/guards/permissionGuard";
+import {PermissionGuard} from "@data/guards/permission.guard";
 
 const routes: Routes = [
 	{path: 'services/packages', component: IndexPackageComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'packages:index'}},
