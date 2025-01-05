@@ -1,0 +1,10 @@
+<div class="card">
+	<div class="card-header">
+		<div class="d-flex justify-content-end align-items-center flex-row">
+			<button type="submit" class="btn btn-primary me-2" (click)="payInvoice()">{{'pay' | translate | titlecase}} <i class="ms-2 bi bi-credit-card"></i></button>
+		</div>
+	</div>
+	<div class="card-body">
+		<app-invoice-show-body [invoice]="invoice" [invoiceUser]="invoiceUser" [invoiceItems]="invoiceItems"></app-invoice-show-body>
+	</div>
+</div>
