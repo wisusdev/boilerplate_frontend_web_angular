@@ -4,9 +4,9 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgbCollapse, NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
 import {DOCUMENT, NgForOf} from "@angular/common";
 import {catchError, of, tap} from "rxjs";
-import {Auth} from "@data/Providers/Auth";
-import {AuthService} from "../../public/auth/auth.service";
-import {RouteExceptionService} from "@data/Services/route-exception.service";
+import {Auth} from "@data/providers/auth";
+import {AuthService} from "@views/auth/auth.service";
+import {RouteExceptionService} from "@data/services/route-exception.service";
 import {environment} from "@env/environment";
 
 @Component({
@@ -57,6 +57,12 @@ export class NavbarComponent implements OnInit {
 			this.translate.use(language);
 		} else {
 			this.translate.use(this.translate.getDefaultLang());
+		}
+
+		const appData = localStorage.getItem('app') || null;
+		if (appData) {
+			const app = JSON.parse(appData);
+			this.appName = app.name;
 		}
 	}
 

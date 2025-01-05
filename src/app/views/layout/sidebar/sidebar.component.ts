@@ -1,9 +1,9 @@
 import { Component, ElementRef, Renderer2, OnInit } from '@angular/core';
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {PermissionService} from "@data/Services/permission.service";
 import {NgIf} from "@angular/common";
 import {environment} from "@env/environment";
+import {PermissionService} from "@data/services/permission.service";
 
 @Component({
 	selector: 'app-sidebar',
