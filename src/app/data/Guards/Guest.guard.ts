@@ -1,8 +1,8 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {Auth} from "../Providers/Auth";
 import {map, take} from "rxjs";
 import {environment} from "@env/environment";
+import {Auth} from "@data/providers/auth";
 
 export const guestGuard: CanActivateFn = () => {
 	const authUser = inject(Auth);
