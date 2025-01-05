@@ -1,0 +1,177 @@
+<div class="card mb-3">
+	<div class="card-header border-bottom-0 d-flex justify-content-between align-items-center">
+		<h4 class="card-title">{{ 'paymentGateway' | translate }}</h4>
+	</div>
+</div>
+<form [formGroup]="formPaymentGateway" (ngSubmit)="savePaymentGatewaySettings()">
+	<div class="card mb-3">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-3 mb-3">
+					<label for="currency" class="form-label">{{ 'currency' | translate }}</label>
+					<input type="text" class="form-control" id="currency" [ngClass]="{'is-invalid': errorMessages['currency']}" formControlName="currency" name="currency" placeholder="{{'currency' | translate}}">
+					<div class="invalid-feedback">
+						{{ errorMessages['currency'] }}
+					</div>
+				</div>
+				<div class="col-md-3 mb-3">
+					<label for="currency_symbol" class="form-label">{{ 'currencySymbol' | translate }}</label>
+					<input type="text" class="form-control" id="currency_symbol" [ngClass]="{'is-invalid': errorMessages['currency_symbol']}" formControlName="currency_symbol" name="currency_symbol" placeholder="{{'currencySymbol' | translate}}">
+					<div class="invalid-feedback">
+						{{ errorMessages['currency_symbol'] }}
+					</div>
+				</div>
+
+				<div class="col-md-3 mb-3">
+					<label for="decimal_separator" class="form-label">{{ 'decimalSeparator' | translate }}</label>
+					<input type="text" class="form-control" id="decimal_separator" formControlName="decimal_separator" placeholder="{{'decimalSeparator' | translate}}">
+				</div>
+				<div class="col-md-3 mb-3">
+					<label for="thousands_separator" class="form-label">{{ 'thousandsSeparator' | translate }}</label>
+					<input type="text" class="form-control" id="thousands_separator" formControlName="thousands_separator" placeholder="{{'thousandsSeparator' | translate}}">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="card mb-3">
+		<div class="card-body">
+			<div class="row bg-light-subtle rounded">
+				<h5 class="mb-3">{{ 'paypal' | translate | titlecase | uppercase }}</h5>
+				<div formGroupName="payment_methods" class="col-md-2 mb-3">
+					<div formGroupName="paypal">
+						<label for="paypalStatus" class="form-label">{{ 'enabled' | translate }}</label>
+
+						<select class="form-select" id="paypalStatus" formControlName="enabled" required>
+							<option value="true">{{'yes' | translate }}</option>
+							<option value="false">{{'no' | translate }}</option>
+						</select>
+
+						<div class="invalid-feedback">
+							{{ errorMessages['enabled'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-2 mb-3">
+					<div formGroupName="paypal">
+						<label for="paypalMode" class="form-label">{{ 'mode' | translate }}</label>
+
+						<select class="form-select" id="paypalMode" name="mode" formControlName="mode" required>
+							<option *ngFor="let mode of paymentMethodsMode" [value]="mode">{{ mode | translate }}</option>
+						</select>
+
+						<div class="invalid-feedback">
+							{{ errorMessages['mode'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-4 mb-3">
+					<div formGroupName="paypal">
+						<label for="paypalKey" class="form-label">{{ 'publicKey' | translate }}</label>
+						<input type="text" class="form-control" id="paypalKey" [ngClass]="{'is-invalid': errorMessages['key']}" formControlName="key" name="key" placeholder="{{'publicKey' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['key'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-4 mb-3">
+					<div formGroupName="paypal">
+						<label for="paypalSecret" class="form-label">{{ 'secretKey' | translate }}</label>
+						<input type="text" class="form-control" id="paypalSecret" [ngClass]="{'is-invalid': errorMessages['secret']}" formControlName="secret" name="secret" placeholder="{{'secretKey' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['secret'] }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card mb-3">
+		<div class="card-body">
+			<div class="row bg-light-subtle rounded">
+				<h5 class="mb-3">{{ 'stripe' | translate | titlecase | uppercase }}</h5>
+				<div formGroupName="payment_methods" class="col-md-2 mb-3">
+					<div formGroupName="stripe">
+						<label for="stripeStatus" class="form-label">{{ 'enabled' | translate }}</label>
+
+						<select class="form-select" id="stripeStatus" formControlName="enabled" required>
+							<option value="true">{{'yes' | translate }}</option>
+							<option value="false">{{'no' | translate }}</option>
+						</select>
+
+						<div class="invalid-feedback">
+							{{ errorMessages['enabled'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-4 mb-3">
+					<div formGroupName="stripe">
+						<label for="stripeKey" class="form-label">{{ 'publicKey' | translate }}</label>
+						<input type="text" class="form-control" id="stripeKey" [ngClass]="{'is-invalid': errorMessages['key']}" formControlName="key" name="key" placeholder="{{'publicKey' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['key'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-4 mb-3">
+					<div formGroupName="stripe">
+						<label for="stripeSecret" class="form-label">{{ 'secretKey' | translate }}</label>
+						<input type="text" class="form-control" id="stripeSecret" [ngClass]="{'is-invalid': errorMessages['secret']}" formControlName="secret" name="secret" placeholder="{{'secretKey' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['secret'] }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card mb-3">
+		<div class="card-body">
+			<div class="row bg-light-subtle rounded">
+				<h5 class="mb-3">{{ 'wompi' | translate | titlecase | uppercase }}</h5>
+				<div formGroupName="payment_methods" class="col-md-2 mb-3">
+					<div formGroupName="wompi">
+						<label for="wompiStatus" class="form-label">{{ 'enabled' | translate }}</label>
+
+						<select class="form-select" id="wompiStatus" formControlName="enabled" required>
+							<option value="true">{{'yes' | translate }}</option>
+							<option value="false">{{'no' | translate }}</option>
+						</select>
+
+						<div class="invalid-feedback">
+							{{ errorMessages['enabled'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-4 mb-3">
+					<div formGroupName="wompi">
+						<label for="wompiKey" class="form-label">{{ 'publicKey' | translate }}</label>
+						<input type="text" class="form-control" id="wompiKey" [ngClass]="{'is-invalid': errorMessages['key']}" formControlName="key" name="key" placeholder="{{'publicKey' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['key'] }}
+						</div>
+					</div>
+				</div>
+				<div formGroupName="payment_methods" class="col-md-4 mb-3">
+					<div formGroupName="wompi">
+						<label for="wompiSecret" class="form-label">{{ 'secretKey' | translate }}</label>
+						<input type="text" class="form-control" id="wompiSecret" [ngClass]="{'is-invalid': errorMessages['secret']}" formControlName="secret" name="secret" placeholder="{{'secretKey' | translate}}">
+						<div class="invalid-feedback">
+							{{ errorMessages['secret'] }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="card-footer border-top-0 d-flex justify-content-end">
+			<button [disabled]="!formPaymentGateway.valid" type="submit" class="btn btn-primary">{{ 'save' | translate }}</button>
+		</div>
+	</div>
+</form>
