@@ -1,19 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {authGuard} from '@data/Guards/Auth.guard';
-import {HomeComponent} from "@views/admin/home/home.component";
-import {WelcomeComponent} from "@views/public/welcome/welcome.component";
-import {AccountRoutingModule} from "@views/admin/account/account-routing.module";
-import {SettingsRoutingModule} from "@views/admin/settings/settings-routing.module";
-import {AuthRoutingModule} from "@views/public/auth/auth-routing.module";
-import {ServicesRoutingModule} from "@views/admin/services/services-routing.module";
-import { PublicPackagesComponent } from '@views/public/services/package/public-packages.component';
-import {PayPackageComponent} from "@views/public/services/pay-package/pay-package.component";
-import {PaymentStatusComponent} from "@views/public/services/payment-status/payment-status.component";
+import {authGuard} from '@data/guards/auth.guard';
+import {HomeComponent} from "@views/home/home.component";
+import {WelcomeComponent} from "@views/welcome/welcome.component";
+import {AccountRoutingModule} from "@views/account/account-routing.module";
+import {SettingsRoutingModule} from "@views/settings/settings-routing.module";
+import {AuthRoutingModule} from "@views/auth/auth-routing.module";
+import {ServicesRoutingModule} from "@views/services/services-routing.module";
+import { PublicPackagesComponent } from '@views/services/packages/public-package/public-packages.component';
+import {PayPackageComponent} from "@views/services/pay-package/pay-package.component";
+import {PaymentStatusComponent} from "@views/services/payment-status/payment-status.component";
 
 const routes: Routes = [
-	{path: '', component: WelcomeComponent},
-	{path: 'home', component: HomeComponent, canActivate: [authGuard]},
+	{path: '', component: WelcomeComponent, data: {title: 'Welcome'}},
+	{path: 'home', component: HomeComponent, canActivate: [authGuard], data: {title: 'Home'}},
 	{path: 'plans', component: PublicPackagesComponent},
 	{path: 'plans/:id', component: PayPackageComponent},
 	{path: 'payment-success/:id', component: PaymentStatusComponent, canActivate: [authGuard]},

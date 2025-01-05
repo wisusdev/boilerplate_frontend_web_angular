@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Auth} from '@data/Providers/Auth';
-import {RouteExceptionService} from "@data/Services/route-exception.service";
+import {Auth} from '@data/providers/auth';
+import {RouteExceptionService} from "@data/services/route-exception.service";
 import {catchError, of, tap} from "rxjs";
-import {SettingsService} from "@views/admin/settings/settings.service";
-import {TranslateService} from "@ngx-translate/core";
+import {SettingsService} from "@views/settings/settings.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
 	selector: 'app-root',
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 		private authUser: Auth,
 		private routeExceptionService: RouteExceptionService,
 		private settings: SettingsService,
+		private titleService: Title
 	) {
 	}
 
@@ -27,8 +28,11 @@ export class AppComponent implements OnInit {
 			this.loggedIn = status;
 		});
 
-		const app = localStorage.getItem('app') || null;
-		if (app === null) {
+		const appData = localStorage.getItem('app') || null;
+		if (appData) {
+			const app = JSON.parse(appData);
+			this.titleService.setTitle(app.name);
+		} else {
 			this.getAppSettings();
 		}
 	}
