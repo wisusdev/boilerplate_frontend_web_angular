@@ -1,5 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
-import {CreditCardNumberMaskDirective} from "@data/Directives/credit-card-number-mask.directive";
+import {CreditCardNumberMaskDirective} from "@data/directives/credit-card-number-mask.directive";
 
 export class WompiRequest {
 	static creditCardNumber(): ValidatorFn {
