@@ -5,7 +5,7 @@ import {environment} from "@env/environment";
 import {PermissionService} from "@data/services/permission.service";
 import {ToastService} from "@data/services/toast.service";
 
-export const PermissionGuard: CanActivateFn = (route, state) => {
+export const permissionGuard: CanActivateFn = (route, state) => {
 
 	const permissionService = inject(PermissionService);
 	const router = inject(Router);
