@@ -6,14 +6,28 @@ import {authGuard} from "@data/guards/auth.guard";
 import {IndexInvoiceComponent} from "@views/services/invoices/index/indexInvoice.component";
 import {CreateSubscriptionComponent} from "@views/services/subscriptions/create/createSubscription.component";
 import {ShowInvoiceComponent} from "@views/services/invoices/show/showInvoice.component";
-import {PermissionGuard} from "@data/guards/permission.guard";
+import {permissionGuard} from "@data/guards/permission.guard";
+
+function createRoute(path: string, component: any, permissions: string) {
+	return {
+		path,
+		component,
+		canActivate: [authGuard, permissionGuard],
+		data: { permissions }
+	};
+}
 
 const routes: Routes = [
-	{path: 'services/packages', component: IndexPackageComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'packages:index'}},
-	{path: 'services/subscriptions', component: IndexSubscriptionComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'subscriptions:index'}},
-	{path: 'services/subscriptions/create', component: CreateSubscriptionComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'subscriptions:create'}},
-	{path: 'services/invoices', component: IndexInvoiceComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'invoices:index'}},
-	{path: 'services/invoices/show/:id', component: ShowInvoiceComponent, canActivate: [authGuard, PermissionGuard], data: {permissions: 'invoices:show'}},
+	{
+		path: 'services',
+		children: [
+			createRoute('packages', IndexPackageComponent, 'packages:index'),
+			createRoute('subscriptions', IndexSubscriptionComponent, 'subscriptions:index'),
+			createRoute('subscriptions/create', CreateSubscriptionComponent, 'subscriptions:create'),
+			createRoute('invoices', IndexInvoiceComponent, 'invoices:index'),
+			createRoute('invoices/show/:id', ShowInvoiceComponent, 'invoices:show')
+		]
+	}
 ];
 
 @NgModule({
