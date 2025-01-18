@@ -5,10 +5,10 @@ import {NgFor, NgIf} from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {RouterLink} from "@angular/router";
-import {PermissionService} from "@data/services/permission.service";
+import {PermissionService} from "@data/Services/permission.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
-import {IndexRoleResponseInterface} from "@data/interfaces/responses/indexRoleResponse.interface";
-import {ToastService} from "@data/services/toast.service";
+import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleResponse.interface";
+import {ToastService} from "@data/Services/toast.service";
 
 @Component({
 	selector: 'app-index-rol',

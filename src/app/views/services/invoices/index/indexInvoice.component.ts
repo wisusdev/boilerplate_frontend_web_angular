@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicesService} from "@views/services/services.service";
 import {catchError, of, tap} from "rxjs";
-import {ToastService} from "@data/services/toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {InvoiceData} from "@data/interfaces/responses/indexInvoicesResponse.interface";
+import {InvoiceData} from "@data/Interfaces/Responses/indexInvoicesResponse.interface";
 import {DatePipe, NgForOf} from "@angular/common";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {catchError, of, tap} from "rxjs";
-import {ToastService} from "@data/services/toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ServicesService} from "@views/services/services.service";
 

@@ -7,9 +7,9 @@ import {EditUserComponent} from "./users/edit/editUser.component";
 import {CreateRolComponent} from "./roles/create/createRol.component";
 import {EditRolComponent} from "./roles/edit/editRol.component";
 import { ShowUserComponent } from "./users/show/show.component";
-import {authGuard} from "@data/guards/auth.guard";
+import {authGuard} from "@data/Guards/auth.guard";
 import {AppConfigComponent} from "@views/settings/config/app/appConfig.component";
-import {permissionGuard} from "@data/guards/permission.guard";
+import {permissionGuard} from "@data/Guards/permission.guard";
 import {MailConfigComponent} from "./config/mail/mailConfig.component";
 import {PaymentGatewayConfigComponent} from "@views/settings/config/payment-gateway/payment-gateway-config.component";
 

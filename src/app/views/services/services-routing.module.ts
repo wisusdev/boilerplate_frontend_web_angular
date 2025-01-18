@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {IndexPackageComponent} from "./packages/index/indexPackage.component";
 import {IndexSubscriptionComponent} from "./subscriptions/index/indexSubscription.component";
-import {authGuard} from "@data/guards/auth.guard";
+import {authGuard} from "@data/Guards/auth.guard";
 import {IndexInvoiceComponent} from "@views/services/invoices/index/indexInvoice.component";
 import {CreateSubscriptionComponent} from "@views/services/subscriptions/create/createSubscription.component";
 import {ShowInvoiceComponent} from "@views/services/invoices/show/showInvoice.component";
-import {permissionGuard} from "@data/guards/permission.guard";
+import {permissionGuard} from "@data/Guards/permission.guard";
 
 function createRoute(path: string, component: any, permissions: string) {
 	return {

@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ServicesService} from "@views/services/services.service";
 import {catchError, of, tap} from "rxjs";
-import {ToastService} from "@data/services/toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {InvoiceShowBodyComponent} from "@views/shared/invoice-show-body/invoice-show-body.component";
-import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/interfaces/responses/showInvoiceResponse.interface";
+import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/Interfaces/Responses/showInvoiceResponse.interface";
 import {TitleCasePipe} from "@angular/common";
 
 @Component({

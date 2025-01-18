@@ -5,11 +5,11 @@ import {SettingsService} from "@views/settings/settings.service";
 import {catchError, of, tap} from "rxjs";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Package} from "@data/interfaces/requests/indexPackageRequest.interface";
+import {Package} from "@data/Interfaces/Requests/indexPackageRequest.interface";
 import {ServicesService} from "@views/services/services.service";
-import {itemsRequest} from "@data/requests/items-request";
-import {Auth} from "@data/providers/auth";
-import {ToastService} from "@data/services/toast.service";
+import {itemsRequest} from "@data/Requests/items-request";
+import {Auth} from "@data/Providers/auth";
+import {ToastService} from "@data/Services/toast.service";
 
 @Component({
 	selector: 'app-create-subscription',

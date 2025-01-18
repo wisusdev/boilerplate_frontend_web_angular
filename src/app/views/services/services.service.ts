@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
-import {Handle} from "@data/exceptions/handle";
-import {IndexPackageRequestInterface} from "@data/interfaces/requests/indexPackageRequest.interface";
-import {StoreUpdatePackageResponseInterface} from "@data/interfaces/responses/storeUpdatePackageResponde.interface";
-import {StoreUpdatePackageRequestInterface} from "@data/interfaces/requests/storeUpdatePackageRequest.interface";
-import {ShowPackageResponseInterface} from "@data/interfaces/responses/showPackageResponse.interface";
-import {IndexSubscriptionsResponseInterface} from "@data/interfaces/responses/indexSubscriptionsResponse.interface";
+import {Handle} from "@data/Exceptions/handle";
+import {IndexPackageRequestInterface} from "@data/Interfaces/Requests/indexPackageRequest.interface";
+import {StoreUpdatePackageResponseInterface} from "@data/Interfaces/Responses/storeUpdatePackageResponde.interface";
+import {StoreUpdatePackageRequestInterface} from "@data/Interfaces/Requests/storeUpdatePackageRequest.interface";
+import {ShowPackageResponseInterface} from "@data/Interfaces/Responses/showPackageResponse.interface";
+import {IndexSubscriptionsResponseInterface} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 import {environment} from "@env/environment";
-import {ShowInvoiceResponseInterface} from "@data/interfaces/responses/showInvoiceResponse.interface";
-import {WompiPaisesResponse} from "@data/interfaces/responses/getWompiRegions.interface";
+import {ShowInvoiceResponseInterface} from "@data/Interfaces/Responses/showInvoiceResponse.interface";
+import {WompiPaisesResponse} from "@data/Interfaces/Responses/getWompiRegions.interface";
 
 @Injectable({
 	providedIn: 'root'

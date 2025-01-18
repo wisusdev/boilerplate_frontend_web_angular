@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ToastService} from "@data/services/toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ServicesService} from "@views/services/services.service";
 import {catchError, of, tap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/interfaces/responses/showInvoiceResponse.interface";
+import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/Interfaces/Responses/showInvoiceResponse.interface";
 import {NgForOf, SlicePipe, TitleCasePipe} from "@angular/common";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";

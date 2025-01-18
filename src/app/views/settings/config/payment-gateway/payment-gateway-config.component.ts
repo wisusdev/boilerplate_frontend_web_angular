@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {SettingsService} from "@views/settings/settings.service";
-import {ToastService} from "@data/services/toast.service";
+import {ToastService} from "@data/Services/toast.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {ErrorMessagesInterface} from "@data/interfaces/errors.interface";
+import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 import {catchError, of, tap} from "rxjs";
 import {LowerCasePipe, NgClass, NgForOf, TitleCasePipe, UpperCasePipe} from "@angular/common";
 

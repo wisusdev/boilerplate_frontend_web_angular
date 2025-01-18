@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
-import {Handle} from "@data/exceptions/handle";
-import {ProfileUpdateRequestInterface} from "@data/interfaces/requests/profileUpdateRequest.interface";
-import {ChangePasswordRequestInterface} from "@data/interfaces/requests/changePasswordRequest.interface";
-import {ChangePasswordResponseInterface} from "@data/interfaces/responses/changePasswordResponse.interface";
-import {GetDeviceAuthListResponseInterface} from "@data/interfaces/responses/getDeviceAuthListResponse.interface";
-import {LogoutDeviceAuthRequestInterface} from "@data/interfaces/requests/logoutDeviceAuthRequest.interface";
-import {LogoutDeviceAuthResponseInterface} from "@data/interfaces/responses/logoutDeviceAuthResponse.interface";
-import {IndexSubscriptionsResponseInterface} from "@data/interfaces/responses/indexSubscriptionsResponse.interface";
+import {Handle} from "@data/Exceptions/handle";
+import {ProfileUpdateRequestInterface} from "@data/Interfaces/Requests/profileUpdateRequest.interface";
+import {ChangePasswordRequestInterface} from "@data/Interfaces/Requests/changePasswordRequest.interface";
+import {ChangePasswordResponseInterface} from "@data/Interfaces/Responses/changePasswordResponse.interface";
+import {GetDeviceAuthListResponseInterface} from "@data/Interfaces/Responses/getDeviceAuthListResponse.interface";
+import {LogoutDeviceAuthRequestInterface} from "@data/Interfaces/Requests/logoutDeviceAuthRequest.interface";
+import {LogoutDeviceAuthResponseInterface} from "@data/Interfaces/Responses/logoutDeviceAuthResponse.interface";
+import {IndexSubscriptionsResponseInterface} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 import {environment} from "@env/environment";
-import {ProfileUpdateResponse} from "@data/interfaces/responses/profileUpdateResponse.interface";
+import {ProfileUpdateResponse} from "@data/Interfaces/Responses/profileUpdateResponse.interface";
 
 @Injectable({
 	providedIn: 'root'

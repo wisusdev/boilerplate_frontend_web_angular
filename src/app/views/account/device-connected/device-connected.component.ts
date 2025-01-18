@@ -6,8 +6,8 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
 import {NgForOf} from "@angular/common";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Handle} from "@data/exceptions/handle";
-import {ToastService} from "@data/services/toast.service";
+import {Handle} from "@data/Exceptions/handle";
+import {ToastService} from "@data/Services/toast.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
 

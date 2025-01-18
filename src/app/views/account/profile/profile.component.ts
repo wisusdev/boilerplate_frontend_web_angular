@@ -6,10 +6,10 @@ import {catchError} from "rxjs/operators";
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass, NgForOf} from "@angular/common";
-import {ToastService} from "@data/services/toast.service";
-import {ErrorMessagesInterface} from "@data/interfaces/errors.interface";
+import {ToastService} from "@data/Services/toast.service";
+import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 import {environment} from "@env/environment";
-import {FileHelperService} from "@data/services/file-helper.service";
+import {FileHelperService} from "@data/Services/file-helper.service";
 
 @Component({
 	selector: 'app-profile',

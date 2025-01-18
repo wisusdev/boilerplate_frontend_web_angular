@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Auth} from '@data/providers/auth';
-import {RouteExceptionService} from "@data/services/route-exception.service";
+import {Auth} from '@data/Providers/auth';
+import {RouteExceptionService} from "@data/Services/route-exception.service";
 import {catchError, of, tap} from "rxjs";
 import {SettingsService} from "@views/settings/settings.service";
 import {Title} from "@angular/platform-browser";

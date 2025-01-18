@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Handle} from '@data/exceptions/handle';
+import {Handle} from '@data/Exceptions/handle';
 import {environment} from "@env/environment";
 
 @Injectable({

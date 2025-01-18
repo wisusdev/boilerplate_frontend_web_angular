@@ -5,8 +5,8 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {SettingsService} from "../../settings.service";
 import {NgClass, NgForOf} from "@angular/common";
 import {catchError, of, tap} from "rxjs";
-import {ToastService} from "@data/services/toast.service";
-import {ErrorMessagesInterface} from "@data/interfaces/errors.interface";
+import {ToastService} from "@data/Services/toast.service";
+import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 
 @Component({
 	selector: 'app-create-user',

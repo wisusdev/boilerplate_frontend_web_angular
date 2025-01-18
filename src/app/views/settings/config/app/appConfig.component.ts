@@ -4,9 +4,9 @@ import {SettingsService} from "../../settings.service";
 import {catchError, of, tap} from "rxjs";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgForOf} from "@angular/common";
-import {ErrorMessagesInterface} from "@data/interfaces/errors.interface";
-import {ToastService} from "@data/services/toast.service";
-import {FileHelperService} from "@data/services/file-helper.service";
+import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
+import {ToastService} from "@data/Services/toast.service";
+import {FileHelperService} from "@data/Services/file-helper.service";
 import {environment} from "@env/environment";
 
 @Component({

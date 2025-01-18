@@ -4,9 +4,9 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgbCollapse, NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
 import {DOCUMENT, NgForOf} from "@angular/common";
 import {catchError, of, tap} from "rxjs";
-import {Auth} from "@data/providers/auth";
+import {Auth} from "@data/Providers/auth";
 import {AuthService} from "@views/auth/auth.service";
-import {RouteExceptionService} from "@data/services/route-exception.service";
+import {RouteExceptionService} from "@data/Services/route-exception.service";
 import {environment} from "@env/environment";
 
 @Component({

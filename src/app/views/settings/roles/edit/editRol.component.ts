@@ -3,10 +3,10 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {SettingsService} from "../../settings.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {KeyValuePipe, NgClass, NgForOf} from '@angular/common';
-import {ErrorMessagesInterface} from '@data/interfaces/errors.interface';
+import {ErrorMessagesInterface} from '@data/Interfaces/errors.interface';
 import {catchError, of, tap} from 'rxjs';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {ToastService} from "@data/services/toast.service";
+import {ToastService} from "@data/Services/toast.service";
 
 @Component({
 	selector: 'app-edit-rol',

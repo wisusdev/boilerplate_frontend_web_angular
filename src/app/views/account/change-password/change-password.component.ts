@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { ErrorMessagesInterface } from '@data/interfaces/errors.interface';
-import { Auth } from '@data/providers/auth';
+import { ErrorMessagesInterface } from '@data/Interfaces/errors.interface';
+import { Auth } from '@data/Providers/auth';
 import { AccountService } from '../account.service';
 import { catchError, of, tap } from 'rxjs';
-import { Handle } from '@data/exceptions/handle';
+import { Handle } from '@data/Exceptions/handle';
 import {AccountMenuListComponent} from "../account-menu-list/account-menu-list.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
-import {ToastService} from "@data/services/toast.service";
+import {ToastService} from "@data/Services/toast.service";
 
 @Component({
 	selector: 'app-change-password',

@@ -3,7 +3,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {environment} from "@env/environment";
-import {PermissionService} from "@data/services/permission.service";
+import {PermissionService} from "@data/Services/permission.service";
 
 @Component({
 	selector: 'app-sidebar',

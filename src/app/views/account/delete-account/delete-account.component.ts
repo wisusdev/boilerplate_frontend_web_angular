@@ -5,8 +5,8 @@ import {AccountService} from "../account.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, tap} from "rxjs";
 import {Router} from "@angular/router";
-import {Handle} from "@data/exceptions/handle";
-import {ToastService} from "@data/services/toast.service";
+import {Handle} from "@data/Exceptions/handle";
+import {ToastService} from "@data/Services/toast.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 import {environment} from "@env/environment";
 

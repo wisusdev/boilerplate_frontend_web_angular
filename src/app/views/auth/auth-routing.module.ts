@@ -4,7 +4,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 import {NgModule} from "@angular/core";
-import {guestGuard} from "@data/guards/guest.guard";
+import {guestGuard} from "@data/Guards/guest.guard";
 
 const routes: Routes = [
 	{ path: 'auth/login', component: LoginComponent, canActivate: [guestGuard]},

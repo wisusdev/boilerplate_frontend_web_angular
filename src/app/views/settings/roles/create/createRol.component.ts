@@ -5,9 +5,9 @@ import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {catchError, of, tap} from "rxjs";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {Handle} from "@data/exceptions/handle";
-import {ToastService} from "@data/services/toast.service";
-import {ErrorMessagesInterface} from "@data/interfaces/errors.interface";
+import {Handle} from "@data/Exceptions/handle";
+import {ToastService} from "@data/Services/toast.service";
+import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 
 @Component({
 	selector: 'app-create-rol',

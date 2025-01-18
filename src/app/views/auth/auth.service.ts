@@ -2,15 +2,15 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
-import {Handle} from "@data/exceptions/handle";
-import {LoginResponseInterface} from "@data/interfaces/responses/loginResponse.interface";
-import {LoginRequestInterface} from "@data/interfaces/requests/loginRequest.interface";
-import {RegisterRequestInterface} from "@data/interfaces/requests/registerRequest.interface";
-import {RegisterResponseInterface} from "@data/interfaces/responses/registerResponse.interface";
-import {ForgotPasswordRequestInterface} from "@data/interfaces/requests/forgotPasswordRequest.interface";
-import {ForgotPasswordResponseInterface} from "@data/interfaces/responses/forgotPasswordResponse.interface";
-import {ResetPasswordRequestInterface} from "@data/interfaces/requests/resetPasswordRequest.interface";
-import {ResetPasswordResponseInterface} from "@data/interfaces/responses/resetPasswordResponse.interface";
+import {Handle} from "@data/Exceptions/handle";
+import {LoginResponseInterface} from "@data/Interfaces/Responses/loginResponse.interface";
+import {LoginRequestInterface} from "@data/Interfaces/Requests/loginRequest.interface";
+import {RegisterRequestInterface} from "@data/Interfaces/Requests/registerRequest.interface";
+import {RegisterResponseInterface} from "@data/Interfaces/Responses/registerResponse.interface";
+import {ForgotPasswordRequestInterface} from "@data/Interfaces/Requests/forgotPasswordRequest.interface";
+import {ForgotPasswordResponseInterface} from "@data/Interfaces/Responses/forgotPasswordResponse.interface";
+import {ResetPasswordRequestInterface} from "@data/Interfaces/Requests/resetPasswordRequest.interface";
+import {ResetPasswordResponseInterface} from "@data/Interfaces/Responses/resetPasswordResponse.interface";
 import {environment} from "@env/environment";
 
 @Injectable({
