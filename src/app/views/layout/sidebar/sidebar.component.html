@@ -13,33 +13,7 @@
                 <i class="app-menu__icon bi bi-speedometer"></i><span class="app-menu__label">{{'home' | translate }}</span>
             </a>
         </li>
-		<li *ngIf="permissionService.hasPermission('invoices:index')">
-			<a class="app-menu__item" routerLink="/services/invoices" routerLinkActive="active">
-				<i class="app-menu__icon bi bi-receipt"></i><span class="app-menu__label">{{'invoices' | translate }}</span>
-			</a>
-		</li>
-		<li class="treeview" (click)="toggleTreeView($event)">
-			@if (permissionService.hasPermission('packages:index') || permissionService.hasPermission('roles:subscriptions')){
-				<a class="app-menu__item" href="#" data-toggle="treeview">
-				<i class="app-menu__icon bi bi-calendar-event"></i>
-				<span class="app-menu__label">{{'services' | translate}}</span>
-				<i class="treeview-indicator bi bi-chevron-right"></i>
-			</a>
-			}
-			<ul class="treeview-menu">
-				<li *ngIf="permissionService.hasPermission('packages:index')">
-					<a class="treeview-item" routerLink="/services/packages" routerLinkActive="active">
-						<i class="icon bi bi-box"></i> {{'packages' | translate}}
-					</a>
-				</li>
 
-				<li *ngIf="permissionService.hasPermission('subscriptions:index')">
-					<a class="treeview-item" routerLink="/services/subscriptions" routerLinkActive="active">
-						<i class="icon bi bi-calendar-range-fill"></i> {{'subscriptions' | translate}}
-					</a>
-				</li>
-			</ul>
-		</li>
 		<li class="treeview" (click)="toggleTreeView($event)">
 			@if (permissionService.hasPermission('users:index') || permissionService.hasPermission('roles:index')){
             <a class="app-menu__item" href="#" data-toggle="treeview">
