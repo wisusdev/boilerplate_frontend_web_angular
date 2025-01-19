@@ -15351,7 +15351,7 @@ fieldset:disabled .btn {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	background-color: var(--bs-yellow);
+	background-color: var(--bs-gray-900);
 	z-index: 1030;
 	padding-right: 15px;
 }
@@ -15606,9 +15606,9 @@ fieldset:disabled .btn {
 	width: 230px;
 	overflow: auto;
 	z-index: 10;
-	background-color: #222d32;
-	-webkit-box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
-	box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
+	background-color: var(--bs-gray-900);
+	-webkit-box-shadow: 0 8px 17px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 8px 17px rgba(0, 0, 0, 0.2);
 	-webkit-transition: left 0.3s ease, width 0.3s ease;
 	transition: left 0.3s ease, width 0.3s ease;
 }
