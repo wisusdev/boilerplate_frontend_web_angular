@@ -6,15 +6,14 @@
 		"outDir": "./dist/out-tsc",
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
+		"esModuleInterop": true,
 		"noImplicitOverride": true,
 		"noPropertyAccessFromIndexSignature": true,
-		"allowSyntheticDefaultImports": true,
 		"noImplicitReturns": true,
 		"resolveJsonModule": true,
 		"noFallthroughCasesInSwitch": true,
 		"sourceMap": true,
 		"declaration": false,
-		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"moduleResolution": "node",
 		"importHelpers": true,
@@ -26,10 +25,18 @@
 			"dom"
 		],
 		"paths": {
-			"@env/*": ["src/environments/*"],
-			"@config/*": ["src/app/config/*"],
-			"@data/*": ["src/app/data/*"],
-			"@views/*": ["src/app/views/*"],
+			"@env/*": [
+				"src/environments/*"
+			],
+			"@config/*": [
+				"src/app/config/*"
+			],
+			"@data/*": [
+				"src/app/data/*"
+			],
+			"@views/*": [
+				"src/app/views/*"
+			],
 		}
 	},
 	"angularCompilerOptions": {
