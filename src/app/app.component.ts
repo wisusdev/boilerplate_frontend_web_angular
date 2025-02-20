@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Auth} from '@data/Providers/auth';
-import {RouteExceptionService} from "@data/Services/route-exception.service";
 import {catchError, of, tap} from "rxjs";
 import {SettingsService} from "@views/settings/settings.service";
 import {Title} from "@angular/platform-browser";
+import {RouteExceptionService} from '@data/services/route-exception.service';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
 
