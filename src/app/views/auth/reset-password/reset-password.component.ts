@@ -11,14 +11,13 @@ import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 import {environment} from "@env/environment";
 
 @Component({
-	selector: 'app-reset-password',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		ReactiveFormsModule,
-		NgClass
-	],
-	templateUrl: './reset-password.component.html'
+    selector: 'app-reset-password',
+    imports: [
+        TranslateModule,
+        ReactiveFormsModule,
+        NgClass
+    ],
+    templateUrl: './reset-password.component.html'
 })
 export class ResetPasswordComponent implements OnInit {
 	constructor(

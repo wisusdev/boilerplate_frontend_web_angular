@@ -9,17 +9,16 @@ import {ToastService} from "@data/Services/toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 
 @Component({
-	selector: 'app-create-user',
-	standalone: true,
-	imports: [
-		RouterLink,
-		TranslateModule,
-		FormsModule,
-		ReactiveFormsModule,
-		NgForOf,
-		NgClass
-	],
-	templateUrl: './createUser.component.html',
+    selector: 'app-create-user',
+    imports: [
+        RouterLink,
+        TranslateModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgForOf,
+        NgClass
+    ],
+    templateUrl: './createUser.component.html'
 })
 export class CreateUserComponent implements OnInit {
 	formUser!: FormGroup;

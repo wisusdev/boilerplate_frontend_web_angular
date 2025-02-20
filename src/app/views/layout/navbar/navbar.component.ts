@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, Renderer2} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {NgbCollapse, NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
 import {DOCUMENT, NgForOf} from "@angular/common";
 import {catchError, of, tap} from "rxjs";
 import {Auth} from "@data/Providers/auth";
@@ -10,19 +10,17 @@ import {RouteExceptionService} from "@data/Services/route-exception.service";
 import {environment} from "@env/environment";
 
 @Component({
-	selector: 'app-navbar',
-	standalone: true,
-	imports: [
-		NgbCollapse,
-		RouterLink,
-		TranslateModule,
-		NgbDropdown,
-		NgbDropdownMenu,
-		NgbDropdownToggle,
-		NgbDropdownItem,
-		NgForOf
-	],
-	templateUrl: './navbar.component.html'
+    selector: 'app-navbar',
+    imports: [
+        RouterLink,
+        TranslateModule,
+        NgbDropdown,
+        NgbDropdownMenu,
+        NgbDropdownToggle,
+        NgbDropdownItem,
+        NgForOf
+    ],
+    templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
 	public loggedIn: boolean = false;

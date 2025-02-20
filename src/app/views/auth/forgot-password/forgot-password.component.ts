@@ -10,14 +10,13 @@ import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 import {environment} from "@env/environment";
 
 @Component({
-	selector: 'app-forgot-password',
-	standalone: true,
-	templateUrl: './forgot-password.component.html',
-	imports: [
-		TranslateModule,
-		ReactiveFormsModule,
-		NgClass
-	]
+    selector: 'app-forgot-password',
+    templateUrl: './forgot-password.component.html',
+    imports: [
+        TranslateModule,
+        ReactiveFormsModule,
+        NgClass
+    ]
 })
 export class ForgotPasswordComponent implements OnInit {
 

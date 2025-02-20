@@ -10,17 +10,16 @@ import {ToastService} from "@data/Services/toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 
 @Component({
-	selector: 'app-create-rol',
-	standalone: true,
-	imports: [
-		KeyValuePipe,
-		NgForOf,
-		RouterLink,
-		ReactiveFormsModule,
-		NgClass,
-		TranslateModule
-	],
-	templateUrl: './createRol.component.html'
+    selector: 'app-create-rol',
+    imports: [
+        KeyValuePipe,
+        NgForOf,
+        RouterLink,
+        ReactiveFormsModule,
+        NgClass,
+        TranslateModule
+    ],
+    templateUrl: './createRol.component.html'
 })
 export class CreateRolComponent implements OnInit {
 	permissions: Array<any> = [];

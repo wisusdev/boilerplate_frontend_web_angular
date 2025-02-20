@@ -6,23 +6,20 @@ import {catchError, of, tap} from "rxjs";
 import {DatePipe, NgClass, NgForOf} from "@angular/common";
 import {SubscriptionData} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
 import {ToastService} from "@data/Services/toast.service";
-import {RouterLink} from "@angular/router";
 
 interface StatusClass {
 	[key: string]: string;
 }
 
 @Component({
-	selector: 'app-index-subscription',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		NgForOf,
-		DatePipe,
-		NgClass,
-		RouterLink
-	],
-	templateUrl: './indexSubscription.component.html',
+    selector: 'app-index-subscription',
+    imports: [
+        TranslateModule,
+        NgForOf,
+        DatePipe,
+        NgClass
+    ],
+    templateUrl: './indexSubscription.component.html'
 })
 export class IndexSubscriptionComponent implements OnInit {
 

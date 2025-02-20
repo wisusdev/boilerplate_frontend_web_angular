@@ -10,18 +10,17 @@ import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/con
 import {RouterLink} from "@angular/router";
 
 @Component({
-	selector: 'app-index-invoices',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		NgForOf,
-		DatePipe,
-		NgbPagination,
-		NgbPaginationNext,
-		NgbPaginationPrevious,
-		RouterLink
-	],
-	templateUrl: './indexInvoice.component.html'
+    selector: 'app-index-invoices',
+    imports: [
+        TranslateModule,
+        NgForOf,
+        DatePipe,
+        NgbPagination,
+        NgbPaginationNext,
+        NgbPaginationPrevious,
+        RouterLink
+    ],
+    templateUrl: './indexInvoice.component.html'
 })
 export class IndexInvoiceComponent implements OnInit {
 	lastPage: number = 0;

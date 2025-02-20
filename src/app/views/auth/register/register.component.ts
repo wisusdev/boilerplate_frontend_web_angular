@@ -11,15 +11,14 @@ import {environment} from "@env/environment";
 import {RouterLink} from '@angular/router';
 
 @Component({
-	selector: 'app-register',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		ReactiveFormsModule,
-		NgClass,
-		RouterLink
-	],
-	templateUrl: './register.component.html'
+    selector: 'app-register',
+    imports: [
+        TranslateModule,
+        ReactiveFormsModule,
+        NgClass,
+        RouterLink
+    ],
+    templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
 

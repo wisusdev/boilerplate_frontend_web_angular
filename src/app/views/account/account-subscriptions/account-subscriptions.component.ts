@@ -10,18 +10,17 @@ import {NgbDropdown, NgbDropdownMenu, NgbDropdownToggle, NgbModal} from "@ng-boo
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
-	selector: 'app-subscriptions',
-	standalone: true,
-	imports: [
-		AccountMenuListComponent,
-		TranslateModule,
-		DatePipe,
-		NgForOf,
-		NgbDropdown,
-		NgbDropdownMenu,
-		NgbDropdownToggle
-	],
-	templateUrl: './account-subscriptions.component.html'
+    selector: 'app-subscriptions',
+    imports: [
+        AccountMenuListComponent,
+        TranslateModule,
+        DatePipe,
+        NgForOf,
+        NgbDropdown,
+        NgbDropdownMenu,
+        NgbDropdownToggle
+    ],
+    templateUrl: './account-subscriptions.component.html'
 })
 export class AccountSubscriptionsComponent implements OnInit {
 

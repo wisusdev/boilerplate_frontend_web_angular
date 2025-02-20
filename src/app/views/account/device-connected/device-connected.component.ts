@@ -12,17 +12,16 @@ import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/con
 
 
 @Component({
-	selector: 'app-device-connected',
-	standalone: true,
-	imports: [
-		AccountMenuListComponent,
-		NgbPagination,
-		NgbPaginationPrevious,
-		TranslateModule,
-		NgbPaginationNext,
-		NgForOf
-	],
-	templateUrl: './device-connected.component.html',
+    selector: 'app-device-connected',
+    imports: [
+        AccountMenuListComponent,
+        NgbPagination,
+        NgbPaginationPrevious,
+        TranslateModule,
+        NgbPaginationNext,
+        NgForOf
+    ],
+    templateUrl: './device-connected.component.html'
 })
 export class DeviceConnectedComponent implements OnInit {
 

@@ -12,20 +12,18 @@ import {Auth} from "@data/Providers/auth";
 import {ToastService} from "@data/Services/toast.service";
 
 @Component({
-	selector: 'app-create-subscription',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		NgForOf,
-		DecimalPipe,
-		NgSelectModule,
-		FormsModule,
-		ReactiveFormsModule,
-		LowerCasePipe,
-		TitleCasePipe,
-		NgIf
-	],
-	templateUrl: './createSubscription.component.html'
+    selector: 'app-create-subscription',
+    imports: [
+        TranslateModule,
+        NgForOf,
+        DecimalPipe,
+        NgSelectModule,
+        FormsModule,
+        ReactiveFormsModule,
+        LowerCasePipe,
+        TitleCasePipe
+    ],
+    templateUrl: './createSubscription.component.html'
 })
 export class CreateSubscriptionComponent implements OnInit {
 

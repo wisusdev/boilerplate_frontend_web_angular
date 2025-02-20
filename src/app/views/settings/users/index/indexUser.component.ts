@@ -11,24 +11,23 @@ import {ToastService} from "@data/Services/toast.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
-	selector: 'app-index-users',
-	standalone: true,
-	imports: [
-		NgFor,
-		TranslateModule,
-		RouterLink,
-		DatePipe,
-		FormsModule,
-		AsyncPipe,
-		ReactiveFormsModule,
-		NgbPagination,
-		NgbPaginationNext,
-		NgbPaginationPrevious
-	],
-	providers: [
-		DecimalPipe
-	],
-	templateUrl: './indexUser.component.html',
+    selector: 'app-index-users',
+    imports: [
+        NgFor,
+        TranslateModule,
+        RouterLink,
+        DatePipe,
+        FormsModule,
+        AsyncPipe,
+        ReactiveFormsModule,
+        NgbPagination,
+        NgbPaginationNext,
+        NgbPaginationPrevious
+    ],
+    providers: [
+        DecimalPipe
+    ],
+    templateUrl: './indexUser.component.html'
 })
 export class IndexUserComponent implements OnInit {
 

@@ -6,15 +6,14 @@ import {environment} from "@env/environment";
 import {PermissionService} from "@data/Services/permission.service";
 
 @Component({
-	selector: 'app-sidebar',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		RouterLink,
-		RouterLinkActive,
-		NgIf
-	],
-	templateUrl: './sidebar.component.html',
+    selector: 'app-sidebar',
+    imports: [
+        TranslateModule,
+        RouterLink,
+        RouterLinkActive,
+        NgIf
+    ],
+    templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent implements OnInit {
 

@@ -11,18 +11,17 @@ import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleRe
 import {ToastService} from "@data/Services/toast.service";
 
 @Component({
-	selector: 'app-index-rol',
-	standalone: true,
-	imports: [
-		NgFor,
-		TranslateModule,
-		NgbPagination,
-		NgbPaginationPrevious,
-		NgbPaginationNext,
-		RouterLink,
-		NgIf,
-	],
-	templateUrl: './indexRol.component.html'
+    selector: 'app-index-rol',
+    imports: [
+        NgFor,
+        TranslateModule,
+        NgbPagination,
+        NgbPaginationPrevious,
+        NgbPaginationNext,
+        RouterLink,
+        NgIf,
+    ],
+    templateUrl: './indexRol.component.html'
 })
 export class IndexRolComponent implements OnInit {
 

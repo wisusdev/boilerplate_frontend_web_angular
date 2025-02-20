@@ -11,15 +11,14 @@ import {NgClass} from "@angular/common";
 import {ToastService} from "@data/Services/toast.service";
 
 @Component({
-	selector: 'app-change-password',
-	standalone: true,
-	imports: [
-		AccountMenuListComponent,
-		TranslateModule,
-		ReactiveFormsModule,
-		NgClass
-	],
-	templateUrl: './change-password.component.html',
+    selector: 'app-change-password',
+    imports: [
+        AccountMenuListComponent,
+        TranslateModule,
+        ReactiveFormsModule,
+        NgClass
+    ],
+    templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent implements OnInit {
 

@@ -5,13 +5,12 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {NgIf} from "@angular/common";
 
 @Component({
-	selector: 'app-confirmation-dialog',
-	standalone: true,
-	imports: [
-		NgIf,
-		ReactiveFormsModule,
-	],
-	templateUrl: './confirmation-dialog.component.html',
+    selector: 'app-confirmation-dialog',
+    imports: [
+        NgIf,
+        ReactiveFormsModule,
+    ],
+    templateUrl: './confirmation-dialog.component.html'
 })
 export class ConfirmationDialogComponent implements OnInit{
 	@Input() title: string = this.translate.instant('logout');

@@ -9,17 +9,16 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ToastService} from "@data/Services/toast.service";
 
 @Component({
-	selector: 'app-edit-rol',
-	standalone: true,
-	imports: [
-		KeyValuePipe,
-		NgForOf,
-		ReactiveFormsModule,
-		NgClass,
-		RouterLink,
-		TranslateModule,
-	],
-	templateUrl: './editRol.component.html'
+    selector: 'app-edit-rol',
+    imports: [
+        KeyValuePipe,
+        NgForOf,
+        ReactiveFormsModule,
+        NgClass,
+        RouterLink,
+        TranslateModule,
+    ],
+    templateUrl: './editRol.component.html'
 })
 export class EditRolComponent implements OnInit {
 

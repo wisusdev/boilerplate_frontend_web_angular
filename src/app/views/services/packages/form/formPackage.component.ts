@@ -8,13 +8,12 @@ import {ToastService} from "@data/Services/toast.service";
 import {Auth} from "@data/Providers/auth";
 
 @Component({
-	selector: 'app-form-packages',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		ReactiveFormsModule
-	],
-	templateUrl: './formPackage.component.html'
+    selector: 'app-form-packages',
+    imports: [
+        TranslateModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './formPackage.component.html'
 })
 export class FormPackageComponent implements OnInit {
 

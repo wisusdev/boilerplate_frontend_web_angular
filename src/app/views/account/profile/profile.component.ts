@@ -12,16 +12,15 @@ import {environment} from "@env/environment";
 import {FileHelperService} from "@data/Services/file-helper.service";
 
 @Component({
-	selector: 'app-profile',
-	standalone: true,
-	imports: [
-		AccountMenuListComponent,
-		TranslateModule,
-		ReactiveFormsModule,
-		NgClass,
-		NgForOf
-	],
-	templateUrl: './profile.component.html'
+    selector: 'app-profile',
+    imports: [
+        AccountMenuListComponent,
+        TranslateModule,
+        ReactiveFormsModule,
+        NgClass,
+        NgForOf
+    ],
+    templateUrl: './profile.component.html'
 })
 export class ProfileComponent implements OnInit {
 	public availableLang: any[] = [];

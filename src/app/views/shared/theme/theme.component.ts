@@ -4,16 +4,15 @@ import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from "
 import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
-	selector: 'app-theme',
-	standalone: true,
-	imports: [
-		NgbDropdown,
-		NgbDropdownMenu,
-		NgbDropdownItem,
-		NgbDropdownToggle,
-		TranslateModule
-	],
-	templateUrl: './theme.component.html',
+    selector: 'app-theme',
+    imports: [
+        NgbDropdown,
+        NgbDropdownMenu,
+        NgbDropdownItem,
+        NgbDropdownToggle,
+        TranslateModule
+    ],
+    templateUrl: './theme.component.html'
 })
 export class ThemeComponent {
 

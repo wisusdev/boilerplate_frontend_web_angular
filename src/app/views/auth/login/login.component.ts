@@ -12,15 +12,14 @@ import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 import {environment} from "@env/environment";
 
 @Component({
-	selector: 'app-login',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		ReactiveFormsModule,
-		NgClass,
-		RouterLink
-	],
-	templateUrl: './login.component.html'
+    selector: 'app-login',
+    imports: [
+        TranslateModule,
+        ReactiveFormsModule,
+        NgClass,
+        RouterLink
+    ],
+    templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
 

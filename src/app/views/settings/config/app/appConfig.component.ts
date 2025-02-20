@@ -10,15 +10,14 @@ import {FileHelperService} from "@data/Services/file-helper.service";
 import {environment} from "@env/environment";
 
 @Component({
-	selector: 'app-config',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		NgClass,
-		ReactiveFormsModule,
-		NgForOf,
-	],
-	templateUrl: './appConfig.component.html'
+    selector: 'app-config',
+    imports: [
+        TranslateModule,
+        NgClass,
+        ReactiveFormsModule,
+        NgForOf,
+    ],
+    templateUrl: './appConfig.component.html'
 })
 export class AppConfigComponent implements OnInit {
 	constructor(

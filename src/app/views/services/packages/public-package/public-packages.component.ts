@@ -8,14 +8,13 @@ import {ToastService} from "@data/Services/toast.service";
 import {ServicesService} from "@views/services/services.service";
 
 @Component({
-	selector: 'app-public-services',
-	standalone: true,
-	imports: [
-		NgFor,
-		RouterLink,
-		TranslateModule
-	],
-	templateUrl: './public-packages.component.html'
+    selector: 'app-public-services',
+    imports: [
+        NgFor,
+        RouterLink,
+        TranslateModule
+    ],
+    templateUrl: './public-packages.component.html'
 })
 export class PublicPackagesComponent implements OnInit {
 

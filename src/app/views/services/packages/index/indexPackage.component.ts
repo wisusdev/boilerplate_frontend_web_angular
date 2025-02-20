@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {RouterLink} from "@angular/router";
 import {ServicesService} from "../../services.service";
 import {catchError, of, tap} from "rxjs";
 import {DatePipe, NgForOf} from "@angular/common";
@@ -11,15 +10,13 @@ import {ToastService} from "@data/Services/toast.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
-	selector: 'app-index-package',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		RouterLink,
-		DatePipe,
-		NgForOf
-	],
-	templateUrl: './indexPackage.component.html'
+    selector: 'app-index-package',
+    imports: [
+        TranslateModule,
+        DatePipe,
+        NgForOf
+    ],
+    templateUrl: './indexPackage.component.html'
 })
 export class IndexPackageComponent implements OnInit {
 

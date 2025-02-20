@@ -5,21 +5,19 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 import {catchError, of, tap} from "rxjs";
-import {LowerCasePipe, NgClass, NgForOf, TitleCasePipe, UpperCasePipe} from "@angular/common";
+import {NgClass, NgForOf, TitleCasePipe, UpperCasePipe} from "@angular/common";
 
 @Component({
-	selector: 'app-payment-gateway',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		ReactiveFormsModule,
-		NgClass,
-		NgForOf,
-		TitleCasePipe,
-		UpperCasePipe,
-		LowerCasePipe,
-	],
-	templateUrl: './payment-gateway-config.component.html'
+    selector: 'app-payment-gateway',
+    imports: [
+        TranslateModule,
+        ReactiveFormsModule,
+        NgClass,
+        NgForOf,
+        TitleCasePipe,
+        UpperCasePipe,
+    ],
+    templateUrl: './payment-gateway-config.component.html'
 })
 export class PaymentGatewayConfigComponent implements OnInit {
 	formPaymentGateway!: FormGroup;

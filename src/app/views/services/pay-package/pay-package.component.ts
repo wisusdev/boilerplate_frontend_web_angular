@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Auth} from "@data/Providers/auth";
-import {LoginComponent} from "@views/auth/login/login.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, of, tap} from "rxjs";
 import {PackageData} from "@data/Interfaces/Responses/showPackageResponse.interface";
-import {CurrencyPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {CurrencyPipe, NgForOf} from "@angular/common";
 import {ToastService} from "@data/Services/toast.service";
 import {loadStripe, Stripe} from "@stripe/stripe-js";
 import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
@@ -26,22 +25,18 @@ interface UserProfile {
 }
 
 @Component({
-	selector: 'app-pay-service',
-	standalone: true,
-	imports: [
-		LoginComponent,
-		TranslateModule,
-		CurrencyPipe,
-		NgbCollapseModule,
-		ReactiveFormsModule,
-		FormsModule,
-		NgForOf,
-		CreditCardNumberMaskDirective,
-		CreditCardCvvMaskDirective,
-		NgClass,
-		NgIf,
-	],
-	templateUrl: './pay-package.component.html'
+    selector: 'app-pay-service',
+    imports: [
+        TranslateModule,
+        CurrencyPipe,
+        NgbCollapseModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgForOf,
+        CreditCardNumberMaskDirective,
+        CreditCardCvvMaskDirective,
+    ],
+    templateUrl: './pay-package.component.html'
 })
 export class PayPackageComponent implements OnInit {
 

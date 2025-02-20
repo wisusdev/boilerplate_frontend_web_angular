@@ -11,13 +11,12 @@ import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/con
 import {environment} from "@env/environment";
 
 @Component({
-	selector: 'app-delete-account',
-	standalone: true,
-	imports: [
-		AccountMenuListComponent,
-		TranslateModule
-	],
-	templateUrl: './delete-account.component.html',
+    selector: 'app-delete-account',
+    imports: [
+        AccountMenuListComponent,
+        TranslateModule
+    ],
+    templateUrl: './delete-account.component.html'
 })
 export class DeleteAccountComponent {
 

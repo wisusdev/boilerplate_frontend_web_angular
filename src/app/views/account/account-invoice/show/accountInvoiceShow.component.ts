@@ -9,14 +9,13 @@ import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/Interfaces/Resp
 import {TitleCasePipe} from "@angular/common";
 
 @Component({
-	selector: 'app-account-invoice-show',
-	standalone: true,
-	imports: [
-		InvoiceShowBodyComponent,
-		TranslateModule,
-		TitleCasePipe
-	],
-	templateUrl: './accountInvoiceShow.component.html'
+    selector: 'app-account-invoice-show',
+    imports: [
+        InvoiceShowBodyComponent,
+        TranslateModule,
+        TitleCasePipe
+    ],
+    templateUrl: './accountInvoiceShow.component.html'
 })
 export class AccountInvoiceShowComponent implements OnInit {
 	invoiceId: string = '';

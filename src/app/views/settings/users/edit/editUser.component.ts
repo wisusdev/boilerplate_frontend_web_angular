@@ -9,16 +9,15 @@ import {ToastService} from "@data/Services/toast.service";
 import {ErrorMessagesInterface} from "@data/Interfaces/errors.interface";
 
 @Component({
-	selector: 'app-edit-user',
-	standalone: true,
-	imports: [
-		FormsModule,
-		NgForOf,
-		ReactiveFormsModule,
-		RouterLink,
-		TranslateModule
-	],
-	templateUrl: './editUser.component.html',
+    selector: 'app-edit-user',
+    imports: [
+        FormsModule,
+        NgForOf,
+        ReactiveFormsModule,
+        RouterLink,
+        TranslateModule
+    ],
+    templateUrl: './editUser.component.html'
 })
 export class EditUserComponent implements OnInit {
 

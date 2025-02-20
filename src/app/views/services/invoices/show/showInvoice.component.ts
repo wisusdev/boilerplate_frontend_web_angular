@@ -5,22 +5,17 @@ import {ServicesService} from "@views/services/services.service";
 import {catchError, of, tap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/Interfaces/Responses/showInvoiceResponse.interface";
-import {NgForOf, SlicePipe, TitleCasePipe} from "@angular/common";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {InvoiceShowBodyComponent} from "@views/shared/invoice-show-body/invoice-show-body.component";
 
 @Component({
-	selector: 'app-show-invoices',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		NgForOf,
-		SlicePipe,
-		TitleCasePipe,
-		InvoiceShowBodyComponent
-	],
-	templateUrl: './showInvoice.component.html'
+    selector: 'app-show-invoices',
+    imports: [
+        TranslateModule,
+        InvoiceShowBodyComponent
+    ],
+    templateUrl: './showInvoice.component.html'
 })
 export class ShowInvoiceComponent implements OnInit {
 	invoiceId: string = '';

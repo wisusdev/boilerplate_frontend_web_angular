@@ -6,12 +6,11 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ServicesService} from "@views/services/services.service";
 
 @Component({
-	selector: 'app-payment-status',
-	standalone: true,
-	imports: [
-		TranslateModule
-	],
-	templateUrl: './payment-status.component.html'
+    selector: 'app-payment-status',
+    imports: [
+        TranslateModule
+    ],
+    templateUrl: './payment-status.component.html'
 })
 export class PaymentStatusComponent implements OnInit {
 

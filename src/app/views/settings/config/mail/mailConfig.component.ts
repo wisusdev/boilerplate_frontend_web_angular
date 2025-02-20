@@ -8,14 +8,13 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass} from "@angular/common";
 
 @Component({
-	selector: 'app-mail',
-	standalone: true,
-	imports: [
-		TranslateModule,
-		ReactiveFormsModule,
-		NgClass
-	],
-	templateUrl: './mailConfig.component.html'
+    selector: 'app-mail',
+    imports: [
+        TranslateModule,
+        ReactiveFormsModule,
+        NgClass
+    ],
+    templateUrl: './mailConfig.component.html'
 })
 export class MailConfigComponent implements OnInit {
 
