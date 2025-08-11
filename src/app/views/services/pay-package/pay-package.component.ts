@@ -3,7 +3,7 @@ import {Auth} from "@data/Providers/auth";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, of, tap} from "rxjs";
-import {PackageData} from "@data/Interfaces/Responses/showPackageResponse.interface";
+import {PackageData} from "@data/interfaces/responses/showPackageResponse.interface";
 import {CurrencyPipe, NgForOf} from "@angular/common";
 import {ToastService} from "@data/Services/toast.service";
 import {loadStripe, Stripe} from "@stripe/stripe-js";
@@ -13,7 +13,7 @@ import {environment} from "@env/environment";
 import {WompiRequest} from "@data/Requests/wompi-request";
 import {CreditCardNumberMaskDirective} from "@data/Directives/credit-card-number-mask.directive";
 import {CreditCardCvvMaskDirective} from "@data/Directives/credit-card-cvv-mask.directive";
-import {Pais, Territorio} from "@data/Interfaces/Responses/getWompiRegions.interface";
+import {Pais, Territorio} from "@data/interfaces/responses/getWompiRegions.interface";
 import {ServicesService} from "@views/services/services.service";
 
 interface UserProfile {

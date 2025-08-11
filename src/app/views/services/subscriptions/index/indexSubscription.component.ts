@@ -4,7 +4,7 @@ import {ServicesService} from "../../services.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, of, tap} from "rxjs";
 import {DatePipe, NgClass, NgForOf} from "@angular/common";
-import {SubscriptionData} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
+import {SubscriptionData} from "@data/interfaces/responses/indexSubscriptionsResponse.interface";
 import {ToastService} from "@data/Services/toast.service";
 
 interface StatusClass {

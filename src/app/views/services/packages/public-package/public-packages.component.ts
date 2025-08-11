@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Package } from '@data/Interfaces/Requests/indexPackageRequest.interface';
+import { Package } from '@data/interfaces/requests/indexPackageRequest.interface';
 import { NgFor } from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {ToastService} from "@data/Services/toast.service";

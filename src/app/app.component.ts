@@ -28,44 +28,9 @@ export class AppComponent implements OnInit {
 		this.authUser.status().pipe().subscribe((status: boolean) => {
 			this.loggedIn = status;
 		});
-
-		const appData = localStorage.getItem('app') || null;
-		if (appData) {
-			const app = JSON.parse(appData);
-			this.titleService.setTitle(app.name);
-		} else {
-			this.getAppSettings();
-		}
 	}
 
 	exceptionRoute(): boolean {
 		return this.routeExceptionService.exceptionRoute();
-	}
-
-	getAppSettings() {
-		this.settings.getSettings('app').pipe(
-			tap((response) => {
-				const { attributes } = response.data;
-				const { name, url_api, url_frontend, description, email, phone, address, timezone, logo, favicon } = attributes;
-
-				const formValues = {
-					name,
-					url_api,
-					url_frontend,
-					description,
-					email,
-					phone,
-					address,
-					timezone,
-					logo,
-					favicon,
-				};
-
-				localStorage.setItem('app', JSON.stringify(formValues));
-			}),
-			catchError((error) => {
-				return of(null);
-			})
-		).subscribe();
 	}
 }

@@ -6,7 +6,7 @@ import {ChangePasswordComponent} from "@views/account/change-password/change-pas
 import {DeviceConnectedComponent} from "@views/account/device-connected/device-connected.component";
 import {DeleteAccountComponent} from "@views/account/delete-account/delete-account.component";
 import {AccountInvoiceShowComponent} from "@views/account/account-invoice/show/accountInvoiceShow.component";
-import {authGuard} from "@data/Guards/auth.guard";
+import {authGuard} from "@data/guards/auth.guard";
 
 
 const routes: Routes = [

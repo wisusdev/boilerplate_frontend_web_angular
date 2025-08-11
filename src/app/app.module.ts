@@ -7,8 +7,6 @@ import {HttpClient, withFetch, withInterceptors, provideHttpClient, withIntercep
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {headerTokenInterceptor} from '@data/Interceptors/headerToken.interceptor';
-import {formatRequestInterceptor} from "@data/Interceptors/formatRequest.interceptor";
 import {SidebarComponent} from "@views/layout/sidebar/sidebar.component";
 import {NavbarComponent} from "@views/layout/navbar/navbar.component";
 
@@ -23,6 +21,8 @@ import {
 import {ToastComponent} from "@views/shared/toast/toast.component";
 import {ThemeComponent} from "@views/shared/theme/theme.component";
 import {AccountMenuListComponent} from "@views/account/account-menu-list/account-menu-list.component";
+import { headerTokenInterceptor } from '@data/interceptors/headerToken.interceptor';
+import { formatRequestInterceptor } from '@data/interceptors/formatRequest.interceptor';
 
 @NgModule({
 	declarations: [

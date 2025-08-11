@@ -4,7 +4,7 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ServicesService} from "@views/services/services.service";
 import {catchError, of, tap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/Interfaces/Responses/showInvoiceResponse.interface";
+import {InvoiceAttributes, InvoiceItem, InvoiceUser} from "@data/interfaces/responses/showInvoiceResponse.interface";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {InvoiceShowBodyComponent} from "@views/shared/invoice-show-body/invoice-show-body.component";

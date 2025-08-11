@@ -4,7 +4,7 @@ import {AccountService} from "@views/account/account.service";
 import {ToastService} from "@data/Services/toast.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {catchError, of, tap} from "rxjs";
-import {SubscriptionData} from "@data/Interfaces/Responses/indexSubscriptionsResponse.interface";
+import {SubscriptionData} from "@data/interfaces/responses/indexSubscriptionsResponse.interface";
 import {DatePipe, NgForOf} from "@angular/common";
 import {NgbDropdown, NgbDropdownMenu, NgbDropdownToggle, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
