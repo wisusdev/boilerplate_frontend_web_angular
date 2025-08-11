@@ -2,16 +2,16 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, Observable} from 'rxjs';
 import {Handle} from '@data/Exceptions/handle';
-import {StoreRoleRequestInterface} from "@data/Interfaces/Requests/storeRoleRequest.interface";
-import {UpdateStoreRoleResponseInterface} from "@data/Interfaces/Responses/updateStoreRoleResponse.interface";
-import {ShowRoleResponseInterface} from "@data/Interfaces/Responses/showRoleResponse.interface";
-import {IndexPermissionsInterface} from "@data/Interfaces/Responses/indexPermissions.interface";
-import {IndexUserResponseInterface, UserData} from "@data/Interfaces/Responses/indexUserResponse.interface";
-import {StoreUserRequestInterface} from "@data/Interfaces/Requests/storeUserRequest.interface";
-import {StoreUserResponseInterface} from "@data/Interfaces/Responses/storeUserResponse.interface";
-import {ShowUserResponseInterface} from "@data/Interfaces/Responses/showUserResponse.interface";
 import {environment} from "@env/environment";
-import {IndexRoleResponseInterface} from "@data/Interfaces/Responses/indexRoleResponse.interface";
+import { IndexRoleResponseInterface } from '@data/interfaces/responses/indexRoleResponse.interface';
+import { StoreRoleRequestInterface } from '@data/interfaces/requests/storeRoleRequest.interface';
+import { UpdateStoreRoleResponseInterface } from '@data/interfaces/responses/updateStoreRoleResponse.interface';
+import { ShowRoleResponseInterface } from '@data/interfaces/responses/showRoleResponse.interface';
+import { IndexPermissionsInterface } from '@data/interfaces/responses/indexPermissions.interface';
+import { IndexUserResponseInterface, UserData } from '@data/interfaces/responses/indexUserResponse.interface';
+import { StoreUserRequestInterface } from '@data/interfaces/requests/storeUserRequest.interface';
+import { StoreUserResponseInterface } from '@data/interfaces/responses/storeUserResponse.interface';
+import { ShowUserResponseInterface } from '@data/interfaces/responses/showUserResponse.interface';
 
 @Injectable({
 	providedIn: 'root'
@@ -91,19 +91,6 @@ export class SettingsService {
 
 	destroyUser(id: string): any {
 		return this.httpClient.delete(`${this._apiUriUsers}/${id}`, {
-			headers: environment.headers,
-		}).pipe(catchError(this.handleMessage.errorHandle));
-	}
-
-	// Settings
-	getSettings(key: string): Observable<any> {
-		return this.httpClient.get<any>(`${this._apiUri}/settings?filter[key]=${key}`, {
-			headers: environment.headers,
-		}).pipe(catchError(this.handleMessage.errorHandle));
-	}
-
-	updateSettings(data: any): Observable<any> {
-		return this.httpClient.patch<any>(`${this._apiUri}/settings/${data.id}`, data, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}

@@ -7,11 +7,8 @@ import {EditUserComponent} from "./users/edit/editUser.component";
 import {CreateRolComponent} from "./roles/create/createRol.component";
 import {EditRolComponent} from "./roles/edit/editRol.component";
 import { ShowUserComponent } from "./users/show/show.component";
-import {authGuard} from "@data/Guards/auth.guard";
-import {AppConfigComponent} from "@views/settings/config/app/appConfig.component";
-import {permissionGuard} from "@data/Guards/permission.guard";
-import {MailConfigComponent} from "./config/mail/mailConfig.component";
-import {PaymentGatewayConfigComponent} from "@views/settings/config/payment-gateway/payment-gateway-config.component";
+import {authGuard} from "@data/guards/auth.guard";
+import {permissionGuard} from "@data/guards/permission.guard";
 
 const router: Routes = [
 	{path: 'settings/users', component: IndexUserComponent, canActivate: [authGuard, permissionGuard], data: {permissions: 'users:index'}},
@@ -22,10 +19,6 @@ const router: Routes = [
 	{path: 'settings/roles', component: IndexRolComponent, canActivate: [authGuard, permissionGuard], data: {permissions: 'roles:index'}},
 	{path: 'settings/roles/create', component: CreateRolComponent, canActivate: [authGuard, permissionGuard], data: {permissions: 'roles:create'}},
 	{path: 'settings/roles/edit/:id', component: EditRolComponent, canActivate: [authGuard, permissionGuard], data: {permissions: 'roles:edit'}},
-
-	{path: 'settings/app', component: AppConfigComponent, canActivate: [authGuard, permissionGuard], data: {permissions: 'settings:app'}},
-	{path: 'settings/mail', component: MailConfigComponent, canActivate: [authGuard, permissionGuard], data: {permissions: 'settings:mail'}},
-	{path: 'settings/payment_gateway', component: PaymentGatewayConfigComponent, canActivate: [authGuard, permissionGuard], data: {permissions: 'settings:payment_gateway'}}
 ];
 
 @NgModule({
