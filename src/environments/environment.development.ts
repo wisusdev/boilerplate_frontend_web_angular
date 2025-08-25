@@ -3,7 +3,7 @@ const api_version: string = '/v1';
 
 export const environment = {
     /* Application Name */
-	name: 'Web Care',
+	name: 'Boilerplate',
 
 	/* Application Version */
 	version: '1.0.0',
