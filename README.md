@@ -1,6 +1,8 @@
 # Installation
 
 ```bash
+git clone https://github.com/wisusdev/boilerplate_frontend_web_angular.git
+cd boilerplate_frontend_web_angular
 npm install
 ng serve
 ```
