@@ -3,12 +3,6 @@
 
 	@if(loggedIn && !exceptionRoute()){
 		<span class="app-sidebar__toggle p-cursor" data-toggle="sidebar" href="#" (click)="toggleMenu()" aria-label="Hide Sidebar"></span>
-	} @else {
-		<ul class="app-nav-start">
-			<li>
-				<a class="app-nav__item text-decoration-none" routerLink="/plans">{{'plans' | translate}}</a>
-			</li>
-		</ul>
 	}
 
 	<ul class="app-nav">
