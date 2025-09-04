@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
 		this.resetErrorMessages();
 		this.authService.login(this.formUser.value).pipe(
 			tap(response => {
-				if (response && response.data.relationships.access.token) {
+				if (response && response.data.relationships?.access?.token) {
 					localStorage.setItem('user', JSON.stringify(response.data.attributes.user));
 					localStorage.setItem('permissions', JSON.stringify(response.data.relationships.permissions));
 					localStorage.setItem('user_key', response.data.id);
