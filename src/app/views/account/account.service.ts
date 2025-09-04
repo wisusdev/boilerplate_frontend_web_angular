@@ -2,15 +2,17 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
 import {Handle} from "@data/Exceptions/handle";
-import {ProfileUpdateRequestInterface} from "@data/interfaces/requests/profileUpdateRequest.interface";
-import {ChangePasswordRequestInterface} from "@data/interfaces/requests/changePasswordRequest.interface";
-import {ChangePasswordResponseInterface} from "@data/interfaces/responses/changePasswordResponse.interface";
-import {GetDeviceAuthListResponseInterface} from "@data/interfaces/responses/getDeviceAuthListResponse.interface";
-import {LogoutDeviceAuthRequestInterface} from "@data/interfaces/requests/logoutDeviceAuthRequest.interface";
-import {LogoutDeviceAuthResponseInterface} from "@data/interfaces/responses/logoutDeviceAuthResponse.interface";
-import {IndexSubscriptionsResponseInterface} from "@data/interfaces/responses/indexSubscriptionsResponse.interface";
+import {
+	ProfileUpdateRequest,
+	ChangePasswordRequest,
+	LogoutDeviceAuthRequest,
+	ChangePasswordResponse,
+	GetDeviceAuthListResponse,
+	LogoutDeviceAuthResponse,
+	IndexSubscriptionsResponse,
+	ProfileUpdateResponse
+} from "@data/interfaces";
 import {environment} from "@env/environment";
-import {ProfileUpdateResponse} from "@data/interfaces/responses/profileUpdateResponse.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -25,10 +27,7 @@ export class AccountService {
 
 	httpHeaders: HttpHeaders = new HttpHeaders(environment.headers);
 
-	constructor(
-		private httpClient: HttpClient,
-		private handleMessage: Handle
-	) {
+	constructor(private httpClient: HttpClient, private handleMessage: Handle) {
 	}
 
 	getInfoProfile(): Observable<object> {
@@ -37,27 +36,27 @@ export class AccountService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	updateProfile(data: ProfileUpdateRequestInterface): Observable<ProfileUpdateResponse> {
+	updateProfile(data: ProfileUpdateRequest): Observable<ProfileUpdateResponse> {
 		return this.httpClient.patch<ProfileUpdateResponse>(`${this._apiUriAccount}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	changePassword(data: ChangePasswordRequestInterface): Observable<ChangePasswordResponseInterface> {
-		return this.httpClient.patch<ChangePasswordResponseInterface>(`${this._apiUriChangePassword}`, data, {
+	changePassword(data: ChangePasswordRequest): Observable<ChangePasswordResponse> {
+		return this.httpClient.patch<ChangePasswordResponse>(`${this._apiUriChangePassword}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	getDeviceAuthList(data: any): Observable<GetDeviceAuthListResponseInterface> {
+	getDeviceAuthList(data: any): Observable<GetDeviceAuthListResponse> {
 		let apiUriDeviceAuth: string = `${this._apiUriDeviceAuth}&page[number]=${data.page}`;
-		return this.httpClient.get<GetDeviceAuthListResponseInterface>(`${apiUriDeviceAuth}`, {
+		return this.httpClient.get<GetDeviceAuthListResponse>(`${apiUriDeviceAuth}`, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	logoutDeviceAuth(data: LogoutDeviceAuthRequestInterface): Observable<LogoutDeviceAuthResponseInterface> {
-		return this.httpClient.post<LogoutDeviceAuthResponseInterface>(`${this._apiUriLogoutDevice}`, data, {
+	logoutDeviceAuth(data: LogoutDeviceAuthRequest): Observable<LogoutDeviceAuthResponse> {
+		return this.httpClient.post<LogoutDeviceAuthResponse>(`${this._apiUriLogoutDevice}`, data, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
@@ -68,8 +67,8 @@ export class AccountService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	getAccountSubscriptions(): Observable<IndexSubscriptionsResponseInterface> {
-		return this.httpClient.get<IndexSubscriptionsResponseInterface>(`${this._apiUri}/account/subscriptions`, {
+	getAccountSubscriptions(): Observable<IndexSubscriptionsResponse> {
+		return this.httpClient.get<IndexSubscriptionsResponse>(`${this._apiUri}/account/subscriptions`, {
 			headers: this.httpHeaders,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
