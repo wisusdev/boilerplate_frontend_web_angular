@@ -3,15 +3,18 @@ import {Injectable} from '@angular/core';
 import {catchError, Observable} from 'rxjs';
 import {Handle} from '@data/Exceptions/handle';
 import {environment} from "@env/environment";
-import { IndexRoleResponseInterface } from '@data/interfaces/responses/indexRoleResponse.interface';
-import { StoreRoleRequestInterface } from '@data/interfaces/requests/storeRoleRequest.interface';
-import { UpdateStoreRoleResponseInterface } from '@data/interfaces/responses/updateStoreRoleResponse.interface';
-import { ShowRoleResponseInterface } from '@data/interfaces/responses/showRoleResponse.interface';
-import { IndexPermissionsInterface } from '@data/interfaces/responses/indexPermissions.interface';
-import { IndexUserResponseInterface, UserData } from '@data/interfaces/responses/indexUserResponse.interface';
-import { StoreUserRequestInterface } from '@data/interfaces/requests/storeUserRequest.interface';
-import { StoreUserResponseInterface } from '@data/interfaces/responses/storeUserResponse.interface';
-import { ShowUserResponseInterface } from '@data/interfaces/responses/showUserResponse.interface';
+import {
+	IndexRoleResponse,
+	StoreRoleRequest,
+	UpdateStoreRoleResponse,
+	ShowRoleResponse,
+	IndexPermissionsResponse,
+	IndexUserResponse,
+	UserData,
+	StoreUserRequest,
+	StoreUserResponse,
+	ShowUserResponse
+} from '@data/interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,32 +26,29 @@ export class SettingsService {
 	private _apiUriPermissions: string = this._apiUri + '/permissions';
 	private _apiUriUsers: string = this._apiUri + '/users';
 
-	constructor(
-		private httpClient: HttpClient,
-		private handleMessage: Handle
-	) {
+	constructor(private httpClient: HttpClient, private handleMessage: Handle) {
 	}
 
-	indexRoles(): Observable<IndexRoleResponseInterface> {
-		return this.httpClient.get<IndexRoleResponseInterface>(`${this._apiUriRoles}`, {
+	indexRoles(): Observable<IndexRoleResponse> {
+		return this.httpClient.get<IndexRoleResponse>(`${this._apiUriRoles}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	storeRole(data: StoreRoleRequestInterface): Observable<UpdateStoreRoleResponseInterface> {
-		return this.httpClient.post<UpdateStoreRoleResponseInterface>(`${this._apiUriRoles}`, data, {
+	storeRole(data: StoreRoleRequest): Observable<UpdateStoreRoleResponse> {
+		return this.httpClient.post<UpdateStoreRoleResponse>(`${this._apiUriRoles}`, data, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	showRole(id: string): Observable<ShowRoleResponseInterface> {
-		return this.httpClient.get<ShowRoleResponseInterface>(`${this._apiUriRoles}/${id}`, {
+	showRole(id: string): Observable<ShowRoleResponse> {
+		return this.httpClient.get<ShowRoleResponse>(`${this._apiUriRoles}/${id}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	updateRole(id: string, data: StoreRoleRequestInterface): Observable<UpdateStoreRoleResponseInterface> {
-		return this.httpClient.patch<UpdateStoreRoleResponseInterface>(`${this._apiUriRoles}/${id}`, data, {
+	updateRole(id: string, data: StoreRoleRequest): Observable<UpdateStoreRoleResponse> {
+		return this.httpClient.patch<UpdateStoreRoleResponse>(`${this._apiUriRoles}/${id}`, data, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
@@ -59,26 +59,26 @@ export class SettingsService {
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	indexPermissions(): Observable<IndexPermissionsInterface> {
-		return this.httpClient.get<IndexPermissionsInterface>(`${this._apiUriPermissions}`, {
+	indexPermissions(): Observable<IndexPermissionsResponse> {
+		return this.httpClient.get<IndexPermissionsResponse>(`${this._apiUriPermissions}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	indexUsers(pageSize: number = 15, pageNumber: number = 1, filterType: string = 'first_name', filterValue: string = '', order: string = '-', sort: string = 'id'): Observable<IndexUserResponseInterface> {
-		return this.httpClient.get<IndexUserResponseInterface>(`${this._apiUriUsers}?page[size]=${pageSize}&page[number]=${pageNumber}&filter[${filterType}]=${filterValue}&sort=${order}${sort}`, {
+	indexUsers(pageSize: number = 15, pageNumber: number = 1, filterType: string = 'first_name', filterValue: string = '', order: string = '-', sort: string = 'id'): Observable<IndexUserResponse> {
+		return this.httpClient.get<IndexUserResponse>(`${this._apiUriUsers}?page[size]=${pageSize}&page[number]=${pageNumber}&filter[${filterType}]=${filterValue}&sort=${order}${sort}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	storeUser(data: StoreUserRequestInterface): Observable<StoreUserResponseInterface> {
-		return this.httpClient.post<StoreUserResponseInterface>(`${this._apiUriUsers}`, data, {
+	storeUser(data: StoreUserRequest): Observable<StoreUserResponse> {
+		return this.httpClient.post<StoreUserResponse>(`${this._apiUriUsers}`, data, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
 
-	showUser(id: string): Observable<ShowUserResponseInterface> {
-		return this.httpClient.get<ShowUserResponseInterface>(`${this._apiUriUsers}/${id}`, {
+	showUser(id: string): Observable<ShowUserResponse> {
+		return this.httpClient.get<ShowUserResponse>(`${this._apiUriUsers}/${id}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}
