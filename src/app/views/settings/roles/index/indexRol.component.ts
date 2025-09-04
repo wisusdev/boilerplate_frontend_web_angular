@@ -7,7 +7,7 @@ import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from 
 import {RouterLink} from "@angular/router";
 import {PermissionService} from "@data/services/permission.service";
 import {ConfirmationDialogComponent} from "@views/shared/confirmation-dialog/confirmation-dialog.component";
-import {IndexRoleResponseInterface} from "@data/interfaces/responses/indexRoleResponse.interface";
+import {IndexRoleResponse} from "@data/interfaces";
 import {ToastService} from "@data/Services/toast.service";
 
 @Component({
@@ -47,7 +47,7 @@ export class IndexRolComponent implements OnInit {
 
 	getRoles() {
 		this.settings.indexRoles().pipe(
-			tap((data: IndexRoleResponseInterface) => {
+			tap((data: IndexRoleResponse) => {
 				this.roles = data.data;
 				this.lastPage = data.meta.last_page;
 				this.totalPages = data.meta.last_page;
