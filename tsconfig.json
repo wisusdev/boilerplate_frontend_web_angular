@@ -28,15 +28,21 @@
 			"@env/*": [
 				"src/environments/*"
 			],
-			"@config/*": [
-				"src/app/config/*"
+			"@core/*": [
+				"src/app/core/*"
 			],
-			"@data/*": [
-				"src/app/data/*"
+			"@shared/*": [
+				"src/app/shared/*"
 			],
-			"@views/*": [
-				"src/app/views/*"
+			"@features/*": [
+				"src/app/features/*"
 			],
+			"@layout/*": [
+				"src/app/layout/*"
+			],
+			"@api/*": [
+				"src/app/api/*"
+			]
 		}
 	},
 	"angularCompilerOptions": {

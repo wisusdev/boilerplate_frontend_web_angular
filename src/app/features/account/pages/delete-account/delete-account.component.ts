@@ -1,0 +1,60 @@
+import {Component} from '@angular/core';
+import {AccountMenuListComponent} from "../../components/account-menu-list/account-menu-list.component";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {AccountService} from "../../services/account.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {catchError, tap} from "rxjs";
+import {Router} from "@angular/router";
+import {Handle} from "@core/exceptions/handle";
+import {ToastService} from "@core/services/toast.service";
+import {ConfirmationDialogComponent} from "@shared/components/confirmation-dialog/confirmation-dialog.component";
+import {environment} from "@env/environment";
+
+@Component({
+    selector: 'app-delete-account',
+    imports: [
+        AccountMenuListComponent,
+        TranslateModule
+    ],
+    templateUrl: './delete-account.component.html'
+})
+export class DeleteAccountComponent {
+
+	constructor(
+		private accountService: AccountService,
+		private translate: TranslateService,
+		private modalService: NgbModal,
+		private handleMessage: Handle,
+		private router: Router,
+		private toast: ToastService
+	){
+	}
+
+	openConfirmationDialog() {
+		const modalRef = this.modalService.open(ConfirmationDialogComponent, {centered: true});
+		modalRef.componentInstance.title = this.translate.instant('deleteAccount');
+		modalRef.componentInstance.message = this.translate.instant('confirmDeleteAccount');
+		modalRef.componentInstance.confirmText = this.translate.instant('yesConfirm');
+		modalRef.componentInstance.cancelText = this.translate.instant('noCancel');
+		modalRef.result.then((result) => {
+			if (result['status']) {
+				this.deleteAccount();
+			}
+		}, (reason) => {
+		});
+	}
+
+	deleteAccount() {
+		let userId: string | null = localStorage.getItem('user_key');
+		if (userId) {
+			this.accountService.deleteAccount(userId).pipe(
+				tap((response) => {
+					this.toast.show({message: 'Account deleted successfully', className: 'bg-success text-light'});
+					localStorage.clear();
+					this.router.navigate([environment.redirectToLogin]);
+				}),
+				catchError(this.handleMessage.errorHandle)
+			).subscribe();
+		}
+	}
+}

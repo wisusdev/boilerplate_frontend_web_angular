@@ -15351,7 +15351,7 @@ fieldset:disabled .btn {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	background-color: var(--bs-gray-900);
+	background-color: var(--bs-gray-700);
 	z-index: 1030;
 	padding-right: 15px;
 }
@@ -15372,7 +15372,7 @@ fieldset:disabled .btn {
 	-webkit-box-flex: 1;
 	-ms-flex: 1 0 auto;
 	flex: 1 0 auto;
-	color: #fff;
+	color: var(--bs-white);
 	text-align: center;
 	font-family: "Montserrat", serif;
 	padding: 0 15px;
@@ -15396,7 +15396,7 @@ fieldset:disabled .btn {
 .app-header__logo:focus,
 .app-header__logo:hover {
 	text-decoration: none;
-	color: #fff;
+	color: var(--bs-white);
 }
 
 .app-sidebar__toggle {

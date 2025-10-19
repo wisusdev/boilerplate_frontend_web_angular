@@ -1,4 +1,4 @@
-@import "vali.css";
+@import "./vali.css";
+@import "./custom.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "@ng-select/ng-select/themes/default.theme.css";
-@import "custom.css";

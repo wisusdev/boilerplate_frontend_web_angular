@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Auth} from '@data/Providers/auth';
+import {Auth} from '@core/providers/auth';
 import {catchError, of, tap} from "rxjs";
-import {SettingsService} from "@views/settings/settings.service";
+import {SettingsService} from "@features/settings/services/settings.service";
 import {Title} from "@angular/platform-browser";
-import {RouteExceptionService} from '@data/services/route-exception.service';
+import {RouteExceptionService} from '@core/services/route-exception.service';
 
 @Component({
     selector: 'app-root',
