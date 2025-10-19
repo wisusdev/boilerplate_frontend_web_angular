@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService} from "../../services/account.service";
+import {AccountService} from "@features/base/services/account.service";
 import {catchError, of, tap} from "rxjs";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {AccountMenuListComponent} from "../../components/account-menu-list/account-menu-list.component";
+import {AccountMenuListComponent} from "@features/base/components/account-menu-list/account-menu-list.component";
 import {NgForOf} from "@angular/common";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Handle} from "@core/exceptions/handle";

@@ -1,10 +1,10 @@
 import {Component, OnInit, PipeTransform} from '@angular/core';
-import {SettingsService} from '../../../services/settings.service';
+import {RoleAndPermissionService} from '../../../services/role-and-permission.service';
 import {AsyncPipe, DatePipe, DecimalPipe, NgFor} from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {RouterLink} from "@angular/router";
 import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from "@ng-bootstrap/ng-bootstrap";
-import {catchError, map, Observable, of, startWith, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, map, Observable, of, startWith, tap} from "rxjs";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserData} from "@api/interfaces";
 import {ToastService} from "@core/services/toast.service";
@@ -36,17 +36,24 @@ export class IndexUserComponent implements OnInit {
 	pageNumber: number = 1;
 	pages: number[] = [];
 
-	users: UserData[] = [];
+	private users$ = new BehaviorSubject<UserData[]>([]);
 	filteredUsers$!: Observable<UserData[]>;
 	filter = new FormControl('', {nonNullable: true});
 
 	constructor(
-		private settingsService: SettingsService,
+		private settingsService: RoleAndPermissionService,
 		private toast: ToastService,
 		private translate: TranslateService,
 		private modalService: NgbModal,
 		private pipe: DecimalPipe,
 	) {
+		// Configurar filtrado reactivo
+		this.filteredUsers$ = combineLatest([
+			this.users$.asObservable(),
+			this.filter.valueChanges.pipe(startWith(''))
+		]).pipe(
+			map(([users, text]) => this.search(text, this.pipe, users))
+		);
 	}
 
 	ngOnInit(): void {
@@ -66,13 +73,10 @@ export class IndexUserComponent implements OnInit {
 	}
 
 	getUsers() {
-		this.settingsService.indexUsers().pipe(
+		this.settingsService.indexUsers(15, this.pageNumber).pipe(
 			tap((response) => {
-				this.users = response.data;
-				this.filteredUsers$ = this.filter.valueChanges.pipe(
-					startWith(''),
-					map(text => this.search(text, this.pipe, this.users))
-				);
+				// Emitir los datos al BehaviorSubject
+				this.users$.next(response.data);
 
 				this.lastPage = response.meta.last_page;
 				this.totalPages = response.meta.last_page;

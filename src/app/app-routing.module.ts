@@ -2,8 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {authGuard} from '@core/guards/auth.guard';
 import {HomeComponent} from "@features/home/home.component";
-import {AccountRoutingModule} from "@features/account/account-routing.module";
-import {SettingsRoutingModule} from "@features/settings/settings-routing.module";
+import {BaseRoutingModule} from "@features/base/base-routing.module";
 import {AuthRoutingModule} from "@features/auth/auth-routing.module";
 import {LoginComponent} from "@features/auth/pages/login/login.component";
 
@@ -16,9 +15,8 @@ const routes: Routes = [
 @NgModule({
 	imports: [
 		RouterModule.forRoot(routes),
-		AccountRoutingModule,
-		AuthRoutingModule,
-		SettingsRoutingModule
+		BaseRoutingModule,
+		AuthRoutingModule
 	],
 	exports: [RouterModule]
 })

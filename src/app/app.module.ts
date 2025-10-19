@@ -20,7 +20,7 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import {ToastComponent} from "@shared/components/toast/toast.component";
 import {ThemeComponent} from "@shared/components/theme/theme.component";
-import {AccountMenuListComponent} from "@features/account/components/account-menu-list/account-menu-list.component";
+import {AccountMenuListComponent} from "@features/base/components/account-menu-list/account-menu-list.component";
 import { headerTokenInterceptor } from '@core/interceptors/header-token.interceptor';
 import { formatRequestInterceptor } from '@core/interceptors/format-request.interceptor';
 import { CoreModule } from '@core/core.module';
@@ -35,7 +35,7 @@ import { CoreModule } from '@core/core.module';
 	],
 	imports: [
 		BrowserModule,
-		CoreModule, // Módulo Core - debe importarse primero
+		CoreModule,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,

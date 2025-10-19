@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {SettingsService} from "../../../services/settings.service";
 import {NgClass, NgForOf} from "@angular/common";
 import {catchError, of, tap} from "rxjs";
 import {ToastService} from "@core/services/toast.service";
 import {ErrorMessagesInterface} from "@api/interfaces/errors.interface";
+import {RoleAndPermissionService} from "@features/base/services/role-and-permission.service";
 
 @Component({
     selector: 'app-create-user',
@@ -26,7 +26,7 @@ export class CreateUserComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private settingsService: SettingsService,
+		private settingsService: RoleAndPermissionService,
 		private toast: ToastService,
 		private translate: TranslateService,
 		private route: Router

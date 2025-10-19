@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SettingsService} from '../../../services/settings.service';
+import {RoleAndPermissionService} from '../../../services/role-and-permission.service';
 import {catchError, of, tap} from 'rxjs';
 import {NgFor, NgIf} from '@angular/common';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -33,7 +33,7 @@ export class IndexRolComponent implements OnInit {
 	pages: number[] = [];
 
 	constructor(
-		private settings: SettingsService,
+		private settings: RoleAndPermissionService,
 		private toast: ToastService,
 		private modalService: NgbModal,
 		private translate: TranslateService,

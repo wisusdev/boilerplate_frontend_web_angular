@@ -25,9 +25,9 @@
 						<th>{{'actions' | translate }}</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr *ngFor="let user of filteredUsers$ | async; let i = index">
-						<td>{{ i + 1 }}</td>
+			<tbody>
+				<tr *ngFor="let user of filteredUsers$ | async; let i = index">
+					<td>{{ i + 1 }}</td>
 						<td>{{ user.attributes.first_name }} {{ user.attributes.last_name }}</td>
 						<td>{{ user.attributes.username }}</td>
 						<td>{{ user.attributes.email }}</td>

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {AccountMenuListComponent} from "../../components/account-menu-list/account-menu-list.component";
+import {AccountMenuListComponent} from "@features/base/components/account-menu-list/account-menu-list.component";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {AccountService} from "../../services/account.service";
+import {AccountService} from "@features/base/services/account.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, tap} from "rxjs";
 import {Router} from "@angular/router";

@@ -19,7 +19,7 @@ import {
 @Injectable({
 	providedIn: 'root'
 })
-export class SettingsService {
+export class RoleAndPermissionService {
 
 	private _apiUri: string = environment.api_url_v1;
 	private _apiUriRoles: string = this._apiUri + '/roles';
@@ -66,7 +66,21 @@ export class SettingsService {
 	}
 
 	indexUsers(pageSize: number = 15, pageNumber: number = 1, filterType: string = 'first_name', filterValue: string = '', order: string = '-', sort: string = 'id'): Observable<IndexUserResponse> {
-		return this.httpClient.get<IndexUserResponse>(`${this._apiUriUsers}?page[size]=${pageSize}&page[number]=${pageNumber}&filter[${filterType}]=${filterValue}&sort=${order}${sort}`, {
+		// Construir parámetros de query dinámicamente
+		const params: string[] = [
+			`page[size]=${pageSize}`,
+			`page[number]=${pageNumber}`,
+			`sort=${order}${sort}`
+		];
+
+		// Solo añadir filtro si tiene valor
+		if (filterValue && filterValue.trim() !== '') {
+			params.push(`filter[${filterType}]=${encodeURIComponent(filterValue.trim())}`);
+		}
+
+		const queryString = params.join('&');
+
+		return this.httpClient.get<IndexUserResponse>(`${this._apiUriUsers}?${queryString}`, {
 			headers: environment.headers,
 		}).pipe(catchError(this.handleMessage.errorHandle));
 	}

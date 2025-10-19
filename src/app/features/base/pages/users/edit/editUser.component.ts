@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SettingsService} from "../../../services/settings.service";
+import {RoleAndPermissionService} from "../../../services/role-and-permission.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {catchError, of, tap} from "rxjs";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -26,7 +26,7 @@ export class EditUserComponent implements OnInit {
 	formUser!: FormGroup;
 
 	constructor(
-		private settingsService: SettingsService,
+		private settingsService: RoleAndPermissionService,
 		private formBuilder: FormBuilder,
 		private toast: ToastService,
 		private route: ActivatedRoute,
