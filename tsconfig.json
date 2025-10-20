@@ -39,9 +39,6 @@
 			],
 			"@layout/*": [
 				"src/app/layout/*"
-			],
-			"@api/*": [
-				"src/app/api/*"
 			]
 		}
 	},

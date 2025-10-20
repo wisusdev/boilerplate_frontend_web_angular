@@ -8,8 +8,8 @@ import {NgClass} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {Handle} from "@core/exceptions/handle";
 import {ToastService} from "@core/services/toast.service";
-import {ErrorMessagesInterface} from "@api/interfaces/errors.interface";
-import {LoginResponse} from "@api/interfaces";
+import {ErrorMessagesInterface} from "@core/models/error.model";
+import {LoginResponse} from "@features/auth/models/auth.model";
 import {environment} from "@env/environment";
 
 @Component({

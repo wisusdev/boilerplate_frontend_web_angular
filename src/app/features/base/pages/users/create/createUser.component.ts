@@ -5,7 +5,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {NgClass, NgForOf} from "@angular/common";
 import {catchError, of, tap} from "rxjs";
 import {ToastService} from "@core/services/toast.service";
-import {ErrorMessagesInterface} from "@api/interfaces/errors.interface";
+import {ErrorMessagesInterface} from "@core/models/error.model";
 import {RoleAndPermissionService} from "@features/base/services/role-and-permission.service";
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { ErrorMessagesInterface } from '@api/interfaces/errors.interface';
+import { ErrorMessagesInterface } from '@core/models/error.model';
 import { Auth } from '@core/providers/auth';
 import { AccountService } from '@features/base/services/account.service';
 import { catchError, of, tap } from 'rxjs';

@@ -3,7 +3,7 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {RoleAndPermissionService} from "../../../services/role-and-permission.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {KeyValuePipe, NgClass, NgForOf} from '@angular/common';
-import {ErrorMessagesInterface} from '@api/interfaces/errors.interface';
+import {ErrorMessagesInterface} from '@core/models/error.model';
 import {catchError, of, tap} from 'rxjs';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {ToastService} from "@core/services/toast.service";

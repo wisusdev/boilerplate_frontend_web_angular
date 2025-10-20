@@ -2,7 +2,6 @@ import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {ProfileComponent} from "@features/base/pages/profile/profile.component";
 import {ChangePasswordComponent} from "@features/base/pages/change-password/change-password.component";
-import {DeviceConnectedComponent} from "@features/base/pages/device-connected/device-connected.component";
 import {DeleteAccountComponent} from "@features/base/pages/delete-account/delete-account.component";
 import {authGuard} from "@core/guards/auth.guard";
 import {IndexUserComponent} from "@features/base/pages/users/index/indexUser.component";
@@ -18,7 +17,6 @@ import {EditRolComponent} from "@features/base/pages/roles/edit/editRol.componen
 const routes: Routes = [
 	{path: 'account/profile', component: ProfileComponent, canActivate: [authGuard]},
 	{path: 'account/change-password', component: ChangePasswordComponent, canActivate: [authGuard]},
-	{path: 'account/device-connected', component: DeviceConnectedComponent, canActivate: [authGuard]},
 	{path: 'account/delete-account', component: DeleteAccountComponent, canActivate: [authGuard]},
 
     {path: 'settings/users', component: IndexUserComponent, canActivate: [authGuard, permissionGuard], data: {permissions: 'users:index'}},

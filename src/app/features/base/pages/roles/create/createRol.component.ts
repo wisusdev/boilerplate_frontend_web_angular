@@ -7,7 +7,7 @@ import {catchError, of, tap} from "rxjs";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {Handle} from "@core/exceptions/handle";
 import {ToastService} from "@core/services/toast.service";
-import {ErrorMessagesInterface} from "@api/interfaces/errors.interface";
+import {ErrorMessagesInterface} from "@core/models/error.model";
 
 @Component({
     selector: 'app-create-rol',

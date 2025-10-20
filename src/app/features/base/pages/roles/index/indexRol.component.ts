@@ -7,7 +7,7 @@ import {NgbModal, NgbPagination, NgbPaginationNext, NgbPaginationPrevious} from 
 import {RouterLink} from "@angular/router";
 import {PermissionService} from "@core/services/permission.service";
 import {ConfirmationDialogComponent} from "@shared/components/confirmation-dialog/confirmation-dialog.component";
-import {IndexRoleResponse} from "@api/interfaces";
+import {IndexRoleResponse} from "@features/base/models/role.model";
 import {ToastService} from "@core/services/toast.service";
 
 @Component({

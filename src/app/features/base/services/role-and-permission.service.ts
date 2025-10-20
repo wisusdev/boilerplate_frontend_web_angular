@@ -8,13 +8,15 @@ import {
 	StoreRoleRequest,
 	UpdateStoreRoleResponse,
 	ShowRoleResponse,
-	IndexPermissionsResponse,
+	IndexPermissionsResponse
+} from '@features/base/models/role.model';
+import {
 	IndexUserResponse,
 	UserData,
 	StoreUserRequest,
 	StoreUserResponse,
 	ShowUserResponse
-} from '@api/interfaces';
+} from '@features/base/models/user.model';
 
 @Injectable({
 	providedIn: 'root'

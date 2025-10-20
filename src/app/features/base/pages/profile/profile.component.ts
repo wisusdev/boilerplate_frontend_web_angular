@@ -7,7 +7,7 @@ import {AccountMenuListComponent} from "@features/base/components/account-menu-l
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {NgClass, NgForOf} from "@angular/common";
 import {ToastService} from "@core/services/toast.service";
-import {ErrorMessagesInterface} from "@api/interfaces/errors.interface";
+import {ErrorMessagesInterface} from "@core/models/error.model";
 import {environment} from "@env/environment";
 import {FileHelperService} from "@core/services/file-helper.service";
 

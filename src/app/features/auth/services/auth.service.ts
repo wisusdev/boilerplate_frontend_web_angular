@@ -13,7 +13,7 @@ import {
     ForgotPasswordResponse,
     ResetPasswordRequest,
     ResetPasswordResponse
-} from "@api/interfaces";
+} from "@features/auth/models/auth.model";
 
 @Injectable({
     providedIn: 'root'
